@@ -4,6 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import SocialDonations from '../components/SocialDonations';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
 const MainContent = () => {
 
@@ -51,7 +53,8 @@ const MainContent = () => {
                 <div className="relative h-4 bg-gray-400 rounded-full overflow-hidden">
                       <div  className="absolute top-0 left-0 h-full bg-blue-500" style={{ width: progressWidth + '%' }} ></div>
                 </div>
-                <div className="mt-4 flex justify-center">
+                <div className="mt-4 flex justify-center items-center flex-col">
+                  <FontAwesomeIcon icon={faHandHoldingDollar} className="text-black w-24 h-24" />
                   <p className="text-gray-600">Loading...</p>
                 </div>
             </div>

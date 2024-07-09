@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /public/
+Disallow: /admin/
+# other examples:
+# Disallow: /internal/
+# Disallow: /private/
+# Disallow: /checkout/
+# Allow: /checkout/success.php
+# Disallow: /temp/
+# Sitemap: https://www.example.com/sitemap.xml
