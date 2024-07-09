@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+// next.config.mjs
+export default {
+  async rewrites() {
+    return [
+      {
+        source: '/(.*)',
+        destination: 'http://localhost:3009/$1', // Adjust port as needed
+      },
+    ];
+  },
+};
