@@ -1,0 +1,16 @@
+{
+  "dpath": "./config",
+  "theme": "default",
+  "title": "Admin Panel",
+  "assets": {
+    "favicon": "/favicon.ico"
+  },
+  "database": {
+    "driver": "pg",
+    "host": "localhost",
+    "port": 5432,
+    "user": "postgres",
+    "password": "parola123",
+    "database": "donorHub"
+  }
+}

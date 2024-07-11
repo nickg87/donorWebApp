@@ -1,0 +1,14 @@
+{
+  "menus": {
+    "top": [
+      {
+        "name": "Pools",
+        "url": "/admin/pools"
+      },
+      {
+        "name": "Donations",
+        "url": "/admin/donations"
+      }
+    ]
+  }
+}

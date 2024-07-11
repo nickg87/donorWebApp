@@ -1,0 +1,8 @@
+{
+  "title": "Admin Panel",
+  "locale": "en",
+  "login": {
+    "url": "/admin",
+    "layout": "login"
+  }
+}
