@@ -4,62 +4,89 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import SocialDonations from '../components/SocialDonations';
+import ProgressBar from '../components/ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
 const MainContent = () => {
 
-  const [loading, setLoading] = useState(true);
+  const [donors, setDonors] = useState(null);
+  const [pools, setPools] = useState(null);
+
 
   useEffect(() => {
-    // Simulate loading effect
-    const timer = setTimeout(() => {
-      //setLoading(false);
-    }, 2000); // Simulate 2 seconds of loading time
 
-    return () => clearTimeout(timer);
-  }, []);
+    if (!pools) {
+      //Fetch pools
+      fetch('http://localhost:5001/api/pools')
+        .then((res) => res.json())
+        .then((data) => setPools(data))
+        .catch((error) => console.error('Error fetching pools:', error));
+    }
 
-  // Dynamic width state for the progress bar
-  const [progressWidth, setProgressWidth] = useState('5'); // Start at 5%
+    if (!donors) {
+      // Fetch donors
+      fetch('http://localhost:5001/api/donors')
+        .then((res) => res.json())
+        .then((data) => setDonors(data))
+        .catch((error) => console.error('Error fetching donors:', error));
+    }
 
-  // Function to simulate infinite loading animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Toggle width between 25% and 95%
-      setProgressWidth((prevWidth) =>
-        prevWidth >= 100 ? 0 : prevWidth + 10
-      );
-    }, 500); // Adjust interval based on your animation speed
 
-    return () => clearInterval(interval);
-  }, []);
+  }, [pools, donors]);
+
+  console.log('kkt main');
 
   return (
     <Layout>
       <>
-        <div className="bg-gray-700 m-2 p-4 flex rounded-md shadow-md">
-          <div className="w-full max-w-screen-sm mx-auto">
-            <h1 className="text-2xl font-bold text-gray-100">Welcome to My App</h1>
-            <p className="text-gray-200 mt-2">
-              Get started by editing <code className="text-blue-600">src/app/pages.js</code>
-            </p>
-          </div>
+        {/*<div className="bg-gray-700 m-2 p-4 flex rounded-md shadow-md">*/}
+        {/*  <div className="w-full max-w-screen-sm mx-auto">*/}
+        {/*    <h1 className="text-2xl font-bold text-gray-100">Welcome to My App</h1>*/}
+        {/*    <p className="text-gray-200 mt-2">*/}
+        {/*      Get started by editing <code className="text-blue-600">src/app/pages.js</code>*/}
+        {/*    </p>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
-        </div>
-        {loading && (
-          <div className="m-2 p-4 flex justify-center items-center">
-            <div className="w-full max-w-screen-sm mx-auto bg-gray-300 rounded-md shadow-md p-4">
-                <div className="relative h-4 bg-gray-400 rounded-full overflow-hidden">
-                      <div  className="absolute top-0 left-0 h-full bg-blue-500" style={{ width: progressWidth + '%' }} ></div>
-                </div>
-                <div className="mt-4 flex justify-center items-center flex-col">
-                  <FontAwesomeIcon icon={faHandHoldingDollar} className="text-black w-24 h-24" />
-                  <p className="text-gray-600">Loading...</p>
-                </div>
-            </div>
+        <ProgressBar/>
+
+        {pools && (
+          <div className="m-2 p-4">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Pools</h2>
+            <ul className="divide-y divide-gray-200">
+              {pools.map((pool) => (
+                <li key={pool.id} className="py-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-lg font-medium text-gray-800">{pool.name}</span>
+                      <span className="text-sm text-gray-500">{pool.description}</span>
+                    </div>
+                    <span className="text-sm text-gray-500">Capacity: {pool.capacity}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-          )}
+        )}
+        {donors && (
+          <div className="m-2 p-4">
+            <h2 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Donors</h2>
+            <ul className="divide-y divide-gray-200">
+              {donors.map((donor) => (
+                <li key={donor.id} className="py-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-lg font-medium text-gray-800">{donor.address}</span>
+                      <span className="text-sm text-gray-500">Amount: {donor.amount}, Fee: {donor.fee}</span>
+                    </div>
+                    <span className="text-sm text-gray-500">Pool ID: {donor.poolId}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <>
           {/* Existing content here */}
           <SocialDonations />
