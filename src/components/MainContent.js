@@ -3,10 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import SocialDonations from '../components/SocialDonations';
 import ProgressBar from '../components/ProgressBar';
+import Head from 'next/head';
 
 const MainContent = ({ pools, donors }) => {
   return (
       <>
+        <Head>
+        <title>Home Page | DonorHub App</title>
+        </Head>
         <ProgressBar />
         {pools && (
           <div className="m-2 p-4">

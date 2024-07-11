@@ -1,8 +1,13 @@
+import Head from "next/head";
+import React from "react";
 
 
 export default function ToC() {
   return (
     <>
+      <Head>
+        <title>Terms and conditions Page | DonorHub App</title>
+      </Head>
       <div className="p-8">
         <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
         <p>
