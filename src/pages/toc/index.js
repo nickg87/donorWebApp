@@ -1,8 +1,8 @@
-import Layout from '../../components/Layout';
+
 
 export default function ToC() {
   return (
-    <Layout>
+    <>
       <div className="p-8">
         <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
         <p>
@@ -112,6 +112,6 @@ export default function ToC() {
           we will not be liable for any loss or damage of any nature.
         </p>
       </div>
-    </Layout>
+    </>
   );
 }
