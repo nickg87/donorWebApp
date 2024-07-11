@@ -7,10 +7,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import LazyLoad from 'react-lazyload';
+
 
 const SocialDonations = () => {
 
-  const usePlaceholder = false;
+  const usePlaceholder = true;
   const items = [
     { id: 1, image: '/donor-image-1.jpg', text: 'Donation Pool 1' },
     { id: 2, image: '/donor-image-2.jpg', text: 'Donation Pool 2' },
@@ -58,12 +60,19 @@ const SocialDonations = () => {
       >
         {swipeItems.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="p-4 bg-white rounded-lg shadow-md">
-              <img src={item.image} alt={item.text} className="w-full h-48 object-cover rounded-t-lg" />
-              <div className="p-4">
-                <p className="text-gray-700 text-center">{item.text}</p>
+            <LazyLoad height={200} once>
+              <div className="p-4 bg-white rounded-lg shadow-md">
+                <img
+                  src={item.image}
+                  alt={item.text}
+                  title={item.text}
+                  className="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div className="p-4">
+                  <p className="text-gray-700 text-center">{item.text}</p>
+                </div>
               </div>
-            </div>
+            </LazyLoad>
           </SwiperSlide>
         ))}
       </Swiper>
