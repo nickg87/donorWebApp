@@ -70,15 +70,6 @@ const DonationProgressComponent = () => {
             pointer={{type: "blob", animationDelay: 0}}
             value={progressWidth}
           />
-          <div className="flex justify-center p-4">
-            <button
-              className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full flex items-center gradient-bg">
-              <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center mr-2">
-                <FontAwesomeIcon icon={faHandHoldingDollar}/>
-              </div>
-              <span className="text-2xl">DONATE NOW</span>
-            </button>
-          </div>
         </div>
 
       </>
