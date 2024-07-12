@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import QRCodeComponent from "@/components/QRCodeComponent";
+import EtherScanComponent from "@/components/EtherScanComponent";
 
 const DonationComponent = () => {
   const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
+  console.log(ethAddress);
 
   const handleDonateNow = async () => {
     try {
@@ -33,6 +38,8 @@ const DonationComponent = () => {
 
 
       <div className="flex flex-col justify-center items-center p-4">
+        <QRCodeComponent address={ethAddress} amount={0.001}/>
+        <EtherScanComponent address={ethAddress} />
 
         <button onClick={handleDonateNow}  className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full flex items-center  gradient-bg">
           <div className="w-8 h-8 flex items-center justify-center mr-2">
