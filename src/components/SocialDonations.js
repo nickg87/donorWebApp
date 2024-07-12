@@ -12,7 +12,7 @@ import LazyLoad from 'react-lazyload';
 
 const SocialDonations = () => {
 
-  const usePlaceholder = true;
+  const usePlaceholder = false;
   const items = [
     { id: 1, image: '/donor-image-1.jpg', text: 'Donation Pool 1' },
     { id: 2, image: '/donor-image-2.jpg', text: 'Donation Pool 2' },
@@ -39,12 +39,16 @@ const SocialDonations = () => {
 
   return (
     <div className="container mx-auto py-8">
+      <p className="text-center text-600 m-8">
+        Explore our social donation pools and make a difference today! Your contribution can create positive change in
+        communities around the world.
+      </p>
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         slidesPerView={1}
         navigation
-        pagination={{ clickable: true }}
+        pagination={{clickable: true}}
         loop={true}
         breakpoints={{
           640: {

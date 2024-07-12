@@ -17,6 +17,8 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-gauge-chart": "^0.5.1",
+    "react-gauge-component": "^1.2.21",
     "react-icons": "^5.2.1",
     "react-lazyload": "^3.2.1",
     "swiper": "^11.1.4"

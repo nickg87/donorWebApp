@@ -8,6 +8,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --main-gradient: repeating-linear-gradient(90deg,  rgba(131,58,180,1), rgba(253,29,29,1), rgb(252, 103, 69),rgba(253,29,29,1), rgba(131,58,180,1));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,10 +43,18 @@ body {
 }
 
 .gradient-bg {
-  background: repeating-linear-gradient(90deg,  rgba(131,58,180,1), rgba(253,29,29,1), rgb(252, 103, 69),rgba(253,29,29,1), rgba(131,58,180,1));
+  background: var(--main-gradient);
   background-repeat:repeat-x;
   height: 100%;
   background-size: 400% 100%;
   animation: moveGradient 30s running infinite;
+}
+
+.enhanceText strong {
+  background: black;
+  color: white;
+  border-radius:4px;
+  padding: .25rem;
+  text-wrap: nowrap;
 }
 

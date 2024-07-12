@@ -2,53 +2,19 @@
 // src/components/MainContent.js
 import React, { useState, useEffect } from 'react';
 import SocialDonations from '../components/SocialDonations';
-import ProgressBar from '../components/ProgressBar';
+import DonationProgressComponent from './DonationProgressComponent';
 import Head from 'next/head';
+import DevCurrentLists from "./DevCurrentLists";
 
 const MainContent = ({ pools, donors }) => {
+  let dev = false;
   return (
       <>
         <Head>
         <title>Home Page | DonorHub App</title>
         </Head>
-        <ProgressBar />
-        {pools && (
-          <div className="m-2 p-4">
-            <h2 className="text-xl font-semibold text-white-800 mb-4">Pools</h2>
-            <ul className="divide-y divide-gray-200">
-              {pools.map((pool) => (
-                <li key={pool.id} className="py-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-col">
-                      <span className="text-lg font-medium text-white-800">{pool.name}</span>
-                      <span className="text-sm text-white-500">{pool.description}</span>
-                    </div>
-                    <span className="text-sm text-white-500">Capacity: {pool.capacity}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {donors && (
-          <div className="m-2 p-4">
-            <h2 className="text-xl font-semibold text-white-800 mt-8 mb-4">Donors</h2>
-            <ul className="divide-y divide-gray-200">
-              {donors.map((donor) => (
-                <li key={donor.id} className="py-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-col">
-                      <span className="text-lg font-medium text-white-800">{donor.address}</span>
-                      <span className="text-sm text-white-500">Amount: {donor.amount}, Fee: {donor.fee}</span>
-                    </div>
-                    <span className="text-sm text-white-500">Pool ID: {donor.poolId}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
+        <DonationProgressComponent />
+        { dev && <DevCurrentLists pools={pools} donors={donors}/> }
         <SocialDonations />
       </>
   );
