@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
 const TransactionListComponent = ({ transactions }) => {
+  //https://sepolia.etherscan.io/tx/0x356aa6a1460149481f5a9e0778205208079a815d09bb9af2a2be6dc7effba6cd
+
+  //console.log(transactions);
   // Helper function to convert UNIX timestamp to readable date format
   const timestampToDateString = (timestamp) => {
     const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
@@ -14,11 +17,11 @@ const TransactionListComponent = ({ transactions }) => {
   };
 
   return (
-    <div className="max-h-screen overflow-y-hidden bg-black p-4 rounded-lg shadow-md">
+    <div className="max-h-screen overflow-y-hidden bg-black bg-opacity-40 p-4 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4 text-white">Last 10 transactions on the network:</h2>
       <div className="max-h-[40vh] overflow-y-auto space-y-4 hidden-scrollbar">
         {transactions.map((tx, index) => (
-          <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-md">
+          <div key={index} className="bg-black bg-opacity-50 p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-white">Transaction {index + 1}</h3>
             <p className="text-white"><strong>Timestamp:</strong> {timestampToDateString(tx.timeStamp)}</p>
             <p className="text-white"><strong>From:</strong> {tx.from}</p>

@@ -5,7 +5,7 @@ import { AppProvider } from '../contexts/AppContext';
 
 export default function Home({pools, donors}) {
   return <AppProvider>
-    <MainContent pools={pools} donors={donors}/>;
+    <MainContent pools={pools} donors={donors}/>
   </AppProvider>
 }
 

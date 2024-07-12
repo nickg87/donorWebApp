@@ -14,9 +14,17 @@ exports.up = function(knex) {
     })
     .createTable('donors', function(table) {
       table.increments('id').primary();
-      table.string('address').notNullable();
-      table.float('amount').notNullable();
-      table.float('fee').notNullable();
+      table.string('blockHash'); //The hash of the block where this transaction was included.
+      table.integer('blockNumber'); //The block number where this transaction was included.
+      table.string('from'); //The Ethereum address of the sender.
+      table.integer('gas'); //The gas limit provided by the sender for this transaction.
+      table.string('gasPrice'); //The price of gas in wei paid by the sender.
+      table.integer('gasUsed'); //The amount of gas used by this transaction.
+      table.string('hash'); //The transaction hash.
+      table.string('timeStamp'); //The timestamp of the transaction in Unix epoch time.
+      table.string('to'); //The Ethereum address of the receiver.
+      table.integer('txreceipt_status'); //The status of the transaction receipt.
+      table.string('value'); // The value transferred in wei.
       table.dateTime('createdAt').defaultTo(knex.fn.now());
       table.integer('poolId').unsigned().references('pools.id').onDelete('CASCADE');
       // Add other columns as needed

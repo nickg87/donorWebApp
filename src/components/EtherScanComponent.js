@@ -12,7 +12,7 @@ const EtherScanComponent = ({ address }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const etherscanApiKey = process.env.NEXT_PUBLIC_DONOR_ETHSCAN_APIKEY;
-  console.log(etherscanApiKey);
+  //console.log(etherscanApiKey);
 
   const fetchData = async () => {
     if (!etherscanApiKey) {
@@ -29,7 +29,6 @@ const EtherScanComponent = ({ address }) => {
 
       // Fetch transaction count
       const txCount = await provider.getTransactionCount(address);
-      console.log((txCount));
       setTransactionCount(txCount);
 
       // Fetch balance
@@ -66,8 +65,9 @@ const EtherScanComponent = ({ address }) => {
 
       if (response.data.status === '1') {
         const dateResponse = response.data;
-        console.log(dateResponse);
-        setTransactionList(dateResponse.result);
+        //console.log(dateResponse);
+        const lastTenTransactions = dateResponse.result.slice(0, 10);
+        setTransactionList(lastTenTransactions);
         return dateResponse.result.length; // Total number of confirmed transactions
       } else {
         console.error('Error fetching confirmed transaction count:');

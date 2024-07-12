@@ -13,7 +13,7 @@ const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: fal
 
 const DonationProgressComponent = () => {
   const { globalState, setGlobalState } = useAppContext();
-  console.log(globalState);
+  //console.log(globalState);
 
   // useEffect(() => {
   //     // Simulate loading effect
@@ -27,7 +27,7 @@ const DonationProgressComponent = () => {
   // Dynamic width state for the progress bar
   const [progressWidth, setProgressWidth] = useState(globalState.balance ? globalState.balance * 10 : 0); // Start at 5%
 
-  console.log(progressWidth);
+  //console.log(progressWidth);
 
   useEffect(() => {
     setProgressWidth(globalState.balance * 10);

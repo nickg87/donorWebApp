@@ -65,7 +65,7 @@ const SocialDonations = () => {
         {swipeItems.map((item) => (
           <SwiperSlide key={item.id}>
             <LazyLoad height={200} once>
-              <div className="p-4 bg-white rounded-lg shadow-md">
+              <div className="p-4 bg-gray-800 bg-opacity-50 rounded-lg shadow-md">
                 <img
                   src={item.image}
                   alt={item.text}
@@ -73,7 +73,7 @@ const SocialDonations = () => {
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
                 <div className="p-4">
-                  <p className="text-gray-700 text-center">{item.text}</p>
+                  <p className="text-white-700 text-center">{item.text}</p>
                 </div>
               </div>
             </LazyLoad>
