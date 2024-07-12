@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EtherScan Web Application
 
-## Getting Started
+Welcome to the EtherScan Web Application repository! This application fetches and displays Ethereum blockchain data using the Etherscan API. It provides real-time information such as transaction count, balance, and recent transactions for a given Ethereum address.
 
-First, run the development server:
+## Features
+
+- Fetches Ethereum transaction count and balance using the Etherscan API.
+- Retrieves and displays confirmed transactions associated with a specified Ethereum address.
+- Updates transaction and balance data every 10 seconds to reflect real-time changes.
+- Provides error handling and feedback for API requests.
+
+## Technologies Used
+
+- **Next.js**: React framework for server-side rendering (SSR) and client-side development.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Ethers.js**: JavaScript library for interacting with the Ethereum blockchain.
+- **Axios**: Promise-based HTTP client for making API requests.
+
+## Setup
+
+To run this project locally, follow these steps:
 
 ```bash
+# Clone the repository:
+git clone https://github.com/your-username/etherscan-web-app.git
+cd etherscan-web-app
+
+# Install dependencies:
+npm install
+# or
+yarn install
+```
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```bash
+NEXT_PUBLIC_DONOR_ETHSCAN_APIKEY=your_etherscan_api_key
+NEXT_PUBLIC_DONOR_ETH_ADDRESS=your_eth_master_address
+```
+
+Replace `your_etherscan_api_key` with your actual Etherscan API key. If you don't have one, you can obtain it from [Etherscan API](https://etherscan.io/apis).
+
+## Running the Development Server
+
+```bash
+# Run the development server:
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Upon running the development server, the application will fetch and display Ethereum transaction data associated with the provided address.
+- Click the "Fetch Data" button to manually update the transaction and balance information.
+- The application updates transaction and balance data automatically every 10 seconds for real-time monitoring.
 
-## Learn More
+## Contributions
 
-To learn more about Next.js, take a look at the following resources:
+Contributions to enhance the functionality and features of this application are welcome. Please fork the repository and create a pull request with your proposed changes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

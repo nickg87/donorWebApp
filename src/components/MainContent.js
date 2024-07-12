@@ -14,7 +14,6 @@ const MainContent = ({ pools, donors }) => {
         <Head>
         <title>Home Page | DonorHub App</title>
         </Head>
-        <DonationProgressComponent />
         <DonationComponent />
         { dev && <DevCurrentLists pools={pools} donors={donors}/> }
         <SocialDonations />

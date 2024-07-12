@@ -2,6 +2,8 @@
 
 // src/components/ProgressBar.js
 import React, { useState, useEffect, Suspense } from 'react';
+
+import { useAppContext } from '../contexts/AppContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,36 +12,44 @@ const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: fal
 
 
 const DonationProgressComponent = () => {
+  const { globalState, setGlobalState } = useAppContext();
+  console.log(globalState);
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading effect
-    const timer = setTimeout(() => {
-      //setLoading(false);
-    }, 2000); // Simulate 2 seconds of loading time
-
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //     // Simulate loading effect
+  //     const timer = setTimeout(() => {
+  //       setLoading(false);
+  //     }, 2000); // Simulate 2 seconds of loading time
+  //
+  //     return () => clearTimeout(timer);
+  // }, []);
 
   // Dynamic width state for the progress bar
-  const [progressWidth, setProgressWidth] = useState('5'); // Start at 5%
+  const [progressWidth, setProgressWidth] = useState(globalState.balance ? globalState.balance * 10 : 0); // Start at 5%
+
+  console.log(progressWidth);
+
+  useEffect(() => {
+    setProgressWidth(globalState.balance * 10);
+  }, [globalState.balance]);
+
 
   // Function to simulate infinite loading animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Toggle width between 25% and 95%
-      setProgressWidth((prevWidth) =>
-        prevWidth >= 100 ? 0 : prevWidth + 10
-      );
-    }, 3000); // Adjust interval based on your animation speed
-
-    return () => clearInterval(interval);
-  }, [progressWidth]);
+  // useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       // Toggle width between 25% and 95%
+  //       setProgressWidth((prevWidth) =>
+  //         prevWidth >= 100 ? 0 : prevWidth + 10
+  //       );
+  //     }, 3000); // Adjust interval based on your animation speed
+  //
+  //     return () => clearInterval(interval);
+  //
+  // }, [progressWidth, globalState.amount]);
 
 
   return (
-    loading && (
+
       <>
         <div className="max-w-screen-sm mx-auto p-4">
           <h1 className="text-3xl font-semibold text-center mb-2">Current Donation Pool</h1>
@@ -73,8 +83,6 @@ const DonationProgressComponent = () => {
         </div>
 
       </>
-
-    )
   )
     ;
 };

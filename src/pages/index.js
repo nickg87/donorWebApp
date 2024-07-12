@@ -1,10 +1,12 @@
 // src/app/page.js
 import React from 'react';
 import MainContent from '../components/MainContent';
+import { AppProvider } from '../contexts/AppContext';
 
-
-export default function Home({ pools, donors }) {
-  return <MainContent pools={pools} donors={donors} />;
+export default function Home({pools, donors}) {
+  return <AppProvider>
+    <MainContent pools={pools} donors={donors}/>;
+  </AppProvider>
 }
 
 
