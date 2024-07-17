@@ -5,7 +5,7 @@ const DonationQRCode = ({ address, amount }) => {
   const qrData = `ethereum:${address}?value=${amount}`;
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center" style={{ wordBreak: "break-all" }}>
       <div className="max-w-xs mx-auto p-4 bg-white rounded-lg shadow-md">
         <QRCode value={qrData} size={200}/>
       </div>

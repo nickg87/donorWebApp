@@ -23,15 +23,15 @@ const TransactionListComponent = ({ transactions }) => {
         {transactions.map((tx, index) => (
           <div key={index} className="bg-black bg-opacity-50 p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-white">Transaction {index + 1}</h3>
-            <p className="text-white"><strong>Timestamp:</strong> {timestampToDateString(tx.timeStamp)}</p>
-            <p className="text-white"><strong>From:</strong> {tx.from}</p>
-            <p className="text-white"><strong>To:</strong> {tx.to}</p>
-            <p className="text-white"><strong>Value:</strong> {formatEtherValue(tx.value)} ETH</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Timestamp:</strong> {timestampToDateString(tx.timeStamp)}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>From:</strong> {tx.from}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>To:</strong> {tx.to}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Value:</strong> {formatEtherValue(tx.value)} ETH</p>
             <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Transaction Hash:</strong> {tx.hash}</p>
-            <p className="text-white"><strong>Block Number:</strong> {tx.blockNumber}</p>
-            <p className="text-white"><strong>Gas Price:</strong> {tx.gasPrice} wei</p>
-            <p className="text-white"><strong>Gas Used:</strong> {tx.gasUsed}</p>
-            <p className="text-white"><strong>Confirmations:</strong> {tx.confirmations}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Block Number:</strong> {tx.blockNumber}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Gas Price:</strong> {tx.gasPrice} wei</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Gas Used:</strong> {tx.gasUsed}</p>
+            <p className="text-white" style={{ wordBreak: "break-all" }}><strong>Confirmations:</strong> {tx.confirmations}</p>
           </div>
         ))}
       </div>

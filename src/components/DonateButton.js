@@ -35,11 +35,11 @@ const DonateButton = () => {
     <>
       <div className="flex flex-col justify-center items-center p-4">
 
-        <button onClick={handleDonateNow}  className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded-full flex items-center  gradient-bg">
+        <button onClick={handleDonateNow}  className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 md:py-6 md:px-12 rounded-full flex items-center  gradient-bg">
           <div className="w-8 h-8 flex items-center justify-center mr-2">
             <FontAwesomeIcon icon={faHandHoldingDollar}/>
           </div>
-          <span className="text-2xl">DONATE NOW</span>
+          <span className="text-md md:text-2xl">DONATE NOW</span>
         </button>
 
         <p className="mt-4 text-center text-sm">
