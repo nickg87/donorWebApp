@@ -40,7 +40,7 @@ const DonationComponent = () => {
 
       <DonationProgressComponent />
       <div className="flex flex-col justify-center items-center p-4">
-        <QRCodeComponent address={ethAddress} amount={0.001}/>
+        <QRCodeComponent address={ethAddress} amount={0.1}/>
         <EtherScanComponent address={ethAddress} />
         <DonateButton/>
       </div>
