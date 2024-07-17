@@ -1,5 +1,5 @@
 module.exports = {
-  development: {
+  staging: {
     client: 'pg',
     connection: {
       host: process.env.DB_HOST_STAGING,
