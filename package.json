@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "admin": "node admin/app.js",
+    "admin": "node backend/app.js",
     "next": "next dev"
   },
   "dependencies": {
