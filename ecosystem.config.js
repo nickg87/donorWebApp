@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'backend',
-      script: 'backend/index.js',
-      cwd: 'backend',
+      script: './backend/index.js',
+      cwd: './backend',
       env: {
         NODE_ENV: process.env.NODE_ENV || 'development', // Use NODE_ENV from environment or default to 'development'
       },
