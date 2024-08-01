@@ -8,7 +8,7 @@ const donorsRoutes = require('./routes/donors');
 
 require('dotenv').config();
 require('dotenv-flow').config({
-  path: './', // This should point to where your .env files are
+  path: process.env.PWD, // This should point to where your .env files are
   node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
 });
 console.log(`Running in ${process.env.NODE_ENV} mode`);
@@ -40,6 +40,7 @@ app.use('/api/donors', donorsRoutes(db));
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(process.env.NODE_ENV);
+  console.log(process.env.DB_HOST_STAGING);
   console.log(`Server running on port ${PORT}`);
 
 });

@@ -1,15 +1,18 @@
 require('dotenv').config();
-require('dotenv-flow').config();
+require('dotenv-flow').config({
+  path: process.env.PWD, // This should point to where your .env files are
+  node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
+});
 
 module.exports = {
   development: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST_STAGING,
-      port: process.env.DB_PORT_STAGING,
-      user: process.env.DB_USER_STAGING,
-      password: process.env.DB_PASSWORD_STAGING,
-      database: process.env.DB_NAME_STAGING,
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
     },
     migrations: {
       directory: __dirname + '/migrations',
