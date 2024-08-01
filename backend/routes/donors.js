@@ -14,8 +14,8 @@ module.exports = (db) => {
 
   router.post('/', async (req, res) => {
     try {
-      const { address, amount, fee, poolId } = req.body;
-      await db('donors').insert({ address, amount, fee, poolId });
+      const { blockHash, from, to, value, gas, poolId } = req.body;
+      await db('donors').insert({ blockHash, from, to, value, gas, poolId });
       res.status(201).json({ success: true });
     } catch (error) {
       console.error('Error creating donor:', error);

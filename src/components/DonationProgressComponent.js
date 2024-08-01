@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
 import dynamic from "next/dynamic";
+import ProgressBarComponent from "@/components/ProgressBarComponent";
+import EmbossedCircle from "@/components/EmbossedCircle";
 const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: false });
 
 
@@ -61,27 +63,58 @@ const DonationProgressComponent = () => {
             <p>Once we hit this target, the entire amount <strong>will be donated back to YOU </strong>, one lucky donor. </p>
             <p>It's a simple way to do good and potentially bring joy back into your life!</p>
           </blockquote>
-          <GaugeComponent
-            type="semicircle"
-            arc={{
-              colorArray: ['#00FF15', '#FF2121'],
-              padding: 0.02,
-              subArcs: [
-                {limit: 25},
-                {limit: 50},
-                {limit: 60},
-                {limit: 70},
-                {limit: 95},
-                {},
-                {},
-                {}
-              ]
-            }}
-            pointer={{type: "blob", animationDelay: 0}}
-            value={progressWidth}
-          />
-        </div>
+          <EmbossedCircle size={400}>
+            <GaugeComponent
+              type="radial"
+              arc={{
+                //colorArray: ['#fff', '#fff'],
+                colorArray: ['#833AB4FF', '#FD1D1DFF'],
+                padding: 0.02,
+                subArcs: [
+                  {limit: 25},
+                  {limit: 50},
+                  {limit: 95},
+                  {}
+                ]
+              }}
+              labels={{
+                valueLabel: {
+                  style: {fill: 'white', fontSize: 45, textShadow: 'unset'}
+                },
+                tickLabels: {
+                  hideMinMax: true,
+                  type: "inner",
+                  defaultTickValueConfig: {
+                    style: {fill: 'white'}
+                  }
+                }
+              }}
+              pointer={{ color:'#d54c03', animationDelay: 0}}
+              value={progressWidth}
+            />
+          </EmbossedCircle>
 
+          {/*old gauge*/}
+          {/*<GaugeComponent*/}
+          {/*  type="semicircle"*/}
+          {/*  arc={{*/}
+          {/*    colorArray: ['#00FF15', '#FF2121'],*/}
+          {/*    padding: 0.02,*/}
+          {/*    subArcs: [*/}
+          {/*      {limit: 25},*/}
+          {/*      {limit: 50},*/}
+          {/*      {limit: 60},*/}
+          {/*      {limit: 70},*/}
+          {/*      {limit: 95},*/}
+          {/*      {},*/}
+          {/*      {},*/}
+          {/*      {}*/}
+          {/*    ]*/}
+          {/*  }}*/}
+          {/*  pointer={{type: "blob", animationDelay: 0}}*/}
+          {/*  value={progressWidth}*/}
+          {/*/>*/}
+        </div>
       </>
   )
     ;

@@ -1,3 +1,6 @@
+require('dotenv').config();
+require('dotenv-flow').config();
+
 module.exports = {
   development: {
     client: 'pg',

@@ -6,7 +6,12 @@ const knexConfig = require('./knexfile');
 const poolsRoutes = require('./routes/pools');
 const donorsRoutes = require('./routes/donors');
 
+require('dotenv').config();
+require('dotenv-flow').config();
+console.log(`Running in ${process.env.NODE_ENV} mode`);
+
 const db = knex(knexConfig.development);
+
 const app = express();
 
 app.use(bodyParser.json());

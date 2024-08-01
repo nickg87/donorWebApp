@@ -5,7 +5,6 @@ import QRCodeComponent from "@/components/QRCodeComponent";
 import EtherScanComponent from "@/components/EtherScanComponent";
 import DonationProgressComponent from "@/components/DonationProgressComponent";
 import DonateButton from "@/components/DonateButton";
-import EmbossedCircle from "@/components/EmbossedCircle";
 
 const DonationComponent = () => {
   const [response, setResponse] = useState(null);
@@ -44,7 +43,6 @@ const DonationComponent = () => {
         <QRCodeComponent address={ethAddress} amount={0.1}/>
         <EtherScanComponent address={ethAddress} />
         <DonateButton/>
-        <EmbossedCircle/>
       </div>
     </>);
 };

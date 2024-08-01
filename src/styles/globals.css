@@ -77,3 +77,75 @@ body {
   /* Custom styles */
   color: #2196f3; /* Example color */
 }
+
+
+
+.svg-pi-wrapper {
+  position: relative;
+}
+
+/* Adding an outside emboss effect */
+.svg-pi {
+  transform: rotate(-90deg); /* Fix the orientation */
+/*// filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.25)) drop-shadow(2px 2px 2px rgba(255, 255, 255, 0.5));*/
+/*//   box-shadow: -20px -20px 40px rgba(255, 255, 255, 0.48), !* Top-left highlight *!*/
+/*//       20px 20px 40px rgba(0, 0, 0, 0.3), !* Bottom-right shadow *!*/
+
+/*//       inset 3px 3px 5px rgba(255, 255, 255, 0.05); !* Inner highlight *!*/
+/*//     border-radius:50%;*/
+}
+
+/* Animated spinner version */
+.svg-pi-indicator--spinner {
+  animation: spinner .75s linear infinite;
+  transform-origin: center;
+  filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.25)) drop-shadow(2px 2px 2px rgba(255, 255, 255, 0.5));
+}
+
+.svg-pi-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-shadow: -1px -1px 2px rgba(0, 0, 0, 0.25), 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.svg-pi-label__loading {
+  opacity: .5;
+  font-size: 0.75em;
+}
+
+.svg-pi-label__progress {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.svg-pi-label__loading,
+.svg-pi-label__progress {
+  display: block;
+}
+
+/* Spinner animation */
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radial-gauge {
+  padding-top: 5%;
+  svg {
+    g {
+      g.value-text {
+        fill: black;
+        opacity: .95;
+        transform: translate(40%, 90%);
+        background-color: black;
+      }
+    }
+  }
+}

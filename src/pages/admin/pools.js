@@ -76,9 +76,14 @@ const Pools = () => {
         </button>
       </form>
 
+      {pools !== undefined &&
+        pools.length> 0 &&
       <ul className="divide-y divide-gray-200">
         {pools.map((pool) => (
           <li key={pool.id} id={'pool-' + pool.id} className="flex justify-between items-center py-4">
+            <div className="flex flex-col" style={{maxWidth:'80', flex:'1 auto'}}>
+              <span className="text-lg font-medium">{pool.id}</span>
+            </div>
             <div className="flex flex-col">
               <span className="text-lg font-medium">{pool.title}</span>
               <span className="text-sm text-gray-500">{pool.description}</span>
@@ -97,7 +102,7 @@ const Pools = () => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul>}
 
     </div>
   );
