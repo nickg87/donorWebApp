@@ -39,5 +39,7 @@ app.use('/api/donors', donorsRoutes(db));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
+  console.log(process.env.NODE_ENV);
   console.log(`Server running on port ${PORT}`);
+
 });
