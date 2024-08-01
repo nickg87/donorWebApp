@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const Pools = () => {
   const [pools, setPools] = useState([]);
@@ -10,7 +11,7 @@ const Pools = () => {
 
   useEffect(() => {
     console.log(pools)
-    fetch('http://localhost:5001/api/pools')
+    fetch(apiUrl + 'pools')
       .then((res) => res.json())
       .then((data) => setPools(data))
       .catch((error) => console.error('Error fetching pools:', error));
@@ -22,7 +23,7 @@ const Pools = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:5001/api/pools', {
+    fetch(apiUrl + 'pools', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ const Pools = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this pool?")) {
       try {
-        const response = await fetch(`http://localhost:5001/api/pools/${id}`, {
+        const response = await fetch(apiUrl + `pools/${id}`, {
           method: 'DELETE',
         });
 

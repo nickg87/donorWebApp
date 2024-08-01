@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const Donors = () => {
   const [donors, setDonors] = useState([]);
@@ -11,7 +12,7 @@ const Donors = () => {
   }, []);
 
   const fetchDonors = () => {
-    fetch('http://localhost:5001/api/donors')
+    fetch(apiUrl + 'donors')
       .then((res) => res.json())
       .then((data) => setDonors(data))
       .catch((error) => console.error('Error fetching donors:', error));
@@ -23,7 +24,7 @@ const Donors = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:5001/api/donors', {
+    fetch(apiUrl + 'donors', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ const Donors = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this donor?")) {
       try {
-        const response = await fetch(`http://localhost:5001/api/donors/${id}`, {
+        const response = await fetch(apiUrl + `donors/${id}`, {
           method: 'DELETE',
         });
 
