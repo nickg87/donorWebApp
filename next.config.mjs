@@ -6,7 +6,7 @@ export default {
     return [
       {
         source: '/(.*)',
-        destination: 'http://localhost:3005/$1', // Adjust port as needed
+        destination:  `${process.env.NEXT_PUBLIC_BACKEND_URL}$1`, // Adjust port as needed
       },
     ];
   },
