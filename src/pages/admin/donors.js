@@ -8,10 +8,15 @@ const Donors = () => {
   const [form, setForm] = useState({ blockHash: '', from: '', to: '',value: '', gas: '', poolId: '' });
 
   useEffect(() => {
+    console.log('enters here useEffect admin/donors');
     fetchDonors();
   }, []);
 
   const fetchDonors = () => {
+
+    console.log(pools);
+    console.log('admin/pools try fetch from: ');
+    console.log(apiUrl + 'pools');
     fetch(apiUrl + 'donors')
       .then((res) => res.json())
       .then((data) => setDonors(data))

@@ -10,7 +10,9 @@ const Pools = () => {
   const [form, setForm] = useState({ title: '', description: '', active: true, type: '' });
 
   useEffect(() => {
-    console.log(pools)
+    console.log(pools);
+    console.log('admin/pools try fetch from: ');
+    console.log(apiUrl + 'pools');
     fetch(apiUrl + 'pools')
       .then((res) => res.json())
       .then((data) => setPools(data))
