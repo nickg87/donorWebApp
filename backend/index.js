@@ -17,6 +17,12 @@ const db = knex(knexConfig.development);
 
 const app = express();
 
+// Middleware to log request details
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.use(bodyParser.json());
 
 // Set up CORS options
