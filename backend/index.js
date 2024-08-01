@@ -8,7 +8,7 @@ const donorsRoutes = require('./routes/donors');
 
 require('dotenv').config();
 require('dotenv-flow').config({
-  path: './backend', // This should point to where your .env files are
+  path: './', // This should point to where your .env files are
   node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
 });
 console.log(`Running in ${process.env.NODE_ENV} mode`);

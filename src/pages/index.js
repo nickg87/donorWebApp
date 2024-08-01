@@ -3,7 +3,7 @@ import React from 'react';
 import MainContent from '../components/MainContent';
 import { AppProvider } from '../contexts/AppContext';
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 export default function Home({pools, donors}) {
   return <AppProvider>
