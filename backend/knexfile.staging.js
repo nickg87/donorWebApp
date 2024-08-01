@@ -1,3 +1,10 @@
+require('dotenv').config();
+let envPath = process.env.PWD  + '/backend'.replace('/backend/backend', '/backend');
+require('dotenv-flow').config({
+  path: envPath, // This should point to where your .env files are
+  node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
+});
+
 module.exports = {
   staging: {
     client: 'pg',
