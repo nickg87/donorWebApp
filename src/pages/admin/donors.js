@@ -14,9 +14,9 @@ const Donors = () => {
 
   const fetchDonors = () => {
 
-    console.log(pools);
-    console.log('admin/pools try fetch from: ');
-    console.log(apiUrl + 'pools');
+    console.log(donors);
+    console.log('admin/donors try fetch from: ');
+    console.log(apiUrl + 'donors');
     fetch(apiUrl + 'donors')
       .then((res) => res.json())
       .then((data) => setDonors(data))
