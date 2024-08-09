@@ -53,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container sm:mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
       {statusMessage && (
         <div
@@ -70,7 +70,7 @@ export default function Contact() {
           {statusMessage}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-lg mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
           <input

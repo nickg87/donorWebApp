@@ -30,6 +30,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+button:focus {
+  outline: none !important; /* Remove the default focus outline */
+}
 
 @layer utilities {
   .text-balance {
