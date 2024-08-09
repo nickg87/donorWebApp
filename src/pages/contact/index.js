@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -46,15 +48,25 @@ export default function Contact() {
     }
   };
 
+  const handleCloseMessage = () => {
+    setStatusMessage('');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
       {statusMessage && (
         <div
-          className={`mb-4 p-4 rounded-md text-white ${
+          className={`relative mb-4 p-4 rounded-md text-white ${
             statusType === 'success' ? 'bg-green-500' : 'bg-red-500'
           }`}
         >
+          <button
+            className="absolute top-2 right-2 p-4 py-2 px-4 text-white"
+            onClick={handleCloseMessage}
+          >
+            <FontAwesomeIcon icon={faTimes}/>
+          </button>
           {statusMessage}
         </div>
       )}
