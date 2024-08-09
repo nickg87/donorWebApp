@@ -5,6 +5,7 @@ const knex = require('knex');
 const knexConfig = require('./knexfile');
 const poolsRoutes = require('./routes/pools');
 const donorsRoutes = require('./routes/donors');
+const emailsRouter = require('./routes/emails');
 
 require('dotenv').config();
 let envPath = process.env.PWD  + '/backend';
@@ -38,6 +39,7 @@ app.use(cors(corsOptions));
 // Routes
 app.use('/api/pools', poolsRoutes(db));
 app.use('/api/donors', donorsRoutes(db));
+app.use('/api/emails', emailsRouter);
 
 const PORT = process.env.PORT || 5001;
 

@@ -5,13 +5,13 @@ const router = express.Router();
 
 // Handler for contact form submissions
 router.post('/contact', async (req, res) => {
-  const { name, email, subject, message } = req.body;
+  const { name, email, message } = req.body;
 
   const emailResult = await sendEmail({
     fromName: name,
     fromEmail: process.env.EMAIL_ADDRESS,
     toEmail: process.env.EMAIL_ADDRESS,
-    subject: `Contact Form: ${subject}`,
+    subject: `Contact Form: DonorHub`,
     message: message,
   });
 
@@ -30,7 +30,7 @@ router.post('/feedback', async (req, res) => {
     fromName: name,
     fromEmail: process.env.EMAIL_ADDRESS,
     toEmail: process.env.FEEDBACK_EMAIL_ADDRESS || process.env.EMAIL_ADDRESS,
-    subject: `Feedback Form: ${name}`,
+    subject: `Contact Form: DonorHub`,
     message: message,
   });
 

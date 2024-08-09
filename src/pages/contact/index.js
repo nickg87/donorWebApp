@@ -1,4 +1,5 @@
 import { useState } from 'react';
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -6,6 +7,10 @@ export default function Contact() {
     email: '',
     message: '',
   });
+
+  const [statusMessage, setStatusMessage] = useState(''); // New state for the status message
+  const [statusType, setStatusType] = useState(''); // New state for message type ('success' or 'error')
+
 
   const handleChange = (e) => {
     setFormData({
@@ -18,7 +23,7 @@ export default function Contact() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(apiUrl + 'emails/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,20 +32,32 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        alert('Your message has been sent!');
+        setStatusMessage('Your message has been sent successfully!');
+        setStatusType('success');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        alert('Failed to send your message.');
+        setStatusMessage('Failed to send your message. Please try again.');
+        setStatusType('error');
       }
     } catch (error) {
       console.error('Error submitting the form:', error);
-      alert('There was an error. Please try again.');
+      setStatusMessage('There was an error. Please try again.');
+      setStatusType('error');
     }
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
+      {statusMessage && (
+        <div
+          className={`mb-4 p-4 rounded-md text-white ${
+            statusType === 'success' ? 'bg-green-500' : 'bg-red-500'
+          }`}
+        >
+          {statusMessage}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-6 max-w-lg mx-auto">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
