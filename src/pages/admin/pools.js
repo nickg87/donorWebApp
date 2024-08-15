@@ -13,7 +13,10 @@ const Pools = () => {
     console.log(pools);
     console.log('admin/pools try fetch from: ');
     console.log('Fetching from:', apiUrl + 'pools');
-    fetch(apiUrl + 'pools')
+    fetch(apiUrl + 'pools', {
+      method: 'GET',
+      mode: 'no-cors'
+    })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
