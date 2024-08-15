@@ -1,8 +1,39 @@
 server {
-    #server_name 3.142.212.82;
+    # Handle HTTP traffic for the entire site
+    listen 80;
     server_name donorhub.site;
 
-    # Apply Basic Authentication to all routes except /api
+    # Redirect all HTTP traffic to HTTPS, except for API routes
+    location /api {
+        proxy_pass http://localhost:5000;  # Directly serve API requests over HTTP
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+        # Skip Basic Authentication for API requests
+        auth_basic off;
+    }
+
+    # Redirect everything else to HTTPS
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    # Handle HTTPS traffic
+    listen 443 ssl http2;
+    server_name donorhub.site;
+
+    # SSL configuration managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/donorhub.site/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/donorhub.site/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Proxy for API requests over HTTPS
     location /api {
         proxy_pass http://localhost:5000;  # Proxy requests to your Express server
         proxy_http_version 1.1;
@@ -15,6 +46,7 @@ server {
         auth_basic off;
     }
 
+    # Proxy for Next.js application
     location / {
         proxy_pass http://localhost:3000;  # Proxy requests to your Next.js server
         proxy_http_version 1.1;
@@ -23,38 +55,8 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
 
-        # Basic authentication
+        # Basic authentication for the rest of the site
         auth_basic "Restricted Access";
         auth_basic_user_file /etc/nginx/.htpasswd;
     }
-
-    listen 443 ssl http2; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/donorhub.site/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/donorhub.site/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-
-
-
 }
-server {
-    if ($host = donorhub.site) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-   # if ($host = donorhub.site) {
-   #     return 301 https://$host$request_uri;
-   # } # managed by Certbot
-
-
-    listen 80;
-    server_name donorhub.site;
-    return 404; # managed by Certbot
-
-
-
-
-}
-
