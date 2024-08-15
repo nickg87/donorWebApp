@@ -9,6 +9,9 @@ import Image from "next/image";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const isStage = process.env.NEXT_PUBLIC_IS_STAGE === 'true';
+  console.log(isStage);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -29,6 +32,7 @@ const Header = () => {
               priority
             />
           </div>
+          {isStage ? <div>STAGE ENV</div> : null}
         </Link>
         <div className="md:hidden" onClick={toggleMenu}>
           {isOpen ? <FaTimes size={24}/> : <FaBars size={24}/>}
