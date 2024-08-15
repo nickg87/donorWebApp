@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 // Set up CORS options
 const corsOptions = {
   origin: '*', // Replace with your frontend URL
-  methods: ['GET', 'POST', 'DELETE', 'PUT'], // Add more methods as needed
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'], // Add more methods as needed
   allowedHeaders: ['Content-Type', 'Authorization'], // Add more headers as needed
 };
 app.use(cors(corsOptions));
