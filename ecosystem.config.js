@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       name: 'backend',                   // Production backend app
-      script: './backend/server.js',     // Path to your Express server script
+      script: './backend/app.js',     // Path to your Express server script
       instances: 1,                      // Number of instances
       env: {
         NODE_ENV: 'production',          // Production environment variables
@@ -29,7 +29,7 @@ module.exports = {
     },
     {
       name: 'stage-backend',             // Staging backend app
-      script: './stage/backend/server.js', // Path to your staging Express server script
+      script: './stage/backend/app.js', // Path to your staging Express server script
       instances: 1,                      // Number of instances
       env_staging: {
         NODE_ENV: 'staging',             // Staging environment variables
