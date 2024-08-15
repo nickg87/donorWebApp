@@ -3,7 +3,7 @@
 export default {
   productionBrowserSourceMaps: true,
   async rewrites() {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001';
     return [
       {
         source: '/(.*)',
