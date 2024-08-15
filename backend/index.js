@@ -41,7 +41,7 @@ app.use('/api/pools', poolsRoutes(db));
 app.use('/api/donors', donorsRoutes(db));
 app.use('/api/emails', emailsRouter);
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 
 const { Client } = require('pg'); // Install with `npm install pg`
