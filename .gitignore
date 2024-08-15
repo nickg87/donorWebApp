@@ -15,6 +15,9 @@
 
 # production
 /build
+# ingnore any stage(ing) fodlers
+/stage
+/staging
 
 # misc
 .DS_Store
