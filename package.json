@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "admin": "node backend/app.js",
-    "next": "next dev"
+    "next": "next dev",
+    "debug-port": "node -e \"console.log(process.env.PORT)\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
