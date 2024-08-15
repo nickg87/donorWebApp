@@ -12,9 +12,14 @@ const Pools = () => {
   useEffect(() => {
     console.log(pools);
     console.log('admin/pools try fetch from: ');
-    console.log(apiUrl + 'pools');
+    console.log('Fetching from:', apiUrl + 'pools');
     fetch(apiUrl + 'pools')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
       .then((data) => setPools(data))
       .catch((error) => console.error('Error fetching pools:', error));
   }, []);

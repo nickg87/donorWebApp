@@ -12,6 +12,20 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
 
+        # Handle preflight OPTIONS requests
+        if ($request_method = 'OPTIONS') {
+            add_header Access-Control-Allow-Origin '*';
+            add_header Access-Control-Allow-Methods 'GET, POST, PUT, DELETE, OPTIONS';
+            add_header Access-Control-Allow-Headers 'Content-Type, Authorization';
+            add_header Access-Control-Max-Age 86400;
+            return 204;
+        }
+
+        # Forward CORS headers for non-OPTIONS requests
+        add_header Access-Control-Allow-Origin '*';
+        add_header Access-Control-Allow-Methods 'GET, POST, PUT, DELETE, OPTIONS';
+        add_header Access-Control-Allow-Headers 'Content-Type, Authorization';
+
         # Skip Basic Authentication for API requests
         auth_basic off;
     }
