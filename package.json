@@ -1,7 +1,7 @@
 {
   "name": "donor-hub",
   "version": "1.0.1",
-  "private": true,
+  "description": "",
   "scripts": {
     "dev": "concurrently \"npm run admin\" \"npm run next\"",
     "build": "next build",
