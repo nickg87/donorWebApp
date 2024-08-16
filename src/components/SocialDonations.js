@@ -18,10 +18,10 @@ const SocialDonations = () => {
     { id: 2, image: '/donor-image-2.jpg', text: 'Donation Pool 2' },
     { id: 3, image: '/donor-image-3.jpg', text: 'Donation Pool 3' },
     { id: 4, image: '/donor-image-4.jpg', text: 'Donation Pool 4' },
-    { id: 5, image: '/donor-image-5.jpg', text: 'Donation Pool 5' },
-    { id: 6, image: '/donor-image-6.jpg', text: 'Donation Pool 6' },
-    { id: 7, image: '/donor-image-7.jpg', text: 'Donation Pool 7' },
-    { id: 8, image: '/donor-image-8.jpg', text: 'Donation Pool 8' },
+    // { id: 5, image: '/donor-image-5.jpg', text: 'Donation Pool 5' },
+    // { id: 6, image: '/donor-image-6.jpg', text: 'Donation Pool 6' },
+    // { id: 7, image: '/donor-image-7.jpg', text: 'Donation Pool 7' },
+    // { id: 8, image: '/donor-image-8.jpg', text: 'Donation Pool 8' },
   ];
 
   const itemsPlaceholder = [
