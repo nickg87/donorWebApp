@@ -58,25 +58,39 @@ module.exports = (db) => {
   });
 
   // Middleware to authenticate JWT
-  const authenticateJWT = (req, res, next) => {
+  const authenticateJWT = (db) => async (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];
 
     if (token) {
-      jwt.verify(token, secretKey, (err, user) => {
-        if (err) {
-          return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-      });
+      try {
+        jwt.verify(token, secretKey, async (err, decoded) => {
+          if (err) {
+            return res.sendStatus(403); // Forbidden
+          }
+
+          // Fetch user from the database
+          const user = await db('users').where({ id: decoded.userId }).first();
+
+          if (!user) {
+            return res.sendStatus(404); // Not Found
+          }
+
+          // Attach user data to the request
+          req.user = {name: user.name, email: user.email};
+          next();
+        });
+      } catch (error) {
+        console.error('Error verifying token:', error);
+        res.sendStatus(500); // Internal Server Error
+      }
     } else {
-      res.sendStatus(401);
+      res.sendStatus(401); // Unauthorized
     }
   };
 
   // Secure data route
-  router.get('/secure-data', authenticateJWT, (req, res) => {
-    res.json({ data: 'This is secure data' });
+  router.get('/secure-data', authenticateJWT(db), (req, res) => {
+    res.json({ user: req.user, data: 'This is secure data' });
   });
 
   return router;

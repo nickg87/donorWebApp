@@ -14,7 +14,7 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const { globalState, updateUser } = useAppContext();
   const [session, setSession] = useState(globalState.user || null);
-  console.log(globalState);
+  //console.log(globalState);
 
   useEffect(() => {
     setSession(globalState.user);
@@ -81,7 +81,7 @@ const Header = () => {
         <div className="md:hidden" onClick={toggleMenu}>
           {isOpen ? <FaTimes size={24}/> : <FaBars size={24}/>}
         </div>
-
+        <button onClick={() => fetchSecureData()}>Check</button>
         <nav className={`md:flex md:items-center md:gap-4 ${isOpen ? 'block' : 'hidden'}`}>
           {session ? (
             <div>

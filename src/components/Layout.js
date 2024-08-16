@@ -1,9 +1,51 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
+import { useAppContext } from '../contexts/AppContext';
 
 const Layout = ({ children }) => {
+
+  const { globalState, updateUser } = useAppContext();
+
+  useEffect(() => {
+    const token = localStorage.getItem('sessionToken');
+    const authenticateUser = async (token) => {
+      if (token) {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}auth/secure-data`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`, // Include token
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            if (data.user.email && data.user.name) {
+              updateUser({
+                email: data.user.email, // Include other user details if available
+                token: token,
+                name: data.user.name,
+              });
+            }
+          } else {
+            // Token is invalid or expired
+            localStorage.removeItem('sessionToken');
+            updateUser(null);
+          }
+        } catch (error) {
+          console.error('Error fetching secure data:', error);
+          // Handle error, e.g., remove token from localStorage
+          localStorage.removeItem('sessionToken');
+          updateUser(null);
+        }
+      }
+    };
+   if (!globalState.user && token) {
+     authenticateUser(token);
+   }
+  }, [globalState.user]);
+
   return (
     <>
       <Head>
