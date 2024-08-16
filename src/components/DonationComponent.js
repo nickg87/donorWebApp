@@ -12,7 +12,7 @@ const DonationComponent = () => {
   const [loading, setLoading] = useState(false);
 
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
-  console.log(ethAddress);
+  //console.log(ethAddress);
 
   const handleDonateNow = async () => {
     try {

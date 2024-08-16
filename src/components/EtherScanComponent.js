@@ -83,7 +83,7 @@ const EtherScanComponent = ({ address }) => {
 
     const fetchDataInterval = setInterval(() => {
       fetchData(); // Fetch data every 10 seconds
-    }, 10000); // Interval set to 10 seconds (10000 milliseconds)
+    }, 360000); // Interval set to 10 seconds (10000 milliseconds)
 
     return () => clearInterval(fetchDataInterval);
   }, [address, etherscanApiKey]);

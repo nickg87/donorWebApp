@@ -34,6 +34,8 @@ button:focus {
   outline: none !important; /* Remove the default focus outline */
 }
 
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -151,4 +153,39 @@ button:focus {
       }
     }
   }
+}
+
+/* modals */
+
+
+/* Example CSS for the modal */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+  width: 300px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
 }
