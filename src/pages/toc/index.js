@@ -1,5 +1,6 @@
-import Head from "next/head";
 import React from "react";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from "next/head";
 
 
 export default function ToC() {
@@ -119,4 +120,13 @@ export default function ToC() {
       </div>
     </>
   );
+}
+
+// Add serverSideTranslations to load translations
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

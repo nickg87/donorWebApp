@@ -1,22 +1,14 @@
-// src/app/page.js
-import React from 'react';
-import MainContent from '../components/MainContent';
+// src/pages/index.js
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import MainContent from "@/components/MainContent";
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
-//console.log('apiUrl: ' + apiUrl);
+export async function getServerSideProps({ locale }) {
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
-export default function Home({pools, donors}) {
-  return  <MainContent pools={pools} donors={donors}/>
-}
-
-
-export async function getServerSideProps(context) {
   try {
-    // Fetch pools
     const poolsRes = await fetch(apiUrl + 'pools');
     const poolsData = await poolsRes.json();
 
-    // Fetch donors
     const donorsRes = await fetch(apiUrl + 'donors');
     const donorsData = await donorsRes.json();
 
@@ -24,6 +16,7 @@ export async function getServerSideProps(context) {
       props: {
         pools: poolsData,
         donors: donorsData,
+        ...(await serverSideTranslations(locale, ['common'])),
       },
     };
   } catch (error) {
@@ -32,7 +25,12 @@ export async function getServerSideProps(context) {
       props: {
         pools: null,
         donors: null,
+        ...(await serverSideTranslations(locale, ['common'])),
       },
     };
   }
+}
+
+export default function Home({ pools, donors }) {
+  return <MainContent pools={pools} donors={donors} />;
 }

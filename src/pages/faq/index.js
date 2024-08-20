@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -47,5 +48,13 @@ const FAQ = () => {
       </div>
   );
 };
+
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}
 
 export default FAQ;

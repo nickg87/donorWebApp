@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -121,4 +122,13 @@ export default function Contact() {
       </form>
     </div>
   );
+}
+
+// Add serverSideTranslations to load translations
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

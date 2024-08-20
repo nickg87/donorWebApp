@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const Donors = () => {
@@ -93,3 +94,12 @@ const Donors = () => {
 };
 
 export default Donors;
+
+// Add serverSideTranslations to load translations
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}
