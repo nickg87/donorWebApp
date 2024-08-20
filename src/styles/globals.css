@@ -157,6 +157,10 @@ button:focus {
 
 /* modals */
 
+/* flag switcher */
+.flagWrapper img {
+  height: 24px;
+}
 
 /* Example CSS for the modal */
 .modal {

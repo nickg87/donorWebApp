@@ -63,16 +63,10 @@ const Header = () => {
           ) : (
             <button onClick={() => setShowModal(true)}>{t('signIn')}</button>
           )}
-          <LanguageSwitcher />
           <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-300">
             {t('contact')}
           </Link>
-          <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-300">
-            {t('toc')}
-          </Link>
-          <Link href="/faq" className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-300">
-            {t('faq')}
-          </Link>
+          <LanguageSwitcher />
         </nav>
       </div>
       <AuthModal showModal={showModal} setShowModal={setShowModal} />

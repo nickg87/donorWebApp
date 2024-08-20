@@ -5,7 +5,7 @@ import { useAppContext } from '@/contexts/AppContext';
 import TransactionListComponent from "@/components/TransactionListComponent";
 
 const EtherScanComponent = ({ address }) => {
-  const { globalState, setGlobalState } = useAppContext();
+  const { updateBalance } = useAppContext();
   const [transactionCount, setTransactionCount] = useState(null);
   const [transactionList, setTransactionList] = useState(null);
   const [balance, setBalance] = useState(null);
@@ -36,7 +36,7 @@ const EtherScanComponent = ({ address }) => {
       const formattedBalance = ethers.formatEther(balance);
       const formattedBalanceToUSDT = parseFloat(formattedBalance) * 100; // Multiply balance by 100
       setBalance(formattedBalance); // Update local state
-      setGlobalState({ ...globalState, balance: formattedBalanceToUSDT }); // Update global state
+      updateBalance(formattedBalanceToUSDT); // Update global state
 
 
       setLoading(false);
