@@ -15,7 +15,7 @@ export default {
   },
   i18n: {
     ...nextI18NextConfig.i18n,
-    localeDetection: true, // Enable locale detection globally
+    localeDetection: false, // Enable locale detection globally
   },
   async redirects() {
     return [
