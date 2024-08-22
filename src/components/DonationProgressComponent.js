@@ -2,6 +2,7 @@
 
 // src/components/ProgressBar.js
 import React, { useState, useEffect, Suspense } from 'react';
+import { useTranslation } from 'next-i18next';
 
 import { useAppContext } from '../contexts/AppContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +16,8 @@ const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: fal
 
 const DonationProgressComponent = () => {
   const { globalState, setGlobalState } = useAppContext();
+  const { t, i18n } = useTranslation();
+
   //console.log(globalState);
 
   // useEffect(() => {
@@ -53,16 +56,14 @@ const DonationProgressComponent = () => {
   return (
 
       <>
-        <div className="max-w-screen-sm mx-auto p-4">
-          <h1 className="text-3xl font-semibold text-center mb-2">Current Donation Pool</h1>
+        <div className="mx-auto p-4">
+          <h1 className="text-3xl font-semibold text-center mb-2">{t("welcomeCurrentPool", {var1: '500$'})}</h1>
           <h2 className="text-center text-white-600 mb-6">
-            Help us reach our goal! Every contribution makes a difference.
+            {t("welcomeCurrentPoolSubText")}
           </h2>
-          <blockquote className="text-center mb-2 leading-8 enhanceText">
-            <p>The gauge below represents our current donation pool. Each donation is a fixed amount of <strong>$10 USDT</strong>, and our goal is to reach <strong>$500 USDT</strong>. </p>
-            <p>Once we hit this target, the entire amount <strong>will be donated back to YOU </strong>, one lucky donor. </p>
-            <p>It's a simple way to do good and potentially bring joy back into your life!</p>
-          </blockquote>
+          <blockquote className="text-center mb-2 leading-8 enhanceText" dangerouslySetInnerHTML={{
+            __html: t('welcomeCurrentPoolDescriptionText', { var1: '$10 USDT', var2: '$500 USDT' }),
+          }} />
           <EmbossedCircle size={400}>
             <GaugeComponent
               type="radial"

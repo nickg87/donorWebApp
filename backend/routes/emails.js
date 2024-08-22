@@ -5,14 +5,15 @@ const router = express.Router();
 
 // Handler for contact form submissions
 router.post('/contact', async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message, apiName } = req.body;
 
   const emailResult = await sendEmail({
     fromName: name,
     fromEmail: process.env.EMAIL_ADDRESS,
     toEmail: process.env.EMAIL_ADDRESS,
-    subject: `Contact Form: DonorHub`,
+    subject: apiName + `: Contact form from ` + name,
     message: message,
+    asHtml: true,
   });
 
   if (emailResult.success) {

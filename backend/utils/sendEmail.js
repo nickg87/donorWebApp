@@ -1,7 +1,7 @@
 // src/utils/sendEmail.js
 const nodemailer = require('nodemailer');
 
-async function sendEmail({ fromName, fromEmail, toEmail, subject, message }) {
+async function sendEmail({ fromName, fromEmail, toEmail, subject, message, asHtml = false }) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: 465,
@@ -12,13 +12,21 @@ async function sendEmail({ fromName, fromEmail, toEmail, subject, message }) {
   });
 
   try {
-    await transporter.sendMail({
+    const mailOptions = {
       from: `"${fromName}" <${fromEmail}>`,
       replyTo: fromEmail,
       to: toEmail,
       subject: subject,
-      text: message,
-    });
+      [asHtml ? 'html' : 'text']: message, // Use HTML or plain text based on asHtml
+    };
+
+    //Debugging log to check the mail options
+    //console.log('Sending email with options:', mailOptions);
+
+    await transporter.sendMail(mailOptions);
+
+    // Debugging log to confirm email sent
+    // console.log('Email sent successfully');
     return { success: true };
   } catch (error) {
     console.error('Error sending email:', error);

@@ -1,8 +1,25 @@
 {
   "welcome": "Bienvenido a DonorHub",
+  "welcomeCurrentPool": "Actual {{var1}} Fondo de donaciones",
+  "welcomeCurrentPoolSubText": "¡Ayúdenos a alcanzar nuestro objetivo! Cada contribución marca la diferencia.",
+  "welcomeCurrentPoolDescriptionText": "<p>El indicador a continuación representa nuestro fondo de donaciones actual. Cada donación es una cantidad fija de <strong>{{var1}}</strong>, y nuestro objetivo es alcanzar <strong>{{var2}}</strong>.</p><p>Una vez que alcancemos este objetivo, la cantidad total <strong>será donada de nuevo a USTED</strong>, un afortunado donante.</p><p>¡Es una forma sencilla de hacer el bien y potencialmente traer alegría de vuelta a tu vida!</p>",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "contact": "Contacto",
   "toc": "Términos del servicio",
-  "faq": "Preguntas frecuentes"
+  "faq": "Preguntas frecuentes",
+  "contactPage": {
+    "title": "Contáctenos",
+    "form": {
+      "fields": {
+        "name": "Nombre",
+        "email": "Correo Electrónico",
+        "message": "Mensaje",
+        "submit": "Enviar Mensaje"
+      },
+      "messageSuccess": "¡Tu mensaje ha sido enviado con éxito!",
+      "messageFailed": "No se pudo enviar tu mensaje. Por favor, inténtalo de nuevo.",
+      "messageError": "Hubo un error. Por favor, inténtalo de nuevo."
+    }
+  }
 }
