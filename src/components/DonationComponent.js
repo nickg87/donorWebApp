@@ -5,6 +5,7 @@ import QRCodeComponent from "@/components/QRCodeComponent";
 import EtherScanComponent from "@/components/EtherScanComponent";
 import DonationProgressComponent from "@/components/DonationProgressComponent";
 import DonateButton from "@/components/DonateButton";
+import DApp from "@/components/walletconnect/DApp";
 
 const DonationComponent = () => {
   const [response, setResponse] = useState(null);
@@ -37,7 +38,9 @@ const DonationComponent = () => {
 
   return (
     <>
-
+      <div className="flex flex-col justify-center items-center p-4">
+        <DApp/>
+      </div>
       <DonationProgressComponent />
       <div className="flex flex-col justify-center items-center p-4">
         <QRCodeComponent address={ethAddress} amount={0.1}/>

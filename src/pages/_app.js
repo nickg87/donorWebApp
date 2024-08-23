@@ -1,17 +1,20 @@
 // src/pages/_app.js
+import '../styles/globals.css'; // Import global styles
+import { AppProvider } from '@/contexts/AppContext'; // Adjust path as needed
+import Web3ModalProvider from '@/utils/web3context'; // Adjust path as needed
 import { appWithTranslation } from 'next-i18next';
-import '../styles/globals.css';
-import Layout from '../components/Layout';
-import { AppProvider } from '../contexts/AppContext';
 import nextI18NextConfig from '../../next-i18next.config.js';
+import Layout from '../components/Layout'; // Adjust path as needed
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AppProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AppProvider>
+    <Web3ModalProvider>
+      <AppProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AppProvider>
+    </Web3ModalProvider>
   );
 }
 

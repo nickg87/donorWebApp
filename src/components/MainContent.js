@@ -8,7 +8,7 @@ import Head from 'next/head';
 import DevCurrentLists from "./DevCurrentLists";
 
 const MainContent = ({ pools, donors }) => {
-  let dev = false;
+  let dev = true;
   return (
       <>
         <Head>
