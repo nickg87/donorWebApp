@@ -8,6 +8,10 @@
   "contact": "Contact",
   "toc": "Toc",
   "faq": "FAQ",
+  "general": {
+    "close": "Close",
+    "copyright": "2024 My DonorHub App. All rights reserved."
+  },
   "contactPage": {
     "title": "Contact Us",
     "form": {
@@ -21,5 +25,17 @@
       "messageFailed": "Failed to send your message. Please try again.",
       "messageError": "There was an error. Please try again."
     }
+  },
+  "qrCodeComponent": {
+    "text": "Scan QR Code with your wallet app to donate {{var1}} ETH to {{var2}}"
+  },
+  "donateComponent": {
+    "buttonText": "Donate Now",
+    "text": "Your donation helps reach the {{var1}} goal for the current donation pool. Together, we can make a difference!",
+    "successMessage":"Your donation has been successfully initiated. Thank you!",
+    "transferStartedMessage":"Crypto transfer initiated successfully!"
+  },
+  "socialDonations": {
+    "mainText": "Explore our social donation pools and make a difference today! Your contribution can create positive change in communities around the world."
   }
 }

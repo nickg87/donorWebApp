@@ -12,8 +12,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white p-4 shadow-md w-full">
       <div className="max-w-5xl mx-auto flex justify-between items-center">
         <div>
-          <p className="text-sm">&copy; 2024 My DonorHub App. All rights reserved.</p>
-          <p className="text-sm mt-2">Contact: info@myapp.com</p>
+          <p className="text-sm">&copy; {t('general.copyright')}</p>
           <div style={{display: 'flex'}}>
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('toc')}

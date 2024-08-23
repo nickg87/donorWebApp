@@ -8,6 +8,10 @@
   "contact": "Contacto",
   "toc": "Términos del servicio",
   "faq": "Preguntas frecuentes",
+  "general": {
+    "close": "Cerrar",
+    "copyright": "2024 Mi aplicación DonorHub. Todos los derechos reservados."
+  },
   "contactPage": {
     "title": "Contáctenos",
     "form": {
@@ -21,5 +25,17 @@
       "messageFailed": "No se pudo enviar tu mensaje. Por favor, inténtalo de nuevo.",
       "messageError": "Hubo un error. Por favor, inténtalo de nuevo."
     }
+  },
+  "qrCodeComponent": {
+    "text": "Escanea el código QR con tu aplicación monedero para donar {{var1}} ETH a {{var2}}"
+  },
+  "donateComponent": {
+    "buttonText": "Donar ahora",
+    "text": "Tu donación ayuda a alcanzar la meta de {{var1}} para el fondo de donación actual. ¡Juntos, podemos hacer la diferencia!",
+    "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
+    "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
+  },
+  "socialDonations": {
+    "mainText": "¡Explora nuestros fondos de donaciones sociales y marca la diferencia hoy! Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
   }
 }

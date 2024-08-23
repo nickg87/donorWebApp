@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import {useTranslation} from "next-i18next";
 
 const DonateButton = () => {
+  const { t, i18n } = useTranslation();
   const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -11,9 +13,10 @@ const DonateButton = () => {
   // console.log(ethAddress);
 
   const handleDonateNow = async () => {
+    const transferStartedMessage = t('donateComponent.transferStartedMessage');
     try {
       // Simulate API call or blockchain transaction initiation
-      const simulatedResponse = await initiateCryptoTransfer();
+      const simulatedResponse = await initiateCryptoTransfer(transferStartedMessage);
       setResponse(simulatedResponse);
       setShowModal(true);
       setLoading(false);
@@ -39,11 +42,11 @@ const DonateButton = () => {
           <div className="w-8 h-8 flex items-center justify-center mr-2">
             <FontAwesomeIcon icon={faHandHoldingDollar}/>
           </div>
-          <span className="text-md md:text-2xl">DONATE NOW</span>
+          <span className="text-md md:text-2xl uppercase">{t('donateComponent.buttonText')}</span>
         </button>
 
         <p className="mt-4 text-center text-sm">
-          Your donation helps reach the 500 USDT goal for the current donation pool. Together, we can make a difference!
+          {t('donateComponent.text', {var1: "500 USDT"})}
         </p>
 
       </div>
@@ -52,12 +55,12 @@ const DonateButton = () => {
           <div className="flex items-center justify-center min-h-screen p-4">
             <div className="bg-black rounded-lg p-8 max-w-md w-full text-center shadow-md">
               <p className="text-xl font-bold mb-4">{response.message}</p>
-              <p className="mb-4">Your donation has been successfully initiated. Thank you!</p>
+              <p className="mb-4">{t('donateComponent.successMessage')}</p>
               <button
                 onClick={() => setShowModal(false)}
-                className="bg-white hover:bg-gray-300 text-black font-bold py-2 px-4 rounded-full"
+                className="bg-white hover:bg-gray-300 text-black font-bold py-2 px-4 rounded-full "
               >
-                Close
+                {t('general.close')}
               </button>
             </div>
           </div>
@@ -69,12 +72,12 @@ const DonateButton = () => {
 export default DonateButton;
 
 // Mock function to simulate crypto transfer initiation
-const initiateCryptoTransfer = async () => {
+const initiateCryptoTransfer = async (transferStartedMessage) => {
   // Simulate API call or blockchain transaction initiation
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       // Simulate successful transfer
-      resolve({success: true, message: 'Crypto transfer initiated successfully!'});
+      resolve({success: true, message: transferStartedMessage});
     }, 2000); // Simulate 2 seconds of transfer initiation time
   });
 };

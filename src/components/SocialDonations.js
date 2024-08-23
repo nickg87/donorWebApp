@@ -8,9 +8,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import LazyLoad from 'react-lazyload';
+import {useTranslation} from "next-i18next";
 
 
 const SocialDonations = () => {
+  const { t, i18n } = useTranslation();
 
   const usePlaceholder = false;
   const items = [
@@ -40,8 +42,7 @@ const SocialDonations = () => {
   return (
     <div className="container mx-auto py-8">
       <p className="text-center text-600 m-8">
-        Explore our social donation pools and make a difference today! Your contribution can create positive change in
-        communities around the world.
+        {t('socialDonations.mainText')}
       </p>
       <Swiper
         modules={[Navigation, Pagination]}
