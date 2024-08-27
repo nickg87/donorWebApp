@@ -13,7 +13,9 @@ const TransactionListComponent = ({ transactions }) => {
 
   // Helper function to format Ethereum value from wei to ETH
   const formatEtherValue = (value) => {
-    return ethers.formatEther(value);
+    // ethers v6
+    //return ethers.formatEther(value);
+    return ethers.utils.formatEther(value);
   };
 
   return (

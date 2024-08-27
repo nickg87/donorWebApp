@@ -16,8 +16,8 @@ const EtherScanComponent = ({ address }) => {
 
   const fetchData = async () => {
     if (!etherscanApiKey) {
-      console.error('Etherscan API key is not set');
-      setError('Etherscan API key is not set');
+      console.error("Etherscan API key is not set");
+      setError("Etherscan API key is not set");
       return;
     }
 
@@ -25,7 +25,10 @@ const EtherScanComponent = ({ address }) => {
     setError(null);
 
     try {
-      const provider = new ethers.EtherscanProvider('sepolia', etherscanApiKey);
+      // Initialize Etherscan provider for ethers v5
+      const provider = new ethers.providers.EtherscanProvider("sepolia", etherscanApiKey);
+      // ethers v6:
+      //const provider = new ethers.EtherscanProvider('sepolia', etherscanApiKey);
 
       // Fetch transaction count
       const txCount = await provider.getTransactionCount(address);
@@ -33,20 +36,22 @@ const EtherScanComponent = ({ address }) => {
 
       // Fetch balance
       const balance = await provider.getBalance(address);
-      const formattedBalance = ethers.formatEther(balance);
-      const formattedBalanceToUSDT = parseFloat(formattedBalance) * 100; // Multiply balance by 100
+      const formattedBalance = ethers.utils.formatEther(balance); // Format using ethers.utils for v5
+      // ethers v6
+      //const formattedBalance = ethers.formatEther(balance);
+      const formattedBalanceToUSDT = parseFloat(formattedBalance) * 100; // Convert balance to USD
       setBalance(formattedBalance); // Update local state
       updateBalance(formattedBalanceToUSDT); // Update global state
 
-
       setLoading(false);
-      fetchConfirmedTransactionCount( address, etherscanApiKey);
+      fetchConfirmedTransactionCount(address, etherscanApiKey);
     } catch (error) {
-      console.error('Error fetching data from Etherscan:', error);
-      setError('Error fetching data from Etherscan');
+      console.error("Error fetching data from Etherscan:", error);
+      setError("Error fetching data from Etherscan");
       setLoading(false);
     }
   };
+
 
   const fetchConfirmedTransactionCount = async (address, etherscanApiKey) => {
     try {
