@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     const checkMaintenanceMode = async () => {
       try {
-        const { data } = await axios.get('/api/maintenance');
+        const { data } = await axios.get('/next-api/maintenance');
         setIsMaintenanceMode(data.isMaintenanceMode);
       } catch (error) {
         console.error('Error checking maintenance mode', error);
