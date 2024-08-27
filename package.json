@@ -4,11 +4,14 @@
   "description": "",
   "scripts": {
     "dev": "concurrently \"npm run admin\" \"npm run next\"",
-    "build": "next build",
+    "build": "npm run set-maintenance-mode && next build && npm run reset-maintenance-mode reload-pm2",
     "start": "next start",
     "lint": "next lint",
     "admin": "node backend/app.js",
     "next": "next dev",
+    "set-maintenance-mode": "node ./maintenance-scripts/set-maintenance-mode.js",
+    "reset-maintenance-mode": "node ./maintenance-scripts/reset-maintenance-mode.js",
+    "reload-pm2": "pm2 reload donor-hub",
     "debug-port": "node -e \"console.log(process.env.PORT)\""
   },
   "dependencies": {
