@@ -12,18 +12,18 @@ const Layout = ({ children }) => {
 
   const [isMaintenanceMode, setIsMaintenanceMode] = React.useState(false);
 
-  useEffect(() => {
-    const checkMaintenanceMode = async () => {
-      try {
-        const { data } = await axios.get('/next-api/maintenance');
-        setIsMaintenanceMode(data.isMaintenanceMode);
-      } catch (error) {
-        console.error('Error checking maintenance mode', error);
-      }
-    };
-
-    checkMaintenanceMode().then();
-  }, []);
+  // useEffect(() => {
+  //   const checkMaintenanceMode = async () => {
+  //     try {
+  //       const { data } = await axios.get('/next-api/maintenance');
+  //       setIsMaintenanceMode(data.isMaintenanceMode);
+  //     } catch (error) {
+  //       console.error('Error checking maintenance mode', error);
+  //     }
+  //   };
+  //
+  //   checkMaintenanceMode().then();
+  // }, []);
 
 
 
