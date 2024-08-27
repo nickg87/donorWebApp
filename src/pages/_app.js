@@ -8,7 +8,8 @@ import Layout from '../components/Layout'; // Adjust path as needed
 import MaintenancePage from './maintenance'; // Import maintenance page
 
 function MyApp({ Component, pageProps }) {
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE.toString() === 'true';
+  console.log('isMaintenanceMode: ' + isMaintenanceMode);
 
   if (isMaintenanceMode) {
     return <MaintenancePage />;
