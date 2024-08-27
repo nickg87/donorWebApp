@@ -10,11 +10,11 @@ if (fs.existsSync(envFilePath)) {
   let envFileContent = fs.readFileSync(envFilePath, 'utf8');
 
   // Set maintenance mode flag
-  envFileContent = envFileContent.replace(/NEXT_PUBLIC_MAINTENANCE_MODE=.*/g, 'NEXT_PUBLIC_MAINTENANCE_MODE=true');
+  envFileContent = envFileContent.replace(/MAINTENANCE_MODE=.*/g, 'MAINTENANCE_MODE=true');
 
   // Write the updated content back to .env.local
   fs.writeFileSync(envFilePath, envFileContent, 'utf8');
 } else {
   // Create .env.local if it doesn't exist
-  fs.writeFileSync(envFilePath, 'NEXT_PUBLIC_MAINTENANCE_MODE=true\n', 'utf8');
+  fs.writeFileSync(envFilePath, 'MAINTENANCE_MODE=true\n', 'utf8');
 }

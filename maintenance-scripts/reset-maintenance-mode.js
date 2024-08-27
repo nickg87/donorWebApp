@@ -10,7 +10,7 @@ if (fs.existsSync(envFilePath)) {
   let envFileContent = fs.readFileSync(envFilePath, 'utf8');
 
   // Reset maintenance mode flag
-  envFileContent = envFileContent.replace(/NEXT_PUBLIC_MAINTENANCE_MODE=.*/g, 'NEXT_PUBLIC_MAINTENANCE_MODE=false');
+  envFileContent = envFileContent.replace(/MAINTENANCE_MODE=.*/g, 'MAINTENANCE_MODE=false');
 
   // Write the updated content back to .env.local
   fs.writeFileSync(envFilePath, envFileContent, 'utf8');

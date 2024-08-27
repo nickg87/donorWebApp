@@ -4,16 +4,32 @@ import Header from './Header';
 import Footer from './Footer';
 import { useAppContext } from '../contexts/AppContext';
 import MaintenancePage from "./MaintenancePage";
+import axios from "axios";
 
 const Layout = ({ children }) => {
 
   const { globalState, updateUser } = useAppContext();
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE.toString() === 'true';
-  console.log('isMaintenanceMode in Layout: ' + isMaintenanceMode);
 
-  if (isMaintenanceMode) {
-    return <MaintenancePage />;
-  }
+  const [isMaintenanceMode, setIsMaintenanceMode] = React.useState(false);
+
+  useEffect(() => {
+    const checkMaintenanceMode = async () => {
+      try {
+        const { data } = await axios.get('/api/maintenance');
+        setIsMaintenanceMode(data.isMaintenanceMode);
+      } catch (error) {
+        console.error('Error checking maintenance mode', error);
+      }
+    };
+
+    checkMaintenanceMode().then();
+  }, []);
+
+
+
+  console.log('isMaintenanceMode in XXXX Layout: ' + isMaintenanceMode);
+
+
 
   useEffect(() => {
     const token = localStorage.getItem('sessionToken');
@@ -52,6 +68,10 @@ const Layout = ({ children }) => {
      authenticateUser(token);
    }
   }, [globalState.user]);
+
+  if (isMaintenanceMode) {
+    return <MaintenancePage />;
+  }
 
   return (
     <>
