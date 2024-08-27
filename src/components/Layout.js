@@ -3,10 +3,17 @@ import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
 import { useAppContext } from '../contexts/AppContext';
+import MaintenancePage from "./MaintenancePage";
 
 const Layout = ({ children }) => {
 
   const { globalState, updateUser } = useAppContext();
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE.toString() === 'true';
+  console.log('isMaintenanceMode in Layout: ' + isMaintenanceMode);
+
+  if (isMaintenanceMode) {
+    return <MaintenancePage />;
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('sessionToken');
