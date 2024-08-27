@@ -32,7 +32,6 @@ const EtherScanComponent = ({ address }) => {
 
       // Fetch transaction count
       const txCount = await provider.getTransactionCount(address);
-      setTransactionCount(txCount);
 
       // Fetch balance
       const balance = await provider.getBalance(address);
@@ -71,6 +70,7 @@ const EtherScanComponent = ({ address }) => {
       if (response.data.status === '1') {
         const dateResponse = response.data;
         //console.log(dateResponse);
+        setTransactionCount(dateResponse.result.length);
         const lastTenTransactions = dateResponse.result.slice(0, 10);
         setTransactionList(lastTenTransactions);
         return dateResponse.result.length; // Total number of confirmed transactions
@@ -101,7 +101,7 @@ const EtherScanComponent = ({ address }) => {
       {error && <p className="text-red-500 mt-4">{error}</p>}
       {!loading && !error && (
         <>
-          {transactionList && <p>Transaction Count: {transactionList.length}</p> }
+          {transactionList && <p>Transaction Count: {transactionCount}</p> }
           <p>Balance: {balance} ETH</p>
         </>
       )}
