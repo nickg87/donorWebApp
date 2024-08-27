@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "concurrently \"npm run admin\" \"npm run next\"",
-    "build": "npm run set-maintenance-mode && next build && npm run reset-maintenance-mode reload-pm2",
+    "build": "next build",
+    "update": "npm run set-maintenance-mode && next build && npm run reset-maintenance-mode reload-pm2",
     "start": "next start",
     "lint": "next lint",
     "admin": "node backend/app.js",
