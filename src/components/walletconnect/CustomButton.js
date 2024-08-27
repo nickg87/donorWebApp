@@ -3,8 +3,9 @@
 
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount, useDisconnect } from "wagmi";
-import {useEffect, useState} from "react";
-import {ethers} from "ethers";
+import React, {useEffect, useState} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faWallet, faUnlink} from '@fortawesome/free-solid-svg-icons';
 
 export default function CustomButton() {
   const { open } = useWeb3Modal();
@@ -39,7 +40,7 @@ export default function CustomButton() {
   };
 
   const baseStyle =
-    "px-4 py-2 font-bold text-white rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0 focus:outline-none";
+    "px-4 py-2 font-bold text-white rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0 focus:outline-none inline-flex";
 
   return (
     <>
@@ -49,7 +50,7 @@ export default function CustomButton() {
           onClick={handleDisconnect}
           className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600`}
         >
-          <span className="mr-2 text-xl">🔓</span>
+          <FontAwesomeIcon icon={faUnlink} className="mr-2 text-xl w-5 h-5" />
           Disconnect
         </button>
       ) : (
@@ -57,8 +58,7 @@ export default function CustomButton() {
           onClick={handleConnect}
           className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600`}
         >
-          <span className="mr-2 text-xl">👛</span>
-          Connect Wallet
+          <FontAwesomeIcon icon={faWallet} className="mr-2 text-xl w-5 h-5" /> Connect Wallet
         </button>
       )}
     </>
