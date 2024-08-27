@@ -4,6 +4,7 @@ import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
+//https://wagmi.sh/react/guides/send-transaction
 export default function SendTransaction() {
   const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
   const [isConfirming, setIsConfirming] = useState(false);
