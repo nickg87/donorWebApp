@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function SendTransaction() {
   const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(true); // New state to handle confirmation display
   const recipientAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
 
   const submit = async (e) => {
@@ -37,6 +40,11 @@ export default function SendTransaction() {
       setIsConfirmed(false);
     }
   }, [isWaiting, isTransactionConfirmed]);
+
+  const handleDismiss = () => {
+    setIsConfirmed(false);
+    setShowConfirmation(false);
+  };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-gray-800 text-gray-200 shadow-md rounded-lg">
@@ -82,7 +90,17 @@ export default function SendTransaction() {
         </div>
       )}
       {isConfirming && <div className="mt-4 p-2 bg-yellow-800 border border-yellow-700 rounded-md">Waiting for confirmation...</div>}
-      {isConfirmed && <div className="mt-4 p-2 bg-green-800 border border-green-700 rounded-md">Transaction confirmed.</div>}
+      {showConfirmation && isConfirmed && (
+        <div className="mt-4 p-2 bg-green-800 border border-green-700 rounded-md relative">
+          <span>Transaction confirmed.</span>
+          <button
+            onClick={handleDismiss}
+            className="absolute top-1 right-1 p-1 text-gray-300 hover:text-white"
+          >
+            <FontAwesomeIcon icon={faXmark} className="w-5 h-5" />
+          </button>
+        </div>
+      )}
       {error && <div className="mt-4 p-2 bg-red-800 border border-red-700 rounded-md text-red-300">Error: {error.message || 'An error occurred'}</div>}
     </div>
   );
