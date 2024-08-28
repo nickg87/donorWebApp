@@ -2,11 +2,11 @@ user=$(stat -c '%U' ./)
 end=$'\e[0m'
 grey=$'\e[100m'
 blue=$'\e[104m'
-border=$'\e[1;4;32m'  # Bold, underlined, and green
+green=$'\e[92m'
+border=$'\e[1;4;32m'
 bold=$'\e[1m'
 underline=$'\e[4m'
-green=$'\e[92m'       # Light green text
-bg_green=$'\e[100m'   # Darker green background
+bg_green=$'\e[100m'
 end=$'\e[0m'
 
 printf "${grey}Current folder owner is ${blue}${user^^}${end}\n"
@@ -23,5 +23,5 @@ printf "${grey}Reloading PM2 FE app...${end}\n"
 npm run reload-pm2
 printf "\n${blue}RELOADING PM2 DONE!...${end}\n"
 
-printf "\n${border}${bg_green}${bold}${green}==================================================\n==================== ALL DONE ====================\n==================================================${end}\n\n\n"
+printf "\n${bold}${green}==================================================\n==================== ALL DONE ====================\n==================================================${end}\n\n\n"
 
