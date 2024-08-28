@@ -2,7 +2,7 @@
   "welcome": "Welcome to DonorHub",
   "welcomeCurrentPool": "Current {{var1}} Donation Pool",
   "welcomeCurrentPoolSubText": "Help us reach our goal! Every contribution makes a difference.",
-  "welcomeCurrentPoolDescriptionText": "<p>The gauge below represents our current donation pool. Each donation is a fixed amount of <strong>{{var1}}</strong>, and our goal is to reach <strong>{{var2}}</strong>.</p><p>Once we hit this target, the entire amount <strong>will be donated back to YOU</strong>, one lucky donor.</p><p>It's a simple way to do good and potentially bring joy back into your life!</p>",
+  "welcomeCurrentPoolDescriptionText": "<p>The gauge below represents our current donation pool. Each donation is a fixed amount of <strong>{{var1}}</strong>, and our goal is to reach <strong>{{var2}}</strong>.</p><p>Once we hit this target, the entire(<sup> 1 </sup>) amount <strong>will be donated back to YOU</strong>, one lucky donor.</p><p>It's a simple way to do good and potentially bring joy back into your life!</p><hr><small><sup>1</sup> Note: A small transaction fee will be applied by the service provider for processing the donation. Check Terms and condition page</small>",
   "signIn": "Sign In",
   "signOut": "Sign Out",
   "contact": "Contact",

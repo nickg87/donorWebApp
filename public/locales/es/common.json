@@ -2,11 +2,11 @@
   "welcome": "Bienvenido a DonorHub",
   "welcomeCurrentPool": "Actual {{var1}} Fondo de donaciones",
   "welcomeCurrentPoolSubText": "¡Ayúdenos a alcanzar nuestro objetivo! Cada contribución marca la diferencia.",
-  "welcomeCurrentPoolDescriptionText": "<p>El indicador a continuación representa nuestro fondo de donaciones actual. Cada donación es una cantidad fija de <strong>{{var1}}</strong>, y nuestro objetivo es alcanzar <strong>{{var2}}</strong>.</p><p>Una vez que alcancemos este objetivo, la cantidad total <strong>será donada de nuevo a USTED</strong>, un afortunado donante.</p><p>¡Es una forma sencilla de hacer el bien y potencialmente traer alegría de vuelta a tu vida!</p>",
+  "welcomeCurrentPoolDescriptionText": "<p>El indicador a continuación representa nuestro fondo de donaciones actual. Cada donación tiene un monto fijo de <strong>{{var1}}</strong>, y nuestro objetivo es alcanzar <strong>{{var2}}</strong>.</p><p>Una vez que alcancemos este objetivo, el monto total(<sup> 1 </sup>) <strong>será devuelto a USTED</strong>, un afortunado donante.</p><p>¡Es una forma sencilla de hacer el bien y, potencialmente, traer alegría de vuelta a su vida!</p><small><hr><sup>1</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. Consulte la página de Términos y condiciones.</small>",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "contact": "Contacto",
-  "toc": "Términos del servicio",
+  "toc": "Términos y condiciones",
   "faq": "Preguntas frecuentes",
   "general": {
     "close": "Cerrar",
