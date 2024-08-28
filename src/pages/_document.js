@@ -14,10 +14,23 @@ class MyDocument extends Document {
   }
 
   render() {
+    // Access the environment variable directly in the render method
+    const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
     return (
       <Html lang={this.props.__NEXT_DATA__.locale}>
         <Head>
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${googleTagId}');
+            `,
+            }}
+          />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"/>
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         </Head>
         <body>
