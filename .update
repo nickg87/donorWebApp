@@ -16,5 +16,5 @@ printf "\n\n${blue}ALL DONE!...${end}\n\n\n"
 printf "${grey}Reloading PM2 FE app...${end}\n\n"
 npm run reload-pm2
 printf "\n\n${blue}ALL DONE!...${end}\n\n\n"
-EOF
+
 
