@@ -2,22 +2,26 @@ user=$(stat -c '%U' ./)
 end=$'\e[0m'
 grey=$'\e[100m'
 blue=$'\e[104m'
-green=$'\e[42m'
+border=$'\e[1;4;32m'  # Bold, underlined, and green
+bold=$'\e[1m'
+underline=$'\e[4m'
+green=$'\e[32m'
+bg_green=$'\e[42m'
+end=$'\e[0m'
 
-printf "${grey}Current folder owner is ${blue}${user^^}${end}\n\n"
+printf "${grey}Current folder owner is ${blue}${user^^}${end}\n"
 
 printf "${grey}Pulling data from web2 repo...${end}\n"
 git pull
-printf "${blue}Data pulled${end}\n\n"
+printf "${blue}Data pulled${end}\n"
 
-printf "${grey}Doing a new build...${end}\n\n"
+printf "${grey}Doing a new build...${end}\n"
 npm run build
-printf "\n\n${blue}BUILD DONE!...${end}\n\n\n"
+printf "\n\n${blue}BUILD DONE!...${end}\n"
 
-printf "${grey}Reloading PM2 FE app...${end}\n\n"
+printf "${grey}Reloading PM2 FE app...${end}\n"
 npm run reload-pm2
-printf "\n\n${blue}RELOADING PM2 DONE!...${end}\n\n\n"
+printf "\n${blue}RELOADING PM2 DONE!...${end}\n"
 
-
-printf "\n\n${green}ALL DONE!...${end}\n\n\n"
+printf "\n${border}${bg_green}${bold}${underline}${green}==================== ALL DONE ====================${end}\n\n\n"
 
