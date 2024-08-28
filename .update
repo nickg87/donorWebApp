@@ -2,6 +2,7 @@ user=$(stat -c '%U' ./)
 end=$'\e[0m'
 grey=$'\e[100m'
 blue=$'\e[104m'
+green=$'\e[42m'
 
 printf "${grey}Current folder owner is ${blue}${user^^}${end}\n\n"
 
@@ -11,10 +12,12 @@ printf "${blue}Data pulled${end}\n\n"
 
 printf "${grey}Doing a new build...${end}\n\n"
 npm run build
-printf "\n\n${blue}ALL DONE!...${end}\n\n\n"
+printf "\n\n${blue}BUILD DONE!...${end}\n\n\n"
 
 printf "${grey}Reloading PM2 FE app...${end}\n\n"
 npm run reload-pm2
-printf "\n\n${blue}ALL DONE!...${end}\n\n\n"
+printf "\n\n${blue}RELOADING PM2 DONE!...${end}\n\n\n"
 
+
+printf "\n\n${green}ALL DONE!...${end}\n\n\n"
 
