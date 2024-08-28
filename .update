@@ -11,7 +11,7 @@ end=$'\e[0m'
 
 printf "${grey}Current folder owner is ${blue}${user^^}${end}\n"
 
-printf "${grey}Pulling data from web2 repo...${end}\n"
+printf "${grey}Pulling data from donorHub repo...${end}\n"
 git pull
 printf "${blue}Data pulled${end}\n"
 
