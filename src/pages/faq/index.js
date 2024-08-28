@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from "next/head";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -29,6 +30,10 @@ const FAQ = () => {
   ];
 
   return (
+    <>
+      <Head>
+        <title>Frequently Asked Questions | DonorHub App</title>
+      </Head>
       <div className="p-8">
         <h1 className="text-2xl font-bold mb-4">Frequently Asked Questions</h1>
         <p className="mb-6">Here you will find answers to the most common questions.</p>
@@ -36,20 +41,23 @@ const FAQ = () => {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div key={index} className="border border-gray-300 rounded-md bg-white shadow-sm overflow-hidden">
-              <button onClick={() => toggleAccordion(index)} className="w-full text-left px-4 py-2 font-semibold text-gray-800 bg-gray-100 hover:bg-gray-200">
+              <button onClick={() => toggleAccordion(index)}
+                      className="w-full text-left px-4 py-2 font-semibold text-gray-800 bg-gray-100 hover:bg-gray-200">
                 {faq.question}
               </button>
-              <div className={`transition-max-height duration-300 ease-in-out overflow-hidden px-4 text-gray-600 ${activeIndex === index ? ' py-2 max-h-screen' : 'max-h-0'}`}>
+              <div
+                className={`transition-max-height duration-300 ease-in-out overflow-hidden px-4 text-gray-600 ${activeIndex === index ? ' py-2 max-h-screen' : 'max-h-0'}`}>
                 {faq.answer}
               </div>
             </div>
           ))}
         </div>
       </div>
+    </>
   );
 };
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps({locale}) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
