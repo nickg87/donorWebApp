@@ -5,9 +5,9 @@ import React, { useState, useEffect } from 'react';
 
 const DevCurrentLists = ({ pools, donors }) => {
   return (
-    <>
+    <div className="flex flex-col justify-center items-center p-4">
       {pools && (
-        <div className="m-2 p-4">
+        <div className="m-2 p-4 max-w-lg w-full">
           <h2 className="text-xl font-semibold text-white-800 mb-4">Pools</h2>
           <ul className="divide-y divide-gray-200">
             {pools.map((pool) => (
@@ -25,7 +25,7 @@ const DevCurrentLists = ({ pools, donors }) => {
         </div>
       )}
       {donors && (
-        <div className="m-2 p-4">
+        <div className="m-2 p-4 max-w-lg w-full">
           <h2 className="text-xl font-semibold text-white-800 mt-8 mb-4">Donors</h2>
           <ul className="divide-y divide-gray-200">
             {donors.map((donor) => (
@@ -42,7 +42,7 @@ const DevCurrentLists = ({ pools, donors }) => {
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

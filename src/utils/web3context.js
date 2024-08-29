@@ -18,7 +18,7 @@ createWeb3Modal({
   projectId,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
   enableOnramp: true, // Optional - false as default
-  themeMode: "light", // By default - set to user system settings
+  themeMode: "dark", // By default - set to user system settings
   themeVariables: {
     "--w3m-font-family": "Verdana", // Base font family
     // "--w3m-color-mix": "#0137b6", // The color that blends in with the default colors

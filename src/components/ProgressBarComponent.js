@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useAppContext} from "@/contexts/AppContext";
 
 const ProgressBar = (props) => {
-  console.log('props ProgressBar');
-  console.log(props);
   let {
     size = 150,
     progress = 0,

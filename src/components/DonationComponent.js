@@ -6,47 +6,30 @@ import EtherScanComponent from "@/components/EtherScanComponent";
 import DonationProgressComponent from "@/components/DonationProgressComponent";
 import DonateButton from "@/components/DonateButton";
 import DApp from "@/components/walletconnect/DApp";
+import DevCurrentLists from "@/components/DevCurrentLists";
 
-const DonationComponent = () => {
+const DonationComponent = ({ pools, donors }) => {
   const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
+
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
+  console.log('isDev: ' + isDev);
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
+  const ethAmount = 0.001;
   //console.log(ethAddress);
 
-  const handleDonateNow = async () => {
-    try {
-      // Simulate API call or blockchain transaction initiation
-      const simulatedResponse = await initiateCryptoTransfer();
-      setResponse(simulatedResponse);
-      setShowModal(true);
-      setLoading(false);
 
-      // Automatically clear response after 3 seconds
-      setTimeout(() => {
-        setResponse(null);
-       setShowModal(false);
-      }, 3000);
-    } catch (error) {
-      console.error('Error initiating transfer:', error);
-      setLoading(false);
-      setShowModal(false);
-    }
-  };
 
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center p-4">
-        <DApp/>
-      </div>
       <DonationProgressComponent />
-      <div className="flex flex-col justify-center items-center p-4">
-        <QRCodeComponent address={ethAddress} amount={0.1}/>
-        <EtherScanComponent address={ethAddress} />
-        <DonateButton/>
-      </div>
+      <DonateButton/>
+      {/*<DApp/>*/}
+      { isDev && <EtherScanComponent address={ethAddress} /> }
+      { isDev && <DevCurrentLists pools={pools} donors={donors}/> }
     </>);
 };
 

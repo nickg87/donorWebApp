@@ -31,6 +31,7 @@
   },
   "donateComponent": {
     "buttonText": "Donate Now",
+    "modalTitle":"How to transfer?",
     "text": "Your donation helps reach the {{var1}} goal for the current donation pool. Together, we can make a difference!",
     "successMessage":"Your donation has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"

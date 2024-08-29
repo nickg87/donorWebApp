@@ -8,15 +8,15 @@ export default function DApp() {
   const { isConnected } = useAccount();
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center p-4">
       {isConnected &&
         <div className="flex items-center p-2 m-10">
           <w3m-button size="sm"/>
-        </div> }
+        </div>}
 
-      {isConnected && <SendTransaction />}
-      <CustomButton />
+      {isConnected && <SendTransaction/>}
+      <CustomButton/>
 
-    </>
+    </div>
   );
 }

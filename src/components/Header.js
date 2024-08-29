@@ -35,7 +35,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white p-4 shadow-md w-full sticky top-0 z-50">
+    <header className="bg-gray-900 text-white p-4 shadow-md w-full sticky top-0 z-19">
       <div className="container mx-auto max-w-7xl flex justify-between items-center">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
