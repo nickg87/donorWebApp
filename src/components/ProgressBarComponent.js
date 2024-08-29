@@ -20,7 +20,7 @@ const ProgressBar = (props) => {
     radius = center - (trackWidth > indicatorWidth ? trackWidth : indicatorWidth),
     dashArray = 2 * Math.PI * radius,
     dashOffset = dashArray * ((100 - progress) / 100);
-  console.log(dashOffset);
+  //console.log(dashOffset);
 
   let hideLabel = (size < 100 || !label.length || spinnerMode) ? true : false
 
@@ -107,11 +107,10 @@ const EmbossedCircle = (props) => {
 
 const ProgressBarComponent = (props) => {
   const { globalState, setGlobalState } = useAppContext();
-  console.log('globalState: ', globalState);
+  //console.log('globalState: ', globalState);
   const [progress, setProgress] = useState(0);
   const targetProgress = globalState?.balance ? globalState.balance * 10 : 0;
-
-  console.log('Initial Progress:', progress);
+  //console.log('Initial Progress:', progress);
 
   // Smooth animation effect
   useEffect(() => {
