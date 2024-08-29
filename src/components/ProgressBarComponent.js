@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppContext} from "@/contexts/AppContext";
 
 const ProgressBar = (props) => {
@@ -109,51 +109,45 @@ const EmbossedCircle = (props) => {
 
 const ProgressBarComponent = (props) => {
   const { globalState, setGlobalState } = useAppContext();
-  const [progressWidth, setProgressWidth] = useState(globalState.balance ? globalState.balance * 10 : 0); // Start at 5%
-  console.log('progressWidth in ProgressBarComponent');
-  console.log(progressWidth);
+  console.log('globalState: ', globalState);
+  const [progress, setProgress] = useState(0);
+  const targetProgress = globalState?.balance ? globalState.balance * 10 : 0;
 
-  console.log('props ProgressBarComponent');
-  console.log(props);
-  const [loading, setLoading] = React.useState(true)
-  const [progress, setProgress] = React.useState(props.progress ?? 0)
-  const loadingDuration = 6000 // 6 seconds
+  console.log('Initial Progress:', progress);
 
-  console.log('progress after');
-  console.log(progress);
-  let roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
-  console.log(roundedNum);
+  // Smooth animation effect
+  useEffect(() => {
+    let start = null;
+    const duration = 1000; // duration of the animation in milliseconds
 
-  React.useEffect(() => {
-    if (!props.progress) {
-      let loadingTimeout = setTimeout(() => {
-        if (loading >= 100) return
-        setProgress(progress + 1)
-      }, loadingDuration/100)
+    const animateProgress = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const newProgress = Math.min(elapsed / duration * targetProgress, targetProgress);
 
-      if (progress === 100) {
-        setProgress(0);
-        setLoading(false);
+      setProgress(newProgress);
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animateProgress);
       }
+    };
 
-      return () => {
-        clearTimeout(loadingTimeout)
-      }
+    if (targetProgress > 0) {
+      requestAnimationFrame(animateProgress);
     }
+  }, [targetProgress]);
 
-  }, [progress, loading])
-
+  // Ensure the progress is a valid number before rounding
+  let roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
 
   return (
-    <div style={{textAlign: 'center'}}>
+    <div style={{ textAlign: 'center' }}>
       <EmbossedCircle>
         <ProgressBar progress={roundedNum} trackWidth={15} indicatorWidth={10} />
       </EmbossedCircle>
-      {/*{loading && (*/}
-      {/*  <ProgressBar progress={progress} trackWidth={15} indicatorWidth={10} />*/}
-      {/*) }*/}
     </div>
-  )
-}
+  );
+};
+
 
 export default ProgressBarComponent;

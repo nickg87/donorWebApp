@@ -3,6 +3,7 @@ import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useAppContext } from '@/contexts/AppContext';
 
 //https://wagmi.sh/react/guides/send-transaction
 export default function SendTransaction() {
@@ -11,6 +12,7 @@ export default function SendTransaction() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true); // New state to handle confirmation display
   const recipientAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
+  const { updateShouldFetch } = useAppContext();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -36,6 +38,7 @@ export default function SendTransaction() {
       setIsConfirming(false);
     }
     if (isTransactionConfirmed) {
+      updateShouldFetch(true);
       setIsConfirmed(true);
     } else {
       setIsConfirmed(false);
@@ -48,7 +51,7 @@ export default function SendTransaction() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-gray-200 shadow-md rounded-lg">
+    <div className="max-w-sm md:max-w-lg mx-auto p-6 bg-gray-800 text-gray-200 shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-white">Send Transaction</h2>
       <form className="space-y-4" onSubmit={submit}>
         <div>

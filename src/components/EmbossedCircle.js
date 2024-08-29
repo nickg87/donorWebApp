@@ -30,7 +30,7 @@ const EmbossedCircle = (props) => {
   function getCircleSize() {
     if (typeof window !== 'undefined' && window.innerWidth <= 768) { // Example breakpoint for mobile
       const smallerDimension = Math.min(window.innerWidth, window.innerHeight);
-      let sizeToReturn =`${smallerDimension * 0.8}px`;
+      let sizeToReturn =`${smallerDimension * 0.7}px`;
       return sizeToReturn;
     } else {
       return props.size ?? '200px';

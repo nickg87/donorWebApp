@@ -15,7 +15,7 @@ function generateEmailTemplate({ apiName, formData, currentLanguage }) {
           .container {
             width: 90%;
             max-width: 600px;
-            margin: 20px 0; /* Center the container horizontally */
+            margin: 20px auto;
             padding: 20px;
             border: 1px solid #ddd;
             background: #f5f5f5;

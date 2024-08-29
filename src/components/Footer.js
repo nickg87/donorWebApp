@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white p-4 shadow-md w-full">
-      <div className="max-w-5xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div>
           <p className="text-sm">&copy; {t('general.copyright')}</p>
           <div style={{display: 'flex'}}>
@@ -25,7 +25,6 @@ const Footer = () => {
         </div>
         <div className="flex items-center">
           <Link href="/" passHref>
-            By{" "}
             <Image
               src="/donorHubLogo.svg"
               alt="DonerHub Logo"

@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [globalState, setGlobalState] = useState({
     user: null,
     balance: null,
+    shouldFetch: false,
   });
 
   const updateUser = (user) => {
@@ -24,8 +25,15 @@ export const AppProvider = ({ children }) => {
     }));
   };
 
+  const updateShouldFetch = (shouldFetch) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      shouldFetch,
+    }));
+  };
+
   return (
-    <AppContext.Provider value={{ globalState, updateUser, updateBalance }}>
+    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch }}>
       {children}
     </AppContext.Provider>
   );

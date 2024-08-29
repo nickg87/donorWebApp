@@ -64,36 +64,37 @@ const DonationProgressComponent = () => {
           <blockquote className="text-center mb-2 leading-8 enhanceText" dangerouslySetInnerHTML={{
             __html: t('welcomeCurrentPoolDescriptionText', { var1: '$10 USDT', var2: '$500 USDT' }),
           }} />
-          <EmbossedCircle size={400}>
-            <GaugeComponent
-              type="radial"
-              arc={{
-                //colorArray: ['#fff', '#fff'],
-                colorArray: ['#833AB4FF', '#FD1D1DFF'],
-                padding: 0.02,
-                subArcs: [
-                  {limit: 25},
-                  {limit: 50},
-                  {limit: 95},
-                  {}
-                ]
-              }}
-              labels={{
-                valueLabel: {
-                  style: {fill: 'white', fontSize: 45, textShadow: 'unset'}
-                },
-                tickLabels: {
-                  hideMinMax: true,
-                  type: "inner",
-                  defaultTickValueConfig: {
-                    style: {fill: 'white'}
-                  }
-                }
-              }}
-              pointer={{ color:'#d54c03', animationDelay: 0}}
-              value={progressWidth}
-            />
-          </EmbossedCircle>
+          <ProgressBarComponent />
+          {/*<EmbossedCircle size={300}>*/}
+          {/*  <GaugeComponent*/}
+          {/*    type="radial"*/}
+          {/*    arc={{*/}
+          {/*      //colorArray: ['#fff', '#fff'],*/}
+          {/*      colorArray: ['#833AB4FF', '#FD1D1DFF'],*/}
+          {/*      padding: 0.02,*/}
+          {/*      subArcs: [*/}
+          {/*        {limit: 25},*/}
+          {/*        {limit: 50},*/}
+          {/*        {limit: 95},*/}
+          {/*        {}*/}
+          {/*      ]*/}
+          {/*    }}*/}
+          {/*    labels={{*/}
+          {/*      valueLabel: {*/}
+          {/*        style: {fill: 'white', fontSize: 45, textShadow: 'unset'}*/}
+          {/*      },*/}
+          {/*      tickLabels: {*/}
+          {/*        hideMinMax: true,*/}
+          {/*        type: "inner",*/}
+          {/*        defaultTickValueConfig: {*/}
+          {/*          style: {fill: 'white'}*/}
+          {/*        }*/}
+          {/*      }*/}
+          {/*    }}*/}
+          {/*    pointer={{ color:'#d54c03', animationDelay: 0}}*/}
+          {/*    value={progressWidth}*/}
+          {/*  />*/}
+          {/*</EmbossedCircle>*/}
 
           {/*old gauge*/}
           {/*<GaugeComponent*/}

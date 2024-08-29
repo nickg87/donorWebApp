@@ -96,7 +96,7 @@ export default function Contact() {
               className="absolute top-2 right-2 p-4 py-2 px-4 text-white"
               onClick={handleCloseMessage}
             >
-              <FontAwesomeIcon icon={faTimes}/>
+              <FontAwesomeIcon style={{width:'18'}} icon={faTimes}/>
             </button>
             {statusMessage}
           </div>

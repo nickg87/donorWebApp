@@ -5,7 +5,7 @@ import { useAppContext } from '@/contexts/AppContext';
 import TransactionListComponent from "@/components/TransactionListComponent";
 
 const EtherScanComponent = ({ address }) => {
-  const { updateBalance } = useAppContext();
+  const { globalState, updateBalance, updateShouldFetch } = useAppContext();
   const [transactionCount, setTransactionCount] = useState(null);
   const [transactionList, setTransactionList] = useState(null);
   const [balance, setBalance] = useState(null);
@@ -41,6 +41,9 @@ const EtherScanComponent = ({ address }) => {
       const formattedBalanceToUSDT = parseFloat(formattedBalance) * 100; // Convert balance to USD
       setBalance(formattedBalance); // Update local state
       updateBalance(formattedBalanceToUSDT); // Update global state
+      if (globalState.shouldFetch) {
+        updateShouldFetch(false);
+      }
 
       setLoading(false);
       fetchConfirmedTransactionCount(address, etherscanApiKey);
@@ -50,6 +53,14 @@ const EtherScanComponent = ({ address }) => {
       setLoading(false);
     }
   };
+
+  // Smooth animation effect
+  useEffect(() => {
+    console.log('xxxxxxx enters here useEffect shouldFetch')
+    if (globalState.shouldFetch) {
+      fetchData();
+    }
+  }, [globalState.shouldFetch]);
 
 
   const fetchConfirmedTransactionCount = async (address, etherscanApiKey) => {
