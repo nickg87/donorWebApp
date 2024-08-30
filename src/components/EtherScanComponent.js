@@ -96,10 +96,9 @@ const EtherScanComponent = ({ address }) => {
 
   useEffect(() => {
     fetchData();
-
     const fetchDataInterval = setInterval(() => {
-      fetchData(); // Fetch data every 10 seconds
-    }, 360000); // Interval set to 10 seconds (10000 milliseconds)
+      fetchData();
+    }, 300000); // Interval set to 5 minutes (1000 milliseconds = 1 second)
 
     return () => clearInterval(fetchDataInterval);
   }, [address, etherscanApiKey]);
