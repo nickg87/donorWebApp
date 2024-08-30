@@ -216,7 +216,7 @@ w3m-modal {
   /* Optional background color for contrast */
   /* background-color: #f9f9f9; */
   box-shadow:
-          -20px -20px 40px rgba(255, 255, 255, 0.48), /* Top-left highlight */
+          -20px -20px 40px rgba(149, 7, 39, 0.43), /* Top-left highlight */
           20px 20px 40px rgba(0, 0, 0, 0.3), /* Bottom-right shadow */
           inset 3px 3px 5px rgba(255, 255, 255, 0.05); /* Inner highlight */
 }
@@ -241,6 +241,7 @@ w3m-modal {
   --primary: var(--progressMainColor);
   --secondary: var(--progressSecondColor);
   --size: 300px;
+  --thickness: 50%;
   animation: progress 2s 0.5s forwards;
   width: var(--size);
   aspect-ratio: 1;
@@ -259,9 +260,9 @@ w3m-modal {
   width: 100%;
   height: 100%;
   background: conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
-  mask: radial-gradient(white 40%, transparent 0); /* Adjust the thickness by changing the first value (40%) */
+  mask: radial-gradient(white var(--thickness), transparent 0); /* Adjust the thickness by changing the first value (40%) */
   mask-mode: alpha;
-  -webkit-mask: radial-gradient(#0000 40%, #000 0); /* Adjust the thickness for webkit browsers */
+  -webkit-mask: radial-gradient(#0000 var(--thickness), #000 0); /* Adjust the thickness for webkit browsers */
   -webkit-mask-mode: alpha;
 }
 

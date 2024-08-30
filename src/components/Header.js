@@ -39,7 +39,6 @@ const Header = () => {
       <div className="container mx-auto max-w-7xl flex justify-between items-center">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
-            <h1 className="hidden md:block text-3xl font-bold mr-2">DonorHub</h1>
             {/*<Image*/}
             {/*  src="/logos/donorHubLogo.svg"*/}
             {/*  alt="DonorHub Logo"*/}
@@ -55,6 +54,7 @@ const Header = () => {
               height={80}
               priority
             />
+            <h1 className="hidden md:block text-3xl font-bold mr-2">DonorHub</h1>
           </div>
         </Link>
         <div className="md:hidden" onClick={toggleMenu}>
