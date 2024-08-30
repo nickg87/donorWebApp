@@ -19,7 +19,7 @@ const DonationQRCode = ({ address, amount }) => {
           <div className="w-full mx-auto p-8 bg-white rounded-lg shadow-md">
             <QRCode value={qrData}  style={{ width: '100%', height: '100%' }} />
           </div>
-          <p className="mt-4 text-center text-sm"  dangerouslySetInnerHTML={{
+          <p className="mt-4 text-center text-sm" style={{wordBreak:'keep-all'}}  dangerouslySetInnerHTML={{
             __html: t('qrCodeComponent.text', {var1: amount, var2: address}),
           }}/>
 

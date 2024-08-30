@@ -27,7 +27,7 @@
     }
   },
   "qrCodeComponent": {
-    "text": "Scan QR Code with your wallet app to donate <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong>{{var2}}</strong>"
+    "text": "Scan QR Code with your wallet app to donate <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong style='word-break: break-all'>{{var2}}</strong>"
   },
   "donateComponent": {
     "buttonText": "Donate Now",
