@@ -33,6 +33,7 @@ const ProgressBarComponent = (props) => {
 
   // Smooth animation effect
   useEffect(() => {
+    console.log('enters here')
     let start = null;
     const duration = 1000; // duration of the animation in milliseconds
 
@@ -55,6 +56,11 @@ const ProgressBarComponent = (props) => {
 
   // Ensure the progress is a valid number before rounding
   let roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
+
+  // fix progress not showing
+  useEffect(() => {
+    roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
+  }, [progress]);
 
   return (
     <div style={{ textAlign: 'center' }}>
