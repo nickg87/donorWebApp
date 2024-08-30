@@ -40,12 +40,19 @@ const Header = () => {
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
             <h1 className="hidden md:block text-3xl font-bold mr-2">DonorHub</h1>
+            {/*<Image*/}
+            {/*  src="/logos/donorHubLogo.svg"*/}
+            {/*  alt="DonorHub Logo"*/}
+            {/*  style={{aspectRatio: '120 / 70'}}*/}
+            {/*  width={100}*/}
+            {/*  height={24}*/}
+            {/*  priority*/}
+            {/*/>*/}
             <Image
-              src="/donorHubLogo.svg"
+              src="/logos/donorLogoWhite.svg"
               alt="DonorHub Logo"
-              style={{aspectRatio: '120 / 70'}}
-              width={100}
-              height={24}
+              width={80}
+              height={80}
               priority
             />
           </div>

@@ -25,13 +25,21 @@ const Footer = () => {
         </div>
         <div className="flex items-center">
           <Link href="/" passHref>
+            {/*<Image*/}
+            {/*  src="/logos/donorHubLogo.svg"*/}
+            {/*  alt="DonerHub Logo"*/}
+            {/*  // className="dark:invert"*/}
+            {/*  width={100}*/}
+            {/*  height={24}*/}
+            {/*  style={{aspectRatio: '120 / 70'}}*/}
+            {/*  priority*/}
+            {/*/>*/}
             <Image
-              src="/donorHubLogo.svg"
+              src="/logos/donorLogoWhite.svg"
               alt="DonerHub Logo"
-              className="dark:invert"
+              // className="dark:invert"
               width={100}
-              height={24}
-              style={{aspectRatio: '120 / 70'}}
+              height={100}
               priority
             />
           </Link>
