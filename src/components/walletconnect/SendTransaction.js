@@ -51,10 +51,10 @@ export default function SendTransaction() {
   };
 
   return (
-    <div className="max-w-sm md:max-w-lg mx-auto p-6 bg-gray-800 text-gray-200 shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-white">Send Transaction</h2>
+    <div className="w-full mx-auto p-8 bg-gray-800 text-gray-200 shadow-md rounded-lg">
+      <h2 className="text-left text-2xl font-bold mb-4 text-white">Send Transaction</h2>
       <form className="space-y-4" onSubmit={submit}>
-        <div>
+        <div className="text-left">
           <label htmlFor="address" className="block text-sm font-medium">Address</label>
           <input
             id="address"
@@ -66,7 +66,7 @@ export default function SendTransaction() {
             readOnly
           />
         </div>
-        <div>
+        <div className="text-left">
           <label htmlFor="value" className="block text-sm font-medium">Amount (ETH)</label>
           <input
             id="value"
@@ -75,7 +75,9 @@ export default function SendTransaction() {
             step="0.000000001"
             className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-900 text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="0.001"
+            value="0.001"
             required
+            readOnly
           />
         </div>
         <button

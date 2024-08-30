@@ -40,7 +40,8 @@ export default function CustomButton() {
   };
 
   const baseStyle =
-    "px-4 py-2 font-bold text-white rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0 focus:outline-none inline-flex";
+    "w-full px-4 py-4 font-bold mt-4 text-white text-center rounded-full  transition-all duration-300 ease-in-out transform focus:outline-none flex items-center justify-center";
+
 
   return (
     <>
@@ -48,15 +49,16 @@ export default function CustomButton() {
       {isConnected ? (
         <button
           onClick={handleDisconnect}
-          className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600`}
+          className={`${baseStyle} bg-gradient-to-r m-2 p-2 bg-gray-800 hover:bg-grey-900`}
         >
+          {/*//from-red-500 to-pink-500*/}
           <FontAwesomeIcon icon={faUnlink} className="mr-2 text-xl w-5 h-5" />
           Disconnect
         </button>
       ) : (
         <button
           onClick={handleConnect}
-          className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600`}
+          className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-red-500 to-pink-500 hover:from-red-800 hover:to-pink-800`}
         >
           <FontAwesomeIcon icon={faWallet} className="mr-2 text-xl w-5 h-5" /> Connect Wallet
         </button>

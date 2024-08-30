@@ -10,6 +10,8 @@
   --background-end-rgb: 255, 255, 255;
   --main-gradient: repeating-linear-gradient(90deg,  rgba(131,58,180,1), rgba(253,29,29,1), rgb(252, 103, 69),rgba(253,29,29,1), rgba(131,58,180,1));
   --swiper-theme-color: rgba(131,58,180,1) !important;
+  --progressMainColor: rgb(252, 103, 69);
+  --progressSecondColor: rgb(252, 167, 69);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -199,3 +201,100 @@ blockquote hr {
 w3m-modal {
   z-index: 100
 }
+
+
+/* START ProgressCircle.css */
+
+.embossed-circle {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  margin: 3rem auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Optional background color for contrast */
+  /* background-color: #f9f9f9; */
+  box-shadow:
+          -20px -20px 40px rgba(255, 255, 255, 0.48), /* Top-left highlight */
+          20px 20px 40px rgba(0, 0, 0, 0.3), /* Bottom-right shadow */
+          inset 3px 3px 5px rgba(255, 255, 255, 0.05); /* Inner highlight */
+}
+
+@keyframes progress {
+  0% {
+    --percentage: 0;
+  }
+  100% {
+    --percentage: var(--value);
+  }
+}
+
+@property --percentage {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+[role="progressbar"] {
+  --percentage: var(--value);
+  --primary: var(--progressMainColor);
+  --secondary: var(--progressSecondColor);
+  --size: 300px;
+  animation: progress 2s 0.5s forwards;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+[role="progressbar"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
+  mask: radial-gradient(white 40%, transparent 0); /* Adjust the thickness by changing the first value (40%) */
+  mask-mode: alpha;
+  -webkit-mask: radial-gradient(#0000 40%, #000 0); /* Adjust the thickness for webkit browsers */
+  -webkit-mask-mode: alpha;
+}
+
+/* Style for the progress text */
+.progress-text {
+  font-size: 2.5rem; /* Adjust this to control text size */
+  color: white;
+  font-weight: bold;
+  z-index: 1; /* Ensures the text is above the pseudo-elements */
+  position: relative;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 600px) {
+  .embossed-circle {
+    width: 260px;
+    height: 260px;
+  }
+  [role="progressbar"] {
+    --size: 200px; /* Smaller size for mobile devices */
+  }
+
+  .progress-text {
+    font-size: 1.5rem; /* Smaller font size for mobile devices */
+  }
+}
+
+/*[role="progressbar"]::after {*/
+/*  counter-reset: percentage var(--value);*/
+/*  content: counter(percentage) '%';*/
+/*  font-family: Helvetica, Arial, sans-serif;*/
+/*  font-size: calc(var(--size) / 5);*/
+/*  color: var(--primary);*/
+/*}*/
+
+/* END ProgressCircle.css */

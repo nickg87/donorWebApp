@@ -26,7 +26,6 @@ const DonationComponent = ({ pools, donors }) => {
   return (
     <>
       <DonationProgressComponent />
-      <DonateButton/>
       {/*<DApp/>*/}
       { isDev && <EtherScanComponent address={ethAddress} /> }
       { isDev && <DevCurrentLists pools={pools} donors={donors}/> }

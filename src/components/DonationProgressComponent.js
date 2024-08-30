@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useTranslation } from 'next-i18next';
 import ProgressBarComponent from "@/components/ProgressBarComponent";
+import DonateButton from "@/components/DonateButton";
 
 const DonationProgressComponent = () => {
   const { t, i18n } = useTranslation();
@@ -15,10 +16,12 @@ const DonationProgressComponent = () => {
           <h2 className="text-center text-white-600 mb-6">
             {t("welcomeCurrentPoolSubText")}
           </h2>
+          <ProgressBarComponent />
+          <DonateButton/>
           <blockquote className="text-center mb-2 leading-8 enhanceText" dangerouslySetInnerHTML={{
             __html: t('welcomeCurrentPoolDescriptionText', { var1: '$10 USDT', var2: '$500 USDT' }),
           }} />
-          <ProgressBarComponent />
+
         </div>
       </>
   )

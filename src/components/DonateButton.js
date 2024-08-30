@@ -13,7 +13,7 @@ const DonateButton = () => {
   const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
 
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
-  const ethAmount = 0.1; // Example amount, replace with actual logic if needed
+  const ethAmount = 0.001; // Example amount, replace with actual logic if needed
 
   const handleDonateNow = async () => {
     const transferStartedMessage = t('donateComponent.transferStartedMessage');
@@ -33,7 +33,7 @@ const DonateButton = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center p-4">
-        <button onClick={handleDonateNow} className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 md:py-6 md:px-12 rounded-full flex items-center gradient-bg">
+        <button onClick={handleDonateNow} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 md:py-6 md:px-12 rounded-full flex items-center gradient-bg">
           <div className="w-8 h-8 flex items-center justify-center mr-2">
             <FontAwesomeIcon icon={faHandHoldingDollar} />
           </div>
