@@ -3,7 +3,7 @@ import {useAppContext} from "@/contexts/AppContext";
 
 
 const ProgressCircle = ({ progress }) => {
-  console.log(progress);
+  //console.log(progress);
   const progressRef = React.useRef(null);
 
   useEffect(() => {

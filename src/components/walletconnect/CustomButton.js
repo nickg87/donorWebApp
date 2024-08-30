@@ -13,14 +13,6 @@ export default function CustomButton() {
   const { disconnect } = useDisconnect();
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (window.ethereum) {
-      console.log(window.ethereum);
-    } else {
-      console.log(window);
-    }
-  }, []);
-
   const handleDisconnect = async () => {
     try {
       await disconnect();

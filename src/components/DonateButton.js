@@ -47,7 +47,7 @@ const DonateButton = () => {
 
       {showModal && (
         <div className="fixed z-10 inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg overflow-y-auto flex items-center justify-center">
-          <div className="bg-black sm:rounded-lg max-w sm:max-w-md w-full bg-opacity-50 sm:bg-opacity-100 h-full sm:h-auto sm:max-h-screen flex flex-col text-center shadow-md">
+          <div className="bg-black sm:rounded-lg max-w sm:max-w-md w-full bg-opacity-75 sm:bg-opacity-100 h-full sm:h-auto sm:max-h-screen flex flex-col text-center shadow-md">
 
             {/* Modal Header */}
             <div className="flex flex-col bg-black sm:bg-transparent">
