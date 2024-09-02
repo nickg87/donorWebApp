@@ -4,7 +4,7 @@ const cors = require('cors');
 const knex = require('knex');
 const knexConfig = require('./knexfile');
 const poolsRoutes = require('./routes/pools');
-const donorsRoutes = require('./routes/donors');
+const transactionsRoutes = require('./routes/transactions');
 const authRouter = require('./routes/auths'); // Import authentication routes
 const emailsRouter = require('./routes/emails');
 
@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 
 // Routes
 app.use('/api/pools', poolsRoutes(db));
-app.use('/api/donors', donorsRoutes(db));
+app.use('/api/transactions', transactionsRoutes(db));
 app.use('/api/emails', emailsRouter);
 app.use('/api/auth', authRouter(db)); // Correctly use authentication routes
 

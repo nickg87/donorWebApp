@@ -9,13 +9,13 @@ export async function getServerSideProps({ locale }) {
     const poolsRes = await fetch(apiUrl + 'pools');
     const poolsData = await poolsRes.json();
 
-    const donorsRes = await fetch(apiUrl + 'donors');
-    const donorsData = await donorsRes.json();
+    const transactionsRes = await fetch(apiUrl + 'transactions');
+    const transactionsData = await transactionsRes.json();
 
     return {
       props: {
         pools: poolsData,
-        donors: donorsData,
+        transactions: transactionsData,
         ...(await serverSideTranslations(locale, ['common'])),
       },
     };
@@ -24,13 +24,13 @@ export async function getServerSideProps({ locale }) {
     return {
       props: {
         pools: null,
-        donors: null,
+        transactions: null,
         ...(await serverSideTranslations(locale, ['common'])),
       },
     };
   }
 }
 
-export default function Home({ pools, donors }) {
-  return <MainContent pools={pools} donors={donors} />;
+export default function Home({ pools, transactions }) {
+  return <MainContent pools={pools} transactions={transactions} />;
 }

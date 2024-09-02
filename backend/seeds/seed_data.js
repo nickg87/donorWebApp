@@ -166,11 +166,11 @@ exports.seed = function(knex) {
         { title: 'Pool 3', description: 'Description for Pool 3', active: false, type: 'C' }
       ]);
 
-      // Get pool IDs for reference in donors seeding
+      // Get pool IDs for reference in transactions seeding
       const pools = await trx('pools').select('id');
 
-      // Seed donors table with valid poolId references
-      await trx('donors').del(); // Clear existing data if any
+      // Seed transactions table with valid poolId references
+      await trx('transactions').del(); // Clear existing data if any
 
 
       // Prepare data for insertion
@@ -191,9 +191,9 @@ exports.seed = function(knex) {
         // Add more columns as needed
       }));
 
-      //await trx('donors').insert(donorData);
+      //await trx('transactions').insert(donorData);
 
-      await trx('donors').insert([
+      await trx('transactions').insert([
         {
           blockHash: '0xe18ac7da4d901963f00af2397677da8eb28871a04ed9e9248876d03176159d10',
           blockNumber: 6295589, // Ensure numeric type

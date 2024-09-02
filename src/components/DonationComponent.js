@@ -8,7 +8,7 @@ import DonateButton from "@/components/DonateButton";
 import DApp from "@/components/walletconnect/DApp";
 import DevCurrentLists from "@/components/DevCurrentLists";
 
-const DonationComponent = ({ pools, donors }) => {
+const DonationComponent = ({ pools, transactions }) => {
   const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ const DonationComponent = ({ pools, donors }) => {
       <DonationProgressComponent />
       {/*<DApp/>*/}
       { isDev && <EtherScanComponent address={ethAddress} /> }
-      { isDev && <DevCurrentLists pools={pools} donors={donors}/> }
+      { isDev && <DevCurrentLists pools={pools} transactions={transactions}/> }
     </>);
 };
 

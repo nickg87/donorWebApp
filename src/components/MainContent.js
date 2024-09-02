@@ -5,10 +5,10 @@ import SocialDonations from '../components/SocialDonations';
 import DonationComponent from './DonationComponent';
 import DevCurrentLists from "./DevCurrentLists";
 
-const MainContent = ({ pools, donors }) => {
+const MainContent = ({ pools, transactions }) => {
   return (
       <>
-        <DonationComponent pools={pools} donors={donors} />
+        <DonationComponent pools={pools} transactions={transactions} />
         <SocialDonations />
       </>
   );
