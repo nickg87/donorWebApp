@@ -41,7 +41,7 @@ const DonateButton = () => {
         </button>
 
         <p className="mt-4 text-center text-sm">
-          {t('donateComponent.text', { var1: "500 USDT" })}
+          {t('donateComponent.text', { var1: "50 $ in ETH" })}
         </p>
       </div>
 
