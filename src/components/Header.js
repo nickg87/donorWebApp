@@ -35,18 +35,10 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white p-4 shadow-md w-full sticky top-0 z-[9]" >
-      <div className="container mx-auto max-w-7xl flex justify-between items-center">
+    <header className="bg-gray-900 text-white p-4 shadow-md w-full sticky top-0 z-[9]">
+      <div className="container mx-auto max-w-7xl flex justify-between items-center p-4">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
-            {/*<Image*/}
-            {/*  src="/logos/donorHubLogo.svg"*/}
-            {/*  alt="DonorHub Logo"*/}
-            {/*  style={{aspectRatio: '120 / 70'}}*/}
-            {/*  width={100}*/}
-            {/*  height={24}*/}
-            {/*  priority*/}
-            {/*/>*/}
             <Image
               src="/logos/donorLogoWhite.svg"
               alt="DonorHub Logo"
@@ -57,26 +49,40 @@ const Header = () => {
             <h1 className="hidden md:block text-3xl font-bold mr-2">DonorHub</h1>
           </div>
         </Link>
-        <div className="md:hidden" onClick={toggleMenu}>
+
+
+        <div className="md:hidden z-50 " onClick={toggleMenu}>
           {isOpen ? <FaTimes size={24}/> : <FaBars size={24}/>}
         </div>
-        <nav className={`md:flex md:items-center md:gap-4 ${isOpen ? 'block' : 'hidden'}`}>
+
+
+        <nav
+          className={`absolute left-0 w-full bg-gray-800 p-4 md:p-0 md:bg-transparent md:static  md:flex md:items-center md:justify-end md:gap-4 md:ml-auto transition-all duration-300 ease-in-out ${
+            isOpen ? 'block ' : 'hidden'
+          }`}
+          style={{zIndex: isOpen ? 40 : 'auto'}}
+        >
           {session ? (
-            <div>
-              <span>{t('welcome')}, {session.name}</span> {/* Example usage of translation */}
-              <span> | </span>
-              <button onClick={signOut}>{t('signOut')}</button>
+            <div className="flex flex-col md:flex-row md:items-center">
+              <span className="text-white">{t('welcome')}, {session.name}</span>
+              <span className="text-white mx-2">|</span>
+              <button className="text-white hover:text-gray-300" onClick={signOut}>
+                {t('signOut')}
+              </button>
             </div>
           ) : (
-            <button onClick={() => setShowModal(true)}>{t('signIn')}</button>
+            <button className="text-white hover:text-gray-300" onClick={() => setShowModal(true)}>
+              {t('signIn')}
+            </button>
           )}
           <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-300">
             {t('contact')}
           </Link>
-          <LanguageSwitcher />
+          <LanguageSwitcher/>
         </nav>
       </div>
-      <AuthModal showModal={showModal} setShowModal={setShowModal} />
+
+      <AuthModal showModal={showModal} setShowModal={setShowModal}/>
     </header>
   );
 };
