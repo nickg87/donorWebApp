@@ -29,6 +29,9 @@
   "qrCodeComponent": {
     "text": "Escanea el código QR con tu aplicación monedero para donar {{var1}} ETH a {{var2}}"
   },
+  "sendTransactionComponent": {
+    "text": "Estás conectado con: <strong style='word-break: break-all'>{{var1}}</strong>"
+  },
   "donateComponent": {
     "buttonText": "Donar ahora",
     "modalTitle":"¿Cómo transferir?",

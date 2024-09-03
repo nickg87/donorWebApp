@@ -5,7 +5,7 @@ import SendTransaction from "./SendTransaction"; // Assuming you rename CustomBu
 import { useAccount } from "wagmi";
 
 export default function DApp() {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
 
   return (
     <div className="flex flex-col justify-center items-center p-8">
@@ -14,7 +14,7 @@ export default function DApp() {
       {/*    <w3m-button size="sm"/>*/}
       {/*  </div>}*/}
 
-      {isConnected && <SendTransaction/>}
+      {isConnected && <SendTransaction walletAddress={address}/>}
       <CustomButton/>
 
     </div>

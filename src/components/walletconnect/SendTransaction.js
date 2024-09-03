@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext } from '@/contexts/AppContext';
+import {useTranslation} from "next-i18next";
 
 //https://wagmi.sh/react/guides/send-transaction
-export default function SendTransaction() {
+export default function SendTransaction(props) {
   const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true); // New state to handle confirmation display
   const recipientAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
   const { updateShouldFetch } = useAppContext();
+  const { t, i18n } = useTranslation();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -89,6 +91,17 @@ export default function SendTransaction() {
         >
           {isPending ? 'Confirming...' : 'Send'}
         </button>
+        {props.walletAddress && (
+          <div className="mt-4 text-center text-xs" style={{ wordBreak: 'keep-all' }}>
+            {/* Icon is placed before the text */}
+            <FontAwesomeIcon icon={faInfoCircle} className="w-4 h-4 inline-block mr-2" />
+            {/* Display text that can be translated, formatted correctly */}
+            <span dangerouslySetInnerHTML={{
+              __html: t('sendTransactionComponent.text', { var1: props.walletAddress }),
+            }} />
+          </div>
+        )}
+
       </form>
       {hash && (
         <div className="mt-4 p-2 bg-gray-700 border border-gray-600 rounded-md break-words">
