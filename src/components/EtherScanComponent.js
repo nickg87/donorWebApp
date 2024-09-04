@@ -5,6 +5,8 @@ import { useAppContext } from '@/contexts/AppContext';
 import TransactionListComponent from "@/components/TransactionListComponent";
 
 const EtherScanComponent = ({ address }) => {
+
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   const { globalState, updateBalance, updateShouldFetch } = useAppContext();
   const [transactionCount, setTransactionCount] = useState(null);
   const [transactionList, setTransactionList] = useState(null);
@@ -13,6 +15,30 @@ const EtherScanComponent = ({ address }) => {
   const [error, setError] = useState(null);
   const etherscanApiKey = process.env.NEXT_PUBLIC_DONOR_ETHSCAN_APIKEY;
   //console.log(etherscanApiKey);
+
+  const fetchDataFromAPI = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get(apiUrl + `etherscan/fetch-data/${address}`);
+      const { transactionCount, transactionList, balance } = response.data;
+
+      setTransactionCount(transactionCount);
+      setTransactionList(transactionList);
+      setBalance(balance);
+      updateBalance(parseFloat(balance) * 100); // Assuming USD conversion is done on frontend
+
+      if (globalState.shouldFetch) {
+        updateShouldFetch(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError("Error fetching data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchData = async () => {
     if (!etherscanApiKey) {
@@ -58,7 +84,7 @@ const EtherScanComponent = ({ address }) => {
   useEffect(() => {
     console.log('xxxxxxx enters here useEffect shouldFetch')
     if (globalState.shouldFetch) {
-      fetchData();
+      fetchDataFromAPI();
     }
   }, [globalState.shouldFetch]);
 
@@ -94,20 +120,23 @@ const EtherScanComponent = ({ address }) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-    const fetchDataInterval = setInterval(() => {
-      fetchData();
-    }, 300000); // Interval set to 5 minutes (1000 milliseconds = 1 second)
-
-    return () => clearInterval(fetchDataInterval);
-  }, [address, etherscanApiKey]);
+  // useEffect(() => {
+  //   fetchDataFromAPI();
+  //   const fetchDataInterval = setInterval(() => {
+  //     fetchDataFromAPI();
+  //   }, 300000); // Interval set to 5 minutes (1000 milliseconds = 1 second)
+  //
+  //   return () => clearInterval(fetchDataInterval);
+  // }, [address, etherscanApiKey]);
 
   return (
     <div>
-      <button onClick={fetchData} disabled={loading} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        {loading ? 'Fetching...' : 'Fetch Data'}
+      <button onClick={fetchDataFromAPI} disabled={loading} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        {loading ? 'Fetching API DATA...' : 'Test Fetch Data from API'}
       </button>
+      {/*<button onClick={fetchData} disabled={loading} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">*/}
+      {/*  {loading ? 'Fetching...' : 'Fetch Data'}*/}
+      {/*</button>*/}
       {error && <p className="text-red-500 mt-4">{error}</p>}
       {!loading && !error && (
         <>

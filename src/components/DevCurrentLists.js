@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import {timestampToDateString} from "@/utils/helpers";
 
 
 const DevCurrentLists = ({ pools, transactions }) => {
@@ -24,6 +25,7 @@ const DevCurrentLists = ({ pools, transactions }) => {
           </ul>
         </div>
       )}
+
       {transactions && (
         <div className="m-2 p-4 max-w-lg w-full">
           <h2 className="text-xl font-semibold text-white-800 mt-8 mb-4">Transactions</h2>
@@ -32,8 +34,9 @@ const DevCurrentLists = ({ pools, transactions }) => {
               <li key={transaction.id} className="py-2">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-lg font-medium text-white-800">{transaction.address}</span>
-                    <span className="text-sm text-white-500">Amount: {transaction.amount}, Fee: {transaction.fee}</span>
+                    <span className="text-lg font-large text-white-800">{transaction.timeStamp}</span>
+                    <span className="text-lg font-medium text-white-800">{transaction.from}</span>
+                    <span className="text-sm text-white-500">Amount: {transaction.value}, Fee: {transaction.gasPrice}</span>
                   </div>
                   <span className="text-sm text-white-500">Pool ID: {transaction.poolId}</span>
                 </div>

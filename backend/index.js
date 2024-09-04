@@ -7,6 +7,7 @@ const poolsRoutes = require('./routes/pools');
 const transactionsRoutes = require('./routes/transactions');
 const authRouter = require('./routes/auths'); // Import authentication routes
 const emailsRouter = require('./routes/emails');
+const etherScanRouter = require('./routes/etherscan');
 
 require('dotenv').config();
 let envPath = process.env.PWD  + '/backend';
@@ -41,7 +42,12 @@ app.use(cors(corsOptions));
 app.use('/api/pools', poolsRoutes(db));
 app.use('/api/transactions', transactionsRoutes(db));
 app.use('/api/emails', emailsRouter);
+app.use('/api/etherscan', etherScanRouter);
 app.use('/api/auth', authRouter(db)); // Correctly use authentication routes
+
+// Start the cron jobs
+const { startCronJobs } = require('./cronJobs'); // Adjust the path to cronJobs.js
+startCronJobs();
 
 const PORT = process.env.PORT || 5000;
 
