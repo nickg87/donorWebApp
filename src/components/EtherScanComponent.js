@@ -8,13 +8,14 @@ import WebSocketClient from '@/components/WebSocketClient';
 const EtherScanComponent = ({ address }) => {
 
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
+  const etherscanApiKey = process.env.NEXT_PUBLIC_DONOR_ETHSCAN_APIKEY;
   const { globalState, updateBalance, updateShouldFetch } = useAppContext();
   const [transactionCount, setTransactionCount] = useState(null);
   const [transactionList, setTransactionList] = useState(null);
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const etherscanApiKey = process.env.NEXT_PUBLIC_DONOR_ETHSCAN_APIKEY;
   //console.log(etherscanApiKey);
 
   const fetchDataFromAPI = async () => {
@@ -83,8 +84,8 @@ const EtherScanComponent = ({ address }) => {
 
   // Smooth animation effect
   useEffect(() => {
-    console.log('xxxxxxx enters here useEffect shouldFetch')
     if (globalState.shouldFetch) {
+      if (isDev) console.log('Enters here useEffect globalState.shouldFetch is TRUE');
       fetchDataFromAPI();
     }
   }, [globalState.shouldFetch]);

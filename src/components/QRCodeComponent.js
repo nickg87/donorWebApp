@@ -4,13 +4,16 @@ import {useTranslation} from "next-i18next";
 import { parseEther } from 'viem';
 
 const DonationQRCode = ({ address, amount }) => {
-  console.log(amount)
-  console.log(typeof amount)
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
   const parsedAmount = parseEther(amount);
-  console.log(parsedAmount);
   const { t, i18n } = useTranslation();
   const qrData = `ethereum:${address}?value=${parsedAmount}`;
-  console.log(qrData)
+  if (isDev) {
+    console.log('amount: ' + amount)
+    console.log('parsedAmount: ' + parsedAmount);
+    console.log('qrData: ');
+    console.log(qrData);
+  }
 
   return (
     <div className="flex flex-col justify-center items-center p-8">

@@ -14,6 +14,7 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const { globalState, updateUser } = useAppContext();
   const [session, setSession] = useState(globalState.user || null);
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
 
   useEffect(() => {
     // This ensures that the language is correctly set client-side after hydration
@@ -23,7 +24,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    console.log('Locale:', i18n.language);
+    if (isDev) console.log('Locale:', i18n.language);
   }, []);
 
   useEffect(() => {
