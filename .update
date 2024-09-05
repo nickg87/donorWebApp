@@ -17,11 +17,11 @@ printf "${blue}Data pulled${end}\n"
 
 printf "${grey}Doing a new build...${end}\n"
 npm run build
-printf "\n\n${blue}BUILD DONE!...${end}\n"
+printf "\n\n${blue}BUILD DONE!...${end}\n\n"
 
 printf "${grey}Flushing PM2 FE app...${end}\n"
 npm run flush-pm2
-printf "\n${green}FLUSH PM2 DONE!...${end}\n"
+printf "\n${blue}FLUSH PM2 DONE!...${end}\n\n"
 
 printf "${grey}Reloading PM2 FE app...${end}\n"
 npm run reload-pm2
