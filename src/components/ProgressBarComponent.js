@@ -30,10 +30,11 @@ const ProgressBarComponent = (props) => {
   const { globalState, setGlobalState } = useAppContext();
   const [progress, setProgress] = useState(0);
   const targetProgress = globalState?.balance ? globalState.balance * 10 : 0;
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
 
   // Smooth animation effect
   useEffect(() => {
-    console.log('enters here')
+    //if (isDev) console.log('enters here');
     let start = null;
     const duration = 1000; // duration of the animation in milliseconds
 
