@@ -12,7 +12,7 @@
     "next": "next dev",
     "set-maintenance-mode": "node ./maintenance-scripts/set-maintenance-mode.js",
     "reset-maintenance-mode": "node ./maintenance-scripts/reset-maintenance-mode.js",
-    "reload-pm2": "pm2 reload donor-hub --update-env",
+    "reload-pm2": "pm2 reload all --update-env",
     "debug-port": "node -e \"console.log(process.env.PORT)\""
   },
   "dependencies": {
