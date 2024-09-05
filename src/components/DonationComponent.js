@@ -14,7 +14,7 @@ const DonationComponent = ({ pools, transactions }) => {
   const [loading, setLoading] = useState(false);
 
 
-  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
+  //const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
   //console.log('isDev: ' + isDev);
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
   const ethAmount = 0.001;
@@ -27,8 +27,8 @@ const DonationComponent = ({ pools, transactions }) => {
     <>
       <DonationProgressComponent />
       {/*<DApp/>*/}
-      { isDev && <EtherScanComponent address={ethAddress} /> }
-      { isDev && <DevCurrentLists pools={pools} transactions={transactions}/> }
+      <EtherScanComponent address={ethAddress} />
+      <DevCurrentLists pools={pools} transactions={transactions}/>
     </>);
 };
 
