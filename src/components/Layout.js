@@ -9,13 +9,16 @@ import axios from "axios";
 const Layout = ({ children }) => {
 
   const { globalState, updateUser } = useAppContext();
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
+  // console.log('isDev: ' + isDev);
 
-  const [isMaintenanceMode, setIsMaintenanceMode] = React.useState(false);
-
+  // const [isMaintenanceMode, setIsMaintenanceMode] = React.useState(false);
   // useEffect(() => {
   //   const checkMaintenanceMode = async () => {
+  //
+  //     const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   //     try {
-  //       const { data } = await axios.get('/next-api/maintenance');
+  //       const { data } = await axios.get(apiUrl + 'next-api/maintenance');
   //       setIsMaintenanceMode(data.isMaintenanceMode);
   //     } catch (error) {
   //       console.error('Error checking maintenance mode', error);
@@ -24,12 +27,12 @@ const Layout = ({ children }) => {
   //
   //   checkMaintenanceMode().then();
   // }, []);
-
-
-
-  console.log('isMaintenanceMode in XXXX Layout: ' + isMaintenanceMode);
-
-
+  //
+  // console.log('isMaintenanceMode in XXXX Layout: ' + isMaintenanceMode);
+  //
+  // if (isMaintenanceMode) {
+  //   return <MaintenancePage />;
+  // }
 
   useEffect(() => {
     const token = localStorage.getItem('sessionToken');
@@ -69,9 +72,7 @@ const Layout = ({ children }) => {
    }
   }, [globalState.user]);
 
-  if (isMaintenanceMode) {
-    return <MaintenancePage />;
-  }
+
 
   return (
     <>

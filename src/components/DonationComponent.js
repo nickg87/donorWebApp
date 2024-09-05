@@ -15,7 +15,7 @@ const DonationComponent = ({ pools, transactions }) => {
 
 
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
-  console.log('isDev: ' + isDev);
+  //console.log('isDev: ' + isDev);
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
   const ethAmount = 0.001;
   //console.log(ethAddress);

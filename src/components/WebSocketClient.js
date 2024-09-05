@@ -7,19 +7,20 @@ const WebSocketClient = () => {
   const [balance, setBalance] = useState(null);
   const [newTransactionsCount, setNewTransactionsCount] = useState(0);
   const { globalState, updateBalance, updateShouldFetch } = useAppContext();
+  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
 
   useEffect(() => {
     const connectWebSocket = () => {
       const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WEBSOCKET_URL}`);
 
       ws.onopen = () => {
-        console.log('WebSocket connection established');
+        if (isDev) console.log('WebSocket connection established');
       };
 
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          console.log('Message received from WebSocket server:', data);
+          if (isDev) console.log('Message received from WebSocket server:', data);
           if (data.type === 'UPDATE') {
             setBalance(data.balance);
             setNewTransactionsCount(data.newTransactionsCount);
@@ -29,7 +30,7 @@ const WebSocketClient = () => {
             }
           }
         } catch (error) {
-          console.error('Error parsing WebSocket message:', error);
+          if (isDev) console.error('Error parsing WebSocket message:', error);
         }
       };
 
@@ -38,9 +39,9 @@ const WebSocketClient = () => {
       };
 
       ws.onclose = (event) => {
-        console.log('WebSocket connection closed', event);
+        if (isDev) console.log('WebSocket connection closed', event);
         if (event.code !== 1000) {
-          console.error('WebSocket closed with error code:', event.code);
+          if (isDev) console.error('WebSocket closed with error code:', event.code);
           // Optionally, attempt to reconnect
           setTimeout(connectWebSocket, 500); // Retry after .5 second
         }
