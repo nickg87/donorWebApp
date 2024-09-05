@@ -56,4 +56,12 @@ const WebSocketClient = () => {
     };
   }, []);
 
+  return (
+    <div>
+      <p>Balance: {balance} ETH</p>
+      <p>New Transactions: {newTransactionsCount}</p>
+    </div>
+  );
+};
+
 export default WebSocketClient;
