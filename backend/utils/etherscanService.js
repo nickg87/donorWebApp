@@ -1,5 +1,7 @@
 const { ethers } = require('ethers');
 const axios = require('axios');
+const { broadcastMessage } = require('../webSocket'); // Import broadcast function
+
 
 const fetchEtherScanData = async (address, db) => {
   const etherScanApiKey = process.env.ETHERSCAN_APIKEY;
@@ -54,6 +56,15 @@ const fetchEtherScanData = async (address, db) => {
           });
           newTransactionsCount++;
         }
+      }
+
+      if (newTransactionsCount > 0) {
+        // Broadcast update to all WebSocket clients
+        broadcastMessage({
+          type: 'UPDATE',
+          balance: formattedBalance,
+          newTransactionsCount,
+        });
       }
 
       return {

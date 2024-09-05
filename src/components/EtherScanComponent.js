@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 const axios = require('axios');
 import { useAppContext } from '@/contexts/AppContext';
 import TransactionListComponent from "@/components/TransactionListComponent";
+import WebSocketClient from '@/components/WebSocketClient';
 
 const EtherScanComponent = ({ address }) => {
 
@@ -120,14 +121,14 @@ const EtherScanComponent = ({ address }) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchDataFromAPI();
-  //   const fetchDataInterval = setInterval(() => {
-  //     fetchDataFromAPI();
-  //   }, 300000); // Interval set to 5 minutes (1000 milliseconds = 1 second)
-  //
-  //   return () => clearInterval(fetchDataInterval);
-  // }, [address, etherscanApiKey]);
+  useEffect(() => {
+    fetchDataFromAPI();
+    // const fetchDataInterval = setInterval(() => {
+    //   fetchDataFromAPI();
+    // }, 300000); // Interval set to 5 minutes (1000 milliseconds = 1 second)
+    //
+    // return () => clearInterval(fetchDataInterval);
+  }, [address, etherscanApiKey]);
 
   return (
     <div>
@@ -144,6 +145,7 @@ const EtherScanComponent = ({ address }) => {
           <p>Balance: {balance} ETH</p>
         </>
       )}
+      <WebSocketClient />
       {transactionList && <TransactionListComponent transactions={transactionList}/> }
     </div>
   );

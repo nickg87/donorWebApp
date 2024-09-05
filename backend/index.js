@@ -9,6 +9,9 @@ const authRouter = require('./routes/auths'); // Import authentication routes
 const emailsRouter = require('./routes/emails');
 const etherScanRouter = require('./routes/etherscan');
 
+const { startCronJobs } = require('./cronJobs'); // Import cron jobs logic
+const { startWebSocketServer } = require('./webSocket'); // Import WebSocket logic
+
 require('dotenv').config();
 let envPath = process.env.PWD  + '/backend';
 envPath = envPath.replace('/backend/backend', '/backend');
@@ -45,11 +48,10 @@ app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);
 app.use('/api/auth', authRouter(db)); // Correctly use authentication routes
 
-// Start the cron jobs
-const { startCronJobs } = require('./cronJobs'); // Adjust the path to cronJobs.js
-startCronJobs();
+
 
 const PORT = process.env.PORT || 5000;
+const KNEX_DEBUG_MODE = process.env.KNEX_DEBUG_MODE || false;
 
 
 const { Client } = require('pg'); // Install with `npm install pg`
@@ -67,11 +69,18 @@ client.connect()
   .catch(e => console.error('Connection error', e.stack))
   .finally(() => client.end());
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(process.env.PWD);
   console.log(process.env.NODE_ENV);
   console.log(process.env.DB_HOST);
   console.log(process.env.DB_NAME);
   console.log(`Server running on port ${PORT}`);
+  console.log(`Knex Debug Mode: ${KNEX_DEBUG_MODE}`);
 
 });
+
+// Start WebSocket server
+startWebSocketServer(server);
+
+// Start cron jobs
+startCronJobs();

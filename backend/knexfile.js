@@ -23,7 +23,7 @@ module.exports = {
     seeds: {
       directory: __dirname + '/seeds',
     },
-    debug: true,
+    debug: process.env.KNEX_DEBUG_MODE || false,
   },
   staging: {
     client: 'pg',
@@ -40,6 +40,6 @@ module.exports = {
     seeds: {
       directory: __dirname + '/seeds',
     },
-    debug: true,
+    debug: process.env.KNEX_DEBUG_MODE || false,
   },
 };
