@@ -42,7 +42,7 @@ const WebSocketClient = () => {
         if (event.code !== 1000) {
           console.error('WebSocket closed with error code:', event.code);
           // Optionally, attempt to reconnect
-          setTimeout(connectWebSocket, 1000); // Retry after 1 second
+          setTimeout(connectWebSocket, 500); // Retry after .5 second
         }
       };
 
