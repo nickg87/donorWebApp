@@ -1,3 +1,4 @@
+//webSocket.js
 const WebSocket = require('ws');
 
 let wss;
@@ -27,8 +28,6 @@ const startWebSocketServer = (server) => {
     wss.handleUpgrade(request, socket, head, (ws) => {
       console.log('WebSocket upgrade handled, emitting connection event');
       wss.emit('connection', ws, request);
-    }).on('error', (error) => {
-      console.error('Error handling WebSocket upgrade:', error);
     });
   });
 
