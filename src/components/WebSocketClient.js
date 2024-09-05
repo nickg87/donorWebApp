@@ -11,7 +11,8 @@ const WebSocketClient = () => {
 
   useEffect(() => {
     // Open a WebSocket connection to the backend
-    const ws = new WebSocket('ws://localhost:' + backend_api_port); // Adjust the URL to your backend
+    const ws = new WebSocket(`ws://${process.env.NEXT_PUBLIC_BACKEND_API_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}`);
+
 
     // Handle messages received from the WebSocket server
     ws.onmessage = (event) => {
