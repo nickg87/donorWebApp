@@ -7,12 +7,10 @@ const WebSocketClient = () => {
   const [balance, setBalance] = useState(null);
   const [newTransactionsCount, setNewTransactionsCount] = useState(0);
   const { globalState, updateBalance, updateShouldFetch } = useAppContext();
-  const backend_api_port = process.env.NEXT_PUBLIC_BACKEND_PORT;
 
   useEffect(() => {
     // Open a WebSocket connection to the backend
-    const ws = new WebSocket(`ws://${process.env.NEXT_PUBLIC_BACKEND_API_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}`);
-
+    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WEBSOCKET_URL}`);
 
     // Handle messages received from the WebSocket server
     ws.onmessage = (event) => {
