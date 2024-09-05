@@ -22,6 +22,6 @@ module.exports = {
     seeds: {
       directory: __dirname + '/seeds',
     },
-    debug: true,
+    debug: process.env.KNEX_DEBUG_MODE || false,
   },
 };
