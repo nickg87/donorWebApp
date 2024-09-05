@@ -31,12 +31,14 @@ const startWebSocketServer = (server) => {
   server.on('upgrade', (request, socket, head) => {
     console.log('Handling WebSocket upgrade request');
 
-    wss.handleUpgrade(request, socket, head, (ws) => {
-      console.log('WebSocket upgrade handled, emitting connection event');
-      wss.emit('connection', ws, request);
-    }).on('error', (error) => {
+    try {
+      wss.handleUpgrade(request, socket, head, (ws) => {
+        console.log('WebSocket upgrade handled, emitting connection event');
+        wss.emit('connection', ws, request);
+      });
+    } catch (error) {
       console.error('Error handling WebSocket upgrade:', error);
-    });
+    }
   });
 
   console.log('WebSocket server started');
