@@ -30,7 +30,7 @@ const DonationQRCode = ({ address, amount }) => {
           }}/>
           <div className="w-full text-left">
             {/*<label htmlFor="address" className="block text-sm font-medium">Address</label>*/}
-            <div className="mt-1 flex items-center">
+            <div className="mt-2 flex items-center">
               <input
                 id="address"
                 name="address"
