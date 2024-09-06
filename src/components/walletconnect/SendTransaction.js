@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faInfoCircle, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext } from '@/contexts/AppContext';
 import {useTranslation} from "next-i18next";
+import {copyToClipboard} from '@/utils/helpers';
 
 //https://wagmi.sh/react/guides/send-transaction
 export default function SendTransaction(props) {
@@ -58,15 +59,26 @@ export default function SendTransaction(props) {
       <form className="space-y-4" onSubmit={submit}>
         <div className="text-left">
           <label htmlFor="address" className="block text-sm font-medium">Address</label>
-          <input
-            id="address"
-            name="address"
-            className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-900 text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="0x..."
-            value={recipientAddress}
-            required
-            readOnly
-          />
+          <div className="mt-1 flex items-center">
+            <input
+              id="address"
+              name="address"
+              className="block w-full px-3 py-2 border border-gray-600 border-r-0 rounded-l-md bg-gray-900 text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="0x..."
+              value={recipientAddress}
+              required
+              readOnly
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                copyToClipboard(recipientAddress)
+              }}
+              className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-r-md focus:outline-none copyToClipboard"
+            >
+              <FontAwesomeIcon icon={faCopy} className="w-4 h-4"/>
+            </button>
+          </div>
         </div>
         <div className="text-left">
           <label htmlFor="value" className="block text-sm font-medium">Amount (ETH)</label>
@@ -120,7 +132,7 @@ export default function SendTransaction(props) {
           </button>
         </div>
       )}
-      {error && <div className="mt-4 p-2 bg-red-800 border border-red-700 rounded-md text-red-300">Error: {error.message || 'An error occurred'}</div>}
+      {error && <div className="mt-4 p-2 bg-red-800 border border-red-700 rounded-md text-red-300 break-all">Error: {error.message || 'An error occurred'}</div>}
     </div>
   );
 }
