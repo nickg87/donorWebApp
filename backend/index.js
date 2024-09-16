@@ -72,7 +72,7 @@ sequelize.sync()
     branding: {
       companyName: process.env.APP_NAME,
       softwareBrothers: false,
-      logo: process.env.APP_URL + '/logos/donorLogoBlack.svg',
+      logo: process.env.APP_URL + 'logos/donorLogoBlack.svg',
       admin: {
         title: 'Resources',
       },
