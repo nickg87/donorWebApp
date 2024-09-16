@@ -1,0 +1,32 @@
+//models/pools.js
+module.exports = (sequelize, DataTypes) => {
+  return sequelize.define('Pool', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    type: {
+      type: DataTypes.STRING,
+    },
+    eth_address: {
+      type: DataTypes.STRING,
+    },
+    prize_amount: {
+      type: DataTypes.FLOAT,
+    },
+    entry_amount: {
+      type: DataTypes.FLOAT,
+    },
+  }, {
+    tableName: 'pools',      // Explicitly set the table name
+    timestamps: true,        // Enable timestamps
+    underscored: true,       // Use snake_case for timestamps and other column names
+  });
+};
