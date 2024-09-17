@@ -1,15 +1,15 @@
-const express = require('express');
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const router = express.Router();
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
+const router = express.Router();
 const secretKey = process.env.JWT_SECRET || '5DD4BmEnTYNB9Qcn';
 
-module.exports = (db) => {
+// Main function that exports the router
+export default (db) => {
 
   // Register request
   router.post('/register', async (req, res) => {
-    //return res.status(200).json({ message: 'Register route is working' });
     try {
       const { name, email, password } = req.body;
       const existingUser = await db('users').where({ email }).first();

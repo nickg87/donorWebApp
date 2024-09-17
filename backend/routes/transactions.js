@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
-module.exports = (db) => {
+export default (db) => {
   router.get('/', async (req, res) => {
     try {
       const transactions = await db('transactions').select('*');

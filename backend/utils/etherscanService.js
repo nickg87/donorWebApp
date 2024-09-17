@@ -1,9 +1,8 @@
-const { ethers } = require('ethers');
-const axios = require('axios');
-const { broadcastMessage } = require('../webSocket'); // Import broadcast function
+import { ethers } from 'ethers';
+import axios from 'axios';
+import { broadcastMessage } from '../webSocket.js'; // Import broadcast function
 
-
-const fetchEtherScanData = async (address, db) => {
+export const fetchEtherScanData = async (address, db) => {
   const etherScanApiKey = process.env.ETHERSCAN_APIKEY;
 
   if (!etherScanApiKey) {
@@ -80,5 +79,3 @@ const fetchEtherScanData = async (address, db) => {
     throw error;
   }
 };
-
-module.exports = fetchEtherScanData;

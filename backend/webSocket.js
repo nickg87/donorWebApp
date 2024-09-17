@@ -1,5 +1,4 @@
-//webSocket.js
-const WebSocket = require('ws');
+import WebSocket from 'ws';
 
 let wss;
 let recentMessages = []; // Buffer to store recent messages
@@ -71,5 +70,4 @@ const clearBuffer = () => {
   recentMessages = []; // Clear the buffer
 };
 
-module.exports = { startWebSocketServer, broadcastMessage };
-
+export { startWebSocketServer, broadcastMessage };

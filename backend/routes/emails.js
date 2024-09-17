@@ -1,6 +1,6 @@
-// src/routes/formRouter.js
-const express = require('express');
-const sendEmail = require('../utils/sendEmail');
+import express from 'express';
+import { sendEmail } from '../utils/sendEmail.js';
+
 const router = express.Router();
 
 // Handler for contact form submissions
@@ -42,4 +42,5 @@ router.post('/feedback', async (req, res) => {
   }
 });
 
-module.exports = router;
+// Export the router
+export default router;

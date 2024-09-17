@@ -1,7 +1,8 @@
-const cron = require('node-cron');
-const knex = require('knex');
-const knexConfig = require('./knexfile'); // Adjust path to knexfile
-const fetchEtherScanData = require('./utils/etherscanService');
+import cron from 'node-cron';
+import knex from 'knex';
+import knexConfig from './knexfile.mjs'; // Adjust path to knexfile
+import { fetchEtherScanData } from './utils/etherscanService.js';
+
 
 // Initialize database connection
 const db = knex(knexConfig.development);
@@ -21,7 +22,7 @@ cron.schedule('*/5 * * * *', async () => {
 });
 
 // Export a function to start cron jobs if needed
-module.exports.startCronJobs = () => {
+export const startCronJobs = () => {
   console.log('Starting cron jobs...');
   // Cron jobs are already scheduled, so this can be used to start other cron jobs if necessary
 };

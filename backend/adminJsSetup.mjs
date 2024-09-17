@@ -9,6 +9,7 @@ export async function setupAdminJS() {
   //const MultilingualTextField =  await import('./components/MultilingualTextField.js');
   const { Database, Resource } = await import('@adminjs/sequelize');
   const { Sequelize } = await import('sequelize');
+  const React = (await import('react')).default;
 
   AdminJS.registerAdapter({ Database, Resource });
 
@@ -23,6 +24,11 @@ export async function setupAdminJS() {
   const Pool = poolModel(sequelize, Sequelize.DataTypes);
   const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
 
+// Define a React component within this file
+  const TestComponent = (props) => {
+    return React.createElement('div', null, 'Hello from TestComponent!');
+  };
+
   // Create and configure ComponentLoader
 
   // Determine the directory of the current module
@@ -30,7 +36,7 @@ export async function setupAdminJS() {
   const __dirname = path.dirname(__filename);
 
   const componentLoader = new ComponentLoader();
-  componentLoader.add('MultilingualTextField', path.resolve(__dirname, './components/MultilingualTextField'));
+  componentLoader.add('MultilingualTextField', './components/MultilingualTextField.js');
 
 
   const adminJS = new AdminJS({
