@@ -53,7 +53,18 @@ sequelize.sync()
 
   const adminJS = new AdminJS({
     resources: [
-      { resource: Pool, options: { navigation: { name: 'Resources' } } },
+      { resource: Pool, options: {
+          properties: {
+            description: {
+              type: 'richtext',
+              isVisible: { list: true, filter: true, show: true, edit: true },
+            },
+          },
+          navigation: {
+            name: 'Resources'
+            }
+        }
+      },
       {
         resource: Transaction,
         options: {
