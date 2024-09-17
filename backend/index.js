@@ -151,6 +151,11 @@ sequelize.sync()
   // Serve static files from the 'public' directory
   app.use(express.static(path.join(__dirname, 'public')));
 
+  // Fallback for favicon
+  app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'favicon.ico'));
+  });
+
   // Add AdminJS router to your Express app
   app.use(adminJS.options.rootPath, adminRouter);
 
