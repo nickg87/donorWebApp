@@ -153,7 +153,7 @@ sequelize.sync()
 
   // Fallback for favicon
   app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'favicon.ico'));
+    res.sendFile(path.join(__dirname, 'public', 'favicons/favicon_be.ico'));
   });
 
   // Add AdminJS router to your Express app
