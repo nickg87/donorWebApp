@@ -1,87 +1,92 @@
-// adminJsSetup.js
+import { fileURLToPath } from 'url';
+import path from 'path';
+import AdminJS, { ComponentLoader } from 'adminjs';
+import AdminJSExpress from '@adminjs/express';
+import { Database, Resource } from '@adminjs/sequelize';
+import { Sequelize } from 'sequelize';
+import React from 'react'; // Import React as default from 'react'
+
+// Register AdminJS adapter
+AdminJS.registerAdapter({ Database, Resource });
+
+// Import model and initialize AdminJS with the models
+import poolModel from './models/pools.js';
+import transactionModel from './models/transactions.js';
+
+
+// Set up the database connection with Sequelize
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'postgres',
+});
+
+// Initialize models
+const Pool = poolModel(sequelize, Sequelize.DataTypes);
+const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
+
+// Determine the directory of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export async function setupAdminJS() {
-  const { fileURLToPath } = await import('url');
-  const path = (await import('path')).default;
-  const { default: AdminJS } = await import('adminjs');
-  const { ComponentLoader } = await import('adminjs');
-  const { default: AdminJSExpress } = await import('@adminjs/express');
-  //const MultilingualTextField =  await import('./components/MultilingualTextField.js');
-  const { Database, Resource } = await import('@adminjs/sequelize');
-  const { Sequelize } = await import('sequelize');
-  const React = (await import('react')).default;
-
-  AdminJS.registerAdapter({ Database, Resource });
-
-  // Import model and initialize AdminJS with the model
-  const poolModel = (await import('./models/pools.js')).default;
-  const transactionModel = (await import('./models/transactions.js')).default;
-  const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'postgres',
-  });
-
-  const Pool = poolModel(sequelize, Sequelize.DataTypes);
-  const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
-
-// Define a React component within this file
-  const TestComponent = (props) => {
-    return React.createElement('div', null, 'Hello from TestComponent!');
-  };
 
   // Create and configure ComponentLoader
-
-  // Determine the directory of the current module
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
+//   const componentLoader = new ComponentLoader();
+// //componentLoader.add('TranslatedFieldsTabs', path.join(__dirname, './components/TranslatedFieldsTabs.jsx')); // Use correct path
+//   componentLoader.add('TranslatedFieldsTabs', './components/TranslatedFieldsTabs');
+//   console.log(componentLoader);
 
   const componentLoader = new ComponentLoader();
-  componentLoader.add('MultilingualTextField', './components/MultilingualTextField.js');
+
+  const Components = {
+    //TranslatedFieldsTabs: componentLoader.add('TranslatedFieldsTabs', './components/TranslatedFieldsTabs'),
+    TitleEdit: componentLoader.add('TitleEdit', './components/MultiLingual/TitleEdit'),
+    TitleShow: componentLoader.add('TitleShow', './components/MultiLingual/TitleShow'),
+    TitleList: componentLoader.add('TitleList', './components/MultiLingual/TitleList'),
+    // other custom components
+  }
 
 
+
+  // Initialize AdminJS
   const adminJS = new AdminJS({
     resources: [
-      { resource: Pool,
+      {
+        resource: Pool,
         options: {
           properties: {
             title: {
+              type: 'string',
               components: {
-                edit: 'MultilingualTextField',
+                edit: Components.TitleEdit,
+                show: Components.TitleShow,
+                list: Components.TitleList,
               },
-              label: 'Title XXX',
             },
             description: {
               type: 'richtext',
               isVisible: { list: true, filter: true, show: true, edit: true },
             },
           },
-          navigation: {
-            name: 'Resources'
-          }
-        }
+          navigation: { name: 'Resources' },
+        },
       },
       {
         resource: Transaction,
         options: {
           listProperties: ['id', 'blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'gasUsed', 'hash', 'timeStamp', 'to', 'txreceipt_status', 'value', 'createdAt', 'poolId'],
           filterProperties: ['id', 'from', 'to', 'poolId'],
-          sort: {
-            direction: 'desc',
-            sortBy: 'id',
-          },
-          navigation: { name: 'Resources' }
+          sort: { direction: 'desc', sortBy: 'id' },
+          navigation: { name: 'Resources' },
         },
       },
-      // Add other models as needed
     ],
     rootPath: '/admin',
     branding: {
       companyName: process.env.APP_NAME,
       softwareBrothers: false,
-      logo: process.env.APP_URL + '/logos/donorLogoBlack.svg',
-      admin: {
-        title: 'Resources',
-      },
+      logo: `${process.env.APP_URL}/logos/donorLogoBlack.svg`,
+      admin: { title: 'Resources' },
     },
     locale: {
       language: 'en',
@@ -97,7 +102,7 @@ export async function setupAdminJS() {
             active: {
               true: 'Yes',
               false: 'No'
-            }
+            },
           },
           properties: {
             title: 'Title',
@@ -119,7 +124,7 @@ export async function setupAdminJS() {
             timeStamp: 'Time Stamp',
             txreceipt_status: 'Txreceipt Status',
             value: 'Value',
-            poolId: 'Pool Id'
+            poolId: 'Pool Id',
           },
         },
       },
@@ -127,7 +132,7 @@ export async function setupAdminJS() {
     componentLoader,
   });
 
+  // Build and return the AdminJS router
   const adminRouter = AdminJSExpress.buildRouter(adminJS);
-
   return adminRouter;
 }

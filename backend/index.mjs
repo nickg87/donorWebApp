@@ -7,16 +7,18 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { config as dotenvConfig } from 'dotenv';
 import { config as dotenvFlowConfig } from 'dotenv-flow';
-import knexModule from 'knex';  // Import knex module dynamically
-import knexConfig from './knexfile.mjs';  // Knex config file
-
+import knexModule from 'knex';
+import knexConfig from './knexfile.mjs';
 // Import AdminJS setup
 import { setupAdminJS } from './adminJsSetup.mjs';
+
+let envPath = process.env.PWD;
+envPath = envPath.replace('/backend/backend', '/backend');
 
 // Setup environment variables
 dotenvConfig();
 dotenvFlowConfig({
-  path: path.resolve(process.cwd(), './backend'),
+  path: path.resolve(envPath),
   node_env: process.env.NODE_ENV || 'development',
 });
 
@@ -88,8 +90,8 @@ const server = app.listen(PORT, () => {
 });
 
 // Import and start WebSocket server
-// import { startWebSocketServer } from './webSocket.js';
-// startWebSocketServer(server);
+import { startWebSocketServer } from './webSocket.js';
+startWebSocketServer(server);
 
 // Import and start cron jobs
 import { startCronJobs } from './cronJobs.js';

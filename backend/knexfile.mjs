@@ -1,10 +1,8 @@
 import { config as dotenvConfig } from 'dotenv';
 import { config as dotenvFlowConfig } from 'dotenv-flow';
 
-let envPath = process.env.PWD  + '/backend';
+let envPath = process.env.PWD;
 envPath = envPath.replace('/backend/backend', '/backend');
-envPath = envPath.replace('/backend/backend', '/backend');
-console.log(envPath);
 
 dotenvConfig();
 dotenvFlowConfig({

@@ -1,10 +1,10 @@
-import WebSocket from 'ws';
+import { WebSocketServer } from 'ws'; // ES module syntax for importing WebSocketServer
 
 let wss;
 let recentMessages = []; // Buffer to store recent messages
 
-const startWebSocketServer = (server) => {
-  wss = new WebSocket.Server({ noServer: true });
+const startWebSocketServer = async (server) => {
+  wss = new WebSocketServer({ noServer: true }); // Correct usage of WebSocketServer
 
   wss.on('connection', (ws) => {
     console.log('WEBSOCKET: New connection established');

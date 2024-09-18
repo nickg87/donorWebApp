@@ -1,7 +1,6 @@
 require('dotenv').config();
 let envPath = process.env.PWD  + '/backend';
 envPath = envPath.replace('/backend/backend', '/backend');
-console.log(envPath);
 require('dotenv-flow').config({
   path: envPath, // This should point to where your .env files are
   node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
