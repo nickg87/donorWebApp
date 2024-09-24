@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Input, Label, Box } from '@adminjs/design-system';
 
 // Define the component for multilingual title editing
 const TitleEdit = ({ record, onChange }) => {
+  console.log('record:');
+  console.log(record);
   const [currentLang, setCurrentLang] = useState('en');
 
   // Extract title from the nested params property
   const initialTitle = ((record.params && record.params.title) || record.title) || {};
+  console.log('initialTitle:');
+  console.log(initialTitle);
   const [title, setTitle] = useState(initialTitle);
 
   // Function to handle language tab changes

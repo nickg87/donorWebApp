@@ -43,6 +43,9 @@ export async function setupAdminJS() {
     TitleEdit: componentLoader.add('TitleEdit', './components/MultiLingual/TitleEdit'),
     TitleShow: componentLoader.add('TitleShow', './components/MultiLingual/TitleShow'),
     TitleList: componentLoader.add('TitleList', './components/MultiLingual/TitleList'),
+    DescriptionEdit: componentLoader.add('DescriptionEdit', './components/MultiLingual/DescriptionEdit'),
+    DescriptionShow: componentLoader.add('DescriptionShow', './components/MultiLingual/DescriptionShow'),
+    DescriptionList: componentLoader.add('DescriptionList', './components/MultiLingual/DescriptionList'),
     // other custom components
   }
 
@@ -65,7 +68,19 @@ export async function setupAdminJS() {
             },
             description: {
               type: 'richtext',
-              isVisible: { list: true, filter: true, show: true, edit: true },
+              components: {
+                edit: Components.DescriptionEdit,
+                show: Components.DescriptionShow,
+                list: Components.DescriptionList,
+              },
+            },
+            type: {
+              type: 'select',
+              availableValues: [
+                { value: 'normal', label: 'Normal' },
+                { value: 'social', label: 'Social' },
+                { value: 'million', label: 'Million' },
+              ],
             },
           },
           navigation: { name: 'Resources' },
@@ -102,6 +117,14 @@ export async function setupAdminJS() {
             active: {
               true: 'Yes',
               false: 'No'
+            },
+            type: {
+              normal: 'Normal',
+              social: 'Social',
+              million: 'Million',
+              Normal: 'Normal',
+              Social: 'Social',
+              Million: 'Million'
             },
           },
           properties: {

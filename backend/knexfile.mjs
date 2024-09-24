@@ -21,10 +21,11 @@ export default {
       database: process.env.DB_NAME,
     },
     migrations: {
-      directory: envPath + './migrations',
+      directory: envPath + '/migrations',
+      extension: 'cjs',
     },
     seeds: {
-      directory: envPath + './seeds',
+      directory: envPath + '/seeds',
     },
     debug: process.env.KNEX_DEBUG_MODE === 'true',
   },
@@ -38,10 +39,11 @@ export default {
       database: process.env.DB_NAME,
     },
     migrations: {
-      directory: envPath + './migrations',
+      directory: envPath + '/migrations',
+      extension: 'cjs',
     },
     seeds: {
-      directory: envPath + './seeds',
+      directory: envPath + '/seeds',
     },
     debug: process.env.KNEX_DEBUG_MODE === 'true',
   },

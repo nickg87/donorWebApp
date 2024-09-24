@@ -91,7 +91,7 @@ const server = app.listen(PORT, () => {
 
 // Import and start WebSocket server
 import { startWebSocketServer } from './webSocket.js';
-startWebSocketServer(server);
+startWebSocketServer(server).then();
 
 // Import and start cron jobs
 import { startCronJobs } from './cronJobs.js';
