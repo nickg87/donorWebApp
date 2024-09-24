@@ -15,7 +15,9 @@ module.exports = {
     // Production Express backend
     {
       name: 'backend',                   // Production backend app
-      script: './backend/index.mjs',     // Path to your Express server script
+      script: 'npm',                     // Use npm to start the backend
+      args: 'run dev',                 // Start the backend using 'npm run start' (or appropriate command)
+      cwd: './backend',                 // Path to your Express server script
       instances: 1,
       env: {
         NODE_ENV: 'production',          // Production environment variables

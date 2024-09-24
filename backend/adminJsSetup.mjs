@@ -1,17 +1,15 @@
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 import path from 'path';
-import AdminJS, { ComponentLoader } from 'adminjs';
+import AdminJS, {ComponentLoader} from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import { Database, Resource } from '@adminjs/sequelize';
-import { Sequelize } from 'sequelize';
-import React from 'react'; // Import React as default from 'react'
-
-// Register AdminJS adapter
-AdminJS.registerAdapter({ Database, Resource });
-
+import {Database, Resource} from '@adminjs/sequelize';
+import {Sequelize} from 'sequelize';
 // Import model and initialize AdminJS with the models
 import poolModel from './models/pools.js';
 import transactionModel from './models/transactions.js';
+
+// Register AdminJS adapter
+AdminJS.registerAdapter({ Database, Resource });
 
 
 // Set up the database connection with Sequelize
@@ -156,6 +154,5 @@ export async function setupAdminJS() {
   });
 
   // Build and return the AdminJS router
-  const adminRouter = AdminJSExpress.buildRouter(adminJS);
-  return adminRouter;
+  return AdminJSExpress.buildRouter(adminJS);
 }
