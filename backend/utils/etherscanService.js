@@ -4,6 +4,8 @@ import { broadcastMessage } from '../webSocket.js'; // Import broadcast function
 
 export const fetchEtherScanData = async (address, db) => {
   const etherScanApiKey = process.env.ETHERSCAN_APIKEY;
+  console.log(etherScanApiKey);
+  console.log(process.env);
 
   if (!etherScanApiKey) {
     throw new Error('Etherscan API key is not set');
