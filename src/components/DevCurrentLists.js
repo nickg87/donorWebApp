@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
 import {timestampToDateString} from "@/utils/helpers";
 
 
 const DevCurrentLists = ({ pools, transactions }) => {
+  const { t, i18n } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center p-4">
       {pools && (
@@ -15,10 +17,9 @@ const DevCurrentLists = ({ pools, transactions }) => {
               <li key={pool.id} className="py-2">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-lg font-medium text-white-800">{pool.name}</span>
-                    <span className="text-sm text-white-500">{pool.description}</span>
+                    <span className="text-lg font-medium text-white-800">{pool.title[i18n.language]}</span>
+                    <span className="text-sm text-white-500">{pool.description[i18n.language]}</span>
                   </div>
-                  <span className="text-sm text-white-500">Capacity: {pool.capacity}</span>
                 </div>
               </li>
             ))}
