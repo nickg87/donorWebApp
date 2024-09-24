@@ -1,12 +1,16 @@
-require('dotenv').config();
-let envPath = process.env.PWD  + '/backend';
+import { config as dotenvConfig } from 'dotenv';
+import { config as dotenvFlowConfig } from 'dotenv-flow';
+
+let envPath = process.env.PWD;
 envPath = envPath.replace('/backend/backend', '/backend');
-require('dotenv-flow').config({
-  path: envPath, // This should point to where your .env files are
-  node_env: process.env.NODE_ENV || 'development', // Use NODE_ENV to pick the right .env file
+
+dotenvConfig();
+dotenvFlowConfig({
+  path: envPath,
+  node_env: process.env.NODE_ENV || 'development',
 });
 
-module.exports = {
+export default {
   development: {
     client: 'pg',
     connection: {
@@ -17,10 +21,10 @@ module.exports = {
       database: process.env.DB_NAME,
     },
     migrations: {
-      directory: __dirname + '/migrations',
+      directory: envPath + './migrations',
     },
     seeds: {
-      directory: __dirname + '/seeds',
+      directory: envPath + './seeds',
     },
     debug: process.env.KNEX_DEBUG_MODE === 'true',
   },
@@ -34,10 +38,10 @@ module.exports = {
       database: process.env.DB_NAME,
     },
     migrations: {
-      directory: __dirname + '/migrations',
+      directory: envPath + './migrations',
     },
     seeds: {
-      directory: __dirname + '/seeds',
+      directory: envPath + './seeds',
     },
     debug: process.env.KNEX_DEBUG_MODE === 'true',
   },

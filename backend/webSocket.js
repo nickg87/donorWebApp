@@ -1,11 +1,10 @@
-//webSocket.js
-const WebSocket = require('ws');
+import { WebSocketServer, WebSocket } from 'ws'; // Import both WebSocketServer and WebSocket
 
 let wss;
 let recentMessages = []; // Buffer to store recent messages
 
-const startWebSocketServer = (server) => {
-  wss = new WebSocket.Server({ noServer: true });
+const startWebSocketServer = async (server) => {
+  wss = new WebSocketServer({ noServer: true }); // Correct usage of WebSocketServer
 
   wss.on('connection', (ws) => {
     console.log('WEBSOCKET: New connection established');
@@ -71,5 +70,4 @@ const clearBuffer = () => {
   recentMessages = []; // Clear the buffer
 };
 
-module.exports = { startWebSocketServer, broadcastMessage };
-
+export { startWebSocketServer, broadcastMessage };

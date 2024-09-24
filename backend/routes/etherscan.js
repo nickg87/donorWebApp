@@ -1,10 +1,12 @@
-const express = require('express');
-const { ethers } = require('ethers');
-const axios = require('axios');
-const knex = require("knex");
-const knexConfig = require("../knexfile");
+import express from 'express';
+import { ethers } from 'ethers';
+import axios from 'axios';
+import knex from 'knex';
+import knexConfig from '../knexfile.mjs';
+import { fetchEtherScanData } from '../utils/etherscanService.js';
+
+
 const router = express.Router();
-const fetchEtherScanData = require('../utils/etherscanService');
 
 router.get('/fetch-data/:address', async (req, res) => {
   const { address } = req.params;
@@ -22,7 +24,6 @@ router.get('/fetch-data/:address', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
 });
 
-module.exports = router;
+export default router;

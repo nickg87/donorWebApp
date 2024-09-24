@@ -1,5 +1,5 @@
 // models/transactions.js
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   return sequelize.define('Transaction', {
     blockHash: {
       type: DataTypes.STRING,

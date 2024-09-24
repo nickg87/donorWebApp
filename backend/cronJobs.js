@@ -1,7 +1,8 @@
-const cron = require('node-cron');
-const knex = require('knex');
-const knexConfig = require('./knexfile'); // Adjust path to knexfile
-const fetchEtherScanData = require('./utils/etherscanService');
+import cron from 'node-cron';
+import knex from 'knex';
+import knexConfig from './knexfile.mjs'; // Adjust path to knexfile
+import { fetchEtherScanData } from './utils/etherscanService.js';
+
 
 // Initialize database connection
 const db = knex(knexConfig.development);
@@ -9,8 +10,8 @@ const db = knex(knexConfig.development);
 // Address to monitor
 const address = '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with the address you want to monitor
 
-// Schedule a cron job to run every 5 minutes
-cron.schedule('*/5 * * * *', async () => {
+// Schedule a cron job to run every 5 minutes [*/5 * * * *] / 1 minute [*/1 * * * *]/ 2 minutes [*/2 * * * *]
+cron.schedule('*/2 * * * *', async () => {
   console.log('Running Etherscan fetch job...');
   try {
     const result = await fetchEtherScanData(address, db);
@@ -21,7 +22,7 @@ cron.schedule('*/5 * * * *', async () => {
 });
 
 // Export a function to start cron jobs if needed
-module.exports.startCronJobs = () => {
+export const startCronJobs = () => {
   console.log('Starting cron jobs...');
   // Cron jobs are already scheduled, so this can be used to start other cron jobs if necessary
 };

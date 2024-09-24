@@ -1,12 +1,12 @@
-//models/pools.js
-module.exports = (sequelize, DataTypes) => {
+// models/pools.js
+export default (sequelize, DataTypes) => {
   return sequelize.define('Pool', {
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
     },
     active: {
       type: DataTypes.BOOLEAN,
