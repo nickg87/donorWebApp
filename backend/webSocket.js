@@ -1,4 +1,4 @@
-import { WebSocketServer } from 'ws'; // ES module syntax for importing WebSocketServer
+import { WebSocketServer, WebSocket } from 'ws'; // Import both WebSocketServer and WebSocket
 
 let wss;
 let recentMessages = []; // Buffer to store recent messages

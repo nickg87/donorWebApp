@@ -10,8 +10,8 @@ const db = knex(knexConfig.development);
 // Address to monitor
 const address = '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with the address you want to monitor
 
-// Schedule a cron job to run every 5 minutes
-cron.schedule('*/5 * * * *', async () => {
+// Schedule a cron job to run every 5 minutes [*/5 * * * *] / 1 minute [*/1 * * * *]/ 2 minutes [*/2 * * * *]
+cron.schedule('*/2 * * * *', async () => {
   console.log('Running Etherscan fetch job...');
   try {
     const result = await fetchEtherScanData(address, db);
