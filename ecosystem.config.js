@@ -23,26 +23,26 @@ module.exports = {
       }
     },
     // Staging Next.js app
-    {
-      name: 'stage-donor-hub',            // Staging app
-      script: 'npm',                      // Use npm to start the staging app
-      args: 'start',                     // Start the app using 'npm start'
-      cwd: './stage',                    // Working directory for staging app
-      instances: 1,
-      env_staging: {
-        NODE_ENV: 'staging',             // Staging environment variables
-        PORT: 3001                        // Staging port
-      }
-    },
-    // Staging Express backend
-    {
-      name: 'stage-backend',             // Staging backend app
-      script: './stage/backend/index.mjs', // Path to your staging Express server script
-      instances: 1,
-      env_staging: {
-        NODE_ENV: 'staging',             // Staging environment variables
-        PORT: 5001                        // Staging port for backend
-      }
-    }
+    // {
+    //   name: 'stage-donor-hub',            // Staging app
+    //   script: 'npm',                      // Use npm to start the staging app
+    //   args: 'start',                     // Start the app using 'npm start'
+    //   cwd: './stage',                    // Working directory for staging app
+    //   instances: 1,
+    //   env_staging: {
+    //     NODE_ENV: 'staging',             // Staging environment variables
+    //     PORT: 3001                        // Staging port
+    //   }
+    // },
+    // // Staging Express backend
+    // {
+    //   name: 'stage-backend',             // Staging backend app
+    //   script: './stage/backend/index.mjs', // Path to your staging Express server script
+    //   instances: 1,
+    //   env_staging: {
+    //     NODE_ENV: 'staging',             // Staging environment variables
+    //     PORT: 5001                        // Staging port for backend
+    //   }
+    // }
   ]
 };
