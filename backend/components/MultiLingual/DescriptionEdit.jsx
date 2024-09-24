@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Label, Box, RichTextEditor } from '@adminjs/design-system';
 
 // Define the component for multilingual description editing
@@ -13,8 +13,8 @@ const DescriptionEdit = ({ record, onChange }) => {
 
   const [description, setDescription] = useState(initialDescription);
 
-  console.log('description:');
-  console.log(description);
+  // console.log('description:');
+  // console.log(description);
 
   // Function to handle language tab changes
   const handleLangChange = (lang) => {

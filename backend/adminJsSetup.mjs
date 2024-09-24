@@ -1,3 +1,4 @@
+//adminJsSetup.mjs
 import {fileURLToPath} from 'url';
 import path from 'path';
 import AdminJS, {ComponentLoader} from 'adminjs';
@@ -26,7 +27,13 @@ const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Function to fetch all pools
+const getAllPools = async () => {
+  return await Pool.findAll(); // Fetch pools from your database
+};
+
 export async function setupAdminJS() {
+  const pools = await getAllPools(); // Fetch the pools data
 
   // Create and configure ComponentLoader
 //   const componentLoader = new ComponentLoader();
@@ -44,6 +51,8 @@ export async function setupAdminJS() {
     DescriptionEdit: componentLoader.add('DescriptionEdit', './components/MultiLingual/DescriptionEdit'),
     DescriptionShow: componentLoader.add('DescriptionShow', './components/MultiLingual/DescriptionShow'),
     DescriptionList: componentLoader.add('DescriptionList', './components/MultiLingual/DescriptionList'),
+    PoolSelectEdit: componentLoader.add('PoolSelectEdit', './components/PoolSelectEdit'),
+    PoolSelectShow: componentLoader.add('PoolSelectShow', './components/PoolSelectShow'),
     // other custom components
   }
 
@@ -91,6 +100,19 @@ export async function setupAdminJS() {
           filterProperties: ['id', 'from', 'to', 'poolId'],
           sort: { direction: 'desc', sortBy: 'id' },
           navigation: { name: 'Resources' },
+          properties: {
+            poolId: {
+              components: {
+                edit: Components.PoolSelectEdit,
+                show: Components.PoolSelectShow,
+                list: Components.PoolSelectShow,
+              },
+              availableValues: pools.map(pool => ({
+                value: pool.id, // Pool ID
+                label: pool.title.en || pool.title.es || 'No Title Available', // Fallback label
+              })),
+            },
+          }
         },
       },
     ],

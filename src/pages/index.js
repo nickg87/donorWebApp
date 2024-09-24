@@ -4,6 +4,7 @@ import MainContent from "@/components/MainContent";
 
 export async function getServerSideProps({ locale }) {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  console.log('apiUrl via process.env.NEXT_PUBLIC_BACKEND_API_URL: ' + apiUrl);
 
   try {
     const poolsRes = await fetch(apiUrl + 'pools');
