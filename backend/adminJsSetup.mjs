@@ -48,6 +48,7 @@ export async function setupAdminJS() {
     PoolSelectShow: componentLoader.add('PoolSelectShow', './components/PoolSelectShow'),
     PoolSelectList: componentLoader.add('PoolSelectList', './components/PoolSelectList'),
     TransactionCount: componentLoader.add('TransactionCount', './components/TransactionCount'),
+    TransactionCountShow: componentLoader.add('TransactionCountShow', './components/TransactionCountShow'),
   }
 
   // Initialize AdminJS
@@ -88,6 +89,7 @@ export async function setupAdminJS() {
               isDisabled: true,
               components: {
                 list: Components.TransactionCount,
+                show: Components.TransactionCountShow,
               },
             },
           },
