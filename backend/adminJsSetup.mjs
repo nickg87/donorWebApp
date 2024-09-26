@@ -37,7 +37,6 @@ export async function setupAdminJS() {
   const componentLoader = new ComponentLoader();
 
   const Components = {
-    //TranslatedFieldsTabs: componentLoader.add('TranslatedFieldsTabs', './components/TranslatedFieldsTabs'),
     TitleEdit: componentLoader.add('TitleEdit', './components/MultiLingual/TitleEdit'),
     TitleShow: componentLoader.add('TitleShow', './components/MultiLingual/TitleShow'),
     TitleList: componentLoader.add('TitleList', './components/MultiLingual/TitleList'),
@@ -47,7 +46,7 @@ export async function setupAdminJS() {
     PoolSelectEdit: componentLoader.add('PoolSelectEdit', './components/PoolSelectEdit'),
     PoolSelectShow: componentLoader.add('PoolSelectShow', './components/PoolSelectShow'),
     PoolSelectList: componentLoader.add('PoolSelectList', './components/PoolSelectList'),
-    TransactionCount: componentLoader.add('TransactionCount', './components/TransactionCount'),
+    TransactionCountList: componentLoader.add('TransactionCountList', './components/TransactionCountList'),
     TransactionCountShow: componentLoader.add('TransactionCountShow', './components/TransactionCountShow'),
   }
 
@@ -88,7 +87,7 @@ export async function setupAdminJS() {
               label: 'Transactions',
               isDisabled: true,
               components: {
-                list: Components.TransactionCount,
+                list: Components.TransactionCountList,
                 show: Components.TransactionCountShow,
               },
             },

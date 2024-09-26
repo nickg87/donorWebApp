@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const TransactionCount = ({ record }) => {
+const TransactionCountList = ({ record }) => {
   const [transactionCount, setTransactionCount] = useState(0);
   const [loading, setLoading] = useState(true); // For loading state
 
@@ -32,4 +32,4 @@ const TransactionCount = ({ record }) => {
   return <p>{transactionCount}</p>;
 };
 
-export default TransactionCount;
+export default TransactionCountList;

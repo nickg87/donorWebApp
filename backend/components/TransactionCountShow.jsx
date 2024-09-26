@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Label, Text, Link } from '@adminjs/design-system';
 
-const TransactionCount = ({ record, resource }) => {
+const TransactionCountList = ({ record, resource }) => {
   const [transactionCount, setTransactionCount] = useState(0);
   const [loading, setLoading] = useState(true); // For loading state
 
@@ -43,4 +43,4 @@ const TransactionCount = ({ record, resource }) => {
 
 };
 
-export default TransactionCount;
+export default TransactionCountList;
