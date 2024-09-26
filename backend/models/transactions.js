@@ -1,6 +1,6 @@
 // models/transactions.js
 export default (sequelize, DataTypes) => {
-  return sequelize.define('Transaction', {
+  const Transaction = sequelize.define('Transaction', {
     blockHash: {
       type: DataTypes.STRING,
     },
@@ -46,7 +46,17 @@ export default (sequelize, DataTypes) => {
       },
     },
   }, {
-    tableName: 'transactions',      // Explicitly set the table name
-    timestamps: false,             // Disable Sequelize’s automatic timestamps
+    tableName: 'transactions',
+    timestamps: false,
   });
+
+  // Define associations here
+  Transaction.associate = (models) => {
+    Transaction.belongsTo(models.Pool, {
+      foreignKey: 'poolId',
+      as: 'pool',
+    });
+  };
+
+  return Transaction;
 };

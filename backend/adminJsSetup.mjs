@@ -34,13 +34,6 @@ const getAllPools = async () => {
 
 export async function setupAdminJS() {
   const pools = await getAllPools(); // Fetch the pools data
-
-  // Create and configure ComponentLoader
-//   const componentLoader = new ComponentLoader();
-// //componentLoader.add('TranslatedFieldsTabs', path.join(__dirname, './components/TranslatedFieldsTabs.jsx')); // Use correct path
-//   componentLoader.add('TranslatedFieldsTabs', './components/TranslatedFieldsTabs');
-//   console.log(componentLoader);
-
   const componentLoader = new ComponentLoader();
 
   const Components = {
@@ -53,10 +46,9 @@ export async function setupAdminJS() {
     DescriptionList: componentLoader.add('DescriptionList', './components/MultiLingual/DescriptionList'),
     PoolSelectEdit: componentLoader.add('PoolSelectEdit', './components/PoolSelectEdit'),
     PoolSelectShow: componentLoader.add('PoolSelectShow', './components/PoolSelectShow'),
-    // other custom components
+    PoolSelectList: componentLoader.add('PoolSelectList', './components/PoolSelectList'),
+    TransactionCount: componentLoader.add('TransactionCount', './components/TransactionCount'),
   }
-
-
 
   // Initialize AdminJS
   const adminJS = new AdminJS({
@@ -89,14 +81,24 @@ export async function setupAdminJS() {
                 { value: 'million', label: 'Million' },
               ],
             },
+            transactionCount: {
+              isVisible: { list: true, show: true, edit: false },
+              type: 'number',
+              label: 'Transactions',
+              isDisabled: true,
+              components: {
+                list: Components.TransactionCount,
+              },
+            },
           },
           navigation: { name: 'Resources' },
         },
+
       },
       {
         resource: Transaction,
         options: {
-          listProperties: ['id', 'blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'gasUsed', 'hash', 'timeStamp', 'to', 'txreceipt_status', 'value', 'createdAt', 'poolId'],
+          listProperties: ['id', 'blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'gasUsed', 'hash', 'timeStamp', 'txreceipt_status', 'value', 'createdAt', 'poolId'],
           filterProperties: ['id', 'from', 'to', 'poolId'],
           sort: { direction: 'desc', sortBy: 'id' },
           navigation: { name: 'Resources' },
@@ -105,7 +107,7 @@ export async function setupAdminJS() {
               components: {
                 edit: Components.PoolSelectEdit,
                 show: Components.PoolSelectShow,
-                list: Components.PoolSelectShow,
+                list: Components.PoolSelectList,
               },
               availableValues: pools.map(pool => ({
                 value: pool.id, // Pool ID

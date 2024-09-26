@@ -13,6 +13,22 @@ export default (db) => {
     }
   });
 
+  // New route: Get transaction count for a pool by ID
+  router.get('/count/:poolId', async (req, res) => {
+    try {
+      const { poolId } = req.params;
+
+      // Query the transactions table to count the number of transactions for the given poolId
+      const transactionCount = await db('transactions').count('* as count').where({ poolId });
+      const count = transactionCount[0].count;
+
+      res.json({ count });
+    } catch (error) {
+      console.error('Error fetching transaction count:', error);
+      res.status(500).json({ error: 'Failed to fetch transaction count' });
+    }
+  });
+
   router.post('/', async (req, res) => {
     try {
       const { blockHash, from, to, value, gas, poolId } = req.body;

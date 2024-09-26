@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, Label, Select } from '@adminjs/design-system';
 
 const PoolSelectEdit = ({ record, resource, onChange }) => {
-  console.log('record:');
-  console.log(record);
-  console.log('resource:');
+  // console.log('record:');
+  // console.log(record);
+  // console.log('resource:');
   const { params } = record;
 
   // Get available pool options

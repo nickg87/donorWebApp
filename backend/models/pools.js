@@ -1,6 +1,6 @@
 // models/pools.js
 export default (sequelize, DataTypes) => {
-  return sequelize.define('Pool', {
+  const Pool = sequelize.define('Pool', {
     title: {
       type: DataTypes.JSONB,
       allowNull: false,
@@ -25,8 +25,18 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
     },
   }, {
-    tableName: 'pools',      // Explicitly set the table name
-    timestamps: true,        // Enable timestamps
-    underscored: true,       // Use snake_case for timestamps and other column names
+    tableName: 'pools',
+    timestamps: true,
+    underscored: true,
   });
+
+  // Define associations here
+  Pool.associate = (models) => {
+    Pool.hasMany(models.Transaction, {
+      foreignKey: 'poolId', // Foreign key in Transaction model
+      as: 'transactions', // Alias for the association
+    });
+  };
+
+  return Pool;
 };
