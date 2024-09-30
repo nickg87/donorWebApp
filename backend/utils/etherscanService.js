@@ -68,12 +68,65 @@ export const fetchEtherScanData = async (address, db) => {
         });
       }
 
+      // Check pools to see if they are full
+      const pools = await db('pools').where({ active: true, drawn_status: 'inactive' });
+      let drawnStatus = 'inactive';
+
+      for (const pool of pools) {
+        //const totalValueResult = await db('transactions').where('poolId', pool.id).sum('value as totalValue');
+
+        const totalValueResult = await db('transactions').where('poolId', pool.id).sum({ totalValue: db.raw('CAST(value AS BIGINT)') });
+        //const poolPrizeAmount = pool.prize_amount;
+        //force some other value for testing purposes
+        const poolPrizeAmount = 0.04;
+
+
+        // Ensure we safely access the totalValue
+        const totalValue = Array.isArray(totalValueResult) && totalValueResult.length > 0 ? totalValueResult[0].totalValue : 0;
+        const formattedTotalValue = ethers.utils.formatEther(totalValue);
+
+        console.log('Total value for poolID ' + pool.id + ': ' + formattedTotalValue);
+        console.log('Pool prize Amount for poolID ' + pool.id + ': ' + poolPrizeAmount);
+
+        if (totalValue >= poolPrizeAmount) {
+          console.log('SHOULD ENTER DRAW LOGIC for poolID: ' + pool.id);
+
+
+          const randomTransactionResult = await db('transactions')
+            .where('poolId', pool.id)
+            .orderByRaw('RANDOM()') // Use RANDOM() to select a random transaction
+            .first(); // Get only one transaction
+
+          if (randomTransactionResult) {
+            // Prepare the drawn_data JSON with relevant transaction information
+            const drawnData = randomTransactionResult;
+
+            // Pool is full, trigger draw logic
+            await db('pools')
+              .where({ id: pool.id })
+              .update({
+                drawn_status: 'in_progress', // Adjust as necessary
+                drawn_at: new Date(),
+                drawn_data: JSON.stringify(drawnData), // Store drawn_data as JSON
+              });
+
+            drawnStatus = 'in_progress';
+            console.log(`Pool ${pool.id} is drawn with drawn_data:`, drawnData);
+          } else {
+            console.log(`No transactions found for poolID: ${pool.id}`);
+          }
+        }
+      }
+
+
       return {
         transactionCount: transactions.length,
         newTransactionsCount,
         balance: formattedBalance,
+        drawn_status: drawnStatus,
       };
     } else {
+      console.log(response)
       throw new Error('Error fetching transaction data');
     }
   } catch (error) {

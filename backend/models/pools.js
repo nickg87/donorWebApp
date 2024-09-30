@@ -24,6 +24,15 @@ export default (sequelize, DataTypes) => {
     entry_amount: {
       type: DataTypes.FLOAT,
     },
+    drawn_status: {
+      type: DataTypes.STRING,
+    },
+    drawn_data: {
+      type: DataTypes.JSONB,
+    },
+    drawn_at: {
+      type: DataTypes.DATE,
+    },
   }, {
     tableName: 'pools',
     timestamps: true,

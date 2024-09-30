@@ -23,7 +23,7 @@ const PoolSelectList = ({ record, resource }) => {
           <>
             <p>{params.to}</p>
             <Link href={poolShowUrl} style={{ color: '#007bff', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">
-              {selectedPoolIdTitle}
+              <b>{params.poolId}:</b> {selectedPoolIdTitle}
             </Link>
           </>
 

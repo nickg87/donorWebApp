@@ -3,23 +3,41 @@ import knex from 'knex';
 import knexConfig from './knexfile.mjs'; // Adjust path to knexfile
 import { fetchEtherScanData } from './utils/etherscanService.js';
 
-
 // Initialize database connection
 const db = knex(knexConfig.development);
 
-// Address to monitor
-const address = '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with the address you want to monitor
+// Get the address from command-line arguments or use a default
+const address = process.argv[2] || '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with a default address if none provided
 
-// Schedule a cron job to run every 5 minutes [*/5 * * * *] / 1 minute [*/1 * * * *]/ 2 minutes [*/2 * * * *]
-cron.schedule('*/2 * * * *', async () => {
-  console.log('Running Etherscan fetch job...');
+// Validate address
+if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+  console.error('Please provide a valid Ethereum address.');
+  process.exit(1);
+}
+
+// Function to fetch Etherscan data
+const runEtherscanFetchJob = async () => {
+  console.log(`Running Etherscan fetch job for address: ${address}...`);
   try {
     const result = await fetchEtherScanData(address, db);
     console.log('CRON: Etherscan data fetched and stored:', result);
   } catch (error) {
     console.error('CRON: Error running the Etherscan fetch job:', error);
   }
-});
+};
+
+// Schedule a cron job to run every 2 minutes
+cron.schedule('*/2 * * * *', runEtherscanFetchJob);
+
+// Export a function to manually trigger the job
+export const triggerEtherscanFetchJob = async () => {
+  await runEtherscanFetchJob();
+};
+
+// Execute the fetch job immediately if an address is provided via CLI
+if (process.argv[2]) {
+  await triggerEtherscanFetchJob();
+}
 
 // Export a function to start cron jobs if needed
 export const startCronJobs = () => {

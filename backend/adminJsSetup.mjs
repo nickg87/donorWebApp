@@ -48,6 +48,7 @@ export async function setupAdminJS() {
     PoolSelectList: componentLoader.add('PoolSelectList', './components/PoolSelectList'),
     TransactionCountList: componentLoader.add('TransactionCountList', './components/TransactionCountList'),
     TransactionCountShow: componentLoader.add('TransactionCountShow', './components/TransactionCountShow'),
+    DrawnDataShow: componentLoader.add('DrawnDataShow', './components/DrawnDataShow'),
   }
 
   // Initialize AdminJS
@@ -56,6 +57,7 @@ export async function setupAdminJS() {
       {
         resource: Pool,
         options: {
+          listProperties: ['title', 'id', 'transactionCount', 'updated_at', 'entry_amount', 'prize_amount', 'active', 'type', 'drawn_status', 'eth_address'],
           properties: {
             title: {
               type: 'string',
@@ -81,6 +83,12 @@ export async function setupAdminJS() {
                 { value: 'million', label: 'Million' },
               ],
             },
+            drawn_data: {
+              type: 'text',
+              components: {
+                show: Components.DrawnDataShow,
+              },
+            },
             transactionCount: {
               isVisible: { list: true, show: true, edit: false },
               type: 'number',
@@ -91,6 +99,16 @@ export async function setupAdminJS() {
                 show: Components.TransactionCountShow,
               },
             },
+            //'inactive', 'pending', 'in_progress', 'completed'
+            drawn_status: {
+              type: 'select',
+              availableValues: [
+                { value: 'inactive', label: 'Inactive' },
+                { value: 'pending', label: 'Pending' },
+                { value: 'in_progress', label: 'In progress' },
+                { value: 'completed', label: 'Completed' },
+              ],
+            }
           },
           navigation: { name: 'Resources' },
         },
@@ -149,6 +167,16 @@ export async function setupAdminJS() {
               Social: 'Social',
               Million: 'Million'
             },
+            drawn_status: {
+              'Inactive': 'Inactive',
+              'inactive': 'Inactive',
+              'Pending': 'Pending',
+              'pending': 'Pending',
+              'In progress': 'In progress',
+              'in_progress': 'In progress',
+              'Completed': 'Completed',
+              'completed': 'Completed',
+            }
           },
           properties: {
             title: 'Title',
@@ -171,6 +199,10 @@ export async function setupAdminJS() {
             txreceipt_status: 'Txreceipt Status',
             value: 'Value',
             poolId: 'Pool Id',
+            transactionCount: 'Transaction Count',
+            drawn_at: 'Drawn at',
+            drawn_data: 'Drawn data',
+            drawn_status: 'Drawn status',
           },
         },
       },
