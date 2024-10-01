@@ -6,11 +6,21 @@ import {copyToClipboard} from '@/utils/helpers';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
-const DonationQRCode = ({ address, amount }) => {
+const QRCodeComponent = ({ address, amount, currentPool }) => {
+  console.log(currentPool);
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
   const parsedAmount = parseEther(amount);
   const { t, i18n } = useTranslation();
-  const qrData = `ethereum:${address}?value=${parsedAmount}`;
+  //const qrData = `ethereum:${address}?value=${parsedAmount}`;
+
+  //const qrData = `ethereum:${currentPool?.eth_address}?value=${currentPool?.entry_amount}&poolId=${currentPool?.id}`
+  const qrData = `ethereum:${currentPool?.eth_address}?function=enterPool&args=${currentPool?.id}&value=${currentPool?.entry_amount}`;
+
+
+  // `&drawnStatus=${currentPool?.drawn_status}` + // Additional parameters from currentPool
+    // `&type=${currentPool?.type}`;
+
+
   if (isDev) {
     console.log('amount: ' + amount)
     console.log('parsedAmount: ' + parsedAmount);
@@ -57,4 +67,4 @@ const DonationQRCode = ({ address, amount }) => {
   );
 };
 
-export default DonationQRCode;
+export default QRCodeComponent;

@@ -50,5 +50,28 @@ export default (db) => {
     }
   });
 
+
+  // Get the current pool based on specified conditions
+  router.get('/current-pool', async (req, res) => {
+    try {
+      const currentPool = await db('pools')
+        .select('*')
+        .where({ active: true, type: 'normal', drawn_status: 'inactive' })
+        .orderBy('created_at', 'desc') // Adjust if you have a different field for sorting
+        .first(); // Get the first result, which will be the latest one
+
+      if (!currentPool) {
+        return res.status(404).json({ error: 'No active pool found' });
+      }
+
+      res.json(currentPool);
+    } catch (error) {
+      console.error('Error fetching current pool:', error);
+      res.status(500).json({ error: 'Failed to fetch current pool' });
+    }
+  });
+
+
+
   return router;
 };

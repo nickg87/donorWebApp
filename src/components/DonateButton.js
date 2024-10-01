@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingDollar, faQrcode, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'next-i18next';
 import DApp from "@/components/walletconnect/DApp";
 import QRCodeComponent from "@/components/QRCodeComponent";
+import axios from "axios";
 
 const DonateButton = () => {
   const { t } = useTranslation();
@@ -11,6 +12,30 @@ const DonateButton = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
+
+  const [currentPool, setCurrentPool] = useState(null);
+  const [error, setError] = useState(null);
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
+  useEffect(() => {
+    const fetchCurrentPool = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}pools/current-pool`);
+        const data = response.data; // Axios returns the data in the `data` property
+        console.log(data);
+        setCurrentPool(data);
+      } catch (err) {
+        console.error(err);
+        setError('Failed to fetch current pool');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (!currentPool) {
+      fetchCurrentPool();
+    }
+  }, [currentPool]); // Added currentPool as a dependency
 
   const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
   const ethAmount = 0.001; // Example amount, replace with actual logic if needed
@@ -89,7 +114,7 @@ const DonateButton = () => {
             <div className="flex-1 overflow-y-auto p-4">
               {/* Tab Content */}
               {activeTab === 'wallet' && <DApp/>}
-              {activeTab === 'qr' && <QRCodeComponent address={ethAddress} amount={ethAmount.toString()}/>}
+              {activeTab === 'qr' && <QRCodeComponent address={ethAddress} currentPool={currentPool} amount={ethAmount.toString()}/>}
             </div>
 
             {/* Modal Footer */}
