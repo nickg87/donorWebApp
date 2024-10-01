@@ -24,12 +24,15 @@ contract PrizePoolManager {
     uint public feePercent = 10;  // 10% fee
 
     constructor() {
-        owner = msg.sender;
+        owner = msg.sender; // Set contract deployer as owner
     }
 
-    function createPool(uint ticketPrice, uint maxPoolSize, bool allowMultipleTickets) external {
-        require(msg.sender == owner, "Only owner can create pools");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can perform this action");
+        _;
+    }
 
+    function createPool(uint ticketPrice, uint maxPoolSize, bool allowMultipleTickets) external onlyOwner {
         pools[poolCount].ticketPrice = ticketPrice;
         pools[poolCount].maxPoolSize = maxPoolSize;
         pools[poolCount].allowMultipleTickets = allowMultipleTickets;
@@ -59,9 +62,8 @@ contract PrizePoolManager {
         emit EnteredPool(poolId, msg.sender, pool.entries[msg.sender]);
     }
 
-    function settlePool(uint poolId, address bankAddress, address winnerAddress) external {
+    function settlePool(uint poolId, address bankAddress, address winnerAddress) external onlyOwner {
         Pool storage pool = pools[poolId];
-        require(msg.sender == owner, "Only owner can settle pools");
         require(pool.size == pool.maxPoolSize, "Pool is not full yet");
         require(!pool.settled, "Pool already settled");
         require(pool.participants.length > 0, "No participants in the pool");
@@ -90,5 +92,10 @@ contract PrizePoolManager {
         pool.settled = true;
 
         emit PoolSettled(poolId, winnerAddress, prizeAmount, feeAmount);
+    }
+
+    function changeOwner(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "New owner address must be valid");
+        owner = newOwner;
     }
 }
