@@ -73,51 +73,48 @@ export const fetchEtherScanData = async (address, db) => {
       let drawnStatus = 'inactive';
 
       for (const pool of pools) {
-        //const totalValueResult = await db('transactions').where('poolId', pool.id).sum('value as totalValue');
+        const hasTransactions = await db('transactions').where('poolId', pool.id).first();
+        if (hasTransactions) {
+          const totalValueResult = await db('transactions').where('poolId', pool.id).sum({ totalValue: db.raw('CAST(value AS BIGINT)') });
+          const poolPrizeAmount = pool.prize_amount;
+          //force some other value for testing purposes
+          //const poolPrizeAmount = 0.04;
 
-        const totalValueResult = await db('transactions').where('poolId', pool.id).sum({ totalValue: db.raw('CAST(value AS BIGINT)') });
-        //const poolPrizeAmount = pool.prize_amount;
-        //force some other value for testing purposes
-        const poolPrizeAmount = 0.04;
+          // Ensure we safely access the totalValue
+          const totalValue = Array.isArray(totalValueResult) && totalValueResult.length > 0 ? totalValueResult[0].totalValue : 0;
+          const formattedTotalValue = ethers.utils.formatEther(totalValue);
 
+          console.log('Total value for poolID ' + pool.id + ': ' + formattedTotalValue);
+          console.log('Pool prize Amount for poolID ' + pool.id + ': ' + poolPrizeAmount);
 
-        // Ensure we safely access the totalValue
-        const totalValue = Array.isArray(totalValueResult) && totalValueResult.length > 0 ? totalValueResult[0].totalValue : 0;
-        const formattedTotalValue = ethers.utils.formatEther(totalValue);
+          if (totalValue >= poolPrizeAmount) {
+            console.log('SHOULD ENTER DRAW LOGIC for poolID: ' + pool.id);
+            const randomTransactionResult = await db('transactions')
+              .where('poolId', pool.id)
+              .orderByRaw('RANDOM()') // Use RANDOM() to select a random transaction
+              .first(); // Get only one transaction
 
-        console.log('Total value for poolID ' + pool.id + ': ' + formattedTotalValue);
-        console.log('Pool prize Amount for poolID ' + pool.id + ': ' + poolPrizeAmount);
+            if (randomTransactionResult) {
+              // Prepare the drawn_data JSON with relevant transaction information
+              const drawnData = randomTransactionResult;
 
-        if (totalValue >= poolPrizeAmount) {
-          console.log('SHOULD ENTER DRAW LOGIC for poolID: ' + pool.id);
+              // Pool is full, trigger draw logic
+              await db('pools')
+                .where({ id: pool.id })
+                .update({
+                  drawn_status: 'in_progress', // Adjust as necessary
+                  drawn_at: new Date(),
+                  drawn_data: JSON.stringify(drawnData), // Store drawn_data as JSON
+                });
 
-
-          const randomTransactionResult = await db('transactions')
-            .where('poolId', pool.id)
-            .orderByRaw('RANDOM()') // Use RANDOM() to select a random transaction
-            .first(); // Get only one transaction
-
-          if (randomTransactionResult) {
-            // Prepare the drawn_data JSON with relevant transaction information
-            const drawnData = randomTransactionResult;
-
-            // Pool is full, trigger draw logic
-            await db('pools')
-              .where({ id: pool.id })
-              .update({
-                drawn_status: 'in_progress', // Adjust as necessary
-                drawn_at: new Date(),
-                drawn_data: JSON.stringify(drawnData), // Store drawn_data as JSON
-              });
-
-            drawnStatus = 'in_progress';
-            console.log(`Pool ${pool.id} is drawn with drawn_data:`, drawnData);
-          } else {
-            console.log(`No transactions found for poolID: ${pool.id}`);
+              drawnStatus = 'in_progress';
+              console.log(`Pool ${pool.id} is drawn with drawn_data:`, drawnData);
+            } else {
+              console.log(`No transactions found for poolID: ${pool.id}`);
+            }
           }
         }
       }
-
 
       return {
         transactionCount: transactions.length,
