@@ -12,6 +12,12 @@ npx hardhat node
 npx hardhat ignition deploy ./ignition/modules/Lock.js
 ```
 
+
+Compile SMART CONTRACT before deploying (if is not seeing any changes remove cache: "rm -rf artifacts cache")
+```shell
+npx hardhat compile
+```
+
 Deploy SMART CONTRACT to localhost Testnet
 ```shell
 npx hardhat run scripts/deploy.js --network localhost

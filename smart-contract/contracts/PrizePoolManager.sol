@@ -2,26 +2,17 @@
 pragma solidity ^0.8.0;
 
 contract PrizePoolManager {
-
-    event PoolCreated(uint indexed poolId, uint ticketPrice, uint maxPoolSize, bool allowMultipleTickets);
-    event EnteredPool(uint indexed poolId, address indexed participant, uint ticketsPurchased);
-    event PoolSettled(uint indexed poolId, address indexed winner, uint prizeAmount, uint feeAmount);
-
     struct Pool {
         uint size; // Current pool size in wei
         uint ticketPrice; // Cost of a ticket in wei
         uint maxPoolSize; // Maximum size of the pool in wei
-        bool allowMultipleTickets; // Determines if multiple tickets per user are allowed
-        address[] participants; // List of participants
-        mapping(address => uint) entries; // Tracks the number of tickets per user
         uint totalTickets; // Total tickets purchased for this pool
         bool settled; // Keeps track if the pool is settled
     }
 
     mapping(uint => Pool) public pools;
-    uint public poolCount;
     address public owner;
-    uint public feePercent = 10;  // 10% fee
+    uint public feePercent = 10; // 10% fee
 
     constructor() {
         owner = msg.sender; // Set contract deployer as owner
@@ -32,70 +23,66 @@ contract PrizePoolManager {
         _;
     }
 
-    function createPool(uint ticketPrice, uint maxPoolSize, bool allowMultipleTickets) external onlyOwner {
-        pools[poolCount].ticketPrice = ticketPrice;
-        pools[poolCount].maxPoolSize = maxPoolSize;
-        pools[poolCount].allowMultipleTickets = allowMultipleTickets;
+    modifier validAddress(address _addr) {
+        require(_addr != address(0), "Address must be valid");
+        _;
+    }
 
-        emit PoolCreated(poolCount, ticketPrice, maxPoolSize, allowMultipleTickets);
+    // Accepting poolId as a parameter
+    function createPool(uint poolId, uint ticketPrice, uint maxPoolSize) external onlyOwner {
+        // Check if poolId already exists
+        require(pools[poolId].ticketPrice == 0, "Pool ID already exists");
 
-        poolCount++;
+        pools[poolId] = Pool({
+            size: 0,
+            ticketPrice: ticketPrice,
+            maxPoolSize: maxPoolSize,
+            totalTickets: 0,
+            settled: false
+        });
     }
 
     function enterPool(uint poolId) external payable {
         Pool storage pool = pools[poolId];
         require(msg.value == pool.ticketPrice, "Incorrect ticket price");
         require(!pool.settled, "Pool already settled");
-        if (!pool.allowMultipleTickets) {
-            require(pool.entries[msg.sender] == 0, "Already entered pool");
-        }
         require(pool.size + msg.value <= pool.maxPoolSize, "Pool is full");
 
-        if (pool.entries[msg.sender] == 0) {
-            pool.participants.push(msg.sender);
-        }
-
-        pool.entries[msg.sender] += 1;
+        // Increase the pool size and total tickets
         pool.size += msg.value;
         pool.totalTickets++;
-
-        emit EnteredPool(poolId, msg.sender, pool.entries[msg.sender]);
     }
 
-    function settlePool(uint poolId, address bankAddress, address winnerAddress) external onlyOwner {
+    function settlePool(uint poolId, address bankAddress, address winnerAddress) external onlyOwner validAddress(bankAddress) validAddress(winnerAddress) {
         Pool storage pool = pools[poolId];
         require(pool.size == pool.maxPoolSize, "Pool is not full yet");
         require(!pool.settled, "Pool already settled");
-        require(pool.participants.length > 0, "No participants in the pool");
 
-        // Verify if the given winnerAddress is a valid participant
-        bool isValidWinner = false;
-        for (uint i = 0; i < pool.participants.length; i++) {
-            if (pool.participants[i] == winnerAddress) {
-                isValidWinner = true;
-                break;
-            }
-        }
-        require(isValidWinner, "Provided winner address is not a participant in the pool");
-
-        // Calculate the fee and winner amount
         uint feeAmount = (pool.size * feePercent) / 100;
         uint prizeAmount = pool.size - feeAmount;
 
-        // Transfer fee to bank
-        payable(bankAddress).transfer(feeAmount);
-
-        // Transfer prize to winner
-        payable(winnerAddress).transfer(prizeAmount);
-
-        // Mark pool as settled
+        // Mark pool as settled before making external calls to prevent reentrancy attacks
         pool.settled = true;
 
-        emit PoolSettled(poolId, winnerAddress, prizeAmount, feeAmount);
+        // Use call for sending ether to avoid gas limit issues
+        (bool bankSuccess, ) = bankAddress.call{value: feeAmount}("");
+        require(bankSuccess, "Failed to send fee to bank");
+
+        (bool winnerSuccess, ) = winnerAddress.call{value: prizeAmount}("");
+        require(winnerSuccess, "Failed to send prize to winner");
     }
 
-    function changeOwner(address newOwner) external onlyOwner {
-        require(newOwner != address(0), "New owner address must be valid");
+    function changeOwner(address newOwner) external onlyOwner validAddress(newOwner) {
         owner = newOwner;
+    }
+
+    // Fallback function to handle incorrect calls
+    fallback() external payable {
+        revert("Invalid function call");
+    }
+
+    // Receive function to handle plain ether transfers
+    receive() external payable {
+        revert("Ether transfers not allowed");
     }
 }
