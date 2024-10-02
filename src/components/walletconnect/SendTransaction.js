@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,7 @@ import { faXmark, faInfoCircle, faCopy } from '@fortawesome/free-solid-svg-icons
 import { useAppContext } from '@/contexts/AppContext';
 import {useTranslation} from "next-i18next";
 import {copyToClipboard} from '@/utils/helpers';
+import axios from "axios";
 
 //https://wagmi.sh/react/guides/send-transaction
 export default function SendTransaction(props) {
@@ -13,9 +14,30 @@ export default function SendTransaction(props) {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true); // New state to handle confirmation display
-  const recipientAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
+ // const recipientAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
   const { updateShouldFetch } = useAppContext();
   const { t, i18n } = useTranslation();
+
+  const [currentPool, setCurrentPool] = useState(null);
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
+  useEffect(() => {
+    const fetchCurrentPool = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}pools/current-pool`);
+        const data = response.data; // Axios returns the data in the `data` property
+        console.log(data);
+        setCurrentPool(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (!currentPool) {
+      fetchCurrentPool();
+    }
+  }, [currentPool]); // Added currentPool as a dependency
+
 
   const submit = async (e) => {
     e.preventDefault();
@@ -23,7 +45,7 @@ export default function SendTransaction(props) {
     const to = formData.get('address');
     const value = formData.get('value');
     try {
-      await sendTransaction({ to, value: parseEther(value) });
+      await sendTransaction({ to, value: parseEther(value.toString()) });
     } catch (err) {
       console.error("Transaction error:", err);
     }
@@ -57,7 +79,8 @@ export default function SendTransaction(props) {
     <div className="w-full mx-auto p-8 bg-gray-800 text-gray-200 shadow-md rounded-lg">
       <h2 className="text-left text-2xl font-bold mb-4 text-white">Send Transaction</h2>
       <form className="space-y-4" onSubmit={submit}>
-        <div className="text-left">
+        {currentPool?.eth_address &&
+          <div className="text-left">
           <label htmlFor="address" className="block text-sm font-medium">Address</label>
           <div className="mt-1 flex items-center">
             <input
@@ -65,14 +88,14 @@ export default function SendTransaction(props) {
               name="address"
               className="block w-full px-3 py-2 border border-gray-600 border-r-0 rounded-l-md bg-gray-900 text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="0x..."
-              value={recipientAddress}
+              value={currentPool?.eth_address}
               required
               readOnly
             />
             <button
               onClick={(e) => {
                 e.preventDefault();
-                copyToClipboard(recipientAddress)
+                copyToClipboard(currentPool?.eth_address)
               }}
               className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-r-md focus:outline-none copyToClipboard"
             >
@@ -80,6 +103,8 @@ export default function SendTransaction(props) {
             </button>
           </div>
         </div>
+        }
+        {currentPool?.entry_amount &&
         <div className="text-left">
           <label htmlFor="value" className="block text-sm font-medium">Amount (ETH)</label>
           <input
@@ -88,12 +113,12 @@ export default function SendTransaction(props) {
             type="number"
             step="0.000000001"
             className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-900 text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="0.001"
-            value="0.001"
+            placeholder={currentPool.entry_amount}
+            value={currentPool.entry_amount}
             required
             readOnly
           />
-        </div>
+        </div>}
         <button
           type="submit"
           disabled={isPending}
