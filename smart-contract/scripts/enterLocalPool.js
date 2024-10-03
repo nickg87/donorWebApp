@@ -4,10 +4,10 @@ const { ethers } = require('ethers');
 // Connect to Ethereum (Hardhat node)
 const infuraUrl = 'http://127.0.0.1:8545';
 const provider = new ethers.JsonRpcProvider(infuraUrl);
-const wallet = new ethers.Wallet('0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a', provider); // Using another account
+const wallet = new ethers.Wallet('0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e', provider); // Using another account
 
 // Define the contract address and ABI
-const contractAddress = '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e'; // Replace with your deployed contract address
+const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'; // Replace with your deployed contract address
 const contractABI = [
   "function enterPool(uint256 poolId) payable"
 ];

@@ -27,6 +27,10 @@ Deploy SMART CONTRACT to Sepolia Testnet
 ```shell
 npx hardhat run scripts/deploy.js --network sepolia
 ```
+Deploy SMART CONTRACT to Mainnet (production/live network)
+```shell
+npx hardhat run scripts/deploy.js --network mainnet
+```
 For this it needs 
 ```shell
 INFURA_API_KEY='here-the-infura-api-key'
