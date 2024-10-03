@@ -1,31 +1,41 @@
 // smart-contract/scripts/enterLocalPool.js
+// require('dotenv').config();
 const { ethers } = require('ethers');
 
 // Connect to Ethereum (Hardhat node)
 const infuraUrl = 'http://127.0.0.1:8545';
 const provider = new ethers.JsonRpcProvider(infuraUrl);
-const wallet = new ethers.Wallet('0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e', provider); // Using another account
 
-// Define the contract address and ABI
+// Wallet setup (local address)
+const privateKey = '0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e';
+const wallet = new ethers.Wallet(privateKey, provider);
+
+// Contract address and ABI
 const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'; // Replace with your deployed contract address
 const contractABI = [
-  "function enterPool(uint256 poolId) payable"
+  "function enterPool(uint256 poolId, uint256 ticketPrice) payable" // Define the enterPool function ABI
 ];
 
 const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
 
-async function enterLocalPool() {
-  const poolId = 41; // Replace with the ID of the pool you want to enter
-  const ticketPrice = ethers.parseEther('0.004'); // Ticket price, it should match the pool ticket price
-
+async function enterPool(poolID, ticketPriceInEther) {
   try {
-    // Sending transaction to enter the pool
-    const tx = await prizePoolManager.enterPool(poolId, { value: ticketPrice });
-    await tx.wait(); // Wait for the transaction to be mined
-    console.log('Entered pool successfully!');
+    // Convert ticket price to wei
+    const ticketPriceInWei = ethers.parseEther(ticketPriceInEther.toString());
+
+    // Call enterPool function with the pool ID and ticket price, sending the correct value
+    const tx = await prizePoolManager.enterPool(poolID, ticketPriceInWei, {
+      value: ticketPriceInWei // Send the ticket price as msg.value
+    });
+
+    const receipt = await tx.wait(); // Wait for the transaction to be mined
+    console.log('Entered the pool successfully!', receipt);
   } catch (error) {
     console.error('Error entering pool:', error);
   }
 }
 
-enterLocalPool();
+const poolId = 40; // Pool ID
+const ticketPrice = 0.004; // Ticket price in ether
+
+enterPool(poolId, ticketPrice);

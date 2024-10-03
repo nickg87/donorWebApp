@@ -2,8 +2,15 @@
 pragma solidity ^0.8.0;
 
 contract PrizePoolManager {
+    struct Pool {
+        uint ticketPrice; // Cost of a ticket in wei
+        uint maxPoolSize;
+        bool exists;
+    }
     address public owner;
     uint public feePercent = 10; // 10% fee
+
+    mapping(uint => Pool) public pools;
 
     event PoolCreated(uint indexed poolId, uint ticketPrice, uint maxPoolSize);
     event PoolEntered(uint indexed poolId, address indexed participant, uint amount);
@@ -19,13 +26,24 @@ contract PrizePoolManager {
     }
 
     // Create a new pool (emit an event)
-    function createPool(uint poolId, uint ticketPrice, uint maxPoolSize) external onlyOwner {
+    function createPool(uint poolId, uint ticketPrice, uint maxPoolSize) external {
+        require(!pools[poolId].exists, "Pool already exists");
+        pools[poolId] = Pool(ticketPrice, maxPoolSize, true);
+
         emit PoolCreated(poolId, ticketPrice, maxPoolSize);
     }
 
+    // Function to get pool details
+    function getPool(uint poolId) external view returns (uint ticketPrice, uint maxPoolSize, bool exists) {
+        Pool memory pool = pools[poolId];
+        return (pool.ticketPrice, pool.maxPoolSize, pool.exists);
+    }
+
     // Enter a pool by purchasing a ticket
-    function enterPool(uint poolId, uint ticketPrice) external payable {
-        require(msg.value == ticketPrice, "Incorrect ticket price");
+    function enterPool(uint poolId) external payable {
+        Pool storage pool = pools[poolId];
+        require(pool.ticketPrice != 0, "Pool does not exist");
+        require(msg.value == pool.ticketPrice, "Incorrect ticket price");
 
         emit PoolEntered(poolId, msg.sender, msg.value);
     }

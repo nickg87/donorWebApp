@@ -1,4 +1,3 @@
-//smart-contract/scripts/createLocalPool.js
 const { ethers } = require('ethers');
 
 // Connect to Ethereum
@@ -9,38 +8,19 @@ const wallet = new ethers.Wallet('0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed
 // Define the contract address and ABI
 const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'; // Replace with your deployed contract address
 const contractABI = [
-  "function createPool(uint256 poolId, uint256 ticketPrice, uint256 maxPoolSize)",
   "function getPool(uint256 poolId) view returns (uint256 ticketPrice, uint256 maxPoolSize, bool exists)"
 ];
 
 const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
 
-async function createLocalPool(poolID) {
-  const ticketPrice = ethers.parseEther('0.001');
-  const maxPoolSize = ethers.parseEther('0.04');
-
+async function getLocalPool(poolID) {
   try {
-    const tx = await prizePoolManager.createPool(poolID, ticketPrice, maxPoolSize);
-    const receipt = await tx.wait(); // Wait for the transaction to be mined
-    console.log('Transaction receipt:', receipt);
-
-    if (receipt.status !== 1) {
-      console.error('Transaction failed.');
+    const pool = await prizePoolManager.getPool(poolID);
+    if (!pool.exists) {
+      console.error(`Pool ID ${poolID} does not exist.`);
       return;
     }
 
-    console.log('Pool created successfully!');
-    // Wait for a few seconds before retrieving pool details
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-    await getPoolDetails(poolID);
-  } catch (error) {
-    console.error('Error creating pool:', error);
-  }
-}
-
-async function getPoolDetails(poolID) {
-  try {
-    const pool = await prizePoolManager.getPool(poolID);
     console.log(`Pool Details for Pool ID ${poolID}:`);
     console.log(`Ticket Price: ${ethers.formatEther(pool.ticketPrice)} ETH`);
     console.log(`Max Pool Size: ${ethers.formatEther(pool.maxPoolSize)} ETH`);
@@ -50,5 +30,6 @@ async function getPoolDetails(poolID) {
   }
 }
 
-const uniquePoolId = 41;
-createLocalPool(uniquePoolId);
+// Replace with the pool ID you want to check
+const poolID = 41;
+getLocalPool(poolID);
