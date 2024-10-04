@@ -40,12 +40,13 @@ contract PrizePoolManager {
     }
 
     // Enter a pool by purchasing a ticket
-    function enterPool(uint poolId) external payable {
+    function enterPool(uint poolId, uint ticketPrice) external payable {
         Pool storage pool = pools[poolId];
         require(pool.ticketPrice != 0, "Pool does not exist");
-        require(msg.value == pool.ticketPrice, "Incorrect ticket price");
+        require(ticketPrice == pool.ticketPrice, "Incorrect ticket price");
+        require(ticketPrice == msg.value, "Incorrect ticket price");
 
-        emit PoolEntered(poolId, msg.sender, msg.value);
+        emit PoolEntered(poolId, msg.sender, ticketPrice);
     }
 
     // Settle a pool and distribute the prize

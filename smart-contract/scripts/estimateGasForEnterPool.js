@@ -3,89 +3,30 @@ require('dotenv').config();
 const { ethers } = require('ethers');
 
 // Connect to Sepolia network
-const infuraApiKey = process.env.INFURA_API_KEY; // Replace with your Infura project ID
-const sepoliaUrl = `https://sepolia.infura.io/v3/${infuraApiKey}`;
-const provider = new ethers.JsonRpcProvider(sepoliaUrl);
-
-// Wallet setup
 const privateKey = process.env.PRIVATE_KEY; // Replace with your private key
+//const privateKey = '0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e';
+//const infuraeKey = process.env.INFURA_API_KEY; // Replace with your Infura project ID
+const infuraUrl = `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}`;
+//const infuraUrl = 'http://127.0.0.1:8545';
+// Wallet setup (local address)
+const provider = new ethers.JsonRpcProvider(infuraUrl);
 const wallet = new ethers.Wallet(privateKey, provider);
 
-// Define the contract address and ABI
-const contractAddress = '0xDe58A23495124294d856142a108975c54b17BC82'; // Replace with your deployed contract address
-const contractABI = [{
-  "inputs": [],
-  "stateMutability": "nonpayable",
-  "type": "constructor"
-}, {"stateMutability": "payable", "type": "fallback"}, {
-  "inputs": [{
-    "internalType": "address",
-    "name": "newOwner",
-    "type": "address"
-  }], "name": "changeOwner", "outputs": [], "stateMutability": "nonpayable", "type": "function"
-}, {
-  "inputs": [{"internalType": "uint256", "name": "poolId", "type": "uint256"}, {
-    "internalType": "uint256",
-    "name": "ticketPrice",
-    "type": "uint256"
-  }, {"internalType": "uint256", "name": "maxPoolSize", "type": "uint256"}],
-  "name": "createPool",
-  "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
-}, {
-  "inputs": [{"internalType": "uint256", "name": "poolId", "type": "uint256"}],
-  "name": "enterPool",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
-}, {
-  "inputs": [],
-  "name": "feePercent",
-  "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "inputs": [],
-  "name": "owner",
-  "outputs": [{"internalType": "address", "name": "", "type": "address"}],
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
-  "name": "pools",
-  "outputs": [{"internalType": "uint256", "name": "size", "type": "uint256"}, {
-    "internalType": "uint256",
-    "name": "ticketPrice",
-    "type": "uint256"
-  }, {"internalType": "uint256", "name": "maxPoolSize", "type": "uint256"}, {
-    "internalType": "uint256",
-    "name": "totalTickets",
-    "type": "uint256"
-  }, {"internalType": "bool", "name": "settled", "type": "bool"}],
-  "stateMutability": "view",
-  "type": "function"
-}, {
-  "inputs": [{"internalType": "uint256", "name": "poolId", "type": "uint256"}, {
-    "internalType": "address",
-    "name": "bankAddress",
-    "type": "address"
-  }, {"internalType": "address", "name": "winnerAddress", "type": "address"}],
-  "name": "settlePool",
-  "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
-}, {"stateMutability": "payable", "type": "receive"}];
+// Contract address and ABI
+const contractAddress = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'; // Replace with your deployed contract address
+const contractABI = [
+  "function enterPool(uint256 poolId, uint256 ticketPrice) payable" // Define the enterPool function ABI
+];
 
-// Initialize the contract
 const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
+
 
 async function estimateGasForEnterPool() {
   const poolId = 41; // Replace with your pool ID
-  const amount = ethers.parseEther('0.004');
+  const amount = ethers.parseEther('0.001');
 
   try {
-    const estimatedGas = await prizePoolManager.estimateGas.enterPool(poolId, {
+    const estimatedGas = await prizePoolManager.estimateGas.enterPool(poolId, amount, {
       value: amount,
     });
 

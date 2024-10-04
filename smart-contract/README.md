@@ -18,6 +18,25 @@ Compile SMART CONTRACT before deploying (if is not seeing any changes remove cac
 npx hardhat compile
 ```
 
+Run local node hardhat
+```shell
+ npx hardhat node  
+```
+
+Run test locally via script folder files
+```shell
+node scripts/createLocalPool.js
+node scripts/enterLocalPool.js
+node scripts/getLocalPool.js
+////
+node scripts/createPool.js
+node scripts/enterPool.js
+////
+node scripts/createPoolMainnet.js
+node scripts/enterPoolMainnet.js
+node scripts/settlePoolMainnet.js
+```
+
 Deploy SMART CONTRACT to localhost Testnet
 ```shell
 npx hardhat run scripts/deploy.js --network localhost

@@ -11,7 +11,7 @@ const privateKey = '0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf
 const wallet = new ethers.Wallet(privateKey, provider);
 
 // Contract address and ABI
-const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'; // Replace with your deployed contract address
+const contractAddress = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'; // Replace with your deployed contract address
 const contractABI = [
   "function enterPool(uint256 poolId, uint256 ticketPrice) payable" // Define the enterPool function ABI
 ];
@@ -35,7 +35,7 @@ async function enterPool(poolID, ticketPriceInEther) {
   }
 }
 
-const poolId = 40; // Pool ID
-const ticketPrice = 0.004; // Ticket price in ether
+const poolId = 41; // Pool ID
+const ticketPrice = 0.001; // Ticket price in ether
 
 enterPool(poolId, ticketPrice);
