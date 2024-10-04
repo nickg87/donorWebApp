@@ -8,7 +8,7 @@ const provider = new ethers.JsonRpcProvider(infuraUrl);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 // Define the contract address and ABI
-const contractAddress = '0xd184FB81Fa09BdfDBFf88262977fd77E1b07f07F'; // Replace with your deployed contract address
+const contractAddress = '0x0f63cc1031d656921c3D4D13dDe38eCb10e9F759'; // Replace with your deployed contract address
 const contractABI = [
   "function createPool(uint256 poolId, uint256 ticketPrice, uint256 maxPoolSize)",
   "function getPool(uint256 poolId) view returns (uint256 ticketPrice, uint256 maxPoolSize, bool exists)"

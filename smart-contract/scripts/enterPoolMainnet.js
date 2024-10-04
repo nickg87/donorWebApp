@@ -12,7 +12,7 @@ const privateKey = process.env.PRIVATE_KEY;
 const wallet = new ethers.Wallet(privateKey, provider);
 
 // Define the contract address and ABI
-const contractAddress = '0x6EE62E1a7Bf6765C9f3c660a653bc5B9235414c2'; // Replace with your deployed contract address
+const contractAddress = '0x0f63cc1031d656921c3D4D13dDe38eCb10e9F759'; // Replace with your deployed contract address
 const contractABI = [
   "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
 ];
