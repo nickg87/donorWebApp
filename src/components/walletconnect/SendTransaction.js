@@ -7,6 +7,7 @@ import { useAppContext } from '@/contexts/AppContext';
 import {useTranslation} from "next-i18next";
 import {copyToClipboard} from '@/utils/helpers';
 import axios from "axios";
+import {ethers} from "ethers";
 
 //https://wagmi.sh/react/guides/send-transaction
 export default function SendTransaction(props) {
@@ -39,15 +40,57 @@ export default function SendTransaction(props) {
   }, [currentPool]); // Added currentPool as a dependency
 
 
+  // const submit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const to = formData.get('address');
+  //   const value = formData.get('value');
+  //   try {
+  //     await sendTransaction({ to, value: parseEther(value.toString()) });
+  //   } catch (err) {
+  //     console.error("Transaction error:", err);
+  //   }
+  // };
+
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const to = formData.get('address');
-    const value = formData.get('value');
+    const poolId = 41; // Get pool ID from form data (assuming it's an input field)
+    const value = 0.001;
+    const ticketPriceInEther = parseFloat(value); // Convert value to a number
+
     try {
-      await sendTransaction({ to, value: parseEther(value.toString()) });
-    } catch (err) {
-      console.error("Transaction error:", err);
+      // Connect to Ethereum using Infura or your chosen provider
+      const infuraUrl = `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_API_KEY}`;
+      const provider = new ethers.providers.JsonRpcProvider(infuraUrl);
+
+      // Retrieve private key from environment variable (secure storage)
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
+      const wallet = new ethers.Wallet(privateKey, provider);
+
+      // Define contract address and ABI
+      const contractAddress = '0x0f63cc1031d656921c3D4D13dDe38eCb10e9F759'; // Replace with your deployed contract address
+      const contractABI = [
+        "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
+      ];
+
+      const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
+
+      // Convert ticket price to wei
+      const ticketPriceInWei = ethers.utils.parseEther(ticketPriceInEther.toString());
+
+      // Call enterPool function and wait for confirmation
+      const tx = await prizePoolManager.enterPool(poolId, ticketPriceInWei, {
+        value: ticketPriceInWei
+      });
+      const receipt = await tx.wait();
+      console.log('Entered the pool successfully!', receipt);
+
+      updateShouldFetch(true);
+      setIsConfirmed(true);
+
+    } catch (error) {
+      console.error('Error entering pool:', error);
     }
   };
 
