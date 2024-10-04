@@ -17,6 +17,10 @@ Compile SMART CONTRACT before deploying (if is not seeing any changes remove cac
 ```shell
 npx hardhat compile
 ```
+Not seeing changes? run this:
+```shell
+rm -rf artifacts cache
+```
 
 Run local node hardhat
 ```shell

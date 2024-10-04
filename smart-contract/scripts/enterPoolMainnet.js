@@ -19,21 +19,23 @@ const contractABI = [
 
 const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
 
-async function enterPool(poolID, ticketPrice) {
+async function enterPool(poolID, ticketPriceInEther) {
   try {
-    const tx = await prizePoolManager.enterPool(poolID, ticketPrice, {
-      value: ticketPrice, // Correctly set msg.value to ticketPrice
+    // Convert ticket price to wei
+    const ticketPriceInWei = ethers.parseEther(ticketPriceInEther.toString());
+    // Call enterPool function with the pool ID and ticket price, sending the correct value
+    const tx = await prizePoolManager.enterPool(poolID, ticketPriceInWei, {
+      value: ticketPriceInWei // Send the ticket price as msg.value
     });
     const receipt = await tx.wait(); // Wait for the transaction to be mined
-    console.log(`Entering pool with ID: ${poolID}, Ticket Price: ${ticketPrice.toString()}`);
-
     console.log('Entered the pool successfully!', receipt);
+
   } catch (error) {
     console.error('Error entering pool:', error);
   }
 }
 
 const poolId = 41; // Pool ID
-const ticketPrice = ethers.parseEther("0.001"); // Convert ticket price to ethers format
+const amount = 0.001; // Amount to send
 
-enterPool(poolId, ticketPrice);
+enterPool(poolId, amount);

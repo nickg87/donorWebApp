@@ -33,7 +33,7 @@ async function createLocalPool(poolID) {
 
     console.log('Pool created successfully!');
     // Wait for a few seconds before retrieving pool details
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await getPoolDetails(poolID);
   } catch (error) {
     console.error('Error creating pool:', error);
