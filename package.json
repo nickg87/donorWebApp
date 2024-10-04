@@ -37,7 +37,8 @@
     "react-lazyload": "^3.2.1",
     "swiper": "^11.1.4",
     "viem": "^2.20.1",
-    "wagmi": "^2.12.7"
+    "wagmi": "^2.12.7",
+    "web3": "^4.13.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

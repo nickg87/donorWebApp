@@ -4,7 +4,7 @@ import CustomButton from "./CustomButton"; // Assuming you rename CustomButton t
 import SendTransaction from "./SendTransaction"; // Assuming you rename CustomButton to Web3CustomButton
 import { useAccount } from "wagmi";
 
-export default function DApp() {
+export default function DApp({currentPool}) {
   const { isConnected, address } = useAccount();
 
   return (
@@ -14,7 +14,7 @@ export default function DApp() {
       {/*    <w3m-button size="sm"/>*/}
       {/*  </div>}*/}
 
-      {isConnected && <SendTransaction walletAddress={address}/>}
+      {isConnected && <SendTransaction currentPool={currentPool}  walletAddress={address}/>}
       <CustomButton/>
 
     </div>

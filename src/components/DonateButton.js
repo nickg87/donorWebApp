@@ -113,7 +113,7 @@ const DonateButton = () => {
             {/* Modal Content (Scrollable if needed) */}
             <div className="flex-1 overflow-y-auto p-4">
               {/* Tab Content */}
-              {activeTab === 'wallet' && <DApp/>}
+              {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
               {activeTab === 'qr' && <QRCodeComponent address={ethAddress} currentPool={currentPool} amount={ethAmount.toString()}/>}
             </div>
 

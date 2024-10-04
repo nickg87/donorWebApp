@@ -4,13 +4,40 @@ import {useTranslation} from "next-i18next";
 import { parseEther } from 'viem';
 import {copyToClipboard} from '@/utils/helpers';
 import { ethers } from 'ethers';
+import Web3 from 'web3';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
 const QRCodeComponent = ({ currentPool }) => {
   console.log(currentPool);
+  const poolId = currentPool.id;
   const amountCP = currentPool.entry_amount;
-  const parsedAmount = parseEther(amountCP.toString());
+  const entryAmount = currentPool.entry_amount;
+  const contractAddress = currentPool.eth_address;
+
+  // Create a new instance of Web3 (only if you need it; otherwise, you can skip this)
+  const web3 = new Web3(); // Can use a specific provider if needed, but we’ll encode without one for now
+
+  const encodeEnterPoolData = (poolId, entryAmount) => {
+    // Convert entry amount from Ether to Wei
+    const parsedAmount = web3.utils.toWei(entryAmount.toString(), 'ether');
+
+    // Encode the function signature
+    const functionSignature = web3.eth.abi.encodeFunctionSignature("enterPool(uint256,uint256)");
+
+    // Encode the parameters
+    const parameters = web3.eth.abi.encodeParameters(['uint256', 'uint256'], [poolId, parsedAmount]);
+
+    // Concatenate the function signature and parameters
+    const enterPoolData = functionSignature + parameters.slice(2); // Remove '0x' from parameters to concatenate
+
+    return enterPoolData;
+  };
+
+
+  const encodedData = encodeEnterPoolData(poolId, entryAmount);
+  console.log('Encoded Enter Pool Data:', encodedData);
+
   console.log('amountCP');
   console.log(amountCP);
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
@@ -19,18 +46,23 @@ const QRCodeComponent = ({ currentPool }) => {
   //const qrData = `ethereum:${address}?value=${parsedAmount}`;
   //const qrData = `ethereum:${currentPool?.eth_address}?value=${currentPool?.entry_amount}&poolId=${currentPool?.id}`
 
-
   // Encode the function data
-  const abi = [
-    "function enterPool(uint256 poolId) payable" // Assuming this function takes a poolId and is payable
+  const contractABI = [
+    "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
   ];
-  const iFace = new ethers.utils.Interface(abi);
-  const enterPoolData = iFace.encodeFunctionData("enterPool", [currentPool?.id]);
-  const gasLimit = 50000; // or use an estimation method
-  const gasPrice = ethers.utils.parseUnits('10', 'gwei').toString(); // Convert to string
+  const iFace = new ethers.utils.Interface(contractABI);
+  const parsedAmount = ethers.utils.parseEther(entryAmount.toString());
 
-  const qrData = `ethereum:${currentPool?.eth_address}?value=${parsedAmount}&data=${enterPoolData}&gasLimit=${gasLimit}&gasPrice=${gasPrice}`;
-  console.log(qrData);
+  // Encode the data for the function call
+  const enterPoolData = iFace.encodeFunctionData("enterPool", [
+    poolId,
+    ethers.utils.parseEther(entryAmount.toString())
+  ]);
+
+  // Construct the QR data URI
+  const qrData = `ethereum:${contractAddress}?value=${parsedAmount}&data=${encodedData}`;
+
+  console.log('QR Code Data:', qrData);
 
   // `&drawnStatus=${currentPool?.drawn_status}` + // Additional parameters from currentPool
     // `&type=${currentPool?.type}`;
