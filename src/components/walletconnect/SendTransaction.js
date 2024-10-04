@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
+import {useContractRead, useSendTransaction, useWaitForTransactionReceipt} from 'wagmi';
 import { parseEther } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faInfoCircle, faCopy } from '@fortawesome/free-solid-svg-icons';
@@ -23,55 +23,76 @@ export default function SendTransaction(props) {
 
   const submit = async (e) => {
     e.preventDefault();
+
     const poolId = currentPool.id;
-    const to = currentPool.eth_address;
-    const value = currentPool.entry_amount;
+    const ticketPriceInEther = currentPool.entry_amount; // Assuming entry_amount represents the ticket price in ETH
+
     try {
-      await sendTransaction({ to, value: parseEther(value.toString()) });
+      // Convert ticket price to wei
+      const ticketPriceInWei = parseEther(ticketPriceInEther.toString());
+
+      // Encode the function data
+      const contractABI = [
+        "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
+      ];
+      const iFace = new ethers.utils.Interface(contractABI);
+      const parsedAmount = ethers.utils.parseEther(ticketPriceInEther.toString());
+
+      // Encode the data for the function call
+      const enterPoolData = iFace.encodeFunctionData("enterPool", [
+        poolId,
+        parsedAmount
+      ]);
+
+      // Call useSendTransaction with the contract address, ABI, function name, and arguments
+      await sendTransaction({
+        to: currentPool.eth_address,
+        data: enterPoolData, // Replace with your contract's ABI
+        value: ticketPriceInWei,
+      });
     } catch (err) {
       console.error("Transaction error:", err);
     }
   };
 
-  //submit that worked without confirmation
-  const submit2 = async (e) => {
+  const submitX = async (e) => {
     e.preventDefault();
-    const poolId = 41; // Get pool ID from form data (assuming it's an input field)
-    const value = 0.001;
-    const ticketPriceInEther = parseFloat(value); // Convert value to a number
+
+    const contractABI = [
+      "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
+    ];
+
+    const poolId = currentPool.id;
+    const ticketPriceInEther = currentPool.entry_amount; // Assuming entry_amount represents the ticket price in ETH
 
     try {
-      // Connect to Ethereum using Infura or your chosen provider
-      const infuraUrl = `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_API_KEY}`;
-      const provider = new ethers.providers.JsonRpcProvider(infuraUrl);
+      // Call useContractRead to get the current ticket price from the contract (optional)
+      // This can be used for validation if the entry_amount might not always match the actual price
+      const { data: currentTicketPrice } = await useContractRead({
+        address: currentPool.eth_address,
+        abi: contractABI,
+        functionName: 'enterPool', // Assuming this function returns the ticket price
+        args: [poolId],
+      });
 
-      // Retrieve private key from environment variable (secure storage)
-      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
-      const wallet = new ethers.Wallet(privateKey, provider);
+      console.log('currentTicketPrice');
+      console.log(currentTicketPrice);
 
-      // Define contract address and ABI
-      const contractAddress = '0x0f63cc1031d656921c3D4D13dDe38eCb10e9F759'; // Replace with your deployed contract address
-      const contractABI = [
-        "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
-      ];
-
-      const prizePoolManager = new ethers.Contract(contractAddress, contractABI, wallet);
+      // Validate entry amount against retrieved ticket price (if fetched)
+      if (currentTicketPrice && ticketPriceInEther !== currentTicketPrice.ticketPrice.toString()) {
+        throw new Error('Entry amount does not match pool ticket price.');
+      }
 
       // Convert ticket price to wei
-      const ticketPriceInWei = ethers.utils.parseEther(ticketPriceInEther.toString());
+      const ticketPriceInWei = parseEther(ticketPriceInEther.toString());
 
-      // Call enterPool function and wait for confirmation
-      const tx = await prizePoolManager.enterPool(poolId, ticketPriceInWei, {
-        value: ticketPriceInWei
+      // Call useSendTransaction to send the ticket price (in wei) to the pool address
+      await sendTransaction({
+        to: currentPool.eth_address,
+        value: ticketPriceInWei, // Send only the ticket price, not any additional fee
       });
-      const receipt = await tx.wait();
-      console.log('Entered the pool successfully!', receipt);
-
-      updateShouldFetch(true);
-      setIsConfirmed(true);
-
-    } catch (error) {
-      console.error('Error entering pool:', error);
+    } catch (err) {
+      console.error("Transaction error:", err);
     }
   };
 
