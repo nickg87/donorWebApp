@@ -4,53 +4,21 @@ import { faHandHoldingDollar, faQrcode, faWallet } from '@fortawesome/free-solid
 import { useTranslation } from 'next-i18next';
 import DApp from "@/components/walletconnect/DApp";
 import QRCodeComponent from "@/components/QRCodeComponent";
-import axios from "axios";
+import {useAppContext} from "@/contexts/AppContext";
 
 const DonateButton = () => {
   const { t } = useTranslation();
-  const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
-
-  const [currentPool, setCurrentPool] = useState(null);
-  const [error, setError] = useState(null);
-  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
-
-  useEffect(() => {
-    const fetchCurrentPool = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}pools/current-pool`);
-        const data = response.data; // Axios returns the data in the `data` property
-        console.log(data);
-        setCurrentPool(data);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to fetch current pool');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (!currentPool) {
-      fetchCurrentPool();
-    }
-  }, [currentPool]); // Added currentPool as a dependency
-
-  const ethAddress = process.env.NEXT_PUBLIC_DONOR_ETH_ADDRESS;
-  const ethAmount = 0.001; // Example amount, replace with actual logic if needed
+  const { globalState } = useAppContext();
+  const currentPool = globalState?.currentPool;
 
   const handleDonateNow = async () => {
-    const transferStartedMessage = t('donateComponent.transferStartedMessage');
     setLoading(true); // Set loading state to true
     try {
-      const simulatedResponse = { success: true, message: transferStartedMessage };
-      setResponse(simulatedResponse);
       setShowModal(true);
-      setLoading(false);
     } catch (error) {
       console.error('Error initiating transfer:', error);
-      setLoading(false);
       setShowModal(false);
     }
   };
@@ -64,25 +32,19 @@ const DonateButton = () => {
           </div>
           <span className="text-md md:text-2xl uppercase">{t('donateComponent.buttonText')}</span>
         </button>
-
         <p className="mt-4 text-center text-sm">
           {t('donateComponent.text', { var1: "50 $ in ETH" })}
         </p>
       </div>
-
       {showModal && (
         <div className="fixed z-10 inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg overflow-y-auto flex items-center justify-center">
           <div className="bg-black sm:rounded-lg max-w sm:max-w-md w-full bg-opacity-75 sm:bg-opacity-100 h-full sm:h-auto sm:max-h-screen flex flex-col text-center shadow-md">
-
             {/* Modal Header */}
             <div className="flex flex-col bg-black sm:bg-transparent">
               {/* First Row: Title and Close Button */}
               <div className="relative text-white py-4 px-6 flex justify-between items-center">
                 <p className="text-xl font-bold">{t('donateComponent.modalTitle')}</p>
-                <button
-                  className="absolute top-4 right-4 text-white hover:text-gray-400"
-                  onClick={() => setShowModal(false)}
-                >
+                <button className="absolute top-4 right-4 text-white hover:text-gray-400" onClick={() => setShowModal(false)}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                   </svg>
@@ -103,7 +65,6 @@ const DonateButton = () => {
                     <FontAwesomeIcon icon={faQrcode}/>
                   </div>
                   <span className="text-md uppercase">Scan QR Code</span>
-
                 </button>
               </div>
 
@@ -114,15 +75,12 @@ const DonateButton = () => {
             <div className="flex-1 overflow-y-auto p-4">
               {/* Tab Content */}
               {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
-              {activeTab === 'qr' && <QRCodeComponent address={ethAddress} currentPool={currentPool} amount={ethAmount.toString()}/>}
+              {activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}
             </div>
 
             {/* Modal Footer */}
             <div className="text-white py-4 px-6">
-              <button
-                onClick={() => setShowModal(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full"
-              >
+              <button onClick={() => setShowModal(false)} className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full">
                 {t('general.close')}
               </button>
             </div>

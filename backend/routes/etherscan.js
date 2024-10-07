@@ -19,7 +19,7 @@ router.get('/fetch-data/:address', async (req, res) => {
   }
 
   try {
-    const result = await fetchEtherScanData(address, db);
+    const result = await fetchEtherScanData(address, db, etherScanApiKey);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });

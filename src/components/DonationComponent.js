@@ -7,11 +7,13 @@ import DonationProgressComponent from "@/components/DonationProgressComponent";
 import DonateButton from "@/components/DonateButton";
 import DApp from "@/components/walletconnect/DApp";
 import DevCurrentLists from "@/components/DevCurrentLists";
+import {useAppContext} from "@/contexts/AppContext";
 
 const DonationComponent = ({ pools, transactions }) => {
   const [response, setResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { globalState } = useAppContext();
 
 
   //const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
@@ -27,7 +29,7 @@ const DonationComponent = ({ pools, transactions }) => {
     <>
       <DonationProgressComponent />
       {/*<DApp/>*/}
-      <EtherScanComponent address={ethAddress} />
+      <EtherScanComponent address={globalState?.currentPool?.eth_address} />
       <DevCurrentLists pools={pools} transactions={transactions}/>
     </>);
 };

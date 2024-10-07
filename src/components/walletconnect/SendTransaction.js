@@ -173,13 +173,13 @@ export default function SendTransaction(props) {
         >
           {isPending ? 'Confirming...' : 'Send'}
         </button>
-        {props.walletAddress && (
+        {props.userWalletAddress && (
           <div className="mt-4 text-center text-xs" style={{ wordBreak: 'keep-all' }}>
             {/* Icon is placed before the text */}
             <FontAwesomeIcon icon={faInfoCircle} className="w-4 h-4 inline-block mr-2" />
             {/* Display text that can be translated, formatted correctly */}
             <span dangerouslySetInnerHTML={{
-              __html: t('sendTransactionComponent.text', { var1: props.walletAddress }),
+              __html: t('sendTransactionComponent.text', { var1: props.userWalletAddress }),
             }} />
           </div>
         )}

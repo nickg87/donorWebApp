@@ -2,25 +2,28 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import { broadcastMessage } from '../webSocket.js'; // Import broadcast function
 
-export const fetchEtherScanData = async (address, db) => {
-  const etherScanApiKey = process.env.ETHERSCAN_APIKEY;
+export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
+  // console.log('etherScanApiKey in fetchEtherScanData: ');
   // console.log(etherScanApiKey);
-  // console.log(process.env);
+  const isLive = process.env.IS_LIVE;
 
   if (!etherScanApiKey) {
     throw new Error('Etherscan API key is not set');
   }
-
+  // Initialize Etherscan provider
+  let provider = new ethers.providers.EtherscanProvider("sepolia", etherScanApiKey);
+  let apiEtherScanUrl = 'https://api-sepolia.etherscan.io/api';
+  if (isLive) {
+    provider = new ethers.providers.EtherscanProvider("homestead", etherScanApiKey);
+    apiEtherScanUrl = 'https://api.etherscan.io/api';
+  }
   try {
-    // Initialize Etherscan provider
-    const provider = new ethers.providers.EtherscanProvider("sepolia", etherScanApiKey);
-
     // Fetch balance
     const balance = await provider.getBalance(address);
     const formattedBalance = ethers.utils.formatEther(balance);
 
     // Fetch confirmed transactions
-    const response = await axios.get(`https://api-sepolia.etherscan.io/api`, {
+    const response = await axios.get(apiEtherScanUrl, {
       params: {
         module: 'account',
         action: 'txlist',
@@ -38,24 +41,30 @@ export const fetchEtherScanData = async (address, db) => {
       let newTransactionsCount = 0;
 
       for (const transaction of transactions) {
-        const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
+        if (transaction.to && ethers.utils.isAddress(transaction.to) && ethers.utils.isAddress(address)) {
+          const normalizedTransactionTo = ethers.utils.getAddress(transaction.to);
+          const normalizedAddress = ethers.utils.getAddress(address);
+          if (normalizedTransactionTo === normalizedAddress && transaction?.value > 0) {
+            const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
 
-        if (!existingTransaction) {
-          await db('transactions').insert({
-            blockHash: transaction.blockHash,
-            blockNumber: parseInt(transaction.blockNumber),
-            from: transaction.from,
-            gas: parseInt(transaction.gas),
-            gasPrice: transaction.gasPrice,
-            gasUsed: parseInt(transaction.gasUsed),
-            hash: transaction.hash,
-            timeStamp: new Date(parseInt(transaction.timeStamp) * 1000).toISOString(),
-            to: transaction.to,
-            txreceipt_status: parseInt(transaction.txreceipt_status),
-            value: transaction.value,
-            poolId: null, // Adjust as necessary
-          });
-          newTransactionsCount++;
+            if (!existingTransaction) {
+              await db('transactions').insert({
+                blockHash: transaction.blockHash,
+                blockNumber: parseInt(transaction.blockNumber),
+                from: transaction.from,
+                gas: parseInt(transaction.gas),
+                gasPrice: transaction.gasPrice,
+                gasUsed: parseInt(transaction.gasUsed),
+                hash: transaction.hash,
+                timeStamp: new Date(parseInt(transaction.timeStamp) * 1000).toISOString(),
+                to: transaction.to,
+                txreceipt_status: parseInt(transaction.txreceipt_status),
+                value: transaction.value,
+                poolId: null, // Adjust as necessary
+              });
+              newTransactionsCount++;
+            }
+          }
         }
       }
 
