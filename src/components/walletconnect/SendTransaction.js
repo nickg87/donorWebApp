@@ -43,6 +43,7 @@ export default function SendTransaction(props) {
         poolId,
         parsedAmount
       ]);
+      //console.log(enterPoolData)
 
       // Call useSendTransaction with the contract address, ABI, function name, and arguments
       await sendTransaction({

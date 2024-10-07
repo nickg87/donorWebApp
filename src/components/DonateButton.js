@@ -10,6 +10,7 @@ const DonateButton = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
+  const [loading, setLoading] = useState(false);
   const { globalState } = useAppContext();
   const currentPool = globalState?.currentPool;
 
