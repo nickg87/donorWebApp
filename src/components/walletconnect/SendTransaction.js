@@ -56,47 +56,6 @@ export default function SendTransaction(props) {
     }
   };
 
-  const submitX = async (e) => {
-    e.preventDefault();
-
-    const contractABI = [
-      "function enterPool(uint256 poolId, uint256 ticketPrice) payable"
-    ];
-
-    const poolId = currentPool.id;
-    const ticketPriceInEther = currentPool.entry_amount; // Assuming entry_amount represents the ticket price in ETH
-
-    try {
-      // Call useContractRead to get the current ticket price from the contract (optional)
-      // This can be used for validation if the entry_amount might not always match the actual price
-      const { data: currentTicketPrice } = await useContractRead({
-        address: currentPool.eth_address,
-        abi: contractABI,
-        functionName: 'enterPool', // Assuming this function returns the ticket price
-        args: [poolId],
-      });
-
-      console.log('currentTicketPrice');
-      console.log(currentTicketPrice);
-
-      // Validate entry amount against retrieved ticket price (if fetched)
-      if (currentTicketPrice && ticketPriceInEther !== currentTicketPrice.ticketPrice.toString()) {
-        throw new Error('Entry amount does not match pool ticket price.');
-      }
-
-      // Convert ticket price to wei
-      const ticketPriceInWei = parseEther(ticketPriceInEther.toString());
-
-      // Call useSendTransaction to send the ticket price (in wei) to the pool address
-      await sendTransaction({
-        to: currentPool.eth_address,
-        value: ticketPriceInWei, // Send only the ticket price, not any additional fee
-      });
-    } catch (err) {
-      console.error("Transaction error:", err);
-    }
-  };
-
   const { isLoading: isWaiting, isSuccess: isTransactionConfirmed } =
     useWaitForTransactionReceipt({
       hash,
