@@ -4,11 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import ProgressBarComponent from "@/components/ProgressBarComponent";
 import DonateButton from "@/components/DonateButton";
+import {useAppContext} from "@/contexts/AppContext";
 
 // New component to fetch ETH price from Binance
 const ETHPrice = () => {
   const [price, setPrice] = useState(null);
   const [error, setError] = useState(null);
+
+  const { globalState, updateCurrentEthPrice} = useAppContext();
 
   useEffect(() => {
     // Fetch ETH price from Binance API
@@ -19,7 +22,9 @@ const ETHPrice = () => {
           throw new Error('Failed to fetch ETH price');
         }
         const data = await response.json();
-        setPrice(parseFloat(data.price).toFixed(2)); // Keep the price to two decimal places
+        const formattedPrice = parseFloat(data.price).toFixed(2)
+        setPrice(formattedPrice); // Keep the price to two decimal places
+        updateCurrentEthPrice(formattedPrice);
       } catch (err) {
         console.error(err);
         setError('Could not fetch price');
@@ -49,20 +54,27 @@ const ETHPrice = () => {
 
 const DonationProgressComponent = () => {
   const { t, i18n } = useTranslation();
-  const poolSize = 500;
+  const { globalState } = useAppContext();
+  const poolPrizeAmount = globalState.currentPool?.prize_amount;
+  const poolEntryAmount = globalState.currentPool?.entry_amount;
+  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
+  // console.log(globalState.currentEthPrice);
+  // console.log(poolPrizeAmountInDollars);
 
   return (
     <>
       <div className="mx-auto p-4">
         <ETHPrice />
-        <h1 className="text-3xl font-semibold text-center mb-2">{t("welcomeCurrentPool", { var1: poolSize + '$' })}</h1>
+        <h1 className="text-3xl font-semibold text-center mb-2">{t("welcomeCurrentPool", { var1: poolSize  })}</h1>
         <h2 className="text-center text-white-600 mb-6">
           {t("welcomeCurrentPoolSubText")}
         </h2>
         <ProgressBarComponent />
         <DonateButton />
         <blockquote className="text-center mb-2 leading-8 enhanceText" dangerouslySetInnerHTML={{
-          __html: t('welcomeCurrentPoolDescriptionText', { var1: '$10 in ETH', var2: '$500 in ETH' }),
+          __html: t('welcomeCurrentPoolDescriptionText', { var1: '~$' + poolEntryAmountInDollars + ' in ETH', var2: '$' + poolPrizeAmountInDollars + ' in ETH' }),
         }} />
       </div>
     </>

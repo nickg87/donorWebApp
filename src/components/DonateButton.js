@@ -13,6 +13,11 @@ const DonateButton = () => {
   const [loading, setLoading] = useState(false);
   const { globalState } = useAppContext();
   const currentPool = globalState?.currentPool;
+  const poolPrizeAmount = currentPool?.prize_amount;
+  const poolEntryAmount = currentPool?.entry_amount;
+  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
 
   const handleDonateNow = async () => {
     setLoading(true); // Set loading state to true
@@ -34,7 +39,7 @@ const DonateButton = () => {
           <span className="text-md md:text-2xl uppercase">{t('donateComponent.buttonText')}</span>
         </button>
         <p className="mt-4 text-center text-sm">
-          {t('donateComponent.text', { var1: "50 $ in ETH" })}
+          {t('donateComponent.text', { var1: "~" + poolPrizeAmountInDollars + " $ in ETH" })}
         </p>
       </div>
       {showModal && (

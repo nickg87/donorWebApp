@@ -143,17 +143,17 @@ export default function SendTransaction(props) {
         >
           {isPending ? 'Confirming...' : 'Send'}
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-          disabled={isPending}
-          className={`w-full py-2 px-4 rounded-md font-semibold text-white ${
-            isPending ? 'bg-gray-600 cursor-not-allowed' : 'bg-gray-600 hover:bg-indigo-700'
-          } transition duration-200`}
-        >
-          Ask for fee
-        </button>
+        {/*<button*/}
+        {/*  onClick={(e) => {*/}
+        {/*    e.preventDefault();*/}
+        {/*  }}*/}
+        {/*  disabled={isPending}*/}
+        {/*  className={`w-full py-2 px-4 rounded-md font-semibold text-white ${*/}
+        {/*    isPending ? 'bg-gray-600 cursor-not-allowed' : 'bg-gray-600 hover:bg-indigo-700'*/}
+        {/*  } transition duration-200`}*/}
+        {/*>*/}
+        {/*  Ask for fee*/}
+        {/*</button>*/}
         {props.userWalletAddress && (
           <div className="mt-4 text-center text-xs" style={{ wordBreak: 'keep-all' }}>
             {/* Icon is placed before the text */}

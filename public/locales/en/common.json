@@ -31,7 +31,7 @@
   },
   "sendTransactionComponent": {
     "text": "You are connected with: <strong style='word-break: break-all'>{{var1}}</strong>",
-    "balanceText": "Looks like you have:<strong>{{var1}}</strong> {{var2}}"
+    "balanceText": "Looks like you have: <strong>{{var1}}</strong> {{var2}}"
   },
   "donateComponent": {
     "buttonText": "Donate Now",
