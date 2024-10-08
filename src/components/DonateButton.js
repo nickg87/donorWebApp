@@ -53,27 +53,27 @@ const DonateButton = () => {
               </div>
 
               {/* Second Row: Tabs */}
-              <div className="flex">
-                <button onClick={() => setActiveTab('wallet')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'wallet' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>
-                  <div className="w-4 h-4 flex items-center justify-center mr-2">
-                    <FontAwesomeIcon icon={faWallet}/>
-                  </div>
-                  <span className="text-md uppercase">Wallet Connect</span>
+              {/*<div className="flex">*/}
+              {/*  <button onClick={() => setActiveTab('wallet')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'wallet' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>*/}
+              {/*    <div className="w-4 h-4 flex items-center justify-center mr-2">*/}
+              {/*      <FontAwesomeIcon icon={faWallet}/>*/}
+              {/*    </div>*/}
+              {/*    <span className="text-md uppercase">Wallet Connect</span>*/}
 
-                </button>
-                <button onClick={() => setActiveTab('qr')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'qr' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>
-                  <div className="w-4 h-4 flex items-center justify-center mr-2">
-                    <FontAwesomeIcon icon={faQrcode}/>
-                  </div>
-                  <span className="text-md uppercase">Scan QR Code</span>
-                </button>
-              </div>
+              {/*  </button>*/}
+              {/*  <button onClick={() => setActiveTab('qr')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'qr' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>*/}
+              {/*    <div className="w-4 h-4 flex items-center justify-center mr-2">*/}
+              {/*      <FontAwesomeIcon icon={faQrcode}/>*/}
+              {/*    </div>*/}
+              {/*    <span className="text-md uppercase">Scan QR Code</span>*/}
+              {/*  </button>*/}
+              {/*</div>*/}
 
 
             </div>
 
             {/* Modal Content (Scrollable if needed) */}
-            <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto px-4">
               {/* Tab Content */}
               {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
               {activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}

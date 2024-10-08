@@ -30,11 +30,13 @@
     "text": "Scan QR Code with your wallet app to donate <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong style='word-break: break-all'>address below</strong>"
   },
   "sendTransactionComponent": {
-    "text": "You are connected with: <strong style='word-break: break-all'>{{var1}}</strong>"
+    "text": "You are connected with: <strong style='word-break: break-all'>{{var1}}</strong>",
+    "balanceText": "Looks like you have:<strong>{{var1}}</strong> {{var2}}"
   },
   "donateComponent": {
     "buttonText": "Donate Now",
-    "modalTitle":"How to transfer?",
+    "modalTitle":"How to participate?",
+    "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
     "text": "Your donation helps reach the {{var1}} goal for the current donation pool. Together, we can make a difference!",
     "successMessage":"Your donation has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"

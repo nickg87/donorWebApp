@@ -43,7 +43,7 @@ const QRCodeComponent = ({ currentPool }) => {
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
 
   const { t, i18n } = useTranslation();
-  //const qrData = `ethereum:${address}?value=${parsedAmount}`;
+
   //const qrData = `ethereum:${currentPool?.eth_address}?value=${currentPool?.entry_amount}&poolId=${currentPool?.id}`
 
   // Encode the function data
@@ -52,6 +52,7 @@ const QRCodeComponent = ({ currentPool }) => {
   ];
   const iFace = new ethers.utils.Interface(contractABI);
   const parsedAmount = ethers.utils.parseEther(entryAmount.toString());
+  const qrDataNormal = `ethereum:${contractAddress}?value=${parsedAmount}`;
 
   // Encode the data for the function call
   const enterPoolData = iFace.encodeFunctionData("enterPool", [
@@ -60,9 +61,8 @@ const QRCodeComponent = ({ currentPool }) => {
   ]);
 
   // Construct the QR data URI
-  const qrData = `ethereum:${contractAddress}?value=${parsedAmount}&data=${encodedData}`;
-
-  console.log('QR Code Data:', qrData);
+  const qrData = `ethereum:${contractAddress}?value=${parsedAmount}&data=${enterPoolData}`;
+  const qrDataX = `ethereum:${contractAddress}?value=${parsedAmount}&data=${encodedData}`;
 
   // `&drawnStatus=${currentPool?.drawn_status}` + // Additional parameters from currentPool
     // `&type=${currentPool?.type}`;
@@ -72,7 +72,41 @@ const QRCodeComponent = ({ currentPool }) => {
     console.log('amount: ' + amountCP)
     console.log('qrData: ');
     console.log(qrData);
+    console.log('qrDataNormal: ');
+    console.log(qrDataNormal);
+    console.log('qrDataX: ');
+    console.log(qrDataX);
   }
+
+
+  const handleTransaction = async () => {
+    // Initialize Etherscan provider for ethers v5
+    const provider = new ethers.providers.EtherscanProvider("homestead", '2B67KIW4DVH6ET3I4NB1E4I53D9IAZ4F23');
+
+    // Estimate gas cost using Ethers.js
+    const estimatedGas = await provider.estimateGas({
+      to: contractAddress,
+      data: enterPoolData,
+      value: parsedAmount
+    });
+
+    // Display estimated gas to the user
+    console.log('Estimated gas:', estimatedGas);
+
+    // Convert to Gwei
+    const estimatedGasInGwei = ethers.utils.formatUnits(estimatedGas, "gwei");
+    console.log(`Estimated Gas in Gwei: ${estimatedGasInGwei}`);
+
+    // Convert to Ether
+    const estimatedGasInEther = ethers.utils.formatUnits(estimatedGas, "ether");
+    console.log(`Estimated Gas in Ether: ${estimatedGasInEther}`);
+
+
+    // Proceed with the transaction if the user confirms
+    // ...
+  };
+
+
 
   return (
     <div className="flex flex-col justify-center items-center p-8">
@@ -80,6 +114,9 @@ const QRCodeComponent = ({ currentPool }) => {
         <div className="flex flex-col items-center" style={{wordBreak: "break-all"}}>
           <div className="w-full mx-auto p-8 bg-white rounded-lg shadow-md">
             <QRCode value={qrData} style={{width: '100%', height: '100%'}}/>
+            {/*<div>qrDataNormal:</div>*/}
+            {/*{qrDataNormal && <QRCode value={qrData} style={{width: '100%', height: '100%'}}/>}*/}
+            <button style={{color: '#000', marginTop: '1rem'}} onClick={handleTransaction}>Test Enter Pool</button>
           </div>
           <p className="mt-4 text-center text-sm" style={{wordBreak: 'keep-all'}} dangerouslySetInnerHTML={{
             __html: t('qrCodeComponent.text', {var1: currentPool?.entry_amount}),

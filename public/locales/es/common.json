@@ -30,11 +30,13 @@
     "text": "Escanea el código QR con tu aplicación monedero para donar {{var1}} ETH a la dirección de abajo"
   },
   "sendTransactionComponent": {
-    "text": "Estás conectado con: <strong style='word-break: break-all'>{{var1}}</strong>"
+    "text": "Estás conectado con: <strong style='word-break: break-all'>{{var1}}</strong>",
+    "balanceText": "Looks like you have:'<strong>{{var1}}</strong> {{var2}}"
   },
   "donateComponent": {
     "buttonText": "Donar ahora",
-    "modalTitle":"¿Cómo transferir?",
+    "modalTitle":"¿Cómo participar?",
+    "howToParticipateText":"Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
     "text": "Tu donación ayuda a alcanzar la meta de {{var1}} para el fondo de donación actual. ¡Juntos, podemos hacer la diferencia!",
     "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
