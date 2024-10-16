@@ -96,7 +96,7 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
           console.log('Total value for poolID ' + pool.id + ': ' + formattedTotalValue);
           console.log('Pool prize Amount for poolID ' + pool.id + ': ' + poolPrizeAmount);
 
-          if (totalValue >= poolPrizeAmount) {
+          if (parseFloat(formattedTotalValue) >= parseFloat(poolPrizeAmount)) {
             console.log('SHOULD ENTER DRAW LOGIC for poolID: ' + pool.id);
             const randomTransactionResult = await db('transactions')
               .where('poolId', pool.id)

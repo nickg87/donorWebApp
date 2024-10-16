@@ -1,6 +1,7 @@
 import React from 'react';
 import EtherScanComponent from "@/components/EtherScanComponent";
 import DonationProgressComponent from "@/components/DonationProgressComponent";
+import PoolCurrentTransactionList from "@/components/PoolCurrentTransactionList";
 import DevCurrentLists from "@/components/DevCurrentLists";
 import {useAppContext} from "@/contexts/AppContext";
 
@@ -12,7 +13,8 @@ const DonationComponent = ({ pools, transactions }) => {
     <>
       <DonationProgressComponent />
       <EtherScanComponent address={globalState?.currentPool?.eth_address} />
-      <DevCurrentLists pools={pools} transactions={transactions}/>
+      <PoolCurrentTransactionList pool={globalState?.currentPool}/>
+      {/*<DevCurrentLists pools={pools} transactions={transactions}/>*/}
     </>);
 };
 

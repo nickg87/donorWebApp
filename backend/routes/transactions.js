@@ -29,6 +29,26 @@ export default (db) => {
     }
   });
 
+  // New route: Get all transaction for a pool by ID
+  router.get('/allById/:poolId', async (req, res) => {
+    try {
+      const { poolId } = req.params;
+
+      // Query the transactions table to get all transactions for the given poolId
+      const transactions = await db('transactions').where({ poolId });
+
+      // Check if any transactions were found
+      if (transactions.length === 0) {
+        return res.status(404).json({ message: 'No transactions found for this poolId.' });
+      }
+
+      res.json(transactions);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      res.status(500).json({ error: 'Failed to fetch transactions' });
+    }
+  });
+
   router.post('/', async (req, res) => {
     try {
       const { blockHash, from, to, value, gas, poolId } = req.body;
