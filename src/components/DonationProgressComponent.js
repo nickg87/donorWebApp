@@ -30,11 +30,30 @@ const ETHPrice = () => {
         setError('Could not fetch price');
       }
     };
+    
+    // Fetch ETH price from Binance API
+    const fetchETH24Change = async () => {
+      try {
+        const response = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=ETHUSDT');
+        if (!response.ok) {
+          throw new Error('Failed to fetch ETH price');
+        }
+        const data = await response.json();
+        //console.log(data);
+        const formattedPrice = parseFloat(data?.lastPrice).toFixed(2)
+        setPrice(formattedPrice); // Keep the price to two decimal places
+        updateCurrentEthPrice(data);
+      } catch (err) {
+        console.error(err);
+        setError('Could not fetch price');
+      }
+    };
 
-    fetchETHPrice();
+    //fetchETHPrice();
+    fetchETH24Change();
 
     // Optionally, you could add a timer to fetch periodically, e.g., every minute
-    const interval = setInterval(fetchETHPrice, 6000000); // Refresh every 6000 seconds
+    const interval = setInterval(fetchETH24Change, 6000000); // Refresh every 6000 seconds
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
@@ -49,7 +68,7 @@ const ETHPrice = () => {
     return <p className="text-center">Loading ETH price...</p>;
   }
 
-  return <p className="text-center">Current ETH Price: ${price} USD</p>;
+  return <p className="text-center">Current ETH Price: ${price} USD <span>({parseFloat(globalState?.currentEthPrice?.priceChangePercent) > 0 && '+'}{globalState?.currentEthPrice?.priceChangePercent}%)</span></p>;
 };
 
 const DonationProgressComponent = () => {
@@ -57,8 +76,8 @@ const DonationProgressComponent = () => {
   const { globalState } = useAppContext();
   const poolPrizeAmount = globalState.currentPool?.prize_amount;
   const poolEntryAmount = globalState.currentPool?.entry_amount;
-  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
-  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
+  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
   const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
   // console.log(globalState.currentEthPrice);
   // console.log(poolPrizeAmountInDollars);

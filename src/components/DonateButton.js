@@ -15,8 +15,8 @@ const DonateButton = () => {
   const currentPool = globalState?.currentPool;
   const poolPrizeAmount = currentPool?.prize_amount;
   const poolEntryAmount = currentPool?.entry_amount;
-  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
-  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice)).toFixed(2);
+  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
+  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
   const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
 
   const handleDonateNow = async () => {
