@@ -7,12 +7,14 @@ import AuthModal from "@/components/AuthModal";
 import { useAppContext } from "@/contexts/AppContext";
 import { useTranslation } from 'next-i18next'; // Fixed import
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import {fetchCurrentPool} from "@/utils/helpers";
+import axios from "axios";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { globalState, updateUser } = useAppContext();
+  const { globalState, updateUser, updateCurrentPool } = useAppContext();
   const [session, setSession] = useState(globalState.user || null);
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
 
@@ -30,6 +32,18 @@ const Header = () => {
   useEffect(() => {
     setSession(globalState.user);
   }, [globalState.user]);
+
+  useEffect(() => {
+    const getCurrentPool = async () => {
+        const data = await fetchCurrentPool();
+        if (data.id) {
+          updateCurrentPool(data);
+        }
+    };
+    if (!globalState.currentPool) {
+      getCurrentPool();
+    }
+  }, [globalState.currentPool]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -51,11 +65,9 @@ const Header = () => {
           </div>
         </Link>
 
-
         <div className="md:hidden z-50 " onClick={toggleMenu}>
           {isOpen ? <FaTimes size={24}/> : <FaBars size={24}/>}
         </div>
-
 
         <nav
           className={`absolute left-0 w-full bg-gray-800 p-4 md:p-0 md:bg-transparent md:static  md:flex md:items-center md:justify-end md:gap-4 md:ml-auto transition-all duration-300 ease-in-out ${

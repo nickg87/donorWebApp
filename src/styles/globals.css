@@ -10,17 +10,23 @@
   --background-end-rgb: 255, 255, 255;
   --main-gradient: repeating-linear-gradient(90deg,  rgba(131,58,180,1), rgba(253,29,29,1), rgb(252, 103, 69),rgba(253,29,29,1), rgba(131,58,180,1));
   //--main-gradient: repeating-linear-gradient(90deg, rgba(64, 224, 208, 1), rgba(72, 209, 204, 1), rgba(32, 178, 170, 1), rgba(0, 139, 139, 1), rgba(32, 178, 170, 1), rgba(72, 209, 204, 1),rgba(64, 224, 208, 1));
+  //--main-gradient: repeating-linear-gradient(90deg, white 0%, #f0f0f0 15%, #e0e0e0 30%, #d0d0d0 45%, #c0c0c0 60%, #e0e0e0 75%, #f0f0f0 90%, white 100%);
   --swiper-theme-color: rgba(131,58,180,1) !important;
   //--swiper-theme-color: rgba(0, 139, 139, 1) !important;
   --progressMainColor: rgb(252, 103, 69);
   //--progressMainColor: rgb(0, 71, 71);
-  --progressSecondColor: rgb(252, 167, 69);
+  //--progressSecondColor: rgb(252, 167, 69);
   //--progressSecondColor: rgb(209, 255, 255);
+  --progressSecondColor: rgb(255, 255, 255);
   /*--embossed-cirrcle-shadow:-20px -20px 40px rgba(3, 67, 87, 0.43), !* Top-left highlight *!*/
   /*20px 20px 40px rgba(0, 0, 0, 0.3), !* Bottom-right shadow *!*/
   /*inset 3px 3px 5px rgba(255, 255, 255, 0.05); !* Inner highlight *!*/
 
-  --embossed-cirrcle-shadow:-20px -20px 40px rgba(149, 7, 39, 0.43), /* Top-left highlight */
+  /*--embossed-cirrcle-shadow:-20px -20px 40px rgba(149, 7, 39, 0.43), !* Top-left highlight *!*/
+  /*20px 20px 40px rgba(0, 0, 0, 0.3), !* Bottom-right shadow *!*/
+  /*inset 3px 3px 5px rgba(255, 255, 255, 0.05); !* Inner highlight *!*/
+
+  --embossed-cirrcle-shadow:-20px -20px 40px rgba(0, 0, 0, 0.43), /* Top-left highlight */
   20px 20px 40px rgba(0, 0, 0, 0.3), /* Bottom-right shadow */
   inset 3px 3px 5px rgba(255, 255, 255, 0.05); /* Inner highlight */
 
@@ -260,8 +266,8 @@ w3m-modal {
   --percentage: var(--value);
   --primary: var(--progressMainColor);
   --secondary: var(--progressSecondColor);
-  --size: 300px;
-  --thickness: 50%;
+  --size: 280px;
+  --thickness: 38%;
   animation: progress 2s 0.5s forwards;
   width: var(--size);
   aspect-ratio: 1;

@@ -5,9 +5,10 @@ import { fetchEtherScanData } from './utils/etherscanService.js';
 
 // Initialize database connection
 const db = knex(knexConfig.development);
-
+const etherScanApiKey = process.env.ETHERSCAN_APIKEY;
 // Get the address from command-line arguments or use a default
-const address = process.argv[2] || '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with a default address if none provided
+//const address = process.argv[2] || '0x092Aa7B28Ee01F85Ffc0B3ae941FE1926F8fA3d3'; // Replace with a default address if none provided
+const address = process.argv[2] || '0x0f63cc1031d656921c3D4D13dDe38eCb10e9F759'; // Replace with a default address if none provided
 
 // Validate address
 if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
@@ -19,7 +20,7 @@ if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
 const runEtherscanFetchJob = async () => {
   console.log(`Running Etherscan fetch job for address: ${address}...`);
   try {
-    const result = await fetchEtherScanData(address, db);
+    const result = await fetchEtherScanData(address, db, etherScanApiKey);
     console.log('CRON: Etherscan data fetched and stored:', result);
   } catch (error) {
     console.error('CRON: Error running the Etherscan fetch job:', error);
