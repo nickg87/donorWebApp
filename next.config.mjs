@@ -8,6 +8,10 @@ export default {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
     return [
       {
+        source: '/one-million-dollar-pool',
+        destination: '/million',
+      },
+      {
         source: '/(.*)',
         destination:  `${backendUrl}$1`,
       },
@@ -25,6 +29,11 @@ export default {
         permanent: false,
         locale: false, // Disable locale for /admin path
       },
+      // {
+      //   source: '/million',
+      //   destination: '/one-million-dollar-pool',
+      //   permanent: true,
+      // },
     ];
   },
 };

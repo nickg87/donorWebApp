@@ -20,6 +20,9 @@ const Footer = () => {
             <Link href="/faq" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('faq')}
             </Link>
+            <Link href="/one-million-dollar-pool" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
+              {t('one-million-dollar-pool')}
+            </Link>
           </div>
 
         </div>
