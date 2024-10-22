@@ -66,3 +66,32 @@ Contributions to enhance the functionality and features of this application are 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## BACKEND EXPRESS
+
+Create a migration
+```shell
+npx knex migrate:make migration_name
+npx knex migrate:make create_articles_table
+```
+
+Run Migrations
+```shell
+npx knex migrate:latest
+```
+
+Seed Database
+```shell
+npx knex seed:run
+```
+
+You can also generate a seed file using:
+```shell
+npx knex seed:make seed_name
+```
+
+Check Migration Status
+```shell
+npx knex migrate:status
+```

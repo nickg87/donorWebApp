@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Label, Text, Link } from '@adminjs/design-system';
+import { Box, Label, Text } from '@adminjs/design-system';
 
 const TransactionCountList = ({ record, resource }) => {
   const [transactionCount, setTransactionCount] = useState(0);

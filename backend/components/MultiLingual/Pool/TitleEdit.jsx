@@ -3,8 +3,8 @@ import { Button, Input, Label, Box } from '@adminjs/design-system';
 
 // Define the component for multilingual title editing
 const TitleEdit = ({ record, onChange }) => {
-  // console.log('record:');
-  // console.log(record);
+  console.log('record:');
+  console.log(record);
   const [currentLang, setCurrentLang] = useState('en');
 
   // Extract title from the nested params property

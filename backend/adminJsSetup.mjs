@@ -8,6 +8,7 @@ import {Sequelize} from 'sequelize';
 // Import model and initialize AdminJS with the models
 import poolModel from './models/pools.js';
 import transactionModel from './models/transactions.js';
+import articlesModel from './models/articles.js';
 
 // Register AdminJS adapter
 AdminJS.registerAdapter({ Database, Resource });
@@ -22,6 +23,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 // Initialize models
 const Pool = poolModel(sequelize, Sequelize.DataTypes);
 const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
+const Article = articlesModel(sequelize, Sequelize.DataTypes);
 
 // Determine the directory of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -37,12 +39,16 @@ export async function setupAdminJS() {
   const componentLoader = new ComponentLoader();
 
   const Components = {
-    TitleEdit: componentLoader.add('TitleEdit', './components/MultiLingual/TitleEdit'),
-    TitleShow: componentLoader.add('TitleShow', './components/MultiLingual/TitleShow'),
-    TitleList: componentLoader.add('TitleList', './components/MultiLingual/TitleList'),
-    DescriptionEdit: componentLoader.add('DescriptionEdit', './components/MultiLingual/DescriptionEdit'),
-    DescriptionShow: componentLoader.add('DescriptionShow', './components/MultiLingual/DescriptionShow'),
-    DescriptionList: componentLoader.add('DescriptionList', './components/MultiLingual/DescriptionList'),
+    PoolTitleEdit: componentLoader.add('PoolTitleEdit', './components/MultiLingual/Pool/TitleEdit'),
+    PoolTitleShow: componentLoader.add('PoolTitleShow', './components/MultiLingual/Pool/TitleShow'),
+    PoolTitleList: componentLoader.add('PoolTitleList', './components/MultiLingual/Pool/TitleList'),
+    PoolDescriptionEdit: componentLoader.add('PoolDescriptionEdit', './components/MultiLingual/Pool/DescriptionEdit'),
+    PoolDescriptionShow: componentLoader.add('PoolDescriptionShow', './components/MultiLingual/Pool/DescriptionShow'),
+    PoolDescriptionList: componentLoader.add('PoolDescriptionList', './components/MultiLingual/Pool/DescriptionList'),
+    ArticleTitleEdit: componentLoader.add('ArticleTitleEdit', './components/MultiLingual/Article/TitleEdit'),
+    ArticleTitleShow: componentLoader.add('ArticleTitleShow', './components/MultiLingual/Article/TitleShow'),
+    ArticleTitleList: componentLoader.add('ArticleTitleList', './components/MultiLingual/Article/TitleList'),
+    MultiLingualFieldEdit: componentLoader.add('MultiLingualFieldEdit', './components/MultiLingual/Article/MultiLingualFieldEdit'),
     PoolSelectEdit: componentLoader.add('PoolSelectEdit', './components/PoolSelectEdit'),
     PoolSelectShow: componentLoader.add('PoolSelectShow', './components/PoolSelectShow'),
     PoolSelectList: componentLoader.add('PoolSelectList', './components/PoolSelectList'),
@@ -62,17 +68,17 @@ export async function setupAdminJS() {
             title: {
               type: 'string',
               components: {
-                edit: Components.TitleEdit,
-                show: Components.TitleShow,
-                list: Components.TitleList,
+                edit: Components.PoolTitleEdit,
+                show: Components.PoolTitleShow,
+                list: Components.PoolTitleList,
               },
             },
             description: {
               type: 'richtext',
               components: {
-                edit: Components.DescriptionEdit,
-                show: Components.DescriptionShow,
-                list: Components.DescriptionList,
+                edit: Components.PoolDescriptionEdit,
+                show: Components.PoolDescriptionShow,
+                list: Components.PoolDescriptionList,
               },
             },
             type: {
@@ -112,7 +118,6 @@ export async function setupAdminJS() {
           },
           navigation: { name: 'Resources' },
         },
-
       },
       {
         resource: Transaction,
@@ -134,6 +139,36 @@ export async function setupAdminJS() {
               })),
             },
           }
+        },
+      },
+      {
+        resource: Article,
+        options: {
+          listProperties: ['title', 'id', 'views', 'updated_at', 'short', 'active'],
+          properties: {
+            title: {
+              type: 'string',
+              components: {
+                //edit: Components.ArticleTitleEdit,
+                edit: Components.MultiLingualFieldEdit,
+                show: Components.ArticleTitleShow,
+                list: Components.ArticleTitleList,
+              },
+            },
+            short: {
+              type: 'string',
+              components: {
+                edit: Components.MultiLingualFieldEdit,
+              },
+            },
+            meta: {
+              type: 'string',
+              components: {
+                edit: Components.MultiLingualFieldEdit,
+              },
+            },
+          },
+          navigation: { name: 'Resources' },
         },
       },
     ],
