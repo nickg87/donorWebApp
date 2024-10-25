@@ -6,9 +6,12 @@ import {formatEther } from 'viem';
 import { fetchCurrentTransactionsForPoolId, timestampToDateString, getTimeAgo} from "@/utils/helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import {useAppContext} from "@/contexts/AppContext";
 
 
 const PoolCurrentTransactionList = ({ pool }) => {
+  const { globalState, updateCurrentPoolBalance } = useAppContext();
+  console.log(globalState);
   const [transactions, setTransactions] = useState(null);
   const { t, i18n } = useTranslation();
 
@@ -26,19 +29,12 @@ const PoolCurrentTransactionList = ({ pool }) => {
 
   }, [pool?.id]);
 
-  // if (transactions) {
-  //   transactions.map((transaction) => {
-  //     console.log(transaction);
-  //
-  //     const weiValue = BigInt(transaction.value); // Example Wei value
-  //     const etherValue = formatEther(weiValue); // Convert Wei to Ether
-  //     console.log(etherValue); // Outputs the value in Ether
-  //     const txnFeeWei = BigInt(transaction.gasUsed) * BigInt(transaction.gasPrice);
-  //     console.log('formatEther(txnFeeWei)');
-  //     console.log(formatEther(txnFeeWei));
-  //
-  //   });
-  // }
+  useEffect(() => {
+    if (transactions) {
+      const balance = transactions.reduce((acc, transaction) => acc + Number(formatEther(transaction.value)), 0);
+      updateCurrentPoolBalance(balance);
+    }
+  }, [pool?.id, transactions]);
 
 
   return (

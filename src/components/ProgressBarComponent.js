@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {useAppContext} from "@/contexts/AppContext";
-
+import React, { useEffect, useState } from 'react';
+import { useAppContext } from "@/contexts/AppContext";
 
 const ProgressCircle = ({ progress }) => {
   const { globalState } = useAppContext();
-  //console.log(progress);
   const progressRef = React.useRef(null);
 
   useEffect(() => {
@@ -21,57 +19,56 @@ const ProgressCircle = ({ progress }) => {
       aria-valuenow={progress}
       aria-valuemin="0"
       aria-valuemax="100"
-      style={{'--value': progress}} // Ensure progress is a valid CSS value
-    ><span className={`progress-text ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>{progress}%</span></div>
-  );
-};
-
-
-const ProgressBarComponent = (props) => {
-  const { globalState, setGlobalState } = useAppContext();
-  const [progress, setProgress] = useState(0);
-  const targetProgress = globalState?.balance ? globalState.balance * 10 : 0;
-  const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
-
-  // Smooth animation effect
-  useEffect(() => {
-    //if (isDev) console.log('enters here');
-    let start = null;
-    const duration = 1000; // duration of the animation in milliseconds
-
-    const animateProgress = (timestamp) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const newProgress = Math.min(elapsed / duration * targetProgress, targetProgress);
-
-      setProgress(newProgress);
-
-      if (elapsed < duration) {
-        requestAnimationFrame(animateProgress);
-      }
-    };
-
-    if (targetProgress > 0) {
-      requestAnimationFrame(animateProgress);
-    }
-  }, [targetProgress, globalState?.balance]);
-
-  // Ensure the progress is a valid number before rounding
-  let roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
-
-  // fix progress not showing
-  useEffect(() => {
-    roundedNum = Math.round((progress + Number.EPSILON) * 100) / 100;
-  }, [progress]);
-
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <div className="embossed-circle">
-        <ProgressCircle progress={roundedNum}/>
-      </div>
+      style={{ '--value': progress }} // Ensure progress is a valid CSS value
+    >
+      <span className={`progress-text ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>{progress}%</span>
     </div>
   );
 };
 
+const ProgressBarComponent = () => {
+  const { globalState } = useAppContext();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const prizeAmount = parseFloat(globalState?.currentPool?.prize_amount || 0);
+    const currentBalance = parseFloat(globalState?.currentPoolBalance || 0);
+    const percentage = prizeAmount > 0 ? (currentBalance / prizeAmount) * 100 : 0;
+
+    let animationFrameId;
+    const duration = 1000;
+    let start = null;
+
+    const animateProgress = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const newProgress = Math.min((elapsed / duration) * percentage, percentage);
+
+      setProgress(newProgress);
+
+      if (elapsed < duration) {
+        animationFrameId = requestAnimationFrame(animateProgress);
+      }
+    };
+
+    if (percentage > 0) {
+      animationFrameId = requestAnimationFrame(animateProgress);
+    } else {
+      setProgress(0);
+    }
+
+    return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [globalState.currentPoolBalance, globalState.currentPool?.prize_amount]);
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div className="embossed-circle">
+        <ProgressCircle progress={Math.round(progress)} />
+      </div>
+    </div>
+  );
+};
 
 export default ProgressBarComponent;

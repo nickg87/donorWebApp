@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
     balance: null,
     shouldFetch: false,
     currentPool: null,
+    currentPoolBalance: null,
     currentEthPrice: null,
     theme: 'light',
   });
@@ -25,6 +26,13 @@ export const AppProvider = ({ children }) => {
     setGlobalState((prevState) => ({
       ...prevState,
       currentPool,
+    }));
+  };
+
+  const updateCurrentPoolBalance = (currentPoolBalance) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      currentPoolBalance,
     }));
   };
 
@@ -58,7 +66,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme }}>
+    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme, updateCurrentPoolBalance }}>
       {children}
     </AppContext.Provider>
   );
