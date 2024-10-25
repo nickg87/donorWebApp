@@ -97,7 +97,7 @@ const Layout = ({ children }) => {
           ))}
         </div>
       </div>
-      <div className={['mainContainer'].join(' ')}>
+      <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
           <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
           <meta name="description"

@@ -95,6 +95,11 @@ body {
   /*  )*/
   /*  rgb(var(--background-start-rgb));*/
 }
+.mainContainer {
+  position: absolute;
+  z-index: 2 !important;
+  width: 100%;
+}
 .mainContainer.darkTheme {
   background: var(--darkThemeMainColor)
 }
@@ -149,17 +154,16 @@ button:focus {
 }
 
 .grid-container {
-  overflow: hidden !important;
-  position: absolute;
-  top: 0;                   /* Align to the top */
-  left: 0;                  /* Align to the left */
-  width: 100vw;              /* Full viewport width */
-  height: 910px;             /* Limit height to display only 7 rows (7 * 130px) */
-  display: grid;             /* Use CSS Grid */
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Create columns */
-  grid-template-rows: repeat(7, 130px); /* Fixed 7 rows */
-  gap: 0;                  /* No gap between squares */
-  z-index: 1;              /* Ensure it's behind other content */
+  position: absolute; /* Keep as absolute */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100vw; /* Full width */
+  height: 100vh; /* Change to full viewport height if necessary */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-rows: repeat(7, 130px); /* Maintain your rows */
+  gap: 0;
+  z-index: 1; /* Ensure visibility */
 }
 
 .grid-item.darkTheme {
@@ -485,9 +489,11 @@ w3m-modal {
 }
 
 .theme-switcher.lightTheme {
+  background: #ffffff;
   border: 1px solid #E1E7F6;
 }
 .theme-switcher.darkTheme {
+  background: #030A31;
   border: 1px solid #413569;
 }
 
