@@ -67,7 +67,7 @@ const ProgressBarComponent = (props) => {
   return (
     <div style={{ textAlign: 'center' }}>
       <div className="embossed-circle">
-        <ProgressCircle progress={88}/>
+        <ProgressCircle progress={roundedNum}/>
       </div>
     </div>
   );
