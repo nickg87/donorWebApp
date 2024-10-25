@@ -65,10 +65,10 @@ const ETHPrice = () => {
 
   // While fetching, show a loading indicator or some placeholder
   if (!price) {
-    return <p className="text-center">Loading ETH price...</p>;
+    return <p className={`text-center ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>Loading ETH price...</p>;
   }
 
-  return <p className="text-center">Current ETH Price: ${price} USD <span>({parseFloat(globalState?.currentEthPrice?.priceChangePercent) > 0 && '+'}{globalState?.currentEthPrice?.priceChangePercent}%)</span></p>;
+  return <p className={`text-center ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>Current ETH Price: ${price} USD <span>({parseFloat(globalState?.currentEthPrice?.priceChangePercent) > 0 && '+'}{globalState?.currentEthPrice?.priceChangePercent}%)</span></p>;
 };
 
 const DonationProgressComponent = () => {
@@ -86,8 +86,8 @@ const DonationProgressComponent = () => {
     <>
       <div className="mx-auto p-4">
         <ETHPrice />
-        <h1 className="text-3xl font-semibold text-center mb-2">{t("welcomeCurrentPool", { var1: poolSize  })}</h1>
-        <h2 className="text-center text-white-600 mb-6">
+        <h1 className={`text-3xl font-semibold text-center mb-2 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>{t("welcomeCurrentPool", { var1: poolSize  })}</h1>
+        <h2 className={`text-center mb-6 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>
           {t("welcomeCurrentPoolSubText")}
         </h2>
         <ProgressBarComponent />

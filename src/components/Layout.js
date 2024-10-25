@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { useAppContext } from '../contexts/AppContext';
 import MaintenancePage from "./MaintenancePage";
 import axios from "axios";
+import {themeCustomClass} from "@/utils/helpers";
 
 const Layout = ({ children }) => {
 
@@ -72,23 +73,53 @@ const Layout = ({ children }) => {
    }
   }, [globalState.user]);
 
+  // Change body background color based on theme
+  useEffect(() => {
+    const rootElement = document.documentElement; // This is the <html> element
+    if (globalState.theme === 'dark') {
+      document.body.style.backgroundColor = 'var(--darkThemeMainColor)';
+      rootElement.style.backgroundColor = 'var(--darkThemeMainColor)';
+    } else {
+      document.body.style.backgroundColor = 'var(--lightThemeMainColor)';
+      rootElement.style.backgroundColor = 'var(--lightThemeMainColor)';
+    }
+  }, [globalState.theme]);
+
 
 
   return (
     <>
-      <Head>
-        <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
-        <meta name="description" content="Welcome to DonorHub, where donations are made easy. Learn more about our services and how you can contribute."/>
-        {/* Other meta tags, stylesheets, etc. */}
-      </Head>
-      <div className="flex flex-col min-h-screen">
-        <Header/>
-        <main className="flex-1 flex-col items-center p-4 md:p-8 lg:p-16 xl:p-24 gradient-bg">
-          <div className="z-10 p-4 md:p-20 bg-gray-800 bg-opacity-50 rounded-lg shadow-lg border border-gray-600 border-opacity-50 max-w-screen-xl mx-auto">
-            {children}
-          </div>
-        </main>
-        <Footer />
+      {/*<div className={['grid-pattern'].join(' ')}></div>*/}
+      <div className="absolute" style={{width: '100%', height: '100vh', overflow: 'hidden'}}>
+        <div className="grid-container">
+          {Array.from({length: 100}, (_, index) => ( // 7 rows * 10 items max = 70 items
+            <div key={index} className={['grid-item', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
+          ))}
+        </div>
+      </div>
+      <div className={['mainContainer'].join(' ')}>
+        <Head>
+          <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
+          <meta name="description"
+                content="Welcome to DonorHub, where donations are made easy. Learn more about our services and how you can contribute."/>
+          {/* Other meta tags, stylesheets, etc. */}
+        </Head>
+        <div className="flex flex-col min-h-screen">
+          <Header/>
+          <main className={["flex-1", "flex-col", "items-center", "p-4", "md:p-8", "lg:p-16", "xl:p-24"].join(' ')}>
+            <div
+              className="z-10 p-4 md:p-20 rounded-lg shadow-lg max-w-screen-xl mx-auto">
+              {children}
+            </div>
+          </main>
+          <Footer/>
+        </div>
+      </div>
+      <div className="absolute" style={{width: '100%', overflow: 'hidden'}}>
+        <div
+          className={['top-right-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
+        <div
+          className={['left-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
       </div>
     </>
   );

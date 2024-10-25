@@ -23,24 +23,25 @@ const LanguageSwitcher = () => {
       {locale === 'en' ? (
         <button onClick={() => changeLanguage('es')} className={'flagWrapper'}>
           <Image
-            src="/flags/ES.svg"  // Replace with your actual path to the Spanish flag
+            src="/flags/en-circle.svg"  // Replace with your actual path to the Spanish flag
             alt="Switch to Spanish"
             title="Switch to Spanish"
-            width={32}
+            width={26}
             height={24}
           />
         </button>
       ) : (
         <button onClick={() => changeLanguage('en')} className={'flagWrapper'}>
           <Image
-            src="/flags/EN.svg"  // Replace with your actual path to the US flag
+            src="/flags/es-circle.svg"  // Replace with your actual path to the US flag
             alt="Switch to English"
             title="Switch to English"
-            width={32}
+            width={26}
             height={24}
           />
         </button>
       )}
+      {locale.toUpperCase()}
     </div>
   );
 };

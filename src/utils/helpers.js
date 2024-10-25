@@ -1,4 +1,5 @@
 import axios from "axios";
+import {text} from "@fortawesome/fontawesome-svg-core";
 
 export const timestampToDateString = (timestamp) => {
   const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
@@ -30,6 +31,12 @@ export const copyToClipboard = (text) => {
   }).catch(err => {
     console.error('Could not copy text: ', err);
   });
+};
+
+export const themeCustomClass = (theme) => {
+  if(theme === 'dark') {
+    return `darkTheme`;
+  } else return  'lightTheme';
 };
 
 export const fetchCurrentPool = async () => {

@@ -5,7 +5,7 @@
   "welcomeCurrentPoolDescriptionText": "<p>El indicador a continuación representa nuestro fondo de donaciones actual. Cada donación tiene un monto fijo de <strong>{{var1}}</strong>, y nuestro objetivo es alcanzar <strong>{{var2}}</strong>.</p><p>Una vez que alcancemos este objetivo, el monto total(<sup> 1 </sup>) <strong>será devuelto a USTED</strong>, un afortunado donante.</p><p>¡Es una forma sencilla de hacer el bien y, potencialmente, traer alegría de vuelta a su vida!</p><small><hr><sup>1</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. Consulte la página de <a href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
-  "contact": "Contacto",
+  "contact": "Contáctenos",
   "toc": "Términos y condiciones",
   "faq": "Preguntas frecuentes",
   "one-million-dollar-pool": "El sorteo del millón de dólares",

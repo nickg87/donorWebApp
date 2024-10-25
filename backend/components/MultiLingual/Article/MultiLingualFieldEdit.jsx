@@ -11,6 +11,7 @@ const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
 
   // Extract the initial value from the nested params property
   let initialFieldValue = ((record.params && record.params[fieldName + '.' + currentLang]) || record[fieldName]) || {};
+  console.log('initialFieldValue for ' + fieldName + ' fieldName: ' );
   console.log(initialFieldValue);
 
   const [fieldValue, setFieldValue] = useState(initialFieldValue);
@@ -18,7 +19,7 @@ const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
   // Update fieldValue whenever currentLang changes
   useEffect(() => {
     setFieldValue(initialFieldValue);
-  }, [currentLang, initialFieldValue]);
+  }, [currentLang]);
 
   // Handle language tab changes
   const handleLangChange = (lang) => {
@@ -65,14 +66,6 @@ const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
       <Box mb="lg">
         <div className="adminjs-multilingual-edit__input">
           <Label htmlFor={fieldName}>{`${capitalizeFirstLetter(label)} (${currentLang}):`}</Label>
-          {fieldName === 'meta' ? (
-            <TextArea
-              id={fieldName}
-              value={fieldValue || ''}
-              onChange={handleInputChange}
-              style={{ width: '100%', height: '180px' }} // Adjust height as needed
-            />
-          ) : (
             <Input
               type="text"
               id={fieldName}
@@ -80,9 +73,6 @@ const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
               onChange={handleInputChange}
               style={{ width: '100%'}}
             />
-          )}
-
-
         </div>
       </Box>
     </div>

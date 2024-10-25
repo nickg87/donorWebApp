@@ -3,6 +3,7 @@ import {useAppContext} from "@/contexts/AppContext";
 
 
 const ProgressCircle = ({ progress }) => {
+  const { globalState } = useAppContext();
   //console.log(progress);
   const progressRef = React.useRef(null);
 
@@ -21,7 +22,7 @@ const ProgressCircle = ({ progress }) => {
       aria-valuemin="0"
       aria-valuemax="100"
       style={{'--value': progress}} // Ensure progress is a valid CSS value
-    ><span className="progress-text">{progress}%</span></div>
+    ><span className={`progress-text ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>{progress}%</span></div>
   );
 };
 
@@ -66,7 +67,7 @@ const ProgressBarComponent = (props) => {
   return (
     <div style={{ textAlign: 'center' }}>
       <div className="embossed-circle">
-        <ProgressCircle progress={roundedNum}/>
+        <ProgressCircle progress={88}/>
       </div>
     </div>
   );
