@@ -67,7 +67,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`p-4 w-full sticky top-0 z-[9] transition-all duration-300 ${isScrolled ? 'backdrop-blur-md shadow-lg' : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-900' : 'text-black shadow-gray-200'}`}>
+    <header className={`p-4 w-full sticky top-0 z-[9] transition-all duration-300 ${isScrolled ? 'backdrop-blur-md bg-white/10 shadow-lg' : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-900' : 'text-black shadow-gray-200'}`}>
       <div className="container mx-auto max-w-7xl flex justify-between items-center p-4">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
