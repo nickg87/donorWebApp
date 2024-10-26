@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     // Production Next.js app
     {
-      name: 'donor-hub',                  // Production app
+      name: 'frontend',                  // Production app
       script: 'npm',                      // Use npm to start the app
       args: 'start',                     // Start the app using 'npm start'
       cwd: './',                         // Working directory for production app
