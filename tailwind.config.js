@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backdropBlur: {
+        md: '10px', // Define the blur amount you want
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
