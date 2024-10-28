@@ -13,6 +13,9 @@ $buttonGradientColorStyleLight: #FFFFA4;
 $buttonGradientStyleLight: linear-gradient(to bottom, $gradient1-secondary-color, $secondary-color);
 $buttonGradientStyleDark: linear-gradient(to bottom, $primary-color, $gradient2-secondary-color);
 
+//GRID EFFECT
+$gridColorLight: rgba(225, 231, 246, 0.5); /* Color with some opacity */
+$gridColorDark: rgba(17, 26, 81, 0.95); /* Color with some opacity */
 
 $progressCircleBackgroundGradientDark: #060c35;
 $progressCircleBackgroundLight: #ffffff;

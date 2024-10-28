@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.gridContainer {
+  position: absolute; /* Keep as absolute */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100vw; /* Full width */
+  height: 100vh; /* Change to full viewport height if necessary */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-rows: repeat(7, 130px); /* Maintain your rows */
+  gap: 0;
+  z-index: 1; /* Ensure visibility */
+}
+
+.gridItem {
+  &.dark {
+    border: 0.5px solid $gridColorDark;
+  }
+  &.light {
+    border: 0.5px solid $gridColorLight;
+  }
+}

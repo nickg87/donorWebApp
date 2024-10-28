@@ -38,10 +38,11 @@ const DonateButton = () => {
         <div className="flex flex-col justify-center items-center p-4">
           <ButtonWrapper icon={<IconLovely className={`w-6 h-6`}/>} theme={'light'} onClick={handleDonateNow} text={t('donateComponent.buttonText')} extra={'uppercase h-[50px] w-[200px]'} />
         </div>
-
-        <p className="mt-4 text-center text-sm">
-          {t('donateComponent.text', { var1: "~" + poolPrizeAmountInDollars + " $ in ETH" })}
-        </p>
+        <p className="mt-4 text-center text-sm text-[#8B91B5]" dangerouslySetInnerHTML={{
+          __html: t('donateComponent.note', {
+            var1: "~" + poolPrizeAmountInDollars + " $ in ETH"
+          }),
+        }} />
       </div>
       {showModal && (
         <div className="fixed z-10 inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg overflow-y-auto flex items-center justify-center">

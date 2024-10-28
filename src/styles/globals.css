@@ -10,8 +10,8 @@
 
   --ellipseGradientLight: radial-gradient(
           circle,
-          rgba(255, 192, 0, .8) 0%,  /* Yellow with 100% opacity at center */
-          rgba(255, 255, 255, 0) 87% /* Transparent white at 87% */
+          rgba(255, 192, 0, .8) 10%,  /* Yellow with 100% opacity at center */
+          rgba(255, 255, 255, 0) 70% /* Transparent white at 87% */
   );
 
   --buttonGradientStyle1: linear-gradient(to bottom, #FADB01, #F78701);
@@ -25,14 +25,14 @@
 
   --leftEllipseGradientLight: radial-gradient(
           circle,
-          rgba(151, 102, 255, 0.56) 0%, /* Purple with 56% opacity at center */
-          rgba(255, 255, 255, 0) 100%   /* Transparent white at 100% */
+          rgba(200, 92, 255, 0.5) 50%, /* Purple with 56% opacity at center */
+          rgba(255, 255, 255, 0) 70%   /* Transparent white at 100% */
   );
 
   --leftEllipseGradientDark: radial-gradient(
-          circle,
+          ellipse at center,
           rgba(151, 102, 255, 0.56) 0%, /* Purple with 56% opacity at center */
-          rgba(3, 10, 49, 0) 100%       /* Transparent dark blue (#030A31) at 100% */
+          rgba(3, 10, 49, 0) 70%           /* Transparent dark blue (#030A31) at 100% */
   );
   --gridColorLight: rgba(225, 231, 246, 0.5); /* Color with some opacity */
   --gridColorDark: rgba(17, 26, 81, 0.95); /* Color with some opacity */
@@ -124,7 +124,7 @@ button:focus {
 
 .left-ellipse-gradient {
   position: fixed;
-  top: 10%;        /* Y position */
+  bottom: -10%;        /* Y position */
   left: -50%;      /* X position */
   width: 70%;     /* Width of the ellipse */
   height: 90%;    /* Height of the ellipse */
@@ -135,15 +135,44 @@ button:focus {
 
 .left-ellipse-gradient.lightTheme {
   background: var(--leftEllipseGradientLight);
-  background-size: 100% 200%;
+  background-size: 100% 100%;
   background-repeat: repeat-y;  /* Repeat vertically */
 }
 
-.left-ellipse.darkTheme {
+.left-ellipse-gradient.darkTheme {
+  opacity: 0.65;
   background: var(--leftEllipseGradientDark);
-  background-size: 100% 200%;
-  background-repeat: repeat-y;  /* Repeat vertically */
+  background-size: 100% 100%;
 }
+
+
+
+.center-ellipse-gradient {
+  position: absolute;
+  top: 15%;           /* Y position */
+  left: 15%;          /* X position */
+  width: 70%;         /* Width of the ellipse */
+  height: 90%;        /* Height of the ellipse */
+  border-radius: 50%; /* To make it an ellipse */
+  opacity: 0.15;      /* Set opacity */
+  z-index: 1;      /* Ensure it's behind other elements */
+}
+
+.center-ellipse-gradient.darkTheme {
+  opacity: 0.35;
+  background: var(--leftEllipseGradientDark);
+  background-size: 100% 100%;
+}
+
+.center-ellipse-gradient.lightTheme {
+  top: 25%;           /* Y position */
+  left: 35%;          /* X position */
+  width: 65%;
+  opacity: 0.15;
+  background: var(--ellipseGradientLight);
+  background-size: 100% 100%;
+}
+
 
 .grid-container {
   position: absolute; /* Keep as absolute */

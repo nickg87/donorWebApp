@@ -10,4 +10,9 @@
       color: $primary-color;;
     }
   }
+  @media (max-width: 640px) { // You can adjust this breakpoint as needed
+    p {
+      border: none; // Remove border on smaller screens
+    }
+  }
 }

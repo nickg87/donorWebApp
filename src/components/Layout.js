@@ -6,6 +6,8 @@ import { useAppContext } from '../contexts/AppContext';
 import MaintenancePage from "./MaintenancePage";
 import axios from "axios";
 import {themeCustomClass} from "@/utils/helpers";
+import LeftEllipseGradientDark from "../../public/images/leftEllipseGradientDark.svg";
+import GridEffectComponent from "@/components/UI/GridEffectComponent";
 
 const Layout = ({ children }) => {
 
@@ -85,18 +87,18 @@ const Layout = ({ children }) => {
     }
   }, [globalState.theme]);
 
-
-
   return (
     <>
       {/*<div className={['grid-pattern'].join(' ')}></div>*/}
-      <div className="absolute" style={{width: '100%', height: '100vh', overflow: 'hidden'}}>
-        <div className="grid-container">
-          {Array.from({length: 100}, (_, index) => ( // 7 rows * 10 items max = 70 items
-            <div key={index} className={['grid-item', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
-          ))}
-        </div>
-      </div>
+      <GridEffectComponent/>
+      {/*<div className="absolute" style={{width: '100%', height: '100vh', overflow: 'hidden'}}>*/}
+      {/*  <div className="grid-container">*/}
+      {/*    {Array.from({length: 100}, (_, index) => ( // 7 rows * 10 items max = 70 items*/}
+      {/*      <div key={index}*/}
+      {/*           className={['grid-item', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>*/}
+      {/*    ))}*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
           <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
@@ -106,7 +108,7 @@ const Layout = ({ children }) => {
         </Head>
         <div className="flex flex-col min-h-screen">
           <Header/>
-          <main className={["flex-1", "flex-col", "items-center", "p-4"].join(' ')}>
+          <main className={["flex-1", "flex-col", "items-center", "p-0", "md:p-4"].join(' ')}>
             <div
               className="z-10 p-4 md:p-8 rounded-lg max-w-screen-xl mx-auto">
               {children}
@@ -117,10 +119,12 @@ const Layout = ({ children }) => {
       </div>
       <div className="absolute" style={{width: '100%', overflow: 'hidden'}}>
         <div
-          className={['top-right-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
+          className={['top-right-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
         <div
-          className={['left-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>
+          className={['left-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
       </div>
+      <div
+        className={['center-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
     </>
   );
 };
