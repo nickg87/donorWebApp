@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import ProgressBarComponent from "@/components/ProgressBarComponent";
 import DonateButton from "@/components/DonateButton";
+import IndexTiles from "@/components/IndexTiles";
 import ETHPrice from "@/components/ETHPrice";
 import {useAppContext} from "@/contexts/AppContext";
 import classes from './DonationProgressComponent.module.scss';
@@ -29,9 +30,7 @@ const DonationProgressComponent = () => {
         </h2>
         <ProgressBarComponent />
         <DonateButton />
-        <blockquote className="text-center mb-2 leading-8 enhanceText" dangerouslySetInnerHTML={{
-          __html: t('welcomeCurrentPoolDescriptionText', { var1: '~$' + poolEntryAmountInDollars + ' in ETH', var2: '$' + poolPrizeAmountInDollars + ' in ETH' }),
-        }} />
+        <IndexTiles />
       </div>
     </>
   );

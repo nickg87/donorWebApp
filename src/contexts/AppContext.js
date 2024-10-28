@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Create the context
 const AppContext = createContext();
 
 // Create the provider component
 export const AppProvider = ({ children }) => {
+  const [isThemeReady, setIsThemeReady] = useState(false);
+  const defaultTheme = typeof window !== 'undefined' ? localStorage.getItem('donorSiteTheme') : null;
   const [globalState, setGlobalState] = useState({
     user: null,
     balance: null,
@@ -12,8 +14,19 @@ export const AppProvider = ({ children }) => {
     currentPool: null,
     currentPoolBalance: null,
     currentEthPrice: null,
-    theme: 'light',
+    theme: defaultTheme || 'light',
   });
+
+  // Load the theme from local storage on initial mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('donorSiteTheme');
+      if (storedTheme) {
+        setGlobalState(prevState => ({ ...prevState, theme: storedTheme }));
+      }
+      setIsThemeReady(true); // Indicate that the theme is ready
+    }
+  }, []);
 
   const updateUser = (user) => {
     setGlobalState((prevState) => ({
@@ -41,6 +54,7 @@ export const AppProvider = ({ children }) => {
       ...prevState,
       theme,
     }));
+    localStorage.setItem('donorSiteTheme', theme);
   };
 
 
@@ -67,7 +81,7 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme, updateCurrentPoolBalance }}>
-      {children}
+      {isThemeReady ? children : null}
     </AppContext.Provider>
   );
 };
