@@ -1,0 +1,104 @@
+@import '../styles/variables.scss'; // Import your SCSS variables here
+
+.embossedCircle {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  margin: 3rem auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $progressCircleBackgroundLight;
+  border: 1px solid $progressCircleBorderColorLight;
+  box-shadow: $progressCircleShadow;
+  &.dark {
+    border: 1px solid $progressCircleBorderColorDark;
+    box-shadow: $progressCircleShadowDark;
+    background: $progressCircleBackgroundGradientDark;
+  }
+
+  .progressbar {  // Local class for the progress bar
+    --percentage: var(--value);
+    --primary:  var(--progressMainColor);
+    --secondary: var(--progressSecondColor);
+    --size: 280px;
+    --thickness: 38%;
+    animation: progress 2s 0.5s forwards;
+    width: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    &.dark {
+      --primary:  var(--progressMainColorDark);
+      --secondary: var(--progressSecondColorDark);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: conic-gradient(
+                      from 0deg,
+                      var(--primary) calc(var(--percentage) * 1%),
+                      $secondary-color calc(var(--percentage) * 1%),
+                      var(--secondary) calc(var(--percentage) * 1%),
+                      var(--secondary) 0
+      );
+      mask: radial-gradient(white var(--thickness), transparent 0);
+      mask-mode: alpha;
+      -webkit-mask: radial-gradient(#0000 var(--thickness), #000 0);
+      -webkit-mask-mode: alpha;
+    }
+  }
+}
+
+@keyframes progress {
+  0% {
+    --percentage: 0;
+  }
+  100% {
+    --percentage: var(--value);
+  }
+}
+
+@property --percentage {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Style for the progress text */
+.progressText {
+  font-size: 2.5rem; /* Adjust this to control text size */
+  color: black;
+  font-weight: bold;
+  z-index: 1; /* Ensures the text is above the pseudo-elements */
+  position: relative;
+  &.light {
+    color: #132C5E;
+  }
+  &.dark {
+    color: #ffffff;
+  }
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 600px) {
+  .embossedCircle {
+    width: 260px;
+    height: 260px;
+  }
+  .progressbar {
+    --size: 200px; /* Smaller size for mobile devices */
+  }
+
+  .progressText {
+    font-size: 1.5rem; /* Smaller font size for mobile devices */
+  }
+}

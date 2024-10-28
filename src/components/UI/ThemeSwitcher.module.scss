@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+
+.themeSwitcher {
+  width: 97px;
+  height: 50px;
+  border-radius: 30px;
+  position: relative;
+  padding: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+
+  &.light {
+    background: #ffffff;
+    border: 1px solid #E1E7F6;
+  }
+  &.dark {
+    background: #030A31;
+    border: 1px solid #413569;
+  }
+}
+
+
+
+.switchToggle {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  &.light {
+    transform: translateX(45px);
+    background: linear-gradient(to bottom, #FFF5AD, #F88F02);
+  }
+  &.dark {
+    transform: translateX(1px);
+    background: linear-gradient(to bottom, #C4A8FF, #081123);
+  }
+}
+
+.iconWrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  &.light {
+    background: $buttonGradientStyle1;
+  }
+  &.dark {
+    background: $buttonGradientStyle2;
+  }
+}

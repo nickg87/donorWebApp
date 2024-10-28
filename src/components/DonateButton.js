@@ -5,6 +5,9 @@ import { useTranslation } from 'next-i18next';
 import DApp from "@/components/walletconnect/DApp";
 import QRCodeComponent from "@/components/QRCodeComponent";
 import {useAppContext} from "@/contexts/AppContext";
+import ButtonWrapper from "@/components/UI/ButtonWrapper";
+
+import IconLovely from "../../public/iconsax/lovely.svg";
 
 const DonateButton = () => {
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ const DonateButton = () => {
   const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
   const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
 
-  const handleDonateNow = async () => {
+  const   handleDonateNow = async () => {
     setLoading(true); // Set loading state to true
     try {
       setShowModal(true);
@@ -32,12 +35,10 @@ const DonateButton = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center p-4">
-        <button onClick={handleDonateNow} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 md:py-6 md:px-12 rounded-full flex items-center gradient-btn-bg">
-          <div className="w-8 h-8 flex items-center justify-center mr-2">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
-          </div>
-          <span className="text-md md:text-2xl uppercase">{t('donateComponent.buttonText')}</span>
-        </button>
+        <div className="flex flex-col justify-center items-center p-4">
+          <ButtonWrapper icon={<IconLovely className={`w-6 h-6`}/>} theme={'light'} onClick={handleDonateNow} text={t('donateComponent.buttonText')} extra={'uppercase h-[50px] w-[200px]'} />
+        </div>
+
         <p className="mt-4 text-center text-sm">
           {t('donateComponent.text', { var1: "~" + poolPrizeAmountInDollars + " $ in ETH" })}
         </p>

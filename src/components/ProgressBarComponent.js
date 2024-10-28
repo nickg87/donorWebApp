@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from "@/contexts/AppContext";
+import classes from "./ProgressBarComponent.module.scss";
 
 const ProgressCircle = ({ progress }) => {
   const { globalState } = useAppContext();
@@ -7,7 +8,6 @@ const ProgressCircle = ({ progress }) => {
 
   useEffect(() => {
     if (progressRef.current) {
-      // Using setProperty to handle --value correctly even with decimals
       progressRef.current.style.setProperty('--value', progress.toString());
     }
   }, [progress]);
@@ -19,9 +19,12 @@ const ProgressCircle = ({ progress }) => {
       aria-valuenow={progress}
       aria-valuemin="0"
       aria-valuemax="100"
-      style={{ '--value': progress }} // Ensure progress is a valid CSS value
+      className={[classes.progressbar, classes[globalState.theme]].join(' ')}
+      style={{ '--value': progress }} // Make sure this is a valid CSS value
     >
-      <span className={`progress-text ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>{progress}%</span>
+      <span className={`${classes.progressText} ${classes[globalState.theme]}`}>
+        {progress}%
+      </span>
     </div>
   );
 };
@@ -64,7 +67,7 @@ const ProgressBarComponent = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <div className="embossed-circle">
+      <div className={[classes.embossedCircle, classes[globalState.theme]].join(' ')}>
         <ProgressCircle progress={Math.round(progress)} />
       </div>
     </div>

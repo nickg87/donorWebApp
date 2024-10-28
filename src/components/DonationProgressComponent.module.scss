@@ -1,0 +1,10 @@
+@import '../styles/variables.scss'; // Import your SCSS variables here
+
+.currentPrice {
+  p {
+    padding: 0.25rem 1rem;
+    color: $primary-color;
+    border:1px solid $primary-color;
+    border-radius: 18px;
+  }
+}

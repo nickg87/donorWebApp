@@ -1,13 +1,38 @@
 import React from 'react';
+import classes from './ButtonWrapper.module.scss';
 
-const ButtonWrapper = ({ children, icon }) => {
+const ButtonWrapper = ({ children, icon, text, theme, onClick, extra }) => {
   return (
-    <div className="relative inline-block">
-      <button className="flex items-center justify-center h-[50px] px-6 rounded-full text-white buttonStyle2 border border-transparent transition-all duration-300 hover:bg-opacity-90">
-        {icon && <span className="mr-2">{icon}</span>} {/* Icon optional */}
-        {children}
+      <button onClick={onClick}
+              className={`
+                relative
+                flex 
+                rounded-full 
+                items-center 
+                justify-center 
+                overflow-hidden
+                ${classes.buttonWrapperStyle} 
+                ${classes[theme]} 
+                ${extra}
+                `}>
+        <div className={`                
+                flex 
+                items-center 
+                justify-center 
+                
+                gap-2 
+                rounded-full 
+                text-white 
+                absolute 
+                inset-0 
+                transition-all 
+                duration-300 
+                hover:bg-opacity-90 ${classes.buttonContentWrapper} ${classes[theme]} `}>
+          {icon && icon}
+          {text && text}
+          {children}
+        </div>
       </button>
-    </div>
   );
 };
 

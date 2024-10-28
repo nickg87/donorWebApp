@@ -106,9 +106,9 @@ const Layout = ({ children }) => {
         </Head>
         <div className="flex flex-col min-h-screen">
           <Header/>
-          <main className={["flex-1", "flex-col", "items-center", "p-4", "md:p-8", "lg:p-16", "xl:p-24"].join(' ')}>
+          <main className={["flex-1", "flex-col", "items-center", "p-4"].join(' ')}>
             <div
-              className="z-10 p-4 md:p-20 rounded-lg shadow-lg max-w-screen-xl mx-auto">
+              className="z-10 p-4 md:p-8 rounded-lg max-w-screen-xl mx-auto">
               {children}
             </div>
           </main>

@@ -1,8 +1,9 @@
 import React from 'react';
+import classes from './ThemeSwitcher.module.scss';
 import Image from 'next/image';
 import {useAppContext} from "@/contexts/AppContext";
-import Sun from "../../public/iconsax/sun-1.svg";
-import Moon from "../../public/iconsax/moon.svg";
+import Sun from "../../../public/iconsax/sun-1.svg";
+import Moon from "../../../public/iconsax/moon.svg";
 
 const ThemeSwitcher = () => {
   const { globalState, updateCurrentTheme } = useAppContext();
@@ -13,9 +14,9 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <button onClick={toggleTheme} className={`theme-switcher ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`} title={`Switch to ${globalState.theme === 'dark' ? 'Light' : 'Dark'} theme`}>
-      <div className={`switch-toggle ${globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>
-        <div className={`icon-wrapper ${globalState?.theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>
+    <button onClick={toggleTheme} className={`${classes.themeSwitcher} ${classes[globalState.theme]}`} title={`Switch to ${globalState.theme === 'dark' ? 'Light' : 'Dark'} theme`}>
+      <div className={`${classes.switchToggle} ${classes[globalState.theme]} `}>
+        <div className={`${classes.iconWrapper} ${classes[globalState.theme]}`}>
           {globalState.theme === 'light' ? (
             <Sun className={`w-6 h-6 text-white`} /> // Apply color for light theme
           ) : (

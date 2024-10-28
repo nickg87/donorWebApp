@@ -7,7 +7,7 @@ import AuthModal from "@/components/AuthModal";
 import { useAppContext } from "@/contexts/AppContext";
 import { useTranslation } from 'next-i18next'; // Fixed import
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import ThemeSwitcher from "@/components/UI/ThemeSwitcher";
 import {fetchCurrentPool} from "@/utils/helpers";
 import ProfileCircle from '../../public/iconsax/profile-circle.svg';
 import axios from "axios";
@@ -70,14 +70,14 @@ const Header = () => {
   };
 
   return (
-    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9] transition-all duration-300 ${isScrolled ? 'backdrop-blur-md bg-white/10 shadow-lg' : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-900' : 'text-black shadow-gray-200'}`}>
+    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9]  ${isScrolled ? 'backdrop-blur-md ' + ( globalState?.theme === 'dark' ? 'bg-black/10 shadow-lg' : 'bg-white/10 shadow-lg' )  : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-900' : 'text-black shadow-gray-200'}`}>
       <div className="container mx-auto max-w-7xl flex justify-between items-center p-4">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
             {globalState.theme === 'light' ? (
               <LogoBlack className="w-[160px] h-[30px] md:w-[200px] md:h-[40px] text-white" />
             ) : (
-              <LogoWhite className={`w-6 h-6 text-white`} /> // Apply color for dark theme
+              <LogoWhite  className="w-[160px] h-[30px] md:w-[200px] md:h-[40px] text-white"  />
             )}
           </div>
         </Link>
@@ -111,7 +111,7 @@ const Header = () => {
             </button>
           )}
           <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-inherit hover:text-gray-300">
-            <ButtonWrapper>
+            <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[136px]'}>
               {t('contact')}
             </ButtonWrapper>
           </Link>
