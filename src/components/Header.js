@@ -12,9 +12,11 @@ import {fetchCurrentPool} from "@/utils/helpers";
 import ProfileCircle from '../../public/iconsax/profile-circle.svg';
 import axios from "axios";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
+import classes from "./Header.module.scss";
 
 import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
 import LogoBlack from "../../public/logos/donorLogoBlackNew.svg";
+import MobileDetect from "mobile-detect";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -24,6 +26,12 @@ const Header = () => {
   const [session, setSession] = useState(globalState.user || null);
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
   const [isScrolled, setIsScrolled] = useState(false);
+  const md = new MobileDetect(window.navigator.userAgent);
+  const isiPhone = md.is('iPhone');
+  console.log( isiPhone );
+
+
+
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -70,7 +78,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9]  ${isScrolled ? 'backdrop-blur-md ' + ( globalState?.theme === 'dark' ? 'bg-black/10 shadow-lg' : 'bg-white/10 shadow-lg' )  : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-950' : 'text-black shadow-gray-200'}`}>
+    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9] ${isScrolled ? (isiPhone ? classes.iOsMobileFix : '') : ''} ${classes[globalState?.theme]} ${isScrolled ? 'backdrop-blur-md ' + ( globalState?.theme === 'dark' ? 'bg-black/10 shadow-lg' : 'bg-white/10 shadow-lg' )  : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-950' : 'text-black shadow-gray-200'}`}>
       <div className="container mx-auto max-w-7xl flex justify-between items-center p-4">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">

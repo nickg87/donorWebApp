@@ -1,0 +1,12 @@
+
+.iOsMobileFix {
+  will-change: backdrop-filter;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  &.dark {
+    background-color: rgba(112, 16, 214, 0.5);
+  }
+  &.light {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
