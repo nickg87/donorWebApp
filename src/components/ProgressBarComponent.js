@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAppContext } from "@/contexts/AppContext";
 import classes from "./ProgressBarComponent.module.scss";
 
+
+//https://codepen.io/alemarzano/pen/bGxPKxe
 const ProgressCircle = ({ progress }) => {
   const { globalState } = useAppContext();
   const progressRef = React.useRef(null);

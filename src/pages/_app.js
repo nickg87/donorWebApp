@@ -1,5 +1,5 @@
 // src/pages/_app.js
-import '../styles/globals.css'; // Import global styles
+import '../styles/globals.scss'; // Import global styles
 import { AppProvider } from '@/contexts/AppContext'; // Adjust path as needed
 import Web3ModalProvider from '@/utils/web3context'; // Adjust path as needed
 import { appWithTranslation } from 'next-i18next';

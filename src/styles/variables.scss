@@ -13,6 +13,29 @@ $buttonGradientColorStyleLight: #FFFFA4;
 $buttonGradientStyleLight: linear-gradient(to bottom, $gradient1-secondary-color, $secondary-color);
 $buttonGradientStyleDark: linear-gradient(to bottom, $primary-color, $gradient2-secondary-color);
 
+//ELLIPSES GRADIENTS EFFECTS
+$ellipseGradientLight: radial-gradient(
+circle,
+rgba(255, 192, 0, .8) 10%,  /* Yellow with 100% opacity at center */
+rgba(255, 255, 255, 0) 70% /* Transparent white at 87% */
+);
+$ellipseGradientDark:  radial-gradient(
+                circle,
+                rgba(255, 192, 0, 1) 0%,    /* Yellow with 100% opacity */
+                rgba(3, 10, 49, 0) 70%      /* Transparent dark blue (#030A31) at 87% */
+);
+$leftEllipseGradientLight: radial-gradient(
+circle,
+rgba(200, 92, 255, 0.5) 50%, /* Purple with 56% opacity at center */
+rgba(255, 255, 255, 0) 70%   /* Transparent white at 100% */
+);
+
+$leftEllipseGradientDark: radial-gradient(
+ellipse at center,
+rgba(151, 102, 255, 0.56) 0%, /* Purple with 56% opacity at center */
+rgba(3, 10, 49, 0) 70%           /* Transparent dark blue (#030A31) at 100% */
+);
+
 //GRID EFFECT
 $gridColorLight: rgba(225, 231, 246, 0.5); /* Color with some opacity */
 $gridColorDark: rgba(17, 26, 81, 0.95); /* Color with some opacity */
@@ -29,5 +52,15 @@ $progressCircleBorderColorDark: rgba(19, 29, 84, 0.8);
 //PROGRESS COMPONENT
 $progressCircleShadow: 0px 13px 20px 0px rgba(188, 201, 219, 0.18);
 $progressCircleShadowDark: 0px 13px 20px 0px rgba(0, 0, 0, 0.18);
+$progressMainColor: #F78501;
+$progressSecondColor: rgb(255, 247, 232);
+$progressMainColorDark: rgba(91, 61, 153, 0.95);
+$progressSecondColorDark: #10173F;
+
+//GENERAL
 $font-family: 'Inter', sans-serif;
+$generalTextColor: rgb(0,0,0);
+$darkThemeMainColor: #030A31;
+$lightThemeMainColor: #ffffff;
+$linkColor: #9766FF;
 

@@ -1,0 +1,65 @@
+@import '../../styles/variables.scss';
+
+.topRightEllipseGradient {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 917px;
+  height: 917px;
+  border-radius: 50%; /* To make sure it's a circle */
+  transform: translate(50%, -50%); /* Adjusts position to keep only a quarter visible */
+  z-index: 1; /* Send it behind other content */
+  opacity: 0.20;
+  &.dark {
+    background: $ellipseGradientDark;
+  }
+  &.light{
+    background: $ellipseGradientLight;
+  }
+}
+
+
+.leftEllipseGradient {
+  position: fixed;
+  bottom: -10%;        /* Y position */
+  left: -50%;      /* X position */
+  width: 70%;     /* Width of the ellipse */
+  height: 90%;    /* Height of the ellipse */
+  border-radius: 50%; /* To make it a circle */
+  opacity: 0.15;
+  z-index: 1;       /* Ensure it's behind other elements */
+  &.dark {
+    opacity: 0.65;
+    background: $leftEllipseGradientDark;
+    background-size: 100% 100%;
+  }
+  &.light{
+    background: $leftEllipseGradientLight;
+    background-size: 100% 100%;
+    background-repeat: repeat-y;  /* Repeat vertically */
+  }
+}
+
+.centerEllipseGradient {
+  position: absolute;
+  top: 15%;           /* Y position */
+  left: 15%;          /* X position */
+  width: 70%;         /* Width of the ellipse */
+  height: 90%;        /* Height of the ellipse */
+  border-radius: 50%; /* To make it an ellipse */
+  opacity: 0.15;      /* Set opacity */
+  z-index: 1;      /* Ensure it's behind other elements */
+  &.dark {
+    opacity: 0.35;
+    background: $leftEllipseGradientDark;
+    background-size: 100% 100%;
+  }
+  &.light{
+    top: 25%;           /* Y position */
+    left: 35%;          /* X position */
+    width: 65%;
+    opacity: 0.15;
+    background: $ellipseGradientLight;
+    background-size: 100% 100%;
+  }
+}

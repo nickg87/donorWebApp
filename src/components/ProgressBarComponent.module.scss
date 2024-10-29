@@ -1,4 +1,4 @@
-@import '../styles/variables.scss'; // Import your SCSS variables here
+@import '../styles/variables.scss';
 
 .embossedCircle {
   width: 380px;
@@ -11,16 +11,16 @@
   background: $progressCircleBackgroundLight;
   border: 1px solid $progressCircleBorderColorLight;
   box-shadow: $progressCircleShadow;
+
+  // Dark theme styles
   &.dark {
+    background: $progressCircleBackgroundGradientDark;
     border: 1px solid $progressCircleBorderColorDark;
     box-shadow: $progressCircleShadowDark;
-    background: $progressCircleBackgroundGradientDark;
   }
 
-  .progressbar {  // Local class for the progress bar
+  .progressbar {
     --percentage: var(--value);
-    --primary:  var(--progressMainColor);
-    --secondary: var(--progressSecondColor);
     --size: 280px;
     --thickness: 38%;
     animation: progress 2s 0.5s forwards;
@@ -31,11 +31,8 @@
     overflow: hidden;
     display: grid;
     place-items: center;
-    &.dark {
-      --primary:  var(--progressMainColorDark);
-      --secondary: var(--progressSecondColorDark);
-    }
 
+    // Light theme background
     &::before {
       content: "";
       position: absolute;
@@ -45,15 +42,20 @@
       height: 100%;
       background: conic-gradient(
                       from 0deg,
-                      var(--primary) calc(var(--percentage) * 1%),
-                      $secondary-color calc(var(--percentage) * 1%),
-                      var(--secondary) calc(var(--percentage) * 1%),
-                      var(--secondary) 0
+                      $progressMainColor calc(var(--percentage) * 1%),
+                      $progressSecondColor calc(var(--percentage) * 1%)
       );
       mask: radial-gradient(white var(--thickness), transparent 0);
-      mask-mode: alpha;
       -webkit-mask: radial-gradient(#0000 var(--thickness), #000 0);
-      -webkit-mask-mode: alpha;
+    }
+
+    // Dark theme background
+    &.dark::before {
+      background: conic-gradient(
+                      from 0deg,
+                      $progressMainColorDark calc(var(--percentage) * 1%),
+                      $progressSecondColorDark calc(var(--percentage) * 1%)
+      );
     }
   }
 }
@@ -75,30 +77,30 @@
 
 /* Style for the progress text */
 .progressText {
-  font-size: 2.5rem; /* Adjust this to control text size */
-  color: black;
+  font-size: 2.5rem;
   font-weight: bold;
-  z-index: 1; /* Ensures the text is above the pseudo-elements */
+  z-index: 1;
   position: relative;
+
   &.light {
     color: #132C5E;
   }
+
   &.dark {
     color: #ffffff;
   }
 }
 
-/* Media Query for Smaller Screens */
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .embossedCircle {
     width: 260px;
     height: 260px;
   }
   .progressbar {
-    --size: 200px; /* Smaller size for mobile devices */
+    --size: 200px;
   }
-
   .progressText {
-    font-size: 1.5rem; /* Smaller font size for mobile devices */
+    font-size: 1.5rem;
   }
 }

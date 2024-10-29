@@ -8,6 +8,7 @@ import axios from "axios";
 import {themeCustomClass} from "@/utils/helpers";
 import LeftEllipseGradientDark from "../../public/images/leftEllipseGradientDark.svg";
 import GridEffectComponent from "@/components/UI/GridEffectComponent";
+import EllipseGradients from "@/components/UI/EllipseGradients";
 
 const Layout = ({ children }) => {
 
@@ -75,30 +76,18 @@ const Layout = ({ children }) => {
    }
   }, [globalState.user]);
 
-  // Change body background color based on theme
   useEffect(() => {
-    const rootElement = document.documentElement; // This is the <html> element
+    const rootElement = document.documentElement;
     if (globalState.theme === 'dark') {
-      document.body.style.backgroundColor = 'var(--darkThemeMainColor)';
-      rootElement.style.backgroundColor = 'var(--darkThemeMainColor)';
+      rootElement.setAttribute('data-theme', 'dark');
     } else {
-      document.body.style.backgroundColor = 'var(--lightThemeMainColor)';
-      rootElement.style.backgroundColor = 'var(--lightThemeMainColor)';
+      rootElement.removeAttribute('data-theme');
     }
   }, [globalState.theme]);
 
   return (
     <>
-      {/*<div className={['grid-pattern'].join(' ')}></div>*/}
       <GridEffectComponent/>
-      {/*<div className="absolute" style={{width: '100%', height: '100vh', overflow: 'hidden'}}>*/}
-      {/*  <div className="grid-container">*/}
-      {/*    {Array.from({length: 100}, (_, index) => ( // 7 rows * 10 items max = 70 items*/}
-      {/*      <div key={index}*/}
-      {/*           className={['grid-item', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}></div>*/}
-      {/*    ))}*/}
-      {/*  </div>*/}
-      {/*</div>*/}
       <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
           <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
@@ -117,14 +106,7 @@ const Layout = ({ children }) => {
           <Footer/>
         </div>
       </div>
-      <div className="absolute" style={{width: '100%', overflow: 'hidden'}}>
-        <div
-          className={['top-right-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
-        <div
-          className={['left-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
-      </div>
-      <div
-        className={['center-ellipse-gradient', globalState.theme === 'dark' ? 'darkTheme' : 'lightTheme'].join(' ')}/>
+      <EllipseGradients/>
     </>
   );
 };

@@ -40,7 +40,7 @@
   "donateComponent": {
     "buttonText": "Donate Now",
     "modalTitle":"How to participate?",
-    "note":"<small><sup>1</sup> Note: A small transaction fee will be applied by the service provider for processing the donation. Check <a href=\"/toc\"><i>Terms and condition</i></a> page</small>",
+    "note":"<small><sup>(1)</sup>A small transaction fee will be applied by the service provider for processing the donation. Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
     "successMessage":"Your donation has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"

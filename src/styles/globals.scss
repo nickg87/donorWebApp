@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import "variables.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lightThemeMainColor: #{$lightThemeMainColor};
+  --darkThemeMainColor: #{$darkThemeMainColor};
+  --swiper-theme-color: rgba(131,58,180,1) !important;
+}
+
+body {
+  font-family: $font-family;
+  color: $generalTextColor;
+  //background: transparent !important;
+  background-color: var(--lightThemeMainColor); // Default to light
+}
+[data-theme='dark'] body {
+  background-color: var(--darkThemeMainColor);
+}
+.mainContainer {
+  position: absolute;
+  z-index: 2 !important;
+  width: 100%;
+}
+.mainContainer.darkTheme {
+  background: $darkThemeMainColor;
+}
+.mainContainer.lightTheme {
+  background: $lightThemeMainColor;
+}
+
+button:focus {
+  outline: none !important; /* Remove the default focus outline */
+}
+
+a.link {
+  color: $linkColor;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.hidden-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* flag switcher */
+.flagWrapper img {
+  height: 24px;
+}
+
+/* Example CSS for the modal */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+  width: 300px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+.w3m-modal {
+  z-index: 100
+}
+
+.copyToClipboard {
+  border: 1px solid #5046e5;
+  background: #5046e5;
+  padding: 10px 1rem;
+  border-left: 0;
+}
