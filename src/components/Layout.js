@@ -76,11 +76,16 @@ const Layout = ({ children }) => {
    }
   }, [globalState.user]);
 
+  // Change body background color based on theme
   useEffect(() => {
-    const rootElement = document.documentElement;
+    const rootElement = document.documentElement; // This is the <html> element
     if (globalState.theme === 'dark') {
+      document.body.style.backgroundColor = 'var(--darkThemeMainColor)';
+      rootElement.style.backgroundColor = 'var(--darkThemeMainColor)';
       rootElement.setAttribute('data-theme', 'dark');
     } else {
+      document.body.style.backgroundColor = 'var(--lightThemeMainColor)';
+      rootElement.style.backgroundColor = 'var(--lightThemeMainColor)';
       rootElement.removeAttribute('data-theme');
     }
   }, [globalState.theme]);
