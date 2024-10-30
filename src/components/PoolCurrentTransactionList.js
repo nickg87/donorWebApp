@@ -79,8 +79,11 @@ const PoolCurrentTransactionList = ({ pool }) => {
               <span className="text-xs">From</span>
             </div>
             <div
-              className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left flex items-center`}>
-              {transaction.from}
+              className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left flex items-center`}
+              style={{width: 'calc(100% - 48px)'}}>
+              <span className="truncate max-w-[calc(100%_-_10px)]" title={transaction.from}>
+                        {transaction.from}
+                      </span>
               <a
                 href={`https://etherscan.io/tx/${transaction.hash}`}
                 target="_blank"
