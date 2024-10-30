@@ -7,11 +7,20 @@ import { fetchCurrentTransactionsForPoolId, timestampToDateString, getTimeAgo} f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import {useAppContext} from "@/contexts/AppContext";
+import SectionNameWrapper from "@/components/UI/SectionNameWrapper";
+import IconCard from "../../public/iconsax/card.svg";
+import classes from "./PoolCurrentTransactionList.module.scss";
+
+import IconClock from "../../public/iconsax/clock-1.svg";
+import IconWallet from "../../public/iconsax/wallet-2.svg";
+import IconBox from "../../public/iconsax/box-1.svg";
+import IconLink from "../../public/iconsax/link-2.svg";
+import IconDollar from "../../public/iconsax/dollar-circle.svg";
 
 
 const PoolCurrentTransactionList = ({ pool }) => {
   const { globalState, updateCurrentPoolBalance } = useAppContext();
-  console.log(globalState);
+  //console.log(globalState);
   const [transactions, setTransactions] = useState(null);
   const { t, i18n } = useTranslation();
 
@@ -36,58 +45,105 @@ const PoolCurrentTransactionList = ({ pool }) => {
     }
   }, [pool?.id, transactions]);
 
+  const TransactionItem = ({ transaction }) => {
+    return (
+      <div className={`${classes.transactionItemWrapper} ${classes[globalState?.theme]} border-b py-4 first:pt-0 last:pb-0 last:border-b-0`}>
+        <div className="flex flex-wrap lg:flex-nowrap lg:space-x-6">
+
+          {/* Block */}
+          <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
+            <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
+              <IconBox className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
+              <span className="text-xs">Block</span>
+            </div>
+            <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
+              {transaction.blockNumber}
+            </div>
+          </div>
+
+          {/* Age */}
+          <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
+            <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
+              <IconClock className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
+              <span className="text-xs">Age</span>
+            </div>
+            <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
+              {getTimeAgo(transaction.timeStamp)} ago
+            </div>
+          </div>
+
+          {/* From */}
+          <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-full lg:w-auto lg:flex-1`}>
+            <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
+              <IconWallet className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
+              <span className="text-xs">From</span>
+            </div>
+            <div
+              className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left flex items-center`}>
+              {transaction.from}
+              <a
+                href={`https://etherscan.io/tx/${transaction.hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link ml-2 hover:text-blue-500 transition"
+                title="Check it on etherscan!"
+              >
+                <IconLink className="w-6 h-6 ml-1"/>
+              </a>
+
+            </div>
+          </div>
+
+          {/* Amount */}
+          <div
+            className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
+            <div
+              className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
+              <IconDollar className={`${classes[globalState?.theme]} w-6 h-6 mb-1`}/>
+              <span className="text-xs">Amount</span>
+            </div>
+            <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
+              {formatEther(transaction.value)} ETH
+            </div>
+          </div>
+
+          {/* TxFee */}
+          <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
+            <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
+              <IconDollar className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
+              <span className="text-xs">TxFee</span>
+            </div>
+            <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
+              {Number(formatEther((BigInt(transaction.gasUsed) * BigInt(transaction.gasPrice)))).toFixed(8)} ETH
+            </div>
+          </div>
+
+        </div>
+      </div>
+    );
+  };
+
 
   return (
-    <div className="flex flex-col justify-center items-center py-4">
-      {transactions && (
-        <div className="mx-2 px-4 w-full bg-gray-800 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white mt-4 mb-4">Transactions for this pool</h2>
-          <ul className="divide-y divide-gray-700">
-            {transactions.map((transaction) => (
-              <li key={transaction.id} className="py-4">
-                <div className="flex flex-col">
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-400">Block:</span>
-                    <span className="text-sm text-white">{transaction.blockNumber}</span>
-                  </div>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-400">Age:</span>
-                    <span className="text-sm text-white">{getTimeAgo(transaction.timeStamp)} ago</span>
-                  </div>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-400">From:</span>
-                    <span className="text-sm text-white flex items-center justify-end" style={{ width: 'calc(100% - 48px)' }}>
-                      <span className="truncate max-w-[calc(100%_-_140px)]" title={transaction.from}>
-                        {transaction.from}
-                      </span>
-                      <a
-                        href={`https://etherscan.io/tx/${transaction.hash}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-2 text-blue-400 hover:text-blue-500 transition"
-                        title="Check it on etherscan!"
-                      >
-                        <FontAwesomeIcon icon={faLink} size="lg" style={{width: 20}}/>
-                      </a>
-                    </span>
-                  </div>
-                  <div className="flex justify-between mb-1">
-                  <span className="text-sm text-gray-400">Amount:</span>
-                    <span className="text-sm text-white">{formatEther(transaction.value)} ETH</span>
-                  </div>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-400">Txn Fee:</span>
-                    <span className="text-sm text-white">{Number(formatEther((BigInt(transaction.gasUsed) * BigInt(transaction.gasPrice)))).toFixed(8)} ETH</span>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+    <>
+      <div className="flex flex-col justify-center items-center py-4">
+        <SectionNameWrapper icon={<IconCard className={`w-6 h-6`}/>} theme={globalState?.theme} text={t('sections.transactions.name')} extra={'uppercase h-[50px] w-[200px]'}/>
+      </div>
+      <div className="flex flex-col justify-center items-center p-4">
+        <h2 className={`${classes.sectionTitle} ${classes[globalState?.theme]} mt-4 mb-4`}>{t('sections.transactions.title')}</h2>
+        <div className="sm:px-2 sm:py-0 md:p-8 w-full sticky top-0 z-[2]">
+          <div
+            className={`p-8 rounded-[30px] ${classes.tileWrapper} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
+            {transactions && (
+              transactions.map((item) => (
+                <TransactionItem key={item.id} transaction={item}/>
+              ))
+            )}
+          </div>
         </div>
-      )}
+      </div>
+    </>
 
-
-    </div>
   );
 };
 

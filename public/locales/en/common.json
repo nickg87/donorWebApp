@@ -4,7 +4,7 @@
   "welcomeCurrentPoolSubText": "Help us reach our goal! Every contribution makes a difference.",
   "firstTextTile": "<h3 class='text-lg font-bold'>Together, we can make a difference</h3>Your donation helps reach the ~$<strong>{{var1}}</strong> in ETH goal for the current donation pool.",
   "secondTextTile": "<h3 class='text-lg font-bold'>The Gauge shows current pool progress</h3>Each donation is a fixed amount of <strong>${{var1}}</strong> in <strong>ETH</strong>, and our goal is to reach <strong>${{var2}}</strong> in <strong>ETH</strong>",
-  "thirdTextTile": "<h3 class='text-lg font-bold'>Bring joy back into your life</h3>Once we hit this target, the entire(<sup> 1 </sup>) amount <strong>will be donated back to YOU</strong>, one lucky donor.",
+  "thirdTextTile": "<h3 class='text-lg font-bold'>Bring joy back into your life</h3>Once we hit this target, the entire(<sup>*</sup>) amount <strong>will be donated back to YOU</strong>, one lucky donor.",
   "welcomeCurrentPoolDescriptionText": "<p>The gauge below represents our current donation pool. Each donation is a fixed amount of <strong>{{var1}}</strong>, and our goal is to reach <strong>{{var2}}</strong>.</p><p>Once we hit this target, the entire(<sup> 1 </sup>) amount <strong>will be donated back to YOU</strong>, one lucky donor.</p><p>It's a simple way to do good and potentially bring joy back into your life!</p><hr><small><sup>1</sup> Note: A small transaction fee will be applied by the service provider for processing the donation. Check <a href=\"/toc\"><i>Terms and condition</i></a> page</small>",
   "signIn": "Sign In",
   "signOut": "Sign Out",
@@ -15,6 +15,17 @@
   "general": {
     "close": "Close",
     "copyright": "2024 My DonorHub App. All rights reserved."
+  },
+  "sections": {
+    "transactions": {
+      "name": "Transactions",
+      "title": "Transactions for this pool"
+    },
+    "pools": "Pools",
+    "blog": "Blog",
+    "articles": "Articles",
+    "toc": "TOC",
+    "faq": "FAQ"
   },
   "contactPage": {
     "title": "Contact Us",
@@ -40,7 +51,7 @@
   "donateComponent": {
     "buttonText": "Donate Now",
     "modalTitle":"How to participate?",
-    "note":"<small><sup>(1)</sup>A small transaction fee will be applied by the service provider for processing the donation. Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
+    "note":"<small><sup>(*)</sup>A small transaction fee will be applied by the service provider for processing the donation. <br/> Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
     "successMessage":"Your donation has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"

@@ -31,8 +31,7 @@ const IndexTiles = () => {
       <div className="flex flex-col justify-center items-center p-4">
         <div className="sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[2]">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-6"> {/* Use grid to create columns */}
-            <div
-              className={`p-8 rounded-[30px] ${classes.tileWrapper} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
+            <div className={`p-8 rounded-[30px] ${classes.tileWrapper} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
               <div className="relative -mt-14 mb-6"> {/* Add negative margin here */}
                 <ImgBlocks className={'w-16 h-16'}/>
               </div>

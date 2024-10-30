@@ -2,13 +2,19 @@
 
 import React from 'react';
 import SocialDonations from '../components/SocialDonations';
-import DonationComponent from './DonationComponent';
 import DevCurrentLists from "./DevCurrentLists";
+import PoolCurrentTransactionList from "@/components/PoolCurrentTransactionList";
+import {useAppContext} from "@/contexts/AppContext";
+import EtherScanComponent from "@/components/EtherScanComponent";
+import DonationProgressComponent from "@/components/DonationProgressComponent";
 
 const MainContent = ({ pools, transactions }) => {
+  const { globalState } = useAppContext();
   return (
       <>
-        <DonationComponent pools={pools} transactions={transactions} />
+        <DonationProgressComponent pools={pools} transactions={transactions}/>
+        <PoolCurrentTransactionList pool={globalState?.currentPool}/>
+        <EtherScanComponent address={globalState?.currentPool?.eth_address} />
         <SocialDonations />
       </>
   );

@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.sectionNameContentWrapper {
+  width: fit-content;
+  height: calc(100% - 4px);
+  transition: background-color 0.3s ease;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.dark {
+    border: 1px solid #444C75;
+    color: #8B91B5;
+  }
+  &.light {
+    border: 1px solid #E1E7F6;
+    color: #132C5E;
+  }
+}

@@ -68,8 +68,7 @@ const ETHPrice = () => {
   }
 
   return <div className={[classes.currentPrice, 'text-center', 'mt-0', 'sm:mt-4', 'm-4', 'justify-center', 'flex', globalState?.theme].join(' ')}>
-    <p
-    className={`flex flex-col sm:flex-row text-center align-middle justify-center items-center gap-1 ${globalState?.theme === 'dark' ? 'text-inherit' : 'text-inherit'}`}>
+    <p className={`flex flex-col sm:flex-row text-center align-middle justify-center items-center gap-1 ${globalState?.theme === 'dark' ? 'text-inherit' : 'text-inherit'}`}>
       <IconETH className={`h-[24px] w-[24px]`} />
       Current ETH Price:
     ${price} USD <span><b>({parseFloat(globalState?.currentEthPrice?.priceChangePercent) > 0 && '+'}{globalState?.currentEthPrice?.priceChangePercent}%)</b></span>

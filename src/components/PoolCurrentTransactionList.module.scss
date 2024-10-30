@@ -1,0 +1,49 @@
+
+.sectionTitle {
+ font-size: 32px;
+ line-height: 24px;
+ font-weight: bold;
+ &.light {
+  color: #132C5E;
+ }
+ &.dark {
+  color: #ffffff;
+ }
+}
+
+.transactionItemWrapper {
+ display: inherit;
+  &.dark {
+   border-color: #262F60;
+  }
+  &.light {
+   border-color: #E4E6F6;
+  }
+}
+
+.transactionDetailWrapper {
+ font: inherit;
+ margin-bottom: .5rem;
+ //&.dark {
+ // color: red;
+ //}
+ //&.light {
+ // color: #132C5E;
+ //}
+ .transactionDetailIconWrapper {
+  &.dark {
+   color: #8B91B5;
+  }
+  &.light {
+   color: #8B91B5;
+  }
+ }
+ .transactionDetailValueWrapper {
+  &.dark {
+   color: #ffffff;
+  }
+  &.light {
+   color: #132C5E;
+  }
+ }
+}
