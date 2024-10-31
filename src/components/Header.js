@@ -6,7 +6,7 @@ import SignInModal from "@/components/SignInModal";
 import AuthModal from "@/components/AuthModal";
 import { useAppContext } from "@/contexts/AppContext";
 import { useTranslation } from 'next-i18next'; // Fixed import
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LanguageSwitcher from "@/components/UI/LanguageSwitcher";
 import ThemeSwitcher from "@/components/UI/ThemeSwitcher";
 import {fetchCurrentPool} from "@/utils/helpers";
 import ProfileCircle from '../../public/iconsax/profile-circle.svg';

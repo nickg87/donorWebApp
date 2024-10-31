@@ -2,8 +2,10 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import {useAppContext} from "@/contexts/AppContext";
 
 const LanguageSwitcher = () => {
+  const { globalState, updateCurrentLanguage } = useAppContext();
   const { i18n } = useTranslation();
   const router = useRouter();
   const { locale } = router;
@@ -12,6 +14,7 @@ const LanguageSwitcher = () => {
     // Save the current scroll position
     const scrollPosition = window.scrollY;
     i18n.changeLanguage(lng);
+    updateCurrentLanguage(lng);
     router.push(router.pathname, router.asPath, { locale: lng }).then(() => {
       // Restore the scroll position after navigation
       window.scrollTo(0, scrollPosition);

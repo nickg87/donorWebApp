@@ -48,7 +48,7 @@
   "donateComponent": {
     "buttonText": "Donar ahora",
     "modalTitle":"¿Cómo participar?",
-    "note":"<small><hr><sup>*</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. <br/> Consulte la página de <a href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
+    "note":"<small><sup>(*)</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. <br/> Consulte la página de <a class='link' href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
     "howToParticipateText":"Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
     "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"

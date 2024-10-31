@@ -1,12 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import {useTranslation} from "next-i18next";
 
 // Create the context
 const AppContext = createContext();
 
 // Create the provider component
 export const AppProvider = ({ children }) => {
+  const { i18n } = useTranslation();
+  const router = useRouter();
   const [isThemeReady, setIsThemeReady] = useState(false);
   const defaultTheme = typeof window !== 'undefined' ? localStorage.getItem('donorSiteTheme') : null;
+  const defaultLanguage = typeof window !== 'undefined' ? localStorage.getItem('donorSiteLanguage') : null;
   const [globalState, setGlobalState] = useState({
     user: null,
     balance: null,
@@ -15,15 +20,29 @@ export const AppProvider = ({ children }) => {
     currentPoolBalance: null,
     currentEthPrice: null,
     theme: defaultTheme || 'light',
+    language: defaultLanguage || 'en',
   });
 
-  // Load the theme from local storage on initial mount
+  // Load the theme and language from local storage on initial mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('donorSiteTheme');
+      const storedLanguage = localStorage.getItem('donorSiteLanguage');
+      let updateObj = {};
       if (storedTheme) {
-        setGlobalState(prevState => ({ ...prevState, theme: storedTheme }));
+        updateObj.theme = storedTheme;
       }
+      if (storedLanguage) {
+        updateObj.language = storedLanguage;
+        i18n.changeLanguage(storedLanguage);
+        if (storedLanguage !== router.locale) {
+          router.replace(router.pathname, router.asPath, { locale: storedLanguage });
+        }
+      }
+      if (Object.keys(updateObj).length > 0) {
+        setGlobalState(prevState => ({ ...prevState, ...updateObj }));
+      }
+
       setIsThemeReady(true); // Indicate that the theme is ready
     }
   }, []);
@@ -57,6 +76,15 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('donorSiteTheme', theme);
   };
 
+  const updateCurrentLanguage = (language) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      language,
+    }));
+    localStorage.setItem('donorSiteLanguage', language);
+    i18n.changeLanguage(language);
+  };
+
 
   const updateCurrentEthPrice = (currentEthPrice) => {
     setGlobalState((prevState) => ({
@@ -80,7 +108,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme, updateCurrentPoolBalance }}>
+    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme, updateCurrentLanguage, updateCurrentPoolBalance }}>
       {isThemeReady ? children : null}
     </AppContext.Provider>
   );
