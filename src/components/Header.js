@@ -96,7 +96,7 @@ const Header = () => {
 
         <nav
           className={`absolute left-0 w-full bg-gray-800 p-4 md:p-0 md:bg-transparent md:static  md:flex md:items-center md:justify-end md:gap-4 md:ml-auto transition-all duration-300 ease-in-out ${
-            isOpen ? 'block ' : 'hidden'
+            isOpen ? 'block open' : 'hidden'
           }`}
           style={{zIndex: isOpen ? 40 : 'auto'}}
         >

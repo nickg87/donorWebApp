@@ -144,3 +144,10 @@ a.link {
   left: unset !important;
 }
 
+//nav
+
+nav {
+  top: 0 !important;
+  max-height: 300px; /* Adjust this value as needed */
+  overflow-y: auto; /* Allow scrolling if content exceeds max-height */
+}
