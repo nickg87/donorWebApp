@@ -9,6 +9,7 @@
   --lightThemeMainColor: #{$lightThemeMainColor};
   --darkThemeMainColor: #{$darkThemeMainColor};
   --swiper-theme-color: rgba(131,58,180,1) !important;
+  --swiper-navigation-size: 24px !important;
 }
 
 body {
@@ -124,7 +125,6 @@ a.link {
   bottom: 6px !important; /* Position buttons slightly above the bottom */
   top: auto !important; /* Reset top positioning */
   transform: translateY(0) !important; /* Reset any previous translation */
-  font-size: 24px !important;
 }
 
 [data-theme='dark'] .swiper-button-next {
