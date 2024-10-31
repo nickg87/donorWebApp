@@ -1,0 +1,66 @@
+
+.sectionTitle {
+  font-size: 32px;
+  line-height: 24px;
+  font-weight: bold;
+  &.light {
+    color: #132C5E;
+  }
+  &.dark {
+    color: #ffffff;
+  }
+}
+
+.swiperButtonNext,
+.swiperButtonPrev {
+  bottom: 10px; /* Move arrows to bottom */
+  top: auto; /* Reset the top position */
+  transform: translateY(0); /* Reset any previous translation */
+}
+
+.swiperButtonNext {
+  right: 50%; /* Center horizontally */
+  transform: translateX(150%); /* Adjust this value to position right arrow */
+}
+
+.swiperButtonPrev {
+  left: 50%; /* Center horizontally */
+  transform: translateX(-250%); /* Adjust this value to position left arrow */
+}
+
+
+.sliderDetailItemWrapper {
+  font: inherit;
+
+  .sliderDetailItemIconWrapper {
+    &.dark {
+      color: #8B91B5;
+      span {
+        color: #8B91B5;
+      }
+
+    }
+    &.light {
+      color: #8B91B5;
+      span {
+        color: #8B91B5;
+      }
+    }
+    svg {
+      &.dark {
+        color: #8B91B5;
+      }
+      &.light {
+        color: #8B91B5;
+      }
+    }
+  }
+  .sliderDetailTitleWrapper {
+    &.dark {
+      color: #ffffff;
+    }
+    &.light {
+      color: #132C5E;
+    }
+  }
+}

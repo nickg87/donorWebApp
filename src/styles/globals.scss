@@ -104,3 +104,43 @@ a.link {
   padding: 10px 1rem;
   border-left: 0;
 }
+
+//swiper
+.swiper-wrapper {
+  padding-bottom: 1rem !important;
+}
+.swiper-pagination {
+  width: fit-content !important;
+}
+.swiper-pagination-bullet {
+  background-color: var(--swiper-theme-color)!important;
+}
+[data-theme='dark'] .swiper-pagination-bullet {
+  background-color: $lightThemeMainColor !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute !important;
+  bottom: 6px !important; /* Position buttons slightly above the bottom */
+  top: auto !important; /* Reset top positioning */
+  transform: translateY(0) !important; /* Reset any previous translation */
+  font-size: 24px !important;
+}
+
+[data-theme='dark'] .swiper-button-next {
+  color: $lightThemeMainColor !important;
+}
+
+[data-theme='dark'] .swiper-button-prev {
+  color: $lightThemeMainColor !important;
+}
+
+.swiper-button-next {
+  right: 0 !important; /* Position the right button close to the right edge */
+}
+
+.swiper-button-prev {
+  right: 40px !important; /* Position the left button to the left of the right button */
+  left: unset !important;
+}
+

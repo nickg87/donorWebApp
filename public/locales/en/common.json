@@ -21,7 +21,11 @@
       "name": "Transactions",
       "title": "Transactions for this pool"
     },
-    "pools": "Pools",
+    "pools": {
+      "name": "Pools",
+      "title": "Donation Pools",
+      "text": "Explore our social donation pools and make a difference today! </br> Your contribution can create positive change in communities around the world."
+    },
     "blog": "Blog",
     "articles": "Articles",
     "toc": "TOC",
@@ -55,8 +59,5 @@
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
     "successMessage":"Your donation has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"
-  },
-  "socialDonations": {
-    "mainText": "Explore our social donation pools and make a difference today! Your contribution can create positive change in communities around the world."
   }
 }

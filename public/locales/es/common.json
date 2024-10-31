@@ -17,8 +17,15 @@
     "copyright": "2024 Mi aplicación DonorHub. Todos los derechos reservados."
   },
   "sections": {
-    "transactions": "Transacciones",
-    "pools": "Fondos",
+    "transactions": {
+      "name": "Transacciones",
+      "title": "Transacciones para esta pool"
+    },
+    "pools": {
+      "name": "Pools",
+      "title": "Pools de Donación",
+      "text": "¡Explora nuestros pools de donación social y marca la diferencia hoy! </br> Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
+    },
     "blog": "Blog",
     "articles": "Artículos",
     "toc": "Índice de Contenidos",
@@ -52,8 +59,5 @@
     "howToParticipateText":"Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
     "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
-  },
-  "socialDonations": {
-    "mainText": "¡Explora nuestros fondos de donaciones sociales y marca la diferencia hoy! Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
   }
 }
