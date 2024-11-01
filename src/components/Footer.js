@@ -11,23 +11,24 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#030A31] text-white py-8 p-4 shadow-md w-full">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
         <div>
-          <p className="text-sm">&copy; {t('general.copyright')}</p>
-          <div style={{display: 'flex'}}>
+          <p className="text-sm text-center">&copy; {t('general.copyright')}</p>
+          <div className="flex items-center justify-evenly md:flex-row md:justify-between md:items-center">
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('toc')}
             </Link>
             <Link href="/faq" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('faq')}
             </Link>
-            <Link href="/one-million-dollar-pool" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
+            <Link href="/one-million-dollar-pool"
+                  className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('one-million-dollar-pool')}
             </Link>
           </div>
 
         </div>
-        <div className="flex items-center">
+        <div className="flex my-2 items-center">
           <Link href="/" passHref>
             {/*<Image*/}
             {/*  src="/logos/donorHubLogo.svg"*/}
@@ -46,7 +47,7 @@ const Footer = () => {
             {/*  height={100}*/}
             {/*  priority*/}
             {/*/>*/}
-            <LogoWhite  className="w-[160px] h-[30px] md:w-[200px] md:h-[40px] text-white"  />
+            <LogoWhite className="w-[160px] h-[30px] md:w-[200px] md:h-[40px] text-white"/>
           </Link>
 
         </div>
