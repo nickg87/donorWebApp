@@ -20,6 +20,7 @@ body {
 }
 [data-theme='dark'] body {
   background-color: var(--darkThemeMainColor);
+  color: var(--lightThemeMainColor);
 }
 .mainContainer {
   position: absolute;

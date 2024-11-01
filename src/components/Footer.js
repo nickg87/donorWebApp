@@ -3,13 +3,14 @@ import React from 'react';
 import Image from 'next/image';
 import {useTranslation} from "next-i18next";
 import Link from "next/link";
+import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
 
 const Footer = () => {
 
   const { t, i18n } = useTranslation();
 
   return (
-    <footer className="bg-gray-900 text-white p-4 shadow-md w-full">
+    <footer className="bg-[#030A31] text-white py-8 p-4 shadow-md w-full">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div>
           <p className="text-sm">&copy; {t('general.copyright')}</p>
@@ -37,14 +38,15 @@ const Footer = () => {
             {/*  style={{aspectRatio: '120 / 70'}}*/}
             {/*  priority*/}
             {/*/>*/}
-            <Image
-              src="/logos/donorLogoWhite.svg"
-              alt="DonerHub Logo"
-              // className="dark:invert"
-              width={100}
-              height={100}
-              priority
-            />
+            {/*<Image*/}
+            {/*  src="/logos/donorLogoWhite.svg"*/}
+            {/*  alt="DonerHub Logo"*/}
+            {/*  // className="dark:invert"*/}
+            {/*  width={100}*/}
+            {/*  height={100}*/}
+            {/*  priority*/}
+            {/*/>*/}
+            <LogoWhite  className="w-[160px] h-[30px] md:w-[200px] md:h-[40px] text-white"  />
           </Link>
 
         </div>
