@@ -6,8 +6,10 @@ import DApp from "@/components/walletconnect/DApp";
 import QRCodeComponent from "@/components/QRCodeComponent";
 import {useAppContext} from "@/contexts/AppContext";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
+import ModalContainer from "@/components/UI/ModalContainer";
 
 import IconLovely from "../../public/iconsax/lovely.svg";
+import classes from "@/components/IndexTile.module.scss";
 
 const DonateButton = () => {
   const { t } = useTranslation();
@@ -45,55 +47,40 @@ const DonateButton = () => {
         }} />
       </div>
       {showModal && (
-        <div className="fixed z-10 inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg overflow-y-auto flex items-center justify-center">
-          <div className="bg-black sm:rounded-lg max-w sm:max-w-md w-full bg-opacity-75 sm:bg-opacity-100 h-full sm:h-auto sm:max-h-screen flex flex-col text-center shadow-md">
-            {/* Modal Header */}
-            <div className="flex flex-col bg-black sm:bg-transparent">
+        <>
+          <ModalContainer show={showModal} theme={globalState.theme}>
+            <>
               {/* First Row: Title and Close Button */}
-              <div className="relative text-white py-4 px-6 flex justify-between items-center">
+              <div className="relative py-4 px-6 flex justify-between items-center">
                 <p className="text-xl font-bold">{t('donateComponent.modalTitle')}</p>
-                <button className="absolute top-4 right-4 text-white hover:text-gray-400" onClick={() => setShowModal(false)}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                <button className="absolute top-4 right-4 text-white hover:text-gray-400"
+                        onClick={() => setShowModal(false)}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"></path>
                   </svg>
                 </button>
               </div>
+              {/* Modal Content (Scrollable if needed) */}
+              <div className="flex-1 overflow-y-auto px-4">
+                {/* Tab Content */}
+                {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
+                {activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}
+              </div>
 
-              {/* Second Row: Tabs */}
-              {/*<div className="flex">*/}
-              {/*  <button onClick={() => setActiveTab('wallet')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'wallet' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>*/}
-              {/*    <div className="w-4 h-4 flex items-center justify-center mr-2">*/}
-              {/*      <FontAwesomeIcon icon={faWallet}/>*/}
-              {/*    </div>*/}
-              {/*    <span className="text-md uppercase">Wallet Connect</span>*/}
-
-              {/*  </button>*/}
-              {/*  <button onClick={() => setActiveTab('qr')} className={`flex-1 flex items-center justify-center py-2 font-bold text-center rounded-t border-b-2 ${activeTab === 'qr' ? 'text-white border-white' : 'border-b-1 text-gray-400 border-gray-400'}`}>*/}
-              {/*    <div className="w-4 h-4 flex items-center justify-center mr-2">*/}
-              {/*      <FontAwesomeIcon icon={faQrcode}/>*/}
-              {/*    </div>*/}
-              {/*    <span className="text-md uppercase">Scan QR Code</span>*/}
+              {/* Modal Footer */}
+              {/*<div className="text-white py-4 px-6">*/}
+              {/*  <button onClick={() => setShowModal(false)} className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full">*/}
+              {/*    {t('general.close')}*/}
               {/*  </button>*/}
               {/*</div>*/}
+            </>
 
 
-            </div>
+          </ModalContainer>
+        </>
 
-            {/* Modal Content (Scrollable if needed) */}
-            <div className="flex-1 overflow-y-auto px-4">
-              {/* Tab Content */}
-              {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
-              {activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="text-white py-4 px-6">
-              <button onClick={() => setShowModal(false)} className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full">
-                {t('general.close')}
-              </button>
-            </div>
-          </div>
-        </div>
       )}
 
     </>

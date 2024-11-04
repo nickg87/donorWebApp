@@ -26,7 +26,7 @@ createWeb3Modal({
     // "--w3m-accent": "#feea35", // Color used for buttons, icons, labels, etc.
     // "--w3m-font-size-master": "10px",
     "--w3m-border-radius-master": "2px",
-    "--w3m-z-index": 1
+    "--w3m-z-index": 11
   }
 });
 
