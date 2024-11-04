@@ -71,7 +71,7 @@ $circle-dimension: 280px;
 }
 
 // Media Queries for further customization
-@media (max-width: 600px) {
+@media (max-width: 460px) {
   .embossedCircle {
     width: 100%;
     height: 100%;
@@ -90,9 +90,4 @@ $circle-dimension: 280px;
       border: 2px solid $progressCircleInnerBorderColorLight;
     }
   }
-
-  //.innerCircle {
-  //  width: calc(80% - 16px); // Adjust inner circle size for other elements if necessary
-  //  height: calc(80% - 16px); // Adjust inner circle size for other elements if necessary
-  //}
 }
