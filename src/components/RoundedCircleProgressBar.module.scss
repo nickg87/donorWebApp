@@ -1,0 +1,70 @@
+@import '../styles/variables.scss';
+$embossedCircleDimension: 380px;
+$border-circle: 38px;
+$circle-dimension: 280px;
+$border-circle: 38px;
+
+
+.embossedCircle {
+  width: $embossedCircleDimension;
+  height: $embossedCircleDimension;
+  border-radius: 50%;
+  margin: 3rem auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $progressCircleBackgroundLight;
+  border: 1px solid $progressCircleBorderColorLight;
+  box-shadow: $progressCircleShadow;
+
+  // Dark theme styles
+  &.dark {
+    background: $progressCircleBackgroundGradientDark;
+    border: 1px solid $progressCircleBorderColorDark;
+    box-shadow: $progressCircleShadowDark;
+  }
+}
+
+
+.progressCircle {
+  margin: 20px;
+  width: $circle-dimension;
+  height: $circle-dimension;
+  z-index: 2;
+  position: relative;
+  border-radius: 50%;
+  &.dark {
+    border: 1px solid $progressCircleInnerBorderColorDark;
+  }
+  &.light {
+    border: 1px solid $progressCircleInnerBorderColorLight;
+  }
+
+  svg path {
+    stroke-linecap: round;
+  }
+
+  &__label {
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+    line-height: 72px;
+
+  }
+}
+
+.innerCircle {
+  position: absolute;
+  width: calc($circle-dimension - 142px);
+  height: calc($circle-dimension - 130px);
+  border-radius: 50%;
+  border: 3px solid transparent;
+
+  &.dark {
+    border: 3px solid $progressCircleInnerBorderColorDark;
+  }
+
+  &.light {
+    border: 2px solid rgba(145, 145, 145, 0.25);
+  }
+}
