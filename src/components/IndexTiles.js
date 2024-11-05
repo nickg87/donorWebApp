@@ -37,7 +37,7 @@ const IndexTiles = () => {
               </div>
               <div dangerouslySetInnerHTML={{
                 __html: t('firstTextTile', {
-                  var1: poolEntryAmountInDollars
+                  var1: poolPrizeAmountInDollars
                 }),
               }}/>
             </div>
