@@ -49,8 +49,12 @@
     "text": "Escanea el código QR con tu aplicación monedero para donar {{var1}} ETH a la dirección de abajo"
   },
   "sendTransactionComponent": {
-    "text": "Estás conectado con: <strong style='word-break: break-all'>{{var1}}</strong>",
-    "balanceText": "Parece que tienes: <strong>{{var1}}</strong> {{var2}}"
+    "userWalletAddress": "Estás conectado con: <strong style='word-break: break-all'>{{var1}}</strong>",
+    "balanceText": "Parece que tienes: <strong>{{var1}}</strong> {{var2}}",
+    "connectButton": "Conectar Billetera",
+    "disconnectButton": "Desconectar Billetera",
+    "isTransactionPending": "Confirming...",
+    "sendTransaction": "Send"
   },
   "donateComponent": {
     "buttonText": "Donar ahora",

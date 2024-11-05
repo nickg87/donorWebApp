@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.inputWrapperStyle {
+  align-items: center;
+  transition: background-color 0.3s ease;
+  outline: none !important;
+  //padding: 0;
+  //margin: 0;
+  &.dark {
+    background: #030A31;
+    border: 1px solid #434B74;
+  }
+  &.light {
+    background: #ffffff;
+    border: 1px solid #E1E7F6;
+  }
+}
+
+.copyToClipboard {
+  border: none;
+  background: linear-gradient(to bottom, #9564FD, #5F41A0);
+  color:#ffffff;
+}
+
+.gradientOutline {
+  position: relative; /* Needed for positioning the pseudo-element */
+  padding: 0;
+  background-color: transparent;
+  z-index: 1;
+  margin-right: 1px;
+}
+
+.gradientOutline::before {
+  content: '';
+  position: absolute;
+  top: -1px; /* Adjust to control thickness */
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  z-index: -1;
+  border-radius: inherit; /* Matches the parent element's border-radius */
+  background: linear-gradient(to bottom, #BFA0FF, rgba(151, 102, 255, .5)); /* Your gradient colors */
+}
+

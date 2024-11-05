@@ -13,15 +13,10 @@ export default function DApp({currentPool}) {
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="flex flex-col justify-center items-center p-8">
-      {/*{isConnected &&*/}
-      {/*  <div className="flex items-center p-2 m-10">*/}
-      {/*    <w3m-button size="sm"/>*/}
-      {/*  </div>}*/}
+    <div className="flex flex-col justify-center items-center text-center gap-4">
       {isConnected && <SendTransaction currentPool={currentPool}  userWalletAddress={address} userBalance={{balance}}/>}
       {!isConnected && <>{t('donateComponent.howToParticipateText')}</>}
       <CustomButton/>
-
     </div>
   );
 }

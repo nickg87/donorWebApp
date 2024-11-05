@@ -1,0 +1,13 @@
+.userWalletAddress {
+  color: inherit;
+  :global(.grayed), .grayed {
+    color: #8B91B5;
+  }
+}
+
+.userBalanceText {
+  color: inherit;
+  :global(.grayed), .grayed {
+    color: #8B91B5;
+  }
+}

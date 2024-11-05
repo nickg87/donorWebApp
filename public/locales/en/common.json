@@ -49,8 +49,12 @@
     "text": "Scan QR Code with your wallet app to donate <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong style='word-break: break-all'>address below</strong>"
   },
   "sendTransactionComponent": {
-    "text": "You are connected with: <strong style='word-break: break-all'>{{var1}}</strong>",
-    "balanceText": "Looks like you have: <strong>{{var1}}</strong> {{var2}}"
+    "userWalletAddress": "<span class='grayed'>You are connected with:</span><br><strong style='word-break: break-all'>{{var1}}</strong>",
+    "balanceText": "<span class='grayed'>Looks like you have:</span><br><strong>{{var1}}</strong> {{var2}}",
+    "connectButton": "Connect Wallet",
+    "disconnectButton": "Disconnect Wallet",
+    "isTransactionPending": "Confirming...",
+    "sendTransaction": "Send"
   },
   "donateComponent": {
     "buttonText": "Donate Now",

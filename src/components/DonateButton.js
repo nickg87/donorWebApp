@@ -1,15 +1,13 @@
-import React, { useState,useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandHoldingDollar, faQrcode, faWallet } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import DApp from "@/components/walletconnect/DApp";
-import QRCodeComponent from "@/components/QRCodeComponent";
+//import QRCodeComponent from "@/components/QRCodeComponent";
 import {useAppContext} from "@/contexts/AppContext";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
 import ModalContainer from "@/components/UI/ModalContainer";
 
 import IconLovely from "../../public/iconsax/lovely.svg";
-import classes from "@/components/IndexTile.module.scss";
+import IconClose from "../../public/iconsax/close-circle.svg";
 
 const DonateButton = () => {
   const { t } = useTranslation();
@@ -47,40 +45,23 @@ const DonateButton = () => {
         }} />
       </div>
       {showModal && (
-        <>
           <ModalContainer show={showModal} theme={globalState.theme}>
-            <>
+            <div className={`flex flex-col gap-4`}>
               {/* First Row: Title and Close Button */}
-              <div className="relative py-4 px-6 flex justify-between items-center">
-                <p className="text-xl font-bold">{t('donateComponent.modalTitle')}</p>
-                <button className="absolute top-4 right-4 text-white hover:text-gray-400"
-                        onClick={() => setShowModal(false)}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                       xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
+              <div className="relative flex justify-between items-center gap-2">
+                <div className="w-full text-xl text-center font-bold">{t('donateComponent.modalTitle')}</div>
+                <button className="absolute top-0 right-0 text-inherit hover:text-gray-400" onClick={() => setShowModal(false)}>
+                  <IconClose className="w-6 h-6"/>
                 </button>
               </div>
               {/* Modal Content (Scrollable if needed) */}
-              <div className="flex-1 overflow-y-auto px-4">
+              <div className="flex-1 overflow-y-auto max-h-[70vh]">
                 {/* Tab Content */}
                 {activeTab === 'wallet' && <DApp currentPool={currentPool}/>}
-                {activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}
+                {/*{activeTab === 'qr' && <QRCodeComponent currentPool={currentPool} />}*/}
               </div>
-
-              {/* Modal Footer */}
-              {/*<div className="text-white py-4 px-6">*/}
-              {/*  <button onClick={() => setShowModal(false)} className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full">*/}
-              {/*    {t('general.close')}*/}
-              {/*  </button>*/}
-              {/*</div>*/}
-            </>
-
-
+            </div>
           </ModalContainer>
-        </>
-
       )}
 
     </>

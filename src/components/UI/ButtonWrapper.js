@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './ButtonWrapper.module.scss';
 
-const ButtonWrapper = ({ children, icon, text, theme, onClick, extra }) => {
+const ButtonWrapper = ({ children, icon, text, theme, onClick, disabled, extra }) => {
   return (
-      <button onClick={onClick}
+      <button onClick={onClick} disabled={disabled}
               className={`
                 relative
                 flex 
