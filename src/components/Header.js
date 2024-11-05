@@ -78,7 +78,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9] ${isScrolled ? ((isMobile || isiPhone) ? classes.isHeaderScrolled : '') : ''} ${classes[globalState?.theme]} ${isScrolled ? 'backdrop-blur-md ' + ( globalState?.theme === 'dark' ? 'bg-black/10 shadow-lg' : 'bg-white/10 shadow-lg' )  : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-950' : 'text-black shadow-gray-200'}`}>
+    <header className={`sm:px-2 sm:py-0 md:p-4 w-full sticky top-0 z-[9] ${isScrolled ? classes.isHeaderScrolled : ''} ${classes[globalState?.theme]} ${isScrolled ? 'backdrop-blur-md ' + ( globalState?.theme === 'dark' ? 'bg-black/10 shadow-lg' : 'bg-white/10 shadow-lg' )  : 'bg-transparent'} ${globalState?.theme === 'dark' ? 'text-white shadow-gray-950' : 'text-black shadow-gray-200'}`}>
       <div className="container mx-auto max-w-7xl flex justify-between items-center p-4">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
