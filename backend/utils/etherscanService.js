@@ -47,6 +47,20 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
           if (normalizedTransactionTo === normalizedAddress && transaction?.value > 0) {
             const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
 
+            //get poolId from transaction.input
+            const inputData = transaction?.input;
+            const iFace = new ethers.utils.Interface([
+              "function enterPool(uint256 poolId, uint256 ticketPrice)"
+            ]);
+            // Decode the input
+            const decodedData = iFace.parseTransaction({ data: inputData });
+            const poolId = decodedData.args.poolId.toString();
+            const ticketPrice = decodedData.args.ticketPrice.toString();
+            //console.log("Pool ID:", poolId);
+            console.log("Pool ID:", parseInt(poolId));
+            //console.log("Ticket Price:", ticketPrice);
+
+
             if (!existingTransaction) {
               await db('transactions').insert({
                 blockHash: transaction.blockHash,
@@ -60,7 +74,7 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
                 to: transaction.to,
                 txreceipt_status: parseInt(transaction.txreceipt_status),
                 value: transaction.value,
-                poolId: null, // Adjust as necessary
+                poolId: parseInt(poolId), // Adjust as necessary
               });
               newTransactionsCount++;
             }
