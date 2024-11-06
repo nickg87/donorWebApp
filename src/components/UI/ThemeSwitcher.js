@@ -14,7 +14,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <button onClick={toggleTheme} className={`${classes.themeSwitcher} ${classes[globalState.theme]}`} title={`Switch to ${globalState.theme === 'dark' ? 'Light' : 'Dark'} theme`}>
+    <button onClick={toggleTheme} className={`${classes.themeSwitcher} ${classes[globalState.theme]} themeSwitcher`} title={`Switch to ${globalState.theme === 'dark' ? 'Light' : 'Dark'} theme`}>
       <div className={`${classes.switchToggle} ${classes[globalState.theme]} `}>
         <div className={`${classes.iconWrapper} ${classes[globalState.theme]}`}>
           {globalState.theme === 'light' ? (

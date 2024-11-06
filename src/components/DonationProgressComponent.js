@@ -23,7 +23,7 @@ const DonationProgressComponent = () => {
 
   return (
     <>
-      <div className={`mx-auto p-4  ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>
+      <div className={`mx-auto py-4  ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <ETHPrice />
         <h1 className={`text-3xl font-semibold text-center mb-2 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>{t("welcomeCurrentPool", { var1: poolSize  })}</h1>
         <h2 className={`text-center mb-6 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}>

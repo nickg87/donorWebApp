@@ -88,12 +88,12 @@ export default function Contact() {
         <h1 className="text-2xl font-bold mb-6">{t('contactPage.title')}</h1>
         {statusMessage && (
           <div
-            className={`relative mb-4 p-4 rounded-md text-white ${
+            className={`relative mb-4 p-4 rounded-md ${
               statusType === 'success' ? 'bg-green-500' : 'bg-red-500'
             }`}
           >
             <button
-              className="absolute top-2 right-2 p-4 py-2 px-4 text-white"
+              className="absolute top-2 right-2 p-4 py-2 px-4"
               onClick={handleCloseMessage}
             >
               <FontAwesomeIcon style={{width:'18'}} icon={faTimes}/>
@@ -103,7 +103,7 @@ export default function Contact() {
         )}
         <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-white">
+            <label htmlFor="name" className="block text-sm font-medium">
               {t('contactPage.form.fields.name')}
             </label>
             <input
@@ -118,7 +118,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-white">
+            <label htmlFor="email" className="block text-sm font-medium">
               {t('contactPage.form.fields.email')}
             </label>
             <input
@@ -133,7 +133,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-white">
+            <label htmlFor="message" className="block text-sm font-medium">
               {t('contactPage.form.fields.message')}
             </label>
             <textarea

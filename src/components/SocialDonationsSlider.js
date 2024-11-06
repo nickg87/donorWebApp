@@ -14,7 +14,6 @@ import IconHearts from "../../public/iconsax/lovely-l.svg";
 import IconDollar from "../../public/iconsax/dollar-circle.svg";
 import classes from "@/components/SocialDonationsSlider.module.scss";
 import {useAppContext} from "@/contexts/AppContext";
-import IconBox from "../../public/iconsax/box-1.svg";
 
 
 const SocialDonationsSlider = () => {
@@ -48,7 +47,7 @@ const SocialDonationsSlider = () => {
 
   const SwiperComponent= () => {
     return (
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto p-4">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -72,12 +71,12 @@ const SocialDonationsSlider = () => {
             <SwiperSlide key={item.id}>
               <LazyLoad height={225} once>
                 <div
-                  className={`rounded-[30px] mb-10 ${classes[globalState?.theme]} border overflow-hidden backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
+                  className={`rounded-[30px] mb-10 mx-1 ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
                   <img
                     src={item.image}
                     alt={item.text}
                     title={item.text}
-                    className="w-full h-60 object-cover"
+                    className="w-full h-60 object-cover rounded-[30px] rounded-b-none"
                   />
                   <div
                     className={`${classes.sliderDetailItemWrapper} ${classes[globalState?.theme]} p-6 flex flex-col align-center items-start`}>
@@ -107,7 +106,7 @@ const SocialDonationsSlider = () => {
         <SectionNameWrapper icon={<IconHearts className={`w-6 h-6`}/>} theme={globalState?.theme}
                             text={t('sections.pools.name')} extra={'uppercase h-[50px] w-[200px]'}/>
       </div>
-      <div className="flex flex-col justify-center items-center p-4">
+      <div className="flex flex-col justify-center items-center p-y4">
         <h2
           className={`${classes.sectionTitle} ${classes[globalState?.theme]} mt-4 mb-4`}>{t('sections.pools.title')}</h2>
         <p className="text-center text-600 m-8 text-[#8B91B5]" dangerouslySetInnerHTML={{

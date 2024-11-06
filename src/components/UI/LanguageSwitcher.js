@@ -22,7 +22,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className={`flex gap-2 items-center align-center text-inherit`}>
+    <div className={`flex gap-2 items-center align-center text-inherit languageSwitcher`}>
       {locale === 'en' ? (
         <button onClick={() => changeLanguage('es')} className={'flagWrapper'}>
           <Image

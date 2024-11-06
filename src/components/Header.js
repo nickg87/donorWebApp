@@ -95,30 +95,30 @@ const Header = () => {
         </div>
 
         <nav
-          className={`absolute left-0 w-full bg-gray-800 p-4 md:p-0 md:bg-transparent md:static  md:flex md:items-center md:justify-end md:gap-4 md:ml-auto transition-all duration-300 ease-in-out ${
-            isOpen ? 'block open' : 'hidden'
+          className={`absolute left-0 w-full  ${classes.headerMenuNav} ${classes[globalState?.theme]} p-4 md:p-0 md:bg-transparent md:static  md:flex md:items-center md:justify-end md:gap-4 md:ml-auto transition-all duration-300 ease-in-out ${
+            isOpen ? ' open' : 'hidden'
           }`}
           style={{zIndex: isOpen ? 40 : 'auto'}}
         >
           <LanguageSwitcher/>
-          {session ? (
-            <div className="flex flex-col md:flex-row md:items-center">
-              <span className="text-white">{t('welcome')}, {session.name}</span>
-              <span className="text-inherit mx-2">|</span>
-              <button className="text-inherit hover:text-gray-300" onClick={signOut}>
-                {t('signOut')}
-              </button>
-            </div>
-          ) : (
-            <button className="flex gap-2 items-center text-center justify-center align-center text-inherit"
-                    onClick={() => setShowModal(true)}>
+          {/*{session ? (*/}
+          {/*  <div className="flex flex-col md:flex-row md:items-center">*/}
+          {/*    <span className="text-white">{t('welcome')}, {session.name}</span>*/}
+          {/*    <span className="text-inherit mx-2">|</span>*/}
+          {/*    <button className="text-inherit hover:text-gray-300" onClick={signOut}>*/}
+          {/*      {t('signOut')}*/}
+          {/*    </button>*/}
+          {/*  </div>*/}
+          {/*) : (*/}
+          {/*  <button className="flex gap-2 items-center text-center justify-center align-center text-inherit"*/}
+          {/*          onClick={() => setShowModal(true)}>*/}
 
-              <ProfileCircle className={`w-6 h-6 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}
-                             width={24} stroke={'red'} alt="Sign in" title="Sign in"/>
-              {t('signIn')}
-            </button>
-          )}
-          <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-inherit hover:text-gray-300">
+          {/*    <ProfileCircle className={`w-6 h-6 ${globalState?.theme === 'dark' ? 'text-white' : 'text-black'}`}*/}
+          {/*                   width={24} stroke={'red'} alt="Sign in" title="Sign in"/>*/}
+          {/*    {t('signIn')}*/}
+          {/*  </button>*/}
+          {/*)}*/}
+          <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-inherit hover:text-gray-300 contactLink">
             <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[136px]'}>
               {t('contact')}
             </ButtonWrapper>

@@ -11,3 +11,88 @@
     background-color: $headerBackgroundScrollLight;
   }
 }
+
+.headerMenuNav {
+  &:global(.open) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem !important;
+    &.dark {
+      background-color: $headerNavBackgroundScrollDark;
+    }
+    &.light {
+      background-color: $headerNavBackgroundScrollLight;
+    }
+  }
+
+  & :global(.contactLink),
+  & :global(.themeSwitcher),
+  & :global(.languageSwitcher) {
+    order: initial; // Default order when nav is not open
+  }
+
+  &:global(.open) {
+    display: flex;
+    flex-direction: column;
+
+    // Change the order of children when .open is applied
+    & :global(.contactLink) {
+      order: 1;
+    }
+    & :global(.themeSwitcher) {
+      order: 2;
+    }
+    & :global(.languageSwitcher) {
+      order: 3;
+    }
+  }
+
+  &:global(.open) {
+    // Set flex direction to column for stacking items by default
+    flex-direction: column;
+
+    // Group themeSwitcher and languageSwitcher on the same row
+    & :global(.themeSwitcher),
+    & :global(.languageSwitcher) {
+      //order: 2;
+      //width: 100%; // Make each item take up full width to allow alignment
+      display: flex;
+      align-items: center;
+    }
+
+    // Container for themeSwitcher and languageSwitcher
+    & :global(.themeSwitcher) {
+      justify-content: flex-start;
+    }
+
+    & :global(.languageSwitcher) {
+      margin-top: -66px;
+      justify-content: flex-end;
+      height: 50px;
+      width:90px;
+      text-align: center;
+      position: relative;
+      left: 75%;
+      border-radius: 30px;
+      padding-right: 16px;
+    }
+  }
+  &.dark {
+    &:global(.open) {
+      & :global(.languageSwitcher) {
+        background: #030A31;
+        border: 1px solid #413569;
+      }
+    }
+
+  }
+  &.light {
+    &:global(.open) {
+      & :global(.languageSwitcher) {
+        background: #ffffff;
+        border: 1px solid #E1E7F6;
+      }
+    }
+  }
+
+}
