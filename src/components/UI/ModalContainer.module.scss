@@ -2,6 +2,12 @@
   will-change: backdrop-filter;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  &.light {
+    background: rgba(5, 12, 51, 0.2);
+  }
+  &.dark {
+    background: rgba(5, 12, 51, 0.2);
+  }
 }
 
 .modalContentWrapper {
