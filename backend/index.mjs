@@ -26,6 +26,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+//
+// app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Middleware to log request details
 app.use((req, res, next) => {
@@ -62,6 +64,7 @@ const poolsRoutes = (await import('./routes/pools.js')).default;
 const transactionsRoutes = (await import('./routes/transactions.js')).default;
 const emailsRouter = (await import('./routes/emails.js')).default;
 const etherScanRouter = (await import('./routes/etherscan.js')).default;
+const fileRouter = (await import('./routes/files.js')).default;
 const authRouter = (await import('./routes/auths.js')).default;
 
 // Set up routes
@@ -70,6 +73,7 @@ app.use('/api/transactions', transactionsRoutes(knex));
 app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);
 app.use('/api/auth', authRouter(knex));
+app.use('/admin/upload', fileRouter);
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));

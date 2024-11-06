@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export default {
+module.exports = {
   up: function(knex) {
     return knex.schema.table('pools', function(table) {
       table.jsonb('title').alter(); // Change title column to jsonb

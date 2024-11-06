@@ -3,12 +3,20 @@ import {fileURLToPath} from 'url';
 import path from 'path';
 import AdminJS, {ComponentLoader} from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import {Database, Resource} from '@adminjs/sequelize';
-import {Sequelize} from 'sequelize';
-// Import model and initialize AdminJS with the models
+import { Database, Resource } from '@adminjs/sequelize';
+import { Sequelize } from 'sequelize';
+
+// Import models
 import poolModel from './models/pools.js';
 import transactionModel from './models/transactions.js';
 import articlesModel from './models/articles.js';
+import filesModel from './models/files.js';
+
+//Import resource definitions
+import {articleResourceOptions} from "./resources/articleResource.js";
+import {fileResourceOptions} from "./resources/fileResource.js";
+import {transactionResourceOptions} from "./resources/transactionResource.js";
+import {poolResourceOptions} from "./resources/poolResource.js";
 
 // Register AdminJS adapter
 AdminJS.registerAdapter({ Database, Resource });
@@ -24,6 +32,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const Pool = poolModel(sequelize, Sequelize.DataTypes);
 const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
 const Article = articlesModel(sequelize, Sequelize.DataTypes);
+const File = filesModel(sequelize, Sequelize.DataTypes);
 
 // Determine the directory of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -60,117 +69,10 @@ export async function setupAdminJS() {
   // Initialize AdminJS
   const adminJS = new AdminJS({
     resources: [
-      {
-        resource: Pool,
-        options: {
-          listProperties: ['title', 'id', 'transactionCount', 'updated_at', 'entry_amount', 'prize_amount', 'active', 'type', 'drawn_status', 'eth_address'],
-          properties: {
-            title: {
-              type: 'string',
-              components: {
-                edit: Components.PoolTitleEdit,
-                show: Components.PoolTitleShow,
-                list: Components.PoolTitleList,
-              },
-            },
-            description: {
-              type: 'richtext',
-              components: {
-                edit: Components.PoolDescriptionEdit,
-                show: Components.PoolDescriptionShow,
-                list: Components.PoolDescriptionList,
-              },
-            },
-            type: {
-              type: 'select',
-              availableValues: [
-                { value: 'normal', label: 'Normal' },
-                { value: 'social', label: 'Social' },
-                { value: 'million', label: 'Million' },
-              ],
-            },
-            drawn_data: {
-              type: 'text',
-              components: {
-                show: Components.DrawnDataShow,
-              },
-            },
-            transactionCount: {
-              isVisible: { list: true, show: true, edit: false },
-              type: 'number',
-              label: 'Transactions',
-              isDisabled: true,
-              components: {
-                list: Components.TransactionCountList,
-                show: Components.TransactionCountShow,
-              },
-            },
-            //'inactive', 'pending', 'in_progress', 'completed'
-            drawn_status: {
-              type: 'select',
-              availableValues: [
-                { value: 'inactive', label: 'Inactive' },
-                { value: 'pending', label: 'Pending' },
-                { value: 'in_progress', label: 'In progress' },
-                { value: 'completed', label: 'Completed' },
-              ],
-            }
-          },
-          navigation: { name: 'Resources' },
-        },
-      },
-      {
-        resource: Transaction,
-        options: {
-          listProperties: ['id', 'blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'gasUsed', 'hash', 'timeStamp', 'txreceipt_status', 'value', 'createdAt', 'poolId'],
-          filterProperties: ['id', 'from', 'to', 'poolId'],
-          sort: { direction: 'desc', sortBy: 'id' },
-          navigation: { name: 'Resources' },
-          properties: {
-            poolId: {
-              components: {
-                edit: Components.PoolSelectEdit,
-                show: Components.PoolSelectShow,
-                list: Components.PoolSelectList,
-              },
-              availableValues: pools.map(pool => ({
-                value: pool.id, // Pool ID
-                label: pool.title.en || pool.title.es || 'No Title Available', // Fallback label
-              })),
-            },
-          }
-        },
-      },
-      {
-        resource: Article,
-        options: {
-          listProperties: ['title', 'id', 'views', 'updated_at', 'short', 'active'],
-          properties: {
-            title: {
-              type: 'string',
-              components: {
-                //edit: Components.ArticleTitleEdit,
-                edit: Components.MultiLingualFieldEdit,
-                show: Components.ArticleTitleShow,
-                list: Components.ArticleTitleList,
-              },
-            },
-            short: {
-              type: 'string',
-              components: {
-                edit: Components.MultiLingualFieldEdit,
-              },
-            },
-            meta: {
-              type: 'string',
-              components: {
-                edit: Components.MultiLingualFieldEdit,
-              },
-            },
-          },
-          navigation: { name: 'Resources' },
-        },
-      },
+      poolResourceOptions(Pool),
+      transactionResourceOptions(Transaction, pools),
+      articleResourceOptions(Article),
+      fileResourceOptions(File),
     ],
     rootPath: '/admin',
     branding: {
@@ -190,6 +92,7 @@ export async function setupAdminJS() {
             pools: 'Pools',
             Resources: 'Resources',
             transactions: 'Transactions',
+            files: 'Files',
             active: {
               true: 'Yes',
               false: 'No'

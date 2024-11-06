@@ -70,6 +70,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## BACKEND EXPRESS
 
+AdminJs icon set:
+https://storybook.adminjs.co/?path=/docs/designsystem-atoms-icon--docs
+
+
 Create a migration
 ```shell
 npx knex migrate:make migration_name
