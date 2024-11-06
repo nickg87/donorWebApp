@@ -8,6 +8,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const generateEmailTemplate = require('../../utils/emailTemplateHelper');
 import i18n from "i18next";
 import Head from "next/head";
+import ButtonWrapper from "@/components/UI/ButtonWrapper";
 
 export default function Contact() {
   const { t, i18n } = useTranslation();
@@ -148,12 +149,9 @@ export default function Contact() {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-gray-700 text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
+            <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[156px]'}>
               {t('contactPage.form.fields.submit')}
-            </button>
+            </ButtonWrapper>
           </div>
         </form>
       </div>
