@@ -59,7 +59,7 @@ const EtherScanComponent = ({ address }) => {
   }, [address, etherscanApiKey]);
 
   return (
-    <div>
+    <div className={`hidden`}>
       <h2>This is EtherScanComponent.js</h2>
       <button onClick={fetchDataFromAPI} disabled={loading} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         {loading ? 'Fetching API DATA...' : 'Test Fetch Data from API'}
