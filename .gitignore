@@ -18,6 +18,8 @@
 # ingnore any stage(ing) fodlers
 /stage
 /staging
+/public/assets/*
+/backend/assets/*
 
 # misc
 .DS_Store
