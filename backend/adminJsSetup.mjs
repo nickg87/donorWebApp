@@ -17,7 +17,7 @@ import {articleResourceOptions} from "./resources/articleResource.js";
 import {fileResourceOptions} from "./resources/fileResource.js";
 import {transactionResourceOptions} from "./resources/transactionResource.js";
 import {poolResourceOptions} from "./resources/poolResource.js";
-import {deleteFileAction} from "./actions/deleteFileAction.js";
+import {deleteFileAction, bulkDeleteFileAction} from "./actions/deleteFileAction.js";
 
 // Register AdminJS adapter
 AdminJS.registerAdapter({ Database, Resource });
@@ -76,7 +76,7 @@ export async function setupAdminJS() {
       poolResourceOptions(Pool, Components),
       transactionResourceOptions(Transaction, Components, pools),
       articleResourceOptions(Article, Components),
-      fileResourceOptions(File, Components, deleteFileAction),
+      fileResourceOptions(File, Components, deleteFileAction, bulkDeleteFileAction()),
     ],
     rootPath: '/admin',
     branding: {

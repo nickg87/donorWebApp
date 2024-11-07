@@ -1,39 +1,62 @@
-import path from 'path';
-import fs from 'fs';
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
-export const deleteFileAction = {
-  name: 'deleteFile',
-  before: async (request) => {
-    const { record } = request;
-    const filePath = record.params.path;  // Assuming the path is stored in DB
+// Get the directory of the current file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-    const fileToDelete = path.join(__dirname, '..', 'public', filePath);  // Resolve the file path
 
-    if (fs.existsSync(fileToDelete)) {
-      try {
-        fs.unlinkSync(fileToDelete); // Delete file from disk
-        console.log('File deleted:', fileToDelete);
-      } catch (error) {
-        console.error('Error deleting file:', error);
-        // Optionally, you can add feedback to the user here
-      }
-    } else {
-      console.log('File does not exist:', fileToDelete);
+// Helper function to delete a single file
+const deleteSingleFile = (filePath) => {
+  const fileToDelete = path.join(__dirname, '..', '..', 'public', filePath);
+  console.log('File to delete:', fileToDelete);
+
+  if (fs.existsSync(fileToDelete)) {
+    try {
+      fs.unlinkSync(fileToDelete);  // Delete the file
+      console.log('CUSTOM ACTION File deleted:', fileToDelete);
+    } catch (error) {
+      console.error('CUSTOM ACTION Error deleting file:', error);
     }
+  } else {
+    console.log('CUSTOM ACTION File does not exist:', fileToDelete);
+  }
+};
 
+
+// The actual delete action function
+export const deleteFileAction = async (request, params) => {
+  const id = params.record.params.id;
+  const filePath = params.record.params.path;
+
+  if (!id || !filePath) {
+    console.log('Missing ID or path in record params');
     return request;
-  },
-  handler: async (request) => {
-    const { record } = request;
+  }
+  // Delete a single file
+  deleteSingleFile(filePath);
 
-    await record.delete();  // Delete the record from the database
+  return request;
+};
 
-    return {
-      record: null, // Indicate that the record has been deleted
-      notice: {
-        message: 'File and record deleted successfully!',
-        type: 'success',
-      },
-    };
-  },
+// The bulk delete action
+export const bulkDeleteFileAction = async (request, params) => {
+
+  console.log('request in bulkDeleteFileAction:');
+  console.log(request);
+  //const { records } = params;  // `records` contains all the records for bulk delete
+
+  // Loop through each record and delete the associated file
+  // for (const record of records) {
+  //   const filePath = record.params.path;
+  //   if (filePath) {
+  //     // Delete each file individually
+  //     deleteSingleFile(filePath);
+  //   } else {
+  //     console.log('No file path for record', record.params.id);
+  //   }
+  // }
+
+  return request;
 };
