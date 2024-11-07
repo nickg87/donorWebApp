@@ -6,12 +6,13 @@ const FileThumbnail = ({ record }) => {
   const fileExtension = filePath.split('.').pop().toLowerCase();
   const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
   //const isImage = false;
+  const imageUrl = `/public${filePath}`;
 
   return (
     <div style={{ textAlign: 'left' }}>
       {isImage ? (
         <img
-          src={filePath}
+          src={imageUrl}
           alt={record.params.filename}
           style={{ maxWidth: '150px', maxHeight: '150px', borderRadius: '8px' }}
         />

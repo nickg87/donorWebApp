@@ -164,7 +164,7 @@ const FileUploadEdit = ({ record, onChange, property, showNotification }) => {
             {uploadedFiles.map((file, index) => (
               <div key={index} style={{ width: '150px', textAlign: 'center' }}>
                 <img
-                  src={file.path}
+                  src={'/public/' + file.path}
                   alt={file.filename}
                   style={{ width: '100%', borderRadius: '8px' }}
                 />

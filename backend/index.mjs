@@ -87,6 +87,8 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'public' directory of the frontend
+app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 // Fallback for favicon
 app.get('/favicon.ico', (req, res) => {

@@ -1,17 +1,19 @@
 // src/components/FileThumbnail.jsx
 import React from 'react';
 
-const FileThumbnail = ({ record }) => {
+const FileShow = ({ record }) => {
   const filePath = record.params.path;  // Assuming the file path is stored in the 'path' property
   const fileExtension = filePath.split('.').pop().toLowerCase();
   const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
   //const isImage = false;
 
+  const imageUrl = `/public${filePath}`;
+
   return (
     <div style={{ textAlign: 'left' }}>
       {isImage ? (
         <img
-          src={filePath}
+          src={imageUrl}
           alt={record.params.filename}
           style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
         />
@@ -24,4 +26,4 @@ const FileThumbnail = ({ record }) => {
   );
 };
 
-export default FileThumbnail;
+export default FileShow;

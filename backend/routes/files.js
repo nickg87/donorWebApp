@@ -13,9 +13,12 @@ export default (db) => {
   const router = express.Router();
 
   // Ensure the uploads directory exists
-  const uploadDir = path.join(__dirname, '..', 'assets', 'uploads');  // Adjust the path to 'backend/assets/uploads'
+  // Path to the `public` folder in the Next.js frontend app
+  const uploadDir = path.join(__dirname, '..', '..', 'public', 'assets', 'uploads');
+
+// Ensure the uploads directory exists in the frontend's public folder
   if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
+    fs.mkdirSync(uploadDir, { recursive: true });
   }
 
   // Configure Multer storage
