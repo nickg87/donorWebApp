@@ -1,15 +1,15 @@
-import {ComponentLoader} from "adminjs";
+// import {ComponentLoader} from "adminjs";
+//
+// const componentLoader = new ComponentLoader();
+//
+// const Components = {
+//   ArticleTitleEdit: componentLoader.add('ArticleTitleEdit', '../components/MultiLingual/Article/TitleEdit'),
+//   ArticleTitleShow: componentLoader.add('ArticleTitleShow', '../components/MultiLingual/Article/TitleShow'),
+//   ArticleTitleList: componentLoader.add('ArticleTitleList', '../components/MultiLingual/Article/TitleList'),
+//   MultiLingualFieldEdit: componentLoader.add('MultiLingualFieldEdit', '../components/MultiLingual/Article/MultiLingualFieldEdit'),
+// }
 
-const componentLoader = new ComponentLoader();
-
-const Components = {
-  ArticleTitleEdit: componentLoader.add('ArticleTitleEdit', '../components/MultiLingual/Article/TitleEdit'),
-  ArticleTitleShow: componentLoader.add('ArticleTitleShow', '../components/MultiLingual/Article/TitleShow'),
-  ArticleTitleList: componentLoader.add('ArticleTitleList', '../components/MultiLingual/Article/TitleList'),
-  MultiLingualFieldEdit: componentLoader.add('MultiLingualFieldEdit', '../components/MultiLingual/Article/MultiLingualFieldEdit'),
-}
-
-export const articleResourceOptions = (Resource) => ({
+export const articleResourceOptions = (Resource, Components) => ({
   resource: Resource,
   options: {
     listProperties: ['title', 'id', 'views', 'updated_at', 'short', 'active'],

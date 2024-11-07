@@ -14,7 +14,7 @@ const Components = {
   DrawnDataShow: componentLoader.add('DrawnDataShow', '../components/DrawnDataShow'),
 }
 
-export const poolResourceOptions = (Resource) => ({
+export const poolResourceOptions = (Resource, Components) => ({
   resource: Resource,
   options: {
     listProperties: ['title', 'id', 'transactionCount', 'updated_at', 'entry_amount', 'prize_amount', 'active', 'type', 'drawn_status', 'eth_address'],

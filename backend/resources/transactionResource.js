@@ -1,16 +1,14 @@
-import {ComponentLoader} from "adminjs";
+// import {ComponentLoader} from "adminjs";
+//
+// const componentLoader = new ComponentLoader();
+//
+// const Components = {
+//   PoolSelectEdit: componentLoader.add('PoolSelectEdit', '../components/PoolSelectEdit'),
+//   PoolSelectShow: componentLoader.add('PoolSelectShow', '../components/PoolSelectShow'),
+//   PoolSelectList: componentLoader.add('PoolSelectList', '../components/PoolSelectList'),
+// }
 
-const componentLoader = new ComponentLoader();
-
-const Components = {
-  PoolSelectEdit: componentLoader.add('PoolSelectEdit', '../components/PoolSelectEdit'),
-  PoolSelectShow: componentLoader.add('PoolSelectShow', '../components/PoolSelectShow'),
-  PoolSelectList: componentLoader.add('PoolSelectList', '../components/PoolSelectList'),
-}
-
-export const transactionResourceOptions = (Resource, extra) => ({
-
-
+export const transactionResourceOptions = (Resource, Components, pools) => ({
   resource: Resource,
   options: {
     listProperties: ['id', 'blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'gasUsed', 'hash', 'timeStamp', 'txreceipt_status', 'value', 'createdAt', 'poolId'],
@@ -27,7 +25,7 @@ export const transactionResourceOptions = (Resource, extra) => ({
           show: Components.PoolSelectShow,
           list: Components.PoolSelectList,
         },
-        availableValues: extra.map(pool => ({
+        availableValues: pools.map(pool => ({
           value: pool.id, // Pool ID
           label: pool.title.en || pool.title.es || 'No Title Available', // Fallback label
         })),

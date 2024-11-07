@@ -64,15 +64,18 @@ export async function setupAdminJS() {
     TransactionCountList: componentLoader.add('TransactionCountList', './components/TransactionCountList'),
     TransactionCountShow: componentLoader.add('TransactionCountShow', './components/TransactionCountShow'),
     DrawnDataShow: componentLoader.add('DrawnDataShow', './components/DrawnDataShow'),
+    FileUploadEdit: componentLoader.add('FileUploadEdit', './components/FileUploadEdit'),
+    FileThumbnail: componentLoader.add('FileThumbnail', './components/FileThumbnail'),
+    FileShow: componentLoader.add('FileShow', './components/FileShow'),
   }
 
   // Initialize AdminJS
   const adminJS = new AdminJS({
     resources: [
-      poolResourceOptions(Pool),
-      transactionResourceOptions(Transaction, pools),
-      articleResourceOptions(Article),
-      fileResourceOptions(File),
+      poolResourceOptions(Pool, Components),
+      transactionResourceOptions(Transaction, Components, pools),
+      articleResourceOptions(Article, Components),
+      fileResourceOptions(File, Components),
     ],
     rootPath: '/admin',
     branding: {
@@ -92,6 +95,7 @@ export async function setupAdminJS() {
             pools: 'Pools',
             Resources: 'Resources',
             transactions: 'Transactions',
+            filename: 'Custom Thumbnail',
             files: 'Files',
             active: {
               true: 'Yes',
@@ -141,6 +145,7 @@ export async function setupAdminJS() {
             drawn_at: 'Drawn at',
             drawn_data: 'Drawn data',
             drawn_status: 'Drawn status',
+            uploadedAt: 'Uploaded at',
           },
         },
       },
