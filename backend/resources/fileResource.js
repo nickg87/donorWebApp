@@ -1,4 +1,3 @@
-import {bulkDeleteFileAction} from "../actions/deleteFileAction.js";
 
 export const fileResourceOptions = (Resource, Components, deleteFileAction, bulkDeleteFileAction) => ({
   resource: Resource,
@@ -31,7 +30,7 @@ export const fileResourceOptions = (Resource, Components, deleteFileAction, bulk
     },
     navigation: {
       name: 'Assets',
-      icon: 'File',
+      icon: 'HardDrive',
     },
     translations: {
       en: {
@@ -45,10 +44,7 @@ export const fileResourceOptions = (Resource, Components, deleteFileAction, bulk
         isVisible: true,
         before: deleteFileAction, // Use the imported deleteFileAction
       },
-      // bulkDelete: {
-      //   isVisible: true,
-      //   before: bulkDeleteFileAction, // Use the bulkDeleteFileAction for bulk delete
-      // }
+      bulkDelete: bulkDeleteFileAction
     }
   }
 });

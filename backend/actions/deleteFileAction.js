@@ -1,11 +1,11 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import AdminJS from "adminjs";
 
 // Get the directory of the current file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 
 // Helper function to delete a single file
 const deleteSingleFile = (filePath) => {
@@ -40,23 +40,49 @@ export const deleteFileAction = async (request, params) => {
   return request;
 };
 
-// The bulk delete action
-export const bulkDeleteFileAction = async (request, params) => {
+// Bulk delete action for AdminJS
+export const bulkDeleteFileAction = {
+  actionType: 'bulk',  // Ensures this is a bulk action
+  component: false,
+  handler: async (request, response, context) => {
+    const { records, currentAdmin, resource, h } = context;
+    // Check if any records were selected
+    if (!records || records.length === 0) {
+      throw new AdminJS.ValidationError({
+        message: 'No records selected for deletion.',
+      });
+    }
 
-  console.log('request in bulkDeleteFileAction:');
-  console.log(request);
-  //const { records } = params;  // `records` contains all the records for bulk delete
+    try {
+      const deletedRecords = await Promise.all(
+        records.map(async (record) => {
+          const { path: filePath } = record.params;
 
-  // Loop through each record and delete the associated file
-  // for (const record of records) {
-  //   const filePath = record.params.path;
-  //   if (filePath) {
-  //     // Delete each file individually
-  //     deleteSingleFile(filePath);
-  //   } else {
-  //     console.log('No file path for record', record.params.id);
-  //   }
-  // }
+          // Delete the file associated with the record
+          deleteSingleFile(filePath);
 
-  return request;
+          // // Delete the record from the database
+          await record.resource.delete(record.params.id);
+
+          // Return the record as RecordJSON (required by AdminJS)
+          return record.toJSON(currentAdmin);
+        })
+      );
+
+      return {
+        notice: {
+          message: `${records.length} records successfully deleted.`,
+          type: 'success',
+        },
+        records: deletedRecords,
+        //records: [],  // Optional but can be added for consistency
+        record: {},  // Adding a dummy record to satisfy redirection logic
+        redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }) + '?refresh=true',
+      };
+
+    } catch (error) {
+      console.error('Error deleting records:', error);
+    }
+  },
+  showInDrawer: false,
 };
