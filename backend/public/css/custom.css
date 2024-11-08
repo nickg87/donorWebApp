@@ -1,0 +1,9 @@
+[data-css="files-new-form"] [data-testid="button-save"] {
+    display: none !important;
+}
+[data-css="sidebar-logo"] {
+    place-content: start !important;
+    padding: 0.9rem 1rem !important;
+    background: #efefef;
+}
+

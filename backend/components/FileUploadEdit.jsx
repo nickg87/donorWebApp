@@ -83,49 +83,6 @@ const FileUploadEdit = ({ record, onChange, property, showNotification }) => {
       setIsUploading(false); // Re-enable the form after upload
     }
   };
-  // Handle file upload
-  const handleGetTest = async (event) => {
-    event.preventDefault(); // Prevent form submission until upload is complete
-    try {
-      const response = await fetch('/api/files', {
-        method: 'GET'
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-      } else {
-        console.error('Test GET Method  failed.');
-      }
-    } catch (error) {
-      console.error('Test GET Method  failed.');
-    }
-  };
-
-  // Handle file upload
-  const handlePostTest = async (event) => {
-    event.preventDefault(); // Prevent form submission until upload is complete
-
-    const formData = new FormData();
-    formData.append('testy', '1');
-    files.forEach((file) => formData.append('file', file));
-
-    try {
-      const response = await fetch('/api/files/test', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-      } else {
-        console.error('Test POST Method  failed.');
-      }
-    } catch (error) {
-      console.error('Test POST Method  failed.');
-    }
-  };
 
   // Handle "Go back to List" action
   const handleGoBack = () => {
@@ -140,43 +97,55 @@ const FileUploadEdit = ({ record, onChange, property, showNotification }) => {
   };
 
   return (
-    <div>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       {uploadedFiles.length === 0 ? (
-          <>
-            <input
-              type="file"
-              name="file"
-              multiple
-              disabled={isUploading}
-              onChange={handleFileChange}
-            />
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            <button onClick={handleUpload} disabled={files.length === 0}>
-              {isUploading ? 'Uploading...' : 'Upload'}
-            </button>
-            {/*<button onClick={handleGetTest} >*/}
-            {/*  Test GET*/}
-            {/*</button>*/}
-          </>) : (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '400px', margin: 'auto' }}>
+          <input
+            type="file"
+            name="file"
+            multiple
+            disabled={isUploading}
+            onChange={handleFileChange}
+            style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}
+          />
+          {error && <div style={{ color: 'red', fontSize: '0.9em' }}>{error}</div>}
+          <button
+            onClick={handleUpload}
+            disabled={files.length === 0 || isUploading}
+            style={{
+              padding: '10px 15px',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: isUploading ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {isUploading ? 'Uploading...' : 'Upload'}
+          </button>
+        </div>
+      ) : (
+        <div style={{ textAlign: 'center' }}>
           <h2>Images were uploaded and saved!</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center' }}>
             {uploadedFiles.map((file, index) => (
               <div key={index} style={{ width: '150px', textAlign: 'center' }}>
                 <img
                   src={'/public/' + file.path}
                   alt={file.filename}
-                  style={{ width: '100%', borderRadius: '8px' }}
+                  style={{ width: '100%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
                 />
-                <p>{file.filename}</p>
+                <p style={{ fontSize: '0.9em', wordWrap: 'break-word' }}>{file.filename}</p>
               </div>
             ))}
           </div>
-          <div style={{ marginTop: '20px' }}>
-            <button onClick={handleGoBack} style={{ marginRight: '10px' }}>
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '10px' }}>
+            <button onClick={handleGoBack} style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#f8f9fa', cursor: 'pointer' }}>
               Go back to List
             </button>
-            <button onClick={handleUploadOtherImages}>Upload other images</button>
+            <button onClick={handleUploadOtherImages} style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#007bff', color: 'white', cursor: 'pointer' }}>
+              Upload other images
+            </button>
           </div>
         </div>
       )}

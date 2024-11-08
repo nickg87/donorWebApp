@@ -82,8 +82,11 @@ export async function setupAdminJS() {
     branding: {
       companyName: process.env.APP_NAME,
       softwareBrothers: false,
-      logo: `${process.env.APP_URL}/logos/donorLogoBlack.svg`,
+      logo: `${process.env.APP_URL}/logos/donorLogoBlackNew.svg`,
       admin: { title: 'Resources' },
+    },
+    assets: {
+      styles: [ '/css/custom.css'],
     },
     locale: {
       language: 'en',
