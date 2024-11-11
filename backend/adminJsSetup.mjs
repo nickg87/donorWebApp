@@ -145,7 +145,7 @@ export async function setupAdminJS() {
             txreceipt_status: 'Txreceipt Status',
             value: 'Value',
             poolId: 'Pool Id',
-            transactionCount: 'Transaction Count',
+            transactionCount: 'Tx Count',
             drawn_at: 'Drawn at',
             drawn_data: 'Drawn data',
             drawn_status: 'Drawn status',

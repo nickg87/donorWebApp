@@ -105,7 +105,7 @@ export default function SendTransaction(props) {
   return (
     <div className="w-full mx-auto ">
       <h4 className="text-center mt-[-6px] mb-4 text-[#8B91B5]">Send Transaction</h4>
-      <form className="space-y-4" onSubmit={submit}>
+      <form className="space-y-4 flex flex-col gap-5" onSubmit={submit}>
         {currentPool?.eth_address &&
           <div className="text-left">
             <label htmlFor="address" className="block text-sm font-medium">Address</label>

@@ -4,6 +4,30 @@
 [data-css="sidebar-logo"] {
     place-content: start !important;
     padding: 0.9rem 1rem !important;
+    padding-left: 2rem !important;
     background: #efefef;
 }
 
+[data-css="pools-list-eth_address"], [data-css="transactions-list-blockHash"], [data-css="transactions-list-hash"], [data-css="transactions-list-poolId"], [data-css="transactions-list-from"] {
+    min-width:100px !important;
+    max-width:200px !important;
+    text-overflow: ellipsis;
+}
+
+.adminjs_Text  {
+    min-width:100px;
+    max-width:100%; /*/* Limits to 180px or the container's width */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Apply ellipsis style for smaller screens */
+@media (max-width: 768px) { /* Adjust this breakpoint as needed */
+    .adminjs_Text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%; /* You can set a specific width if needed */
+    }
+}

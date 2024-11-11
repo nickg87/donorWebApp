@@ -8,10 +8,10 @@ const TitleList = ({ record }) => {
 
   return (
     <Box mb="lg">
-        <Text id="title-en" style={{ color: '#000', fontWeight: 'normal' }}>
+        <Text id="title-en" className={'adminjs_Text'} style={{ color: '#000', fontWeight: 'normal' }}>
           EN:  {title['en'] || ''}
         </Text>
-      <Text id="title-en" style={{ color: '#000', fontWeight: 'normal' }}>
+      <Text id="title-es" className={'adminjs_Text'} style={{ color: '#000', fontWeight: 'normal' }}>
         ES: {title['es'] || ''}
       </Text>
     </Box>

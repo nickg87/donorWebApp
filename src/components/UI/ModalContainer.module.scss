@@ -3,6 +3,7 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   &.light {
+    //background: rgba(5, 12, 51, 0.2);
     background: rgba(5, 12, 51, 0.2);
   }
   &.dark {
@@ -13,9 +14,11 @@
 .modalContentWrapper {
   &.dark {
     background: rgba(17, 24, 62, 0.84);
+    border: 1px solid rgba(67, 75, 116, 0.5);
   }
   &.light {
     color: #132C5E;
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.71);
   }
 }
