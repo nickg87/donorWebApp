@@ -1,8 +1,25 @@
 // src/components/FileThumbnail.jsx
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 const FileThumbnail = ({ record }) => {
-  const filePath = record.params.path;  // Assuming the file path is stored in the 'path' property
+  const [filePath, setFilePath] = useState(record?.params?.path);
+  const [isLoading, setIsLoading] = useState(filePath === undefined);
+
+  useEffect(() => {
+    if (!filePath || isLoading) {
+      const timeoutId = setTimeout(() => {
+        setFilePath(record?.params?.path);  // Attempt to get the path again after timeout
+        setIsLoading(false);
+      }, 100); // Set timeout to 1 second (1000 ms) or adjust as needed
+
+      return () => clearTimeout(timeoutId); // Clean up on unmount
+    }
+  }, [filePath, record, isLoading]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   const fileExtension = filePath.split('.').pop().toLowerCase();
   const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
   //const isImage = false;

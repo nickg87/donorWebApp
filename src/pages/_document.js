@@ -30,7 +30,7 @@ class MyDocument extends Document {
             `,
             }}
           />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon.png"/>
+          <link rel="icon" type="image/ico" sizes="32x32" href="/favicons/favicon.ico"/>
           <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
         </Head>
         <body>

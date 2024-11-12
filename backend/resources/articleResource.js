@@ -47,9 +47,13 @@ export const articleResourceOptions = (Resource, Components, File) => ({
           return request;
         },
         after: async (response, request, context) => {
+          console.log('request.payload in after:');
+          console.log(request.payload);
           const { record } = context;
           if (record.isValid() && request.payload.files) {
-            const article = await record.resource.findOne(record.id);
+            const article = await Resource.findByPk(record.id(), {
+              include: [{ model: File, as: 'files' }]
+            });
             await article.setFiles(request.payload.files.map(file => file.file_id));
           }
           return response;
