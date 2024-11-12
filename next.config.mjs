@@ -13,7 +13,7 @@ export default {
         destination: '/million',
       },
       {
-        source: '/(.*)',
+        source: '/api/:path*',
         destination:  `${backendUrl}$1`,
       },
     ];

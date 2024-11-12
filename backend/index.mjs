@@ -59,6 +59,7 @@ sequelize.sync()
 
 // Dynamically import routes
 const poolsRoutes = (await import('./routes/pools.js')).default;
+const articlesRoutes = (await import('./routes/articles.js')).default;
 const transactionsRoutes = (await import('./routes/transactions.js')).default;
 const emailsRouter = (await import('./routes/emails.js')).default;
 const etherScanRouter = (await import('./routes/etherscan.js')).default;
@@ -68,6 +69,7 @@ const authRouter = (await import('./routes/auths.js')).default;
 
 // Set up routes
 app.use('/api/pools', poolsRoutes(knex));
+app.use('/api/articles', articlesRoutes(knex));
 app.use('/api/transactions', transactionsRoutes(knex));
 app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);

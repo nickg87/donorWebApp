@@ -1,3 +1,4 @@
+//src/pages/faq/index.js
 import React, { useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from "next/head";
