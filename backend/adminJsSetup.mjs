@@ -88,7 +88,9 @@ export async function setupAdminJS() {
       transactionResourceOptions(Transaction, Components, pools),
       articleResourceOptions(Article, Components, File),
       fileResourceOptions(File, Components, deleteFileAction, bulkDeleteFileAction),
-      { resource: FileAssignment, options: {} },
+      { resource: FileAssignment, options: {
+          navigation: false, // Hide from the navigation sidebar
+        } },
     ],
     rootPath: '/admin',
     branding: {
