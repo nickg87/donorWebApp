@@ -23,15 +23,9 @@ export default (sequelize, DataTypes) => {
     featured_image: {
       type: DataTypes.STRING,
     },
-    // author_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: true, // Nullable since you may not have authors yet
-    //   references: {
-    //     model: 'authors', // References the authors table when created
-    //     key: 'id',
-    //     onDelete: 'SET NULL',
-    //   },
-    // },
+    updated_at: {
+      type: DataTypes.DATE,
+    },
     views: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
@@ -42,13 +36,19 @@ export default (sequelize, DataTypes) => {
     underscored: true,
   });
 
-  // Define associations here
-  // Article.associate = (models) => {
-  //   Article.belongsTo(models.Author, { // Assuming you will have an Author model
-  //     foreignKey: 'author_id',
-  //     as: 'author',
-  //   });
-  // };
+  // Define association with File through FileAssignment
+  Article.associate = (models) => {
+    Article.belongsToMany(models.File, {
+      through: {
+        model: models.FileAssignment,
+        unique: false,
+        scope: { target_type: 'article' },
+      },
+      foreignKey: 'target_id',
+      otherKey: 'file_id',
+      as: 'files',
+    });
+  };
 
   return Article;
 };

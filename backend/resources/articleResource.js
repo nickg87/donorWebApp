@@ -1,15 +1,5 @@
-// import {ComponentLoader} from "adminjs";
-//
-// const componentLoader = new ComponentLoader();
-//
-// const Components = {
-//   ArticleTitleEdit: componentLoader.add('ArticleTitleEdit', '../components/MultiLingual/Article/TitleEdit'),
-//   ArticleTitleShow: componentLoader.add('ArticleTitleShow', '../components/MultiLingual/Article/TitleShow'),
-//   ArticleTitleList: componentLoader.add('ArticleTitleList', '../components/MultiLingual/Article/TitleList'),
-//   MultiLingualFieldEdit: componentLoader.add('MultiLingualFieldEdit', '../components/MultiLingual/Article/MultiLingualFieldEdit'),
-// }
 
-export const articleResourceOptions = (Resource, Components) => ({
+export const articleResourceOptions = (Resource, Components, File) => ({
   resource: Resource,
   options: {
     listProperties: ['title', 'id', 'views', 'updated_at', 'short', 'active'],
@@ -32,6 +22,62 @@ export const articleResourceOptions = (Resource, Components) => ({
         type: 'string',
         components: {
           edit: Components.MultiLingualFieldEdit,
+        },
+      },
+      files: {
+        type: 'mixed', // The 'files' field stores the IDs of selected files
+        isArray: true,
+        reference: 'files',
+        components: {
+          edit: Components.FileSelectGallery, // Use the gallery for file selection
+        },
+      },
+    },
+    actions: {
+      new: {
+        before: async (request) => {
+          const fileKeys = Object.keys(request.payload).filter(key => key.startsWith('files.'));
+          if (fileKeys.length > 0) {
+            const fileIds = fileKeys.map(key => request.payload[key]);
+            request.payload.files = fileIds.map(fileId => ({
+              file_id: fileId,
+              target_type: 'article',
+            }));
+          }
+          return request;
+        },
+        after: async (response, request, context) => {
+          const { record } = context;
+          if (record.isValid() && request.payload.files) {
+            const article = await record.resource.findOne(record.id);
+            await article.setFiles(request.payload.files.map(file => file.file_id));
+          }
+          return response;
+        },
+      },
+      edit: {
+        before: async (request) => {
+          const fileKeys = Object.keys(request.payload).filter(key => key.startsWith('files.'));
+          if (fileKeys.length > 0) {
+            const fileIds = fileKeys.map(key => request.payload[key]);
+            request.payload.files = fileIds.map(fileId => ({
+              file_id: fileId,
+              target_type: 'article',
+            }));
+          }
+          return request;
+        },
+        after: async (response, request, context) => {
+          console.log('request.payload in after:');
+          console.log(request.payload);
+          const { record } = context;
+          if (record.isValid() && request.payload.files) {
+            const article = await Resource.findByPk(record.id(), {
+              include: [{ model: File, as: 'files' }]
+            });
+            await article.setFiles(request.payload.files.map(file => file.file_id));
+          }
+          return response;
         },
       },
     },

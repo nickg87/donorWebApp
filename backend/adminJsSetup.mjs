@@ -11,6 +11,7 @@ import poolModel from './models/pools.js';
 import transactionModel from './models/transactions.js';
 import articlesModel from './models/articles.js';
 import filesModel from './models/files.js';
+import fileAssignmentsModel from './models/fileAssignments.js';
 
 //Import resource definitions
 import {articleResourceOptions} from "./resources/articleResource.js";
@@ -29,11 +30,20 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   dialect: 'postgres',
 });
 
+// sequelize.sync({ force: true }).then(() => {
+//   console.log("Database synchronized!");
+// });
+
 // Initialize models
 const Pool = poolModel(sequelize, Sequelize.DataTypes);
 const Transaction = transactionModel(sequelize, Sequelize.DataTypes);
 const Article = articlesModel(sequelize, Sequelize.DataTypes);
 const File = filesModel(sequelize, Sequelize.DataTypes);
+const FileAssignment = fileAssignmentsModel(sequelize, Sequelize.DataTypes);
+
+// Set up associations
+Article.associate({ File, FileAssignment });
+File.associate({ Article, FileAssignment });
 
 // Determine the directory of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -68,6 +78,7 @@ export async function setupAdminJS() {
     FileUploadEdit: componentLoader.add('FileUploadEdit', './components/FileUploadEdit'),
     FileThumbnail: componentLoader.add('FileThumbnail', './components/FileThumbnail'),
     FileShow: componentLoader.add('FileShow', './components/FileShow'),
+    FileSelectGallery: componentLoader.add('FileSelectGallery', './components/FileSelectGallery'),
   }
 
   // Initialize AdminJS
@@ -75,8 +86,9 @@ export async function setupAdminJS() {
     resources: [
       poolResourceOptions(Pool, Components),
       transactionResourceOptions(Transaction, Components, pools),
-      articleResourceOptions(Article, Components),
+      articleResourceOptions(Article, Components, File),
       fileResourceOptions(File, Components, deleteFileAction, bulkDeleteFileAction),
+      //{ resource: FileAssignment, options: {} },
     ],
     rootPath: '/admin',
     branding: {

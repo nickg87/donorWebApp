@@ -4,15 +4,15 @@ import { Button, Input, TextArea, Label, Box } from '@adminjs/design-system';
 import {capitalizeFirstLetter} from "../../../utils/miscellaneous.js";
 
 const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
-  console.log(record);
+  //console.log(record);
   const fieldName = property.path;
   const label = property.label || fieldName;
   const [currentLang, setCurrentLang] = useState('en');
 
   // Extract the initial value from the nested params property
   let initialFieldValue = ((record.params && record.params[fieldName + '.' + currentLang]) || record[fieldName]) || {};
-  console.log('initialFieldValue for ' + fieldName + ' fieldName: ' );
-  console.log(initialFieldValue);
+  // console.log('initialFieldValue for ' + fieldName + ' fieldName: ' );
+  // console.log(initialFieldValue);
 
   const [fieldValue, setFieldValue] = useState(initialFieldValue);
 

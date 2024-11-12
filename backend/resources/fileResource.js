@@ -27,6 +27,10 @@ export const fileResourceOptions = (Resource, Components, deleteFileAction, bulk
       uploadedAt: {
         isVisible: { list: true, show: false, edit: false }
       },
+      select: {
+        isAccessible: true,
+        component: Components.FileSelectGallery,
+      },
     },
     navigation: {
       name: 'Assets',
