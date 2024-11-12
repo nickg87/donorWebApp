@@ -10,13 +10,51 @@ const FileSelectGallery = ({ onChange, record }) => {
     fetchFiles()
       .then(fetchedFiles => setFiles(fetchedFiles))
       .catch(error => console.error('Error fetching files:', error));
-  }, []);
+
+    // Fetch associated files if editing
+    if (record.id) {
+      fetchAssociatedFiles(record.id)
+        .then(associatedFiles => {
+          const selectedFileIds = new Set(associatedFiles.map(file => file.id));
+          setSelectedFiles(selectedFileIds);
+          onChange('files', Array.from(selectedFileIds)); // Ensure the parent record is updated
+        })
+        .catch(error => console.error('Error fetching associated files:', error));
+    }
+  }, [record.id]);
 
   const fetchFiles = async () => {
     const api = new ApiClient();
     const response = await api.resourceAction({ resourceId: 'files', actionName: 'list' });
     console.log(response.data.records);
     return response.data.records;
+  };
+
+  const fetchAssociatedFiles = async (articleId) => {
+    const api = new ApiClient();
+    const response = await api.resourceAction({
+      resourceId: 'file_assignments',
+      actionName: 'list',
+      params: {
+        filters: { target_id: articleId, target_type: 'article' },
+      },
+    });
+
+    const fileAssignments = response.data.records;
+    const fileIds = fileAssignments.map(assignment => assignment.params.file_id);
+
+    if (fileIds.length > 0) {
+      const filesResponse = await api.resourceAction({
+        resourceId: 'files',
+        actionName: 'list',
+        params: {
+          filters: { id: fileIds },
+        },
+      });
+      return filesResponse.data.records;
+    }
+
+    return [];
   };
 
   const handleFileSelection = (file) => {
