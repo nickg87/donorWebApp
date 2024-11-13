@@ -11,6 +11,11 @@
   "contact": "Contact us",
   "toc": "Toc",
   "faq": "FAQ",
+  "blog": {
+    "linkText": "Blog",
+    "listTitleText": "Blog articles",
+    "backToText": "Back to article list"
+  },
   "one-million-dollar-pool": "The Million Dollar Pool",
   "general": {
     "close": "Close",

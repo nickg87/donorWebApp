@@ -40,6 +40,7 @@ export default (db) => {
             title: row.title,
             description: row.description,
             short: row.short,
+            slug: row.slug,
             active: row.active,
             type: row.type,
             created_at: row.created_at,

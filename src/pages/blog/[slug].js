@@ -3,15 +3,20 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import {useTranslation} from "next-i18next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Link from "next/link";
+import React from "react";
 
 // Replace this with your API URL
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL; // Make sure this is your correct backend API URL
 
 // This is the page component
 export default function BlogPost({ post }) {
+  console.log(post)
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
-  const { i18n } = useTranslation();
 
   // In case the page is built without a specific slug or falls back
   if (router.isFallback) {
@@ -28,6 +33,9 @@ export default function BlogPost({ post }) {
         <p>{post.description[i18n.language]}</p>
         {post.path && <img src={post.path} alt={'Image for ' + post.description[i18n.language]}/>}
       </div>
+      <Link href="/blog" className="block mt-4 md:inline-block md:mt-0 pr-2">
+        {t('blog.backToText')}
+      </Link>
     </>
   );
 }
@@ -48,6 +56,7 @@ export async function getServerSideProps({ params, locale }) {
     return {
       props: {
         post, // Pass post data as a prop
+        ...(await serverSideTranslations(locale, ['common'])),
       },
     };
   } catch (error) {

@@ -11,6 +11,11 @@
   "contact": "Contáctenos",
   "toc": "Términos y condiciones",
   "faq": "Preguntas frecuentes",
+  "blog": {
+    "linkText": "Blog",
+    "listTitleText": "Artículos del blog",
+    "backToText": "Volver a la lista de artículos"
+  },
   "one-million-dollar-pool": "El sorteo del millón de dólares",
   "general": {
     "close": "Cerrar",
