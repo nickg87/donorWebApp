@@ -14,6 +14,7 @@
   "blog": {
     "linkText": "Blog",
     "listTitleText": "Artículos del blog",
+    "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
   },
   "one-million-dollar-pool": "El sorteo del millón de dólares",

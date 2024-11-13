@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.articleWrapper {
+  will-change: backdrop-filter;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  .articleContainer {
+    will-change: backdrop-filter;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    &.dark {
+      background-color: $headerBackgroundScrollDark;
+    }
+    &.light {
+      background-color: $headerBackgroundScrollLight;
+    }
+  }
+}
