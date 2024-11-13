@@ -17,6 +17,11 @@
     "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
   },
+  "errorPage": {
+    "primaryText": "¡Ups! La página que buscas no existe.",
+    "secondaryText": "Puede que haya sido movida o que la URL sea incorrecta.",
+    "buttonText": "Volver a Inicio"
+  },
   "one-million-dollar-pool": "El sorteo del millón de dólares",
   "general": {
     "close": "Cerrar",

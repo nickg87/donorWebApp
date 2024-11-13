@@ -17,6 +17,11 @@
     "listReadMore": "Read more",
     "backToText": "Back to article list"
   },
+  "errorPage": {
+    "primaryText": "Oops! The page you're looking for doesn't exist.",
+    "secondaryText": "It might have been moved, or the URL might be incorrect.",
+    "buttonText": "Go back to Home"
+  },
   "one-million-dollar-pool": "The Million Dollar Pool",
   "general": {
     "close": "Close",
