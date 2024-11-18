@@ -31,7 +31,13 @@
   "sections": {
     "transactions": {
       "name": "Transactions",
-      "title": "Transactions for this pool"
+      "title": "Transactions for this pool",
+      "list": {
+        "block": "Block",
+        "age": "Age",
+        "from": "From",
+        "amount": "Amount"
+      }
     },
     "pools": {
       "name": "Pools",

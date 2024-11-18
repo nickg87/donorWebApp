@@ -55,7 +55,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
           <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
             <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
               <IconBox className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
-              <span className="text-xs">Block</span>
+              <span className="text-xs">{t('sections.transactions.list.block')}</span>
             </div>
             <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
               {transaction.blockNumber}
@@ -66,7 +66,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
           <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-1/2 lg:flex-1`}>
             <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
               <IconClock className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
-              <span className="text-xs">Age</span>
+              <span className="text-xs">{t('sections.transactions.list.age')}</span>
             </div>
             <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
               {getTimeAgo(transaction.timeStamp, i18n.language)} ago
@@ -77,7 +77,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
           <div className={`${classes.transactionDetailWrapper} ${classes[globalState?.theme]} flex flex-col items-start w-full lg:w-auto lg:flex-1`}>
             <div className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
               <IconWallet className={`${classes[globalState?.theme]} w-6 h-6 mb-1`} />
-              <span className="text-xs">From</span>
+              <span className="text-xs">{t('sections.transactions.list.from')}</span>
             </div>
             <div
               className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left flex items-center`}
@@ -104,7 +104,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
             <div
               className={`${classes.transactionDetailIconWrapper} ${classes[globalState?.theme]} flex flex-col items-center lg:items-start`}>
               <IconDollar className={`${classes[globalState?.theme]} w-6 h-6 mb-1`}/>
-              <span className="text-xs">Amount</span>
+              <span className="text-xs">{t('sections.transactions.list.amount')}</span>
             </div>
             <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
               {formatEther(transaction.value)} ETH
