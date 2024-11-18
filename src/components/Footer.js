@@ -12,9 +12,9 @@ const Footer = () => {
   return (
     <footer className="bg-[#030A31] text-white py-8 p-4 shadow-md w-full">
       <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
-        <div>
-          <p className="text-sm text-center">&copy; {t('general.copyright')}</p>
-          <div className="flex items-center justify-evenly md:flex-row md:justify-between md:items-center">
+        <div className="md:justify-start">
+          <p className="text-sm text-center md:text-left">&copy; {t('general.copyright')}</p>
+          <div className="flex gap-1 md:gap-4 items-center justify-evenly md:flex-row md:justify-between md:items-center text-center md:text-left">
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('toc')}
             </Link>

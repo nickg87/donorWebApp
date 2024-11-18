@@ -2,11 +2,13 @@ import axios from "axios";
 import {text} from "@fortawesome/fontawesome-svg-core";
 
 export const timestampToDateString = (timestamp) => {
+  console.log('timestamp');
+  console.log(timestamp);
   const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
   return date.toLocaleString(); // Adjust locale and format as needed
 };
 
-export const getTimeAgo = (timestamp) => {
+export const getTimeAgo = (timestamp, lang = 'en') => {
   const now = new Date();
   const date = new Date(timestamp);
   const diffInMs = now - date; // Difference in milliseconds
@@ -17,11 +19,11 @@ export const getTimeAgo = (timestamp) => {
   const diffInDays = Math.floor(diffInHours / 24);
 
   if (diffInDays > 0) {
-    return `${diffInDays} day${diffInDays !== 1 ? 's' : ''}`;
+    return `${diffInDays} ${lang === 'en' ? 'day' : 'dia'}${diffInDays !== 1 ? 's' : ''}`;
   } else if (diffInHours > 0) {
-    return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''}`;
+    return `${diffInHours} ${lang === 'en' ? 'hour' : 'hora'}${diffInHours !== 1 ? 's' : ''}`;
   } else {
-    return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''}`;
+    return `${diffInMinutes} ${lang === 'en' ? 'minute' : 'minuto'}${diffInMinutes !== 1 ? 's' : ''}`;
   }
 };
 

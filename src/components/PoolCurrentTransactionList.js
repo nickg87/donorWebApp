@@ -46,6 +46,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
   }, [pool?.id, transactions]);
 
   const TransactionItem = ({ transaction }) => {
+    const { t,i18n } = useTranslation();
     return (
       <div className={`${classes.transactionItemWrapper} ${classes[globalState?.theme]} border-b py-4 first:pt-0 last:pb-0 last:border-b-0`}>
         <div className="flex flex-wrap lg:flex-nowrap lg:space-x-6">
@@ -68,7 +69,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
               <span className="text-xs">Age</span>
             </div>
             <div className={`${classes.transactionDetailValueWrapper} ${classes[globalState?.theme]} text-left`}>
-              {getTimeAgo(transaction.timeStamp)} ago
+              {getTimeAgo(transaction.timeStamp, i18n.language)} ago
             </div>
           </div>
 

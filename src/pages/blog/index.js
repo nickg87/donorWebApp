@@ -19,7 +19,7 @@ export default function Blog({ articles }) {
         <h1 className="text-4xl font-bold text-left mb-10">{t('blog.listTitleText')}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {articles.map((article) => (
-              <ArticleListItem article={article}/>
+              <ArticleListItem key={article?.id} article={article}/>
           ))}
         </div>
       </div>

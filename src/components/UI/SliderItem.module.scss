@@ -1,0 +1,36 @@
+
+.sliderDetailItemWrapper {
+  font: inherit;
+
+  .sliderDetailItemIconWrapper {
+    &.dark {
+      color: #8B91B5;
+      span {
+        color: #8B91B5;
+      }
+
+    }
+    &.light {
+      color: #8B91B5;
+      span {
+        color: #8B91B5;
+      }
+    }
+    svg {
+      &.dark {
+        color: #8B91B5;
+      }
+      &.light {
+        color: #8B91B5;
+      }
+    }
+  }
+  .sliderDetailTitleWrapper {
+    &.dark {
+      color: #ffffff;
+    }
+    &.light {
+      color: #132C5E;
+    }
+  }
+}

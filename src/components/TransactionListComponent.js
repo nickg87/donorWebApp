@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import {timestampToDateString} from "@/utils/helpers";
 
 const TransactionListComponent = ({ transactions }) => {
   //https://sepolia.etherscan.io/tx/0x356aa6a1460149481f5a9e0778205208079a815d09bb9af2a2be6dc7effba6cd
-
-  //console.log(transactions);
-  // Helper function to convert UNIX timestamp to readable date format
-  const timestampToDateString = (timestamp) => {
-    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
-    return date.toLocaleString(); // Adjust locale and format as needed
-  };
 
   // Helper function to format Ethereum value from wei to ETH
   const formatEtherValue = (value) => {

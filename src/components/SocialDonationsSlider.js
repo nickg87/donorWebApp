@@ -1,17 +1,13 @@
 "use client";
-
 // src/components/SocialDonations.js
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import LazyLoad from 'react-lazyload';
 import {useTranslation} from "next-i18next";
 import SectionNameWrapper from "@/components/UI/SectionNameWrapper";
+import SwiperComponent from "@/components/UI/SwiperComponent";
 import IconHearts from "../../public/iconsax/lovely-l.svg";
-import IconDollar from "../../public/iconsax/dollar-circle.svg";
 import classes from "@/components/SocialDonationsSlider.module.scss";
 import {useAppContext} from "@/contexts/AppContext";
 
@@ -45,61 +41,6 @@ const SocialDonationsSlider = () => {
 
   const swipeItems = usePlaceholder ? itemsPlaceholder : items;
 
-  const SwiperComponent= () => {
-    return (
-      <div className="container mx-auto p-4">
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={30}
-          slidesPerView={1}
-          navigation
-          pagination={{clickable: true}}
-          loop={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-          }}
-        >
-          {swipeItems.map((item) => (
-            <SwiperSlide key={item.id}>
-              <LazyLoad height={225} once>
-                <div
-                  className={`rounded-[30px] mb-10 mx-1 ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
-                  <img
-                    src={item.image}
-                    alt={item.text}
-                    title={item.text}
-                    className="w-full h-60 object-cover rounded-[30px] rounded-b-none"
-                  />
-                  <div
-                    className={`${classes.sliderDetailItemWrapper} ${classes[globalState?.theme]} p-6 flex flex-col align-center items-start`}>
-                    <div
-                      className={`${classes.sliderDetailItemIconWrapper} ${classes[globalState?.theme]} flex align-center gap-2 items-center`}>
-                      <IconDollar className={`${classes[globalState?.theme]} w-6 h-6`}/>
-                      <span className="text-xs text-inherit">{item.prize}</span>
-                    </div>
-                    <div
-                      className={`${classes.sliderDetailTitleWrapper} ${classes[globalState?.theme]} text-left`}>
-                      {item.text}
-                    </div>
-                  </div>
-
-                </div>
-              </LazyLoad>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="flex flex-col justify-center items-center py-4">
@@ -112,7 +53,7 @@ const SocialDonationsSlider = () => {
         <p className="text-center text-600 m-8 text-[#8B91B5]" dangerouslySetInnerHTML={{
           __html: t('sections.pools.text'),
         }}/>
-        <SwiperComponent />
+        <SwiperComponent items={swipeItems}/>
       </div>
     </>
 

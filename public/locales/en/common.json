@@ -25,7 +25,8 @@
   "one-million-dollar-pool": "The Million Dollar Pool",
   "general": {
     "close": "Close",
-    "copyright": "2024 My DonorHub App. All rights reserved."
+    "copyright": "2024 My DonorHub App. All rights reserved.",
+    "timeAgo": "{{var1}} ago"
   },
   "sections": {
     "transactions": {
@@ -38,7 +39,11 @@
       "text": "Explore our social donation pools and make a difference today! </br> Your contribution can create positive change in communities around the world."
     },
     "blog": "Blog",
-    "articles": "Articles",
+    "articles": {
+      "name": "Articles",
+      "title": "News and Articles",
+      "text": "Explore news and interesting articles about crypto univers and about how to make a difference in communities around the world."
+    },
     "toc": "TOC",
     "faq": "FAQ"
   },

@@ -25,7 +25,8 @@
   "one-million-dollar-pool": "El sorteo del millón de dólares",
   "general": {
     "close": "Cerrar",
-    "copyright": "2024 Mi aplicación DonorHub. Todos los derechos reservados."
+    "copyright": "2024 Mi aplicación DonorHub. Todos los derechos reservados.",
+    "timeAgo": "Hace {{var1}}"
   },
   "sections": {
     "transactions": {
@@ -38,7 +39,11 @@
       "text": "¡Explora nuestros pools de donación social y marca la diferencia hoy! </br> Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
     },
     "blog": "Blog",
-    "articles": "Artículos",
+    "articles": {
+      "name": "Artículos",
+      "title": "Noticias y Artículos",
+      "text": "Explora noticias y artículos interesantes sobre el universo cripto y cómo marcar la diferencia en las comunidades de todo el mundo."
+    },
     "toc": "Índice de Contenidos",
     "faq": "Preguntas Frecuentes"
   },
