@@ -1,0 +1,9 @@
+.containerWrapper {
+  &.dark {
+    background: rgba(17, 24, 62, 0.04);
+  }
+  &.light {
+    color: #132C5E;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}

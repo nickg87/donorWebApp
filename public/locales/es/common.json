@@ -9,11 +9,22 @@
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "contact": "Contáctenos",
-  "toc": "Términos y condiciones",
-  "faq": "Preguntas frecuentes",
+  "toc": {
+    "linkText": "Términos",
+    "pageHeadlineText": "Términos y condiciones",
+    "pageTitle": "Términos y condiciones | DonorHub App",
+    "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia."
+  },
+  "faq": {
+    "linkText": "Preguntas frecuentes",
+    "pageHeadlineText": "Preguntas frecuentes",
+    "pageTitle": "Preguntas Frecuentes | DonorHub App",
+    "pageTitleText": "Aquí encontrarás respuestas a las preguntas más comunes."
+  },
   "blog": {
     "linkText": "Blog",
     "listTitleText": "Artículos del blog",
+    "pageTitle": "Artículos del blog | DonorHub App",
     "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
   },

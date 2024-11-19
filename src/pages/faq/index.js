@@ -2,9 +2,19 @@
 import React, { useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from "next/head";
+import SectionNameWrapper from "@/components/UI/SectionNameWrapper";
+import IconMessageText from "../../../public/iconsax/message-text-1.svg";
+import IconMinus from "../../../public/iconsax/minus.svg";
+import IconAdd from "../../../public/iconsax/add.svg";
+import {useTranslation} from "next-i18next";
+import {useAppContext} from "@/contexts/AppContext";
+import PageWrapper from "@/components/PageWrapper";
+import classes from "../pages.module.scss";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t, i18n } = useTranslation();
+  const { globalState } = useAppContext();
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -32,28 +42,37 @@ const FAQ = () => {
 
   return (
     <>
-      <Head>
-        <title>Frequently Asked Questions | DonorHub App</title>
-      </Head>
-      <div className="p-8">
-        <h1 className="text-2xl font-bold mb-4">Frequently Asked Questions</h1>
-        <p className="mb-6">Here you will find answers to the most common questions.</p>
-
+      <PageWrapper
+        theme={globalState?.theme}
+        pageTitle={t('faq.pageTitle')}
+        sectionIcon={<IconMessageText className={`w-6 h-6`}/>}
+        sectionNameText={t('faq.pageHeadlineText')}
+        sectionTitleText={t('faq.pageTitleText')}
+      >
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="border border-gray-300 rounded-md bg-white shadow-sm overflow-hidden">
-              <button onClick={() => toggleAccordion(index)}
-                      className="w-full text-left px-4 py-2 font-semibold text-gray-800 bg-gray-100 hover:bg-gray-200">
-                {faq.question}
+            <div
+              className={`p-4 rounded-[12px] ${classes.containerWrapper} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder shadow-darkTheme' : 'border-lightBorder shadow-lightTheme'} `}>
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center px-2 py-2 font-semibold "
+              >
+                <span className="flex-1 text-left">{faq.question}</span>
+                {activeIndex !== index ? (
+                  <IconAdd className="w-6 h-6"/>
+                ) : (
+                  <IconMinus className="w-6 h-6"/>
+                )}
               </button>
               <div
-                className={`transition-max-height duration-300 ease-in-out overflow-hidden px-4 text-gray-600 ${activeIndex === index ? ' py-2 max-h-screen' : 'max-h-0'}`}>
+                className={`transition-max-height duration-300 ease-in-out overflow-hidden px-4 ${activeIndex === index ? ' py-2 max-h-screen' : 'max-h-0'}`}>
                 {faq.answer}
               </div>
             </div>
           ))}
         </div>
-      </div>
+
+      </PageWrapper>
     </>
   );
 };

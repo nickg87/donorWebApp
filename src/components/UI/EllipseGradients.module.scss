@@ -46,6 +46,7 @@
   left: 15%;          /* X position */
   width: 70%;         /* Width of the ellipse */
   height: 90%;        /* Height of the ellipse */
+  max-height: 75vh;
   border-radius: 50%; /* To make it an ellipse */
   opacity: 0.15;      /* Set opacity */
   z-index: 1;      /* Ensure it's behind other elements */

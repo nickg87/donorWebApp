@@ -6,24 +6,27 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { useAppContext } from "@/contexts/AppContext";
 import ArticleListItem from "@/components/UI/ArticleListItem";
+import IconBook from "../../../public/iconsax/book-1.svg";
+import PageWrapper from "@/components/PageWrapper";
 
 export default function Blog({ articles }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { globalState } = useAppContext();
 
   return (
-    <>
-      <Head>
-        <title>{t('blog.listTitleText')}</title>
-      </Head>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-left mb-10">{t('blog.listTitleText')}</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {articles.map((article) => (
-              <ArticleListItem key={article?.id} article={article}/>
-          ))}
-        </div>
+    <PageWrapper
+      theme={globalState?.theme}
+      pageTitle={t('blog.pageTitle')}
+      sectionIcon={<IconBook className={`w-6 h-6`}/>}
+      sectionNameText={t('blog.linkText')}
+      sectionTitleText={t('blog.listTitleText')}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {articles.map((article) => (
+          <ArticleListItem key={article?.id} article={article}/>
+        ))}
       </div>
-    </>
+    </PageWrapper>
   );
 }
 

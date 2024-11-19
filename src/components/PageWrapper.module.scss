@@ -1,0 +1,15 @@
+
+.sectionTitle {
+  font-size: 32px;
+  @media (max-width: 460px) {
+    font-size: 24px;
+  }
+  line-height: 24px;
+  font-weight: bold;
+  &.light {
+    color: #132C5E;
+  }
+  &.dark {
+    color: #ffffff;
+  }
+}

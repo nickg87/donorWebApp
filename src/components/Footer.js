@@ -16,10 +16,10 @@ const Footer = () => {
           <p className="text-sm text-center md:text-left">&copy; {t('general.copyright')}</p>
           <div className="flex gap-1 md:gap-4 items-center justify-evenly md:flex-row md:justify-between md:items-center text-center md:text-left">
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
-              {t('toc')}
+              {t('toc.linkText')}
             </Link>
             <Link href="/faq" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
-              {t('faq')}
+              {t('faq.linkText')}
             </Link>
             <Link href="/blog" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('blog.linkText')}
