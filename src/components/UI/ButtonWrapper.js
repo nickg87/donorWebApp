@@ -11,6 +11,10 @@ const ButtonWrapper = ({ children, icon, text, theme, onClick, disabled, extra }
                 items-center 
                 justify-center 
                 overflow-hidden
+                h-auto 
+                w-auto 
+                px-2
+                py-4
                 ${classes.buttonWrapperStyle} 
                 ${classes[theme]} 
                 ${extra}
@@ -19,14 +23,12 @@ const ButtonWrapper = ({ children, icon, text, theme, onClick, disabled, extra }
                 flex 
                 items-center 
                 justify-center 
-                
                 gap-2 
                 rounded-full 
                 text-white 
-                absolute 
-                inset-0 
                 transition-all 
                 duration-300 
+                ${extra}
                 hover:bg-opacity-90 ${classes.buttonContentWrapper} ${classes[theme]} `}>
           {icon && icon}
           {text && text}

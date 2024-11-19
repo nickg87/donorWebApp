@@ -14,12 +14,18 @@
     background: #ffffff;
     border: 1px solid #E1E7F6;
   }
+  &:read-only {
+    cursor: not-allowed;
+  }
 }
 
 .copyToClipboard {
   border: none;
   background: linear-gradient(to bottom, #9564FD, #5F41A0);
   color:#ffffff;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .gradientOutline {

@@ -9,7 +9,7 @@ const PageWrapper = ({...props}) => {
   return (
     <>
       <Head>
-        <title>{props?.pageTitle} Frequently Asked Questions | DonorHub App</title>
+        <title>{props?.pageTitle}</title>
       </Head>
       <>
         <div className="flex flex-col justify-center items-center py-4">

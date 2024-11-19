@@ -45,23 +45,9 @@ export default function CustomButton() {
     <>
       {error && <div className="text-red-500">{error}</div>}
       {isConnected ? (
-          <ButtonWrapper icon={<IconWalletRemove className={`w-6 h-6`}/>} theme={'light'} onClick={handleDisconnect} text={t('sendTransactionComponent.disconnectButton')} extra={' h-[50px] w-[200px]'} />
-        // <button
-        //   onClick={handleDisconnect}
-        //   className={`${baseStyle} bg-gradient-to-r m-2 p-2 bg-gray-800 hover:bg-grey-900`}
-        // >
-        //   {/*//from-red-500 to-pink-500*/}
-        //   <FontAwesomeIcon icon={faUnlink} className="mr-2 text-xl w-5 h-5" />
-        //   Disconnect
-        // </button>
+          <ButtonWrapper icon={<IconWalletRemove className={`w-6 h-6`}/>} theme={'light'} onClick={handleDisconnect} text={t('sendTransactionComponent.disconnectButton')}  />
       ) : (
         <ButtonWrapper icon={<IconWalletAdd className={`w-6 h-6`}/>} theme={'dark'} onClick={handleConnect} text={t('sendTransactionComponent.connectButton')} extra={' h-[50px] w-[200px]'} />
-        // <button
-        //   onClick={handleConnect}
-        //   className={`${baseStyle} bg-gradient-to-r m-2 p-2 from-red-500 to-pink-500 hover:from-red-800 hover:to-pink-800`}
-        // >
-        //   <FontAwesomeIcon icon={faWallet} className="mr-2 text-xl w-5 h-5" /> Connect Wallet
-        // </button>
       )}
     </>
   );

@@ -1,28 +1,46 @@
 @import '../../styles/variables.scss';
 
 .buttonWrapperStyle {
+  display: inline-flex;
   align-items: center;
   transition: background-color 0.3s ease;
   padding: 0;
   margin: 0;
+  min-height: 50px;
   &.dark {
     background: linear-gradient(to bottom, #C4A8FF, #081123);
+    &:hover {
+      filter: brightness(1.2) saturate(1.3);
+    }
   }
   &.light {
     background: linear-gradient(to bottom, #FFF5AD, #F88F02);
     color: $buttonGradientColorStyleLight;
+    &:hover {
+      filter: brightness(0.95) saturate(1.9);
+    }
   }
+
 }
 
 .buttonContentWrapper {
-  position: absolute;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  left: 2px;
-  top: 2px;
-  display: flex;
+  //position: absolute;
+  //width: calc(100% - 4px);
+  //height: calc(100% - 4px);
+  //left: 2px;
+  //top: 2px;
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
+  min-height: 46px;
+  position: relative; // Make it relative instead of absolute to fit content
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0.5rem 1rem; // Adds space inside the button
+  border-radius: inherit; // Ensure it matches the parent's rounded style
+  background: inherit; // Use par
+
   &.light {
     background: $buttonGradientStyle1;
   }

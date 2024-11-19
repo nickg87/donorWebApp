@@ -119,7 +119,7 @@ const Header = () => {
           {/*  </button>*/}
           {/*)}*/}
           <Link href="/contact" className="block mt-4 md:inline-block md:mt-0 text-inherit hover:text-gray-300 contactLink">
-            <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[136px]'}>
+            <ButtonWrapper theme={'dark'} extra={'min-w-[136px]'}>
               {t('contact')}
             </ButtonWrapper>
           </Link>

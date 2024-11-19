@@ -36,10 +36,15 @@ export default function SendTransaction(props) {
   const { updateShouldFetch } = useAppContext();
   const { t, i18n } = useTranslation();
   const userBalance = props.userBalance?.balance;
+  let userBalanceInDollars = null;
   if (userBalance?.formatted) {
     let balanceFormatted = parseFloat(userBalance?.formatted).toFixed(8)
-    console.log(userBalance);
-    console.log(balanceFormatted);
+    // console.log(userBalance);
+    // console.log(balanceFormatted);
+    if (globalState?.currentEthPrice?.lastPrice) {
+      userBalanceInDollars = parseFloat(parseFloat(props.userBalance?.balance?.formatted) * parseFloat(globalState?.currentEthPrice?.lastPrice));
+      //console.log(userBalanceInDollars);
+    }
   }
 
   const currentPool = props.currentPool;
@@ -173,13 +178,11 @@ export default function SendTransaction(props) {
                 __html: t('sendTransactionComponent.balanceText', {
                   var1: parseFloat(props.userBalance?.balance?.formatted).toFixed(7),
                   var2: props.userBalance?.balance?.symbol
-                }),
+                }) +( userBalanceInDollars ? ' (~' + userBalanceInDollars.toFixed(2) + ' $)' : ''),
               }}/>
             </div>
           )
         }
-
-
 
       </form>
       {hash && (

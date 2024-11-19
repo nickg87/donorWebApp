@@ -6,6 +6,12 @@ import {useTranslation} from "next-i18next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
+import IconBook from "../../../public/iconsax/book-1.svg";
+import ArticleListItem from "@/components/UI/ArticleListItem";
+import {useAppContext} from "@/contexts/AppContext";
+import ButtonWrapper from "@/components/UI/ButtonWrapper";
+import classes from "../pages.module.scss";
 
 // Replace this with your API URL
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL; // Make sure this is your correct backend API URL
@@ -14,6 +20,7 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL; // Make sure this is you
 export default function BlogPost({ post }) {
   console.log(post)
   const { t } = useTranslation();
+  const { globalState } = useAppContext();
   const { i18n } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
@@ -25,17 +32,27 @@ export default function BlogPost({ post }) {
 
   return (
     <>
-      <Head>
-        <title>{post.title[i18n.language]}</title>
-      </Head>
-      <div className="p-8">
-        <h1 className="text-2xl font-bold mb-4">{post.title[i18n.language]}</h1>
-        <p>{post.description[i18n.language]}</p>
-        {post.path && <img src={post.path} alt={'Image for ' + post.description[i18n.language]}/>}
-      </div>
-      <Link href="/blog" className="block mt-4 md:inline-block md:mt-0 pr-2">
-        {t('blog.backToText')}
-      </Link>
+      <PageWrapper
+        theme={globalState?.theme}
+        pageTitle={post.title[i18n.language]}
+        sectionIcon={<IconBook className={`w-6 h-6`}/>}
+        sectionNameText={post.title[i18n.language]}
+      >
+        <>
+          <blockquote className={classes.short}>{post.short[i18n.language]}</blockquote>
+          <p>{post.description}</p>
+          {post.path && <img src={post.path} alt={'Image for ' + post.description[i18n.language]}/>}
+
+          <Link href={`/blog`} className="block mt-4 md:inline-block pr-2">
+            <ButtonWrapper
+              theme={'dark'}
+            >
+              {t('blog.backToText')}
+            </ButtonWrapper>
+          </Link>
+
+        </>
+      </PageWrapper>
     </>
   );
 }

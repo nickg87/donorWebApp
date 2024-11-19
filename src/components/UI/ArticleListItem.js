@@ -39,7 +39,7 @@ const ArticleListItem = ({ article }) => {
         </Link>
         <p className="mt-2">{article.short[i18n.language]}</p>
         <Link href={`/blog/${article.slug}`} className="text-sm text-orange-400 hover:underline mt-4 inline-block">
-          <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[136px]'}>
+          <ButtonWrapper theme={'dark'}>
             {t('blog.listReadMore')}
           </ButtonWrapper>
         </Link>
