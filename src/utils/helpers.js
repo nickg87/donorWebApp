@@ -41,10 +41,10 @@ export const themeCustomClass = (theme) => {
   } else return  'lightTheme';
 };
 
-export const fetchCurrentPool = async () => {
+export const fetchCurrentPool = async (isSpecial = false) => {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   try {
-    const response = await axios.get(`${apiUrl}pools/current-pool`);
+    const response = await axios.get(`${apiUrl}pools/current-pool?isSpecial=` + isSpecial);
      // Axios returns the data in the `data` property
     //console.log(data);
     return response.data;
@@ -53,6 +53,8 @@ export const fetchCurrentPool = async () => {
     return err;
   }
 };
+
+export const fetchSpecialPool = async () => { return fetchCurrentPool(true)};
 
 export const fetchCurrentTransactionsForPoolId = async (poolID) => {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;

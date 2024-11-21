@@ -15,6 +15,11 @@ export default (sequelize, DataTypes) => {
     type: {
       type: DataTypes.STRING,
     },
+    is_test_net: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     eth_address: {
       type: DataTypes.STRING,
     },

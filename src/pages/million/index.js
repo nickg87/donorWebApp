@@ -1,32 +1,44 @@
 import React from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Head from "next/head";
+import SpecialPoolContent from "@/components/SpecialPoolContent";
+import axios from "axios";
 
-
-export default function Million() {
-  return (
-    <>
-      <Head>
-        <title>The One Million Dollar Pool | DonorHub App</title>
-      </Head>
-      <div className="p-8">
-        <h1 className="text-2xl font-bold mb-4">One Million Dollar Pool</h1>
-        <p>
-          Welcome to [Your Website/App Name]! These terms and conditions outline the rules and regulations
-          for the use of [Your Website/App Name]'s Website and Mobile App. By accessing this website and app
-          we assume you accept these terms and conditions. Do not continue to use [Your Website/App Name] if
-          you do not agree to take all of the terms and conditions stated on this page.
-        </p>
-      </div>
-    </>
-  );
+export default function Million({ pools, transactions, articles }) {
+  return <SpecialPoolContent pools={pools} transactions={transactions} articles={articles} />
 }
 
 // Add serverSideTranslations to load translations
 export async function getServerSideProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  };
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+  console.log('apiUrl via process.env.NEXT_PUBLIC_BACKEND_API_URL: ' + apiUrl);
+
+  try {
+    const poolsRes = await fetch(apiUrl + 'pools');
+    const poolsData = await poolsRes.json();
+
+    const transactionsRes = await fetch(apiUrl + 'transactions');
+    const transactionsData = await transactionsRes.json();
+
+    const articlesRes = await axios.get(`${apiUrl}articles`);
+    const articlesData = await articlesRes.data;
+
+    return {
+      props: {
+        pools: poolsData,
+        transactions: transactionsData,
+        articles: articlesData,
+        ...(await serverSideTranslations(locale, ['common'])),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        pools: null,
+        transactions: null,
+        articles: null,
+        ...(await serverSideTranslations(locale, ['common'])),
+      },
+    };
+  }
 }

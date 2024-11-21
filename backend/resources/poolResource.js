@@ -17,7 +17,7 @@ const Components = {
 export const poolResourceOptions = (Resource, Components) => ({
   resource: Resource,
   options: {
-    listProperties: ['title', 'id', 'transactionCount', 'updated_at', 'entry_amount', 'prize_amount', 'active', 'type', 'drawn_status', 'eth_address'],
+    listProperties: ['title', 'id', 'transactionCount', 'updated_at', 'entry_amount', 'prize_amount', 'active', 'type', 'is_test_net', 'drawn_status', 'eth_address'],
     properties: {
       title: {
         type: 'string',

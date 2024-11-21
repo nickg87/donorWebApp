@@ -5,7 +5,6 @@
   "firstTextTile": "<h3 class='text-lg font-bold'>Juntos, podemos hacer la diferencia</h3>Tu donación ayuda a alcanzar la meta de ~$<strong>{{var1}}</strong> en ETH para el pool de donaciones actual.",
   "secondTextTile": "<h3 class='text-lg font-bold'>El medidor muestra el progreso actual del pool</h3>Cada donación es una cantidad fija de <strong>${{var1}}</strong> en <strong>ETH</strong>, y nuestra meta es alcanzar <strong>${{var2}}</strong> en <strong>ETH</strong>.",
   "thirdTextTile": "<h3 class='text-lg font-bold'>Devuelve la alegría a tu vida</h3>Una vez que alcancemos esta meta, el monto total(<sup>*</sup>) <strong>será donado de nuevo a TI</strong>, un afortunado donante.",
-"welcomeCurrentPoolDescriptionText": "<p>El indicador a continuación representa nuestro fondo de donaciones actual. Cada donación tiene un monto fijo de <strong>{{var1}}</strong>, y nuestro objetivo es alcanzar <strong>{{var2}}</strong>.</p><p>Una vez que alcancemos este objetivo, el monto total(<sup> 1 </sup>) <strong>será devuelto a USTED</strong>, un afortunado donante.</p><p>¡Es una forma sencilla de hacer el bien y, potencialmente, traer alegría de vuelta a su vida!</p>",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "contact": "Contáctenos",
@@ -27,6 +26,18 @@
     "pageTitle": "Artículos del blog | DonorHub App",
     "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
+  },
+  "special": {
+    "linkText": "El especial",
+    "listTitleText": "&#9733; ¡Un millón de dólares! &#9733;",
+    "pageTitle": "El pool de un millón | DonorHub App",
+    "secondaryText": "No es realmente UN MILLÓN $, ¡pero casi! </br>Porque depende del precio de ETH. ( &#11016; | &#11017; ) ¡Atrévete a intentarlo! Quién sabe, ¡UNO de ustedes lo CONSEGUIRÁ con SEGURIDAD!",
+    "backToText": "Volver a la página principal",
+    "welcomeCurrentPool": "Pool especial {{var1}}",
+    "welcomeCurrentPoolSubText": "¿Te sientes afortunado? Una vez que esto alcance el 100%, el Smart Contract elegirá aleatoriamente una dirección que haya ingresado a este pool especial. ¡Y donará la cantidad (`) de vuelta a esta dirección! ¡Así de simple! Cada entrada es otra oportunidad de ser el afortunado y marcar la diferencia.",
+    "donateComponent": {
+      "buttonText": "Entrar Ahora"
+    }
   },
   "errorPage": {
     "primaryText": "¡Ups! La página que buscas no existe.",
@@ -91,9 +102,9 @@
   },
   "donateComponent": {
     "buttonText": "Donar ahora",
-    "modalTitle":"¿Cómo participar?",
-    "note":"<small><sup>(*)</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. <br/> Consulte la página de <a class='link' href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
-    "howToParticipateText":"Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
+    "modalTitle": "¿Cómo participar?",
+    "note": "<small><sup>(*)</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. <br/> Consulte la página de <a class='link' href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
+    "howToParticipateText": "Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
     "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
   }

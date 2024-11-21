@@ -16,6 +16,8 @@ const SocialDonationsSlider = ({items}) => {
   const { t, i18n } = useTranslation();
   const { globalState } = useAppContext();
 
+  if (!items) return null;
+
   return (
     <>
       <div className="flex flex-col justify-center items-center py-4">

@@ -17,7 +17,9 @@ export const AppProvider = ({ children }) => {
     balance: null,
     shouldFetch: false,
     currentPool: null,
+    specialPool: null,
     currentPoolBalance: null,
+    specialPoolBalance: null,
     currentEthPrice: null,
     theme: defaultTheme || 'light',
     language: defaultLanguage || 'en',
@@ -61,10 +63,24 @@ export const AppProvider = ({ children }) => {
     }));
   };
 
+  const updateSpecialPool = (specialPool) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      specialPool,
+    }));
+  };
+
   const updateCurrentPoolBalance = (currentPoolBalance) => {
     setGlobalState((prevState) => ({
       ...prevState,
       currentPoolBalance,
+    }));
+  };
+
+  const updateSpecialPoolBalance = (specialPoolBalance) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      specialPoolBalance,
     }));
   };
 
@@ -108,7 +124,19 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ globalState, updateUser, updateBalance, updateShouldFetch, updateCurrentPool, updateCurrentEthPrice, updateCurrentTheme, updateCurrentLanguage, updateCurrentPoolBalance }}>
+    <AppContext.Provider value={{
+      globalState,
+      updateUser,
+      updateBalance,
+      updateShouldFetch,
+      updateCurrentPool,
+      updateSpecialPool,
+      updateCurrentEthPrice,
+      updateCurrentTheme,
+      updateCurrentLanguage,
+      updateCurrentPoolBalance,
+      updateSpecialPoolBalance
+    }}>
       {isThemeReady ? children : null}
     </AppContext.Provider>
   );

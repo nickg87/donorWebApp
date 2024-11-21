@@ -1,6 +1,10 @@
 import express from 'express';
 const router = express.Router();
 
+// Helper function to validate Ethereum addresses
+const isValidEthAddress = (address) => /^0x[a-fA-F0-9]{40}$/.test(address);
+
+
 export default (db) => {
   // Get all pools
   router.get('/', async (req, res) => {
@@ -12,6 +16,28 @@ export default (db) => {
       res.status(500).json({ error: 'Failed to fetch pools' });
     }
   });
+
+  // Get pool by eth_address
+  // router.get('/:eth_address', async (req, res) => {
+  //   try {
+  //     const { eth_address } = req.params;
+  //
+  //
+  //     // Fetch pools from the database
+  //     const pools = await db('pools').select('*').where({ eth_address });
+  //
+  //     // Handle case where no pools are found
+  //     if (pools.length === 0) {
+  //       return res.status(404).json({ error: 'No pools found for the provided eth_address' });
+  //     }
+  //
+  //     // Respond with the pool(s)
+  //     res.json(pools);
+  //   } catch (error) {
+  //     console.error('Error fetching pools:', error);
+  //     res.status(500).json({ error: 'Failed to fetch pools' });
+  //   }
+  // });
 
   // Create a new pool
   router.post('/', async (req, res) => {
@@ -54,9 +80,12 @@ export default (db) => {
   // Get the current pool based on specified conditions
   router.get('/current-pool', async (req, res) => {
     try {
+      const isSpecial = req.query?.isSpecial === 'true';
+      // Determine the type based on `isSpecial`
+      const poolType = isSpecial ? 'million' : 'normal';
       const currentPool = await db('pools')
         .select('*')
-        .where({ active: true, type: 'normal', drawn_status: 'inactive' })
+        .where({ active: true, type: poolType, drawn_status: 'inactive' })
         .orderBy('created_at', 'desc') // Adjust if you have a different field for sorting
         .first(); // Get the first result, which will be the latest one
 

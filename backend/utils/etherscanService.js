@@ -10,14 +10,38 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
   if (!etherScanApiKey) {
     throw new Error('Etherscan API key is not set');
   }
-  // Initialize Etherscan provider
-  let provider = new ethers.providers.EtherscanProvider("sepolia", etherScanApiKey);
-  let apiEtherScanUrl = 'https://api-sepolia.etherscan.io/api';
-  if (isLive) {
-    provider = new ethers.providers.EtherscanProvider("homestead", etherScanApiKey);
-    apiEtherScanUrl = 'https://api.etherscan.io/api';
-  }
+
+  // // Initialize Etherscan provider
+  // let provider = new ethers.providers.EtherscanProvider("sepolia", etherScanApiKey);
+  // let apiEtherScanUrl = 'https://api-sepolia.etherscan.io/api';
+  // if (isLive) {
+  //   provider = new ethers.providers.EtherscanProvider("homestead", etherScanApiKey);
+  //   apiEtherScanUrl = 'https://api.etherscan.io/api';
+  // }
+
+
   try {
+
+    // Step 1: Check if the address is associated with a test network
+    const pool = await db('pools').where({ eth_address: address }).first();
+
+    const isTestNet = pool ? pool.is_test_net === true : false;
+
+    // Log the network type
+    console.log(`Address ${address} is associated with ${isTestNet ? 'testnet' : 'mainnet'}.`);
+
+    // Step 2: Initialize the appropriate Etherscan provider based on the network
+    let provider = new ethers.providers.EtherscanProvider("sepolia", etherScanApiKey);
+    let apiEtherScanUrl = 'https://api-sepolia.etherscan.io/api';
+
+    if (!isTestNet && process.env.IS_LIVE) {
+      provider = new ethers.providers.EtherscanProvider("homestead", etherScanApiKey);
+      apiEtherScanUrl = 'https://api.etherscan.io/api';
+    }
+
+    console.log(`Address ${apiEtherScanUrl}`);
+
+
     // Fetch balance
     const balance = await provider.getBalance(address);
     const formattedBalance = ethers.utils.formatEther(balance);
@@ -41,45 +65,67 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
       let newTransactionsCount = 0;
 
       for (const transaction of transactions) {
-        if (transaction.to && ethers.utils.isAddress(transaction.to) && ethers.utils.isAddress(address)) {
-          const normalizedTransactionTo = ethers.utils.getAddress(transaction.to);
-          const normalizedAddress = ethers.utils.getAddress(address);
-          if (normalizedTransactionTo === normalizedAddress && transaction?.value > 0) {
-            const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
+        if (!isTestNet) {
+          if (transaction.to && ethers.utils.isAddress(transaction.to) && ethers.utils.isAddress(address)) {
+            const normalizedTransactionTo = ethers.utils.getAddress(transaction.to);
+            const normalizedAddress = ethers.utils.getAddress(address);
+            if (normalizedTransactionTo === normalizedAddress && transaction?.value > 0) {
+              const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
 
-            //get poolId from transaction.input
-            const inputData = transaction?.input;
-            const iFace = new ethers.utils.Interface([
-              "function enterPool(uint256 poolId, uint256 ticketPrice)"
-            ]);
-            // Decode the input
-            const decodedData = iFace.parseTransaction({ data: inputData });
-            const poolId = decodedData.args.poolId.toString();
-            const ticketPrice = decodedData.args.ticketPrice.toString();
-            //console.log("Pool ID:", poolId);
-            console.log("Pool ID:", parseInt(poolId));
-            //console.log("Ticket Price:", ticketPrice);
+              //get poolId from transaction.input
+              const inputData = transaction?.input;
+              const iFace = new ethers.utils.Interface([
+                "function enterPool(uint256 poolId, uint256 ticketPrice)"
+              ]);
+              // Decode the input
+              const decodedData = iFace.parseTransaction({ data: inputData });
+              const poolId = decodedData.args.poolId.toString();
+              const ticketPrice = decodedData.args.ticketPrice.toString();
+              //console.log("Pool ID:", poolId);
+              console.log("Pool ID:", parseInt(poolId));
+              //console.log("Ticket Price:", ticketPrice);
 
 
-            if (!existingTransaction) {
-              await db('transactions').insert({
-                blockHash: transaction.blockHash,
-                blockNumber: parseInt(transaction.blockNumber),
-                from: transaction.from,
-                gas: parseInt(transaction.gas),
-                gasPrice: transaction.gasPrice,
-                gasUsed: parseInt(transaction.gasUsed),
-                hash: transaction.hash,
-                timeStamp: new Date(parseInt(transaction.timeStamp) * 1000).toISOString(),
-                to: transaction.to,
-                txreceipt_status: parseInt(transaction.txreceipt_status),
-                value: transaction.value,
-                poolId: parseInt(poolId), // Adjust as necessary
-              });
-              newTransactionsCount++;
+              if (!existingTransaction) {
+                await db('transactions').insert({
+                  blockHash: transaction.blockHash,
+                  blockNumber: parseInt(transaction.blockNumber),
+                  from: transaction.from,
+                  gas: parseInt(transaction.gas),
+                  gasPrice: transaction.gasPrice,
+                  gasUsed: parseInt(transaction.gasUsed),
+                  hash: transaction.hash,
+                  timeStamp: new Date(parseInt(transaction.timeStamp) * 1000).toISOString(),
+                  to: transaction.to,
+                  txreceipt_status: parseInt(transaction.txreceipt_status),
+                  value: transaction.value,
+                  poolId: parseInt(poolId), // Adjust as necessary
+                });
+                newTransactionsCount++;
+              }
             }
           }
+        } else {
+          const existingTransaction = await db('transactions').where({ hash: transaction.hash }).first();
+          if (!existingTransaction) {
+            await db('transactions').insert({
+              blockHash: transaction.blockHash,
+              blockNumber: parseInt(transaction.blockNumber),
+              from: transaction.from,
+              gas: parseInt(transaction.gas),
+              gasPrice: transaction.gasPrice,
+              gasUsed: parseInt(transaction.gasUsed),
+              hash: transaction.hash,
+              timeStamp: new Date(parseInt(transaction.timeStamp) * 1000).toISOString(),
+              to: transaction.to,
+              txreceipt_status: parseInt(transaction.txreceipt_status),
+              value: transaction.value,
+              poolId: parseInt(pool?.id), // Adjust as necessary
+            });
+            newTransactionsCount++;
+          }
         }
+
       }
 
       if (newTransactionsCount > 0) {

@@ -8,7 +8,7 @@ import { useAppContext } from "@/contexts/AppContext";
 import { useTranslation } from 'next-i18next'; // Fixed import
 import LanguageSwitcher from "@/components/UI/LanguageSwitcher";
 import ThemeSwitcher from "@/components/UI/ThemeSwitcher";
-import {fetchCurrentPool} from "@/utils/helpers";
+import {fetchCurrentPool, fetchSpecialPool} from "@/utils/helpers";
 import ProfileCircle from '../../public/iconsax/profile-circle.svg';
 import axios from "axios";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
@@ -22,7 +22,7 @@ const Header = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { globalState, updateUser, updateCurrentPool, updateCurrentTheme } = useAppContext();
+  const { globalState, updateUser, updateCurrentPool, updateCurrentTheme, updateSpecialPool } = useAppContext();
   const [session, setSession] = useState(globalState.user || null);
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,6 +72,18 @@ const Header = () => {
       getCurrentPool();
     }
   }, [globalState.currentPool]);
+
+  useEffect(() => {
+    const getSpecialPool = async () => {
+        const data = await fetchSpecialPool();
+        if (data.id) {
+          updateSpecialPool(data);
+        }
+    };
+    if (!globalState.specialPool) {
+      getSpecialPool();
+    }
+  }, [globalState.specialPool]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

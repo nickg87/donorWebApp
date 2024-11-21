@@ -8,14 +8,15 @@ import ModalContainer from "@/components/UI/ModalContainer";
 
 import IconLovely from "../../public/iconsax/lovely.svg";
 import IconClose from "../../public/iconsax/close-circle.svg";
+import IconStar from "../../public/iconsax/star.svg";
 
-const DonateButton = () => {
+const DonateButton = ({...props}) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
   const [loading, setLoading] = useState(false);
   const { globalState } = useAppContext();
-  const currentPool = globalState?.currentPool;
+  const currentPool = props.isSpecial ? globalState?.specialPool : globalState?.currentPool;
   const poolPrizeAmount = currentPool?.prize_amount;
   const poolEntryAmount = currentPool?.entry_amount;
   const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
@@ -36,7 +37,7 @@ const DonateButton = () => {
     <>
       <div className="flex flex-col justify-center items-center p-4">
         <div className="flex flex-col justify-center items-center p-4">
-          <ButtonWrapper icon={<IconLovely className={`w-6 h-6`}/>} theme={'light'} onClick={handleDonateNow} text={t('donateComponent.buttonText')} extra={'uppercase h-[50px] w-[200px]'} />
+          <ButtonWrapper icon={props.isSpecial ? <IconStar className={`w-6 h-6`}/> : <IconLovely className={`w-6 h-6`}/>} theme={'light'} onClick={handleDonateNow} text={props.isSpecial ? t('special.donateComponent.buttonText') : t('donateComponent.buttonText')} extra={'uppercase h-[50px] w-[200px]'} />
         </div>
         <p className="mt-4 text-center text-sm text-[#8B91B5]" dangerouslySetInnerHTML={{
           __html: t('donateComponent.note', {

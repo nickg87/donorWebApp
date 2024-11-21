@@ -127,6 +127,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
     );
   };
 
+  if (!transactions) return null;
 
   return (
     <>
