@@ -1,18 +1,32 @@
+# Handle HTTP traffic
 server {
-    # Handle HTTP traffic for the entire site
     listen 80;
     server_name donorhub.site;
 
-    # Redirect all HTTP traffic to HTTPS, except for API routes
+    # Serve static files from the /assets directory
+    location /assets/ {
+        root /var/www/donorWebApp/public;
+        autoindex off; # Disable directory listing
+   }
+
+    location /next-api/ {
+        proxy_pass http://localhost:3000/next-api/;  # Next.js API
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Redirect all HTTP traffic to HTTPS
     location /api {
-        proxy_pass http://localhost:5000;  # Directly serve API requests over HTTP
+        proxy_pass http://localhost:5000;  # Adjust this if your API server runs on a different port
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
 
-        # Handle preflight OPTIONS requests
         if ($request_method = 'OPTIONS') {
             add_header Access-Control-Allow-Origin '*';
             add_header Access-Control-Allow-Methods 'GET, POST, PUT, DELETE, OPTIONS';
@@ -21,56 +35,87 @@ server {
             return 204;
         }
 
-        # Forward CORS headers for non-OPTIONS requests
         add_header Access-Control-Allow-Origin '*';
         add_header Access-Control-Allow-Methods 'GET, POST, PUT, DELETE, OPTIONS';
         add_header Access-Control-Allow-Headers 'Content-Type, Authorization';
-
-        # Skip Basic Authentication for API requests
         auth_basic off;
     }
 
-    # Redirect everything else to HTTPS
+    location /admin {
+        proxy_pass http://localhost:5000/admin;  # AdminJS
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        auth_basic off;
+    }
+
     location / {
         return 301 https://$host$request_uri;
     }
 }
 
+# Handle HTTPS traffic
 server {
-    # Handle HTTPS traffic
     listen 443 ssl http2;
     server_name donorhub.site;
 
-    # SSL configuration managed by Certbot
     ssl_certificate /etc/letsencrypt/live/donorhub.site/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/donorhub.site/privkey.pem;
-    include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-    # Proxy for API requests over HTTPS
-    location /api {
-        proxy_pass http://localhost:5000;  # Proxy requests to your Express server
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256';
+    ssl_prefer_server_ciphers off;
+
+    # SSL configuration for Nginx
+
+    # Serve static files from the /assets directory
+    location /assets/ {
+        root /var/www/donorWebApp/public;
+        autoindex off; # Disable directory listing
+    }
+
+    location /next-api/ {
+        proxy_pass http://localhost:3000/next-api/;  # Next.js API
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+    }
 
-        # Skip Basic Authentication for API requests
+    location /api {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
         auth_basic off;
     }
 
-    # Proxy for Next.js application
-    location / {
-        proxy_pass http://localhost:3000;  # Proxy requests to your Next.js server
+    location /admin {
+        proxy_pass http://localhost:5000/admin;  # AdminJS
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+        auth_basic off;
+    }
 
-        # Basic authentication for the rest of the site
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
         auth_basic "Restricted Access";
         auth_basic_user_file /etc/nginx/.htpasswd;
     }
+
+
 }
