@@ -24,7 +24,7 @@ const PageWrapper = ({...props}) => {
             __html: props?.sectionDecriptionText,
           }}/>}
       </div>
-      <div className="m-4 p-4">
+      <div className="m-4 py-4">
         {props.children}
       </div>
     </>

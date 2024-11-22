@@ -18,8 +18,9 @@ import IconLink from "../../public/iconsax/link-2.svg";
 import IconDollar from "../../public/iconsax/dollar-circle.svg";
 
 
-const PoolCurrentTransactionList = ({ pool }) => {
-  const { globalState, updateCurrentPoolBalance } = useAppContext();
+const PoolCurrentTransactionList = ({ pool, type }) => {
+  const { globalState, updateCurrentPoolBalance, updateSpecialPoolBalance } = useAppContext();
+  const isSpecial = type === 'special';
   //console.log(globalState);
   const [transactions, setTransactions] = useState(null);
   const { t, i18n } = useTranslation();
@@ -41,7 +42,12 @@ const PoolCurrentTransactionList = ({ pool }) => {
   useEffect(() => {
     if (transactions) {
       const balance = transactions.reduce((acc, transaction) => acc + Number(formatEther(transaction.value)), 0);
-      updateCurrentPoolBalance(balance);
+      if (isSpecial) {
+        updateSpecialPoolBalance(balance);
+      } else {
+        updateCurrentPoolBalance(balance);
+      }
+
     }
   }, [pool?.id, transactions]);
 
@@ -138,7 +144,7 @@ const PoolCurrentTransactionList = ({ pool }) => {
         <h2 className={`${classes.sectionTitle} ${classes[globalState?.theme]} mt-4 mb-4`}>{t('sections.transactions.title')}</h2>
         <div className="sm:px-2 sm:py-0 md:p-8 w-full sticky top-0 z-[2]">
           <div
-            className={`p-8 rounded-[30px] ${classes.tileWrapper} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
+            className={`p-8 rounded-[30px] ${classes.transactionItemsWrapper} ${classes.customScrollbar} ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
             {transactions && (
               transactions.map((item) => (
                 <TransactionItem key={item.id} transaction={item}/>

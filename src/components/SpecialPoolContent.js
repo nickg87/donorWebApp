@@ -25,7 +25,7 @@ const SpecialPoolContent = ({ pools, transactions, articles }) => {
       sectionDecriptionText={t('special.secondaryText')}
     >
         <DonationProgressComponent type={'special'}/>
-        <PoolCurrentTransactionList pool={globalState?.specialPool}/>
+        <PoolCurrentTransactionList pool={globalState?.specialPool} type={'special'}/>
         <NewsArticlesSlider items={articles}/>
         <EtherScanComponent address={globalState?.specialPool?.eth_address} />
     </PageWrapper>

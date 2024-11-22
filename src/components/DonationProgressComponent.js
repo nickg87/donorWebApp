@@ -14,8 +14,8 @@ const DonationProgressComponent = ({...props}) => {
   const {t, i18n} = useTranslation();
   const isSpecial = props?.type === 'special';
   const {globalState} = useAppContext();
-  console.log(globalState);
-  console.log(isSpecial);
+  // console.log(globalState);
+  // console.log(isSpecial);
   let whatPool = 'currentPool';
   if (isSpecial) {
     whatPool = 'specialPool';
@@ -55,7 +55,7 @@ const DonationProgressComponent = ({...props}) => {
         }
 
         {/*<ProgressBarComponent />*/}
-        <RoundedCircleProgressBar/>
+        <RoundedCircleProgressBar isSpecial={isSpecial}/>
         <DonateButton isSpecial={isSpecial}/>
         {!isSpecial && <IndexTiles/> }
       </div>

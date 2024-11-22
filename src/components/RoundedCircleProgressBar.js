@@ -2,14 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import classes from './RoundedCircleProgressBar.module.scss';
 import { useAppContext } from "@/contexts/AppContext";
 
-const RoundedCircleProgressBar = () => {
+const RoundedCircleProgressBar = ({...props}) => {
   const { globalState } = useAppContext();
   const progressCircleRef = useRef(null);
   const progressBarInstance = useRef(null);
+  let whatPool = 'currentPool';
+  if (props.isSpecial) {
+    whatPool = 'specialPool';
+  }
 
   // Calculate progress based on prize_amount and currentPoolBalance
-  const prizeAmount = parseFloat(globalState?.currentPool?.prize_amount || 0);
-  const currentBalance = parseFloat(globalState?.currentPoolBalance || 0);
+  const prizeAmount = parseFloat(globalState?.[whatPool]?.prize_amount || 0);
+  const currentBalance = parseFloat(globalState?.[whatPool + 'Balance'] || 0);
+  //const currentBalance = 2;
+
   const progress = prizeAmount > 0 ? (currentBalance / prizeAmount) * 100 : 0;
   // Determine trailColor based on theme
   const trailColor = globalState.theme === 'dark' ? '#10173F' : '#FFF7E8FF'; // Change '#E0E0E0' to your desired light theme color
@@ -29,8 +35,28 @@ const RoundedCircleProgressBar = () => {
             className: classes['progressCircle__label'],
           },
           step: (state, circle) => {
-            const value = `${Math.round(circle.value() * 100)}%`;
+            let value;
+            let toCompare = circle.value() * 100;
+            if (props.isSpecial && toCompare < 0.5) {
+              // Format without rounding for values less than 0.5
+              value = `${(circle.value() * 100).toFixed(3)}%`;
+            } else if (props.isSpecial && toCompare < 0.99) {
+              // Format without rounding for values less than 0.5
+              value = `${(circle.value() * 100).toFixed(2)}%`;
+            } else if (props.isSpecial && toCompare < 99) {
+              // Format without rounding for values less than 0.5
+              value = `${(circle.value() * 100).toFixed(1)}%`;
+            } else {
+              // Default rounding
+              value = `${Math.round(circle.value() * 100)}%`;
+            }
             circle.setText(value);
+            // Adjust font size based on length
+            const textElement = circle.text; // Access the SVG text element
+            if (textElement) {
+              const fontSize = value.length > 5 && '30px'; // Adjust as needed
+              textElement.style.fontSize = fontSize;
+            }
           },
         });
 
