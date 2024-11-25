@@ -15,6 +15,7 @@ export default (sequelize, DataTypes) => {
     },
     meta: {
       type: DataTypes.JSONB,
+      allowNull: true,
     },
     active: {
       type: DataTypes.BOOLEAN,
@@ -22,9 +23,11 @@ export default (sequelize, DataTypes) => {
     },
     featured_image: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
-    updated_at: {
-      type: DataTypes.DATE,
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     views: {
       type: DataTypes.INTEGER,

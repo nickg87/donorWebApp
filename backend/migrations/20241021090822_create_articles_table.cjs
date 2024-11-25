@@ -19,7 +19,6 @@ exports.up = async function (knex) {
       // Other fields
       table.boolean('active').defaultTo(true); // Whether the article is active or inactive
       table.string('featured_image').nullable(); // Path or ID to the featured image (you can decide the actual format later)
-      table.integer('author_id').unsigned().nullable(); // Foreign key to authors table
       table.integer('views').defaultTo(0); // View counter, starts at 0
 
       // Timestamps

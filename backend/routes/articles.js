@@ -114,46 +114,6 @@ export default (db) => {
 
 
 
-
-
-  // Create a new pool
-  router.post('/', async (req, res) => {
-    try {
-      const { title, description, active = true, type } = req.body;
-      const [ret] = await db('articles').insert({ title, description, active, type }).returning('id');
-      res.status(201).json({ success: true, id: ret.id });
-    } catch (error) {
-      console.error('Error creating pool:', error);
-      res.status(500).json({ error: 'Failed to create pool' });
-    }
-  });
-
-  // Update a pool by ID
-  router.put('/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { title, description, active, type } = req.body;
-      await db('articles').where({ id }).update({ title, description, active, type });
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Error updating pool:', error);
-      res.status(500).json({ error: 'Failed to update pool' });
-    }
-  });
-
-  // Delete a pool by ID
-  router.delete('/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      await db('articles').where({ id }).del();
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Error deleting pool:', error);
-      res.status(500).json({ error: 'Failed to delete pool' });
-    }
-  });
-
-
   // Get the current pool based on specified conditions
   router.get('/current-article', async (req, res) => {
     try {

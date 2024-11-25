@@ -18,12 +18,17 @@ export const articleResourceOptions = (Resource, Components, File) => ({
           edit: Components.MultiLingualFieldEdit,
         },
       },
+      slug: {
+        type: 'string',
+      },
       meta: {
         type: 'string',
         components: {
           edit: Components.MultiLingualFieldEdit,
         },
       },
+      updated_at: { isVisible: false }, // Hide if not relevant
+      featured_image: { isVisible: false },
       files: {
         type: 'mixed', // The 'files' field stores the IDs of selected files
         isArray: true,
