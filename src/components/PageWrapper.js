@@ -5,7 +5,7 @@ import SectionNameWrapper from "./UI/SectionNameWrapper";
 import classes from "./PageWrapper.module.scss";
 
 const PageWrapper = ({...props}) => {
-  console.log(props)
+  //console.log(props)
   return (
     <>
       <Head>

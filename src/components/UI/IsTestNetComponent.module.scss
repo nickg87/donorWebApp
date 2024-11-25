@@ -1,0 +1,30 @@
+.isTestNetComponentWrapper {
+  width: 40px;
+  writing-mode: vertical-lr; /* Set vertical text orientation */
+  text-orientation: mixed; /* Keep text readable vertically */
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  top: 33%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &.dark {
+    background-color: #444;
+    color: #fff;
+  }
+
+  &.light {
+    background-color: #f0ad4e;
+    color: #333;
+  }
+
+
+  &:hover {
+    transform: scale(1.1); /* Increase scaling for a more pronounced zoom */
+    background-color: #ffbf47;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Optional shadow for added effect */
+    //cursor: not-allowed; /* Retain the 'not-allowed' cursor */
+  }
+}
