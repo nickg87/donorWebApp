@@ -10,12 +10,12 @@ import EtherScanComponent from "@/components/EtherScanComponent";
 import DonationProgressComponent from "@/components/DonationProgressComponent";
 
 const MainContent = ({ pools, transactions, articles }) => {
-  console.log('articles:');
-  console.log(articles);
-  console.log('transactions:');
-  console.log(transactions);
-  console.log('pools:');
-  console.log(pools);
+  // console.log('articles:');
+  // console.log(articles);
+  // console.log('transactions:');
+  // console.log(transactions);
+  // console.log('pools:');
+  // console.log(pools);
   const { globalState } = useAppContext();
   return (
       <>
