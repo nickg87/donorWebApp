@@ -14,8 +14,8 @@ export async function getServerSideProps({ locale }) {
     const transactionsRes = await fetch(apiUrl + 'transactions');
     const transactionsData = await transactionsRes.json();
 
-    const articlesRes = await axios.get(`${apiUrl}articles`);
-    const articlesData = await articlesRes.data;
+    const articlesRes = await fetch(apiUrl + 'articles');
+    const articlesData = await articlesRes.json();
 
     return {
       props: {
