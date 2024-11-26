@@ -20,133 +20,133 @@ export default function ToC() {
         sectionNameText={t('toc.pageHeadlineText')}
         sectionTitleText={t('toc.pageTitleText')}
       >
-        <p className="text-sm text-gray-500 text-center mb-12">
+        <p className="text-sm  text-center mb-12">
           Effective Date: <span className="font-medium">2024/12/01</span>
         </p>
 
         {/* Section 1 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section1.title')}
           </h2>
           <span dangerouslySetInnerHTML={{
             __html: t('toc.section1.text'),
-          }} className="text-gray-600 leading-relaxed mb-4"/>
+          }} className="leading-relaxed mb-4"/>
 
         </section>
 
         {/* Section 2 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section2.title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="leading-relaxed mb-4">
             {t('toc.section2.text1')}
           </p>
-          <ul className="list-disc list-inside text-gray-600 leading-relaxed">
+          <ul className="list-disc list-inside leading-relaxed">
             <li> {t('toc.section2.li1')}</li>
             <li> {t('toc.section2.li2')}</li>
             <li> {t('toc.section2.li3')}</li>
           </ul>
-          <p className="text-gray-600 leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {t('toc.section2.text2')}
           </p>
         </section>
 
         {/* Section 3 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section3.title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="leading-relaxed mb-4">
             {t('toc.section3.text1')}
           </p>
-          <ul className="list-disc list-inside text-gray-600 leading-relaxed">
+          <ul className="list-disc list-inside leading-relaxed">
             <li> {t('toc.section3.li1')}</li>
             <li> {t('toc.section3.li2')}</li>
             <li> {t('toc.section3.li3')}</li>
           </ul>
-          <p className="text-gray-600 leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {t('toc.section3.text2')}
           </p>
         </section>
 
         {/* Section 4 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section4.title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="leading-relaxed mb-4">
             {t('toc.section4.text1')}
           </p>
-          <ul className="list-disc list-inside text-gray-600 leading-relaxed">
+          <ul className="list-disc list-inside leading-relaxed">
             <li> {t('toc.section4.li1')}</li>
             <li> {t('toc.section4.li2')}</li>
             <li> {t('toc.section4.li3')}</li>
           </ul>
-          <p className="text-gray-600 leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {t('toc.section4.text2')}
           </p>
         </section>
 
         {/* Section 5 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section5.title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="leading-relaxed mb-4">
             {t('toc.section5.text1')}
           </p>
-          <ul className="list-disc list-inside text-gray-600 leading-relaxed">
+          <ul className="list-disc list-inside leading-relaxed">
             <li> {t('toc.section5.li1')}</li>
             <li> {t('toc.section5.li2')}</li>
             <li> {t('toc.section5.li3')}</li>
           </ul>
-          <p className="text-gray-600 leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {t('toc.section5.text2')}
           </p>
         </section>
 
         {/* Section 6 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section6.title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
+          <p className="leading-relaxed mb-4">
             {t('toc.section6.text1')}
           </p>
-          <ul className="list-disc list-inside text-gray-600 leading-relaxed">
+          <ul className="list-disc list-inside leading-relaxed">
             <li> {t('toc.section6.li1')}</li>
             <li> {t('toc.section6.li2')}</li>
             <li> {t('toc.section6.li3')}</li>
           </ul>
-          <p className="text-gray-600 leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             {t('toc.section6.text2')}
           </p>
         </section>
 
         {/* Section 7 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section7.title')}
           </h2>
           <span dangerouslySetInnerHTML={{
             __html: t('toc.section7.text'),
-          }} className="text-gray-600 leading-relaxed"/>
+          }} className="leading-relaxed"/>
         </section>
 
         {/* Section 8 */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             {t('toc.section8.title')}
           </h2>
           <span dangerouslySetInnerHTML={{
             __html: t('toc.section8.text'),
-          }} className="text-gray-600 leading-relaxed"/>
+          }} className="leading-relaxed"/>
         </section>
 
         <footer className="text-center mt-12">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm ">
             {t('toc.footer.text')}
             <a
               href="mailto:contact@donorhub.site"

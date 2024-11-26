@@ -16,7 +16,7 @@
     "effectiveDate": "Effective Date",
     "section1": {
       "title": "1. Purpose of donorHub",
-      "text": "<p class=\"text-gray-600 leading-relaxed mb-4\">\n  donorHub is a cryptocurrency-driven donation platform designed to connect\n            individuals with charitable causes worldwide. Our mission is to make giving\n            easy, transparent, and rewarding by allowing donors to contribute and\n            participate in prize pools.\n          </p>\n          <p class=\"text-gray-600 leading-relaxed\">\n            Whether you're looking to support humanitarian projects, environmental\n            conservation, education, or any other cause, donorHub ensures that your\n            contributions are securely processed and reach their intended recipients.\n            Prize pools are an added feature to incentivize donors, combining philanthropy\n            with engagement.\n          </p>"
+      "text": "<p class=\"leading-relaxed mb-4\">\n  donorHub is a cryptocurrency-driven donation platform designed to connect individuals with charitable causes worldwide. Our mission is to make giving easy, transparent, and rewarding by allowing donors to contribute and participate in prize pools.</p><p class=\"leading-relaxed\">Whether you're looking to support humanitarian projects, environmental conservation, education, or any other cause, donorHub ensures that your contributions are securely processed and reach their intended recipients. Prize pools are an added feature to incentivize donors, combining philanthropy with engagement.</p>"
     },
     "section2": {
       "title": "2. Eligibility",
