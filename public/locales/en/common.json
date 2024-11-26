@@ -16,59 +16,58 @@
     "effectiveDate": "Effective Date",
     "section1": {
       "title": "1. Purpose of donorHub",
-      "content1": "<p>donorHub is a cryptocurrency-driven donation platform, enabling seamless support for charitable causes. Users can participate by purchasing tickets to join prize pools.</p>",
-      "content2": "<p>This document outlines the rules and regulations for using the donorHub platform.</p>"
+      "text": "<p class=\"text-gray-600 leading-relaxed mb-4\">\n  donorHub is a cryptocurrency-driven donation platform designed to connect\n            individuals with charitable causes worldwide. Our mission is to make giving\n            easy, transparent, and rewarding by allowing donors to contribute and\n            participate in prize pools.\n          </p>\n          <p class=\"text-gray-600 leading-relaxed\">\n            Whether you're looking to support humanitarian projects, environmental\n            conservation, education, or any other cause, donorHub ensures that your\n            contributions are securely processed and reach their intended recipients.\n            Prize pools are an added feature to incentivize donors, combining philanthropy\n            with engagement.\n          </p>"
     },
     "section2": {
-      "title": "2. User Responsibilities",
-      "intro": "<p>As a user, you agree to follow these rules when using donorHub.</p>",
-      "item1": "Provide accurate information when registering or donating.",
-      "item2": "Refrain from fraudulent activities or manipulating the system.",
-      "item3": "Respect the terms and conditions for participating in prize pools.",
-      "conclusion": "<p>By adhering to these responsibilities, users ensure a fair and safe experience for all.</p>"
+      "title": "2. Eligibility",
+      "text1": "To use donorHub, you must meet the following requirements:",
+      "li1": "You are at least 18 years old or the legal age of majority in your country.",
+      "li2": "You agree to provide accurate and complete information during the donation process.",
+      "li3": "You are not prohibited by law from making cryptocurrency transactions in your jurisdiction.",
+      "text2": "donorHub reserves the right to terminate accounts or restrict access if any eligibility criteria are violated."
     },
     "section3": {
-      "title": "3. Account Management",
-      "intro": "<p>Users are responsible for maintaining the security of their account and ensuring all login credentials are kept private.</p>",
-      "item1": "Do not share your account information with others.",
-      "item2": "Notify donorHub immediately if you suspect any unauthorized activity.",
-      "item3": "Users must update their information regularly to ensure accuracy.",
-      "conclusion": "<p>By keeping your account secure, you ensure a safe experience on donorHub.</p>"
+      "title": "3. User Accounts (if applicable)",
+      "text1": "If user accounts are available or introduced in the future, they will be subject to the following terms:",
+      "li1": "Choose a secure and unique password.",
+      "li2": "Keep your login credentials confidential and secure.",
+      "li3": "Ensure that all account information is current and accurate to avoid disruptions.",
+      "text2": "In case of unauthorized account access or suspicious activity, notify donorHub immediately. We will not be liable for any losses or damages caused by your failure to maintain account security."
     },
     "section4": {
       "title": "4. Donations and Prize Pools",
-      "intro": "<p>Donations made through donorHub contribute to various charitable causes. Users can enter prize pools by purchasing tickets with cryptocurrency.</p>",
-      "item1": "Donations are non-refundable once submitted.",
-      "item2": "Users can track their donation history within the platform.",
-      "item3": "Prize pools are drawn according to set schedules, and winners will be notified via email.",
-      "conclusion": "<p>All transactions are handled securely and transparently.</p>"
+      "text1": "Donations made through donorHub are final, non-refundable, and processed through secure blockchain networks. Prize pools offer users the chance to win rewards, subject to the following conditions:",
+      "li1": "Each prize pool specifies entry requirements, deadlines, and rules.",
+      "li2": "Winners are selected fairly, either via blockchain mechanisms or secure randomizers.",
+      "li3": "Prize distribution may be subject to verification processes and adherence to the pool's terms.",
+      "text2": "By participating in prize pools, you acknowledge the inherent risks of cryptocurrency transactions, including fluctuations in value and transaction fees."
     },
     "section5": {
-      "title": "5. Privacy Policy",
-      "intro": "<p>donorHub respects your privacy and is committed to protecting your personal data. This section outlines how your information is handled.</p>",
-      "item1": "We collect personal data only for account management and donation purposes.",
-      "item2": "Your data is securely stored and encrypted.",
-      "item3": "We do not share your personal information with third parties unless required by law.",
-      "conclusion": "<p>By using donorHub, you agree to our privacy policy and terms regarding your personal information.</p>"
+      "title": "5. Cryptocurrency Transactions",
+      "text1": "All transactions on donorHub are processed on blockchain networks. This ensures security and transparency but may also lead to:",
+      "li1": "Irreversible transactions once confirmed on the blockchain.",
+      "li2": "Delays caused by network congestion or wallet errors.",
+      "li3": "Responsibility for inputting correct wallet addresses lies solely with the user.",
+      "text2": "donorHub is not liable for losses arising from user errors or network issues. Always double-check transaction details before proceeding."
     },
     "section6": {
-      "title": "6. Liability and Disclaimers",
-      "intro": "<p>donorHub is not liable for any losses, damages, or technical issues users may experience while using the platform.</p>",
-      "item1": "We do not guarantee the availability of the platform at all times.",
-      "item2": "We are not responsible for external links or third-party services.",
-      "item3": "Users engage with the platform at their own risk.",
-      "conclusion": "<p>By using donorHub, you acknowledge and accept these terms regarding liability.</p>"
+      "title": "6. User Responsibilities",
+      "text1": "Users must adhere to the following guidelines when using donorHub:",
+      "li1": "Refrain from illegal activities, including fraud, money laundering, or tax evasion.",
+      "li2": "Respect the intellectual property of others.",
+      "li3": "Avoid submitting harmful, misleading, or offensive content.",
+      "text2": "Violations may result in account suspension, legal action, or other consequences."
     },
     "section7": {
-      "title": "7. Termination of Service",
-      "content": "<p>donorHub reserves the right to terminate any user's account if they violate these terms of service. Violations include, but are not limited to, fraudulent activities or abuse of the platform.</p>"
+      "title": "7. Data Privacy",
+      "text": "donorHub collects and processes your data in accordance with our <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Privacy Policy</a>. Your data will never be sold or shared with third parties without consent unless required by law."
     },
     "section8": {
-      "title": "8. Contact Information",
-      "content": "<p>If you have any questions or concerns regarding these terms, please contact us at <a href=\"mailto:contact@donorhub.site\">contact@donorhub.site</a>.</p>"
+      "title": "8. Liability Disclaimer",
+      "text": "donorHub provides services \"as is\" without guarantees. We disclaim all warranties, and our liability is limited to the maximum extent permitted by law."
     },
     "footer": {
-      "text": "For any inquiries or concerns, contact us at"
+      "text": "For any inquiries or concerns, contact us at "
     }
   },
   "privacy": {

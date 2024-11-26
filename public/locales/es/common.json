@@ -12,62 +12,62 @@
     "linkText": "Términos",
     "pageHeadlineText": "Términos y condiciones",
     "pageTitle": "Términos y condiciones | DonorHub App",
-    "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia.",
+    "pageTitleText": "Por favor, lea esto cuidadosamente y actúe en consecuencia.",
+    "effectiveDate": "Fecha de entrada en vigor",
     "section1": {
       "title": "1. Propósito de donorHub",
-      "content1": "<p>donorHub es una plataforma de donaciones impulsada por criptomonedas, que permite un soporte fluido para causas benéficas. Los usuarios pueden participar comprando boletos para unirse a los sorteos de premios.</p>",
-      "content2": "<p>Este documento describe las reglas y regulaciones para el uso de la plataforma donorHub.</p>"
+      "text": "<p class=\"text-gray-600 leading-relaxed mb-4\">\n  donorHub es una plataforma de donaciones impulsada por criptomonedas diseñada para conectar\n            a individuos con causas benéficas en todo el mundo. Nuestra misión es hacer que las donaciones\n            sean fáciles, transparentes y gratificantes, permitiendo a los donantes contribuir y\n            participar en los fondos de premios.\n          </p>\n          <p class=\"text-gray-600 leading-relaxed\">\n            Ya sea que busque apoyar proyectos humanitarios, conservación del medio ambiente,\n            educación o cualquier otra causa, donorHub asegura que sus contribuciones sean procesadas de manera\n            segura y lleguen a sus destinatarios previstos. Los fondos de premios son una característica adicional para\n            incentivar a los donantes, combinando filantropía con participación.\n          </p>"
     },
     "section2": {
-      "title": "2. Responsabilidades del Usuario",
-      "intro": "<p>Como usuario, aceptas seguir estas reglas al usar donorHub.</p>",
-      "item1": "Proporcionar información precisa al registrarse o realizar una donación.",
-      "item2": "Abstenerse de actividades fraudulentas o manipulación del sistema.",
-      "item3": "Respetar los términos y condiciones para participar en los sorteos de premios.",
-      "conclusion": "<p>Al cumplir con estas responsabilidades, los usuarios aseguran una experiencia justa y segura para todos.</p>"
+      "title": "2. Elegibilidad",
+      "text1": "Para usar donorHub, debe cumplir con los siguientes requisitos:",
+      "li1": "Debe tener al menos 18 años o la mayoría de edad legal en su país.",
+      "li2": "Acepta proporcionar información precisa y completa durante el proceso de donación.",
+      "li3": "No está prohibido por la ley para realizar transacciones con criptomonedas en su jurisdicción.",
+      "text2": "donorHub se reserva el derecho de terminar cuentas o restringir el acceso si se violan los requisitos de elegibilidad."
     },
     "section3": {
-      "title": "3. Gestión de la Cuenta",
-      "intro": "<p>Los usuarios son responsables de mantener la seguridad de su cuenta y de asegurar que sus credenciales de inicio de sesión se mantengan privadas.</p>",
-      "item1": "No compartir tu información de cuenta con otras personas.",
-      "item2": "Notificar a donorHub de inmediato si sospechas de cualquier actividad no autorizada.",
-      "item3": "Los usuarios deben actualizar regularmente su información para asegurar su precisión.",
-      "conclusion": "<p>Al mantener tu cuenta segura, aseguras una experiencia segura en donorHub.</p>"
+      "title": "3. Cuentas de usuario (si corresponde)",
+      "text1": "Si se introducen cuentas de usuario en el futuro, estarán sujetas a los siguientes términos:",
+      "li1": "Elija una contraseña segura y única.",
+      "li2": "Mantenga sus credenciales de inicio de sesión confidenciales y seguras.",
+      "li3": "Asegúrese de que toda la información de la cuenta esté actualizada y sea precisa para evitar interrupciones.",
+      "text2": "En caso de acceso no autorizado a la cuenta o actividad sospechosa, notifique inmediatamente a donorHub. No seremos responsables de pérdidas o daños causados por su incumplimiento en mantener la seguridad de la cuenta."
     },
     "section4": {
-      "title": "4. Donaciones y Sorteos de Premios",
-      "intro": "<p>Las donaciones realizadas a través de donorHub contribuyen a diversas causas benéficas. Los usuarios pueden ingresar a los sorteos de premios comprando boletos con criptomonedas.</p>",
-      "item1": "Las donaciones no son reembolsables una vez enviadas.",
-      "item2": "Los usuarios pueden seguir el historial de sus donaciones dentro de la plataforma.",
-      "item3": "Los sorteos de premios se realizan según horarios establecidos, y los ganadores serán notificados por correo electrónico.",
-      "conclusion": "<p>Todas las transacciones se gestionan de forma segura y transparente.</p>"
+      "title": "4. Donaciones y fondos de premios",
+      "text1": "Las donaciones realizadas a través de donorHub son finales, no reembolsables y se procesan a través de redes blockchain seguras. Los fondos de premios ofrecen a los usuarios la oportunidad de ganar recompensas, sujetos a las siguientes condiciones:",
+      "li1": "Cada fondo de premios especifica los requisitos de entrada, plazos y reglas.",
+      "li2": "Los ganadores se seleccionan de manera justa, ya sea mediante mecanismos blockchain o aleatorizadores seguros.",
+      "li3": "La distribución de premios puede estar sujeta a procesos de verificación y cumplimiento de los términos del fondo.",
+      "text2": "Al participar en los fondos de premios, reconoce los riesgos inherentes de las transacciones con criptomonedas, incluidos los cambios en el valor y las tarifas de transacción."
     },
     "section5": {
-      "title": "5. Política de Privacidad",
-      "intro": "<p>donorHub respeta tu privacidad y se compromete a proteger tus datos personales. Esta sección describe cómo se gestionan tus datos.</p>",
-      "item1": "Recopilamos datos personales únicamente para la gestión de cuentas y fines de donación.",
-      "item2": "Tus datos se almacenan de manera segura y cifrada.",
-      "item3": "No compartimos tu información personal con terceros a menos que lo exija la ley.",
-      "conclusion": "<p>Al usar donorHub, aceptas nuestra política de privacidad y términos relacionados con tu información personal.</p>"
+      "title": "5. Transacciones con criptomonedas",
+      "text1": "Todas las transacciones en donorHub se procesan en redes blockchain. Esto garantiza seguridad y transparencia, pero también puede dar lugar a:",
+      "li1": "Transacciones irreversibles una vez confirmadas en la blockchain.",
+      "li2": "Retrasos causados por congestión en la red o errores de billetera.",
+      "li3": "La responsabilidad de ingresar las direcciones de billetera correctas recae únicamente en el usuario.",
+      "text2": "donorHub no es responsable de las pérdidas derivadas de errores del usuario o problemas de red. Siempre verifique los detalles de la transacción antes de proceder."
     },
     "section6": {
-      "title": "6. Responsabilidad y Exenciones",
-      "intro": "<p>donorHub no es responsable de ninguna pérdida, daño o problema técnico que los usuarios puedan experimentar al usar la plataforma.</p>",
-      "item1": "No garantizamos la disponibilidad de la plataforma en todo momento.",
-      "item2": "No somos responsables de enlaces externos o servicios de terceros.",
-      "item3": "Los usuarios interactúan con la plataforma bajo su propio riesgo.",
-      "conclusion": "<p>Al usar donorHub, reconoces y aceptas estos términos sobre responsabilidad.</p>"
+      "title": "6. Responsabilidades del usuario",
+      "text1": "Los usuarios deben cumplir con las siguientes pautas al usar donorHub:",
+      "li1": "Abstenerse de actividades ilegales, incluyendo fraude, lavado de dinero o evasión fiscal.",
+      "li2": "Respetar la propiedad intelectual de terceros.",
+      "li3": "Evitar enviar contenido dañino, engañoso u ofensivo.",
+      "text2": "Las violaciones pueden resultar en la suspensión de la cuenta, acciones legales u otras consecuencias."
     },
     "section7": {
-      "title": "7. Terminación del Servicio",
-      "content": "<p>donorHub se reserva el derecho de cancelar la cuenta de cualquier usuario si violan estos términos de servicio. Las violaciones incluyen, pero no se limitan a, actividades fraudulentas o abuso de la plataforma.</p>"
+      "title": "7. Privacidad de los datos",
+      "text": "donorHub recopila y procesa sus datos de acuerdo con nuestra <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Política de Privacidad</a>. Sus datos nunca serán vendidos ni compartidos con terceros sin su consentimiento, a menos que lo exija la ley."
     },
     "section8": {
-      "title": "8. Información de Contacto",
-      "content": "<p>Si tienes alguna pregunta o inquietud sobre estos términos, por favor contáctanos a <a href=\"mailto:contact@donorhub.site\">contact@donorhub.site</a>.</p>"
+      "title": "8. Exención de responsabilidad",
+      "text": "donorHub proporciona servicios \"tal cual\" sin garantías. Renunciamos a todas las garantías, y nuestra responsabilidad está limitada al máximo permitido por la ley."
     },
     "footer": {
-      "text": "Para cualquier consulta o preocupación, contáctanos en"
+      "text": "Para cualquier consulta o inquietud, contáctenos en "
     }
   },
   "privacy": {
