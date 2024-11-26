@@ -12,7 +12,92 @@
     "linkText": "Términos",
     "pageHeadlineText": "Términos y condiciones",
     "pageTitle": "Términos y condiciones | DonorHub App",
-    "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia."
+    "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia.",
+    "section1": {
+      "title": "1. Propósito de donorHub",
+      "content1": "<p>donorHub es una plataforma de donaciones impulsada por criptomonedas, que permite un soporte fluido para causas benéficas. Los usuarios pueden participar comprando boletos para unirse a los sorteos de premios.</p>",
+      "content2": "<p>Este documento describe las reglas y regulaciones para el uso de la plataforma donorHub.</p>"
+    },
+    "section2": {
+      "title": "2. Responsabilidades del Usuario",
+      "intro": "<p>Como usuario, aceptas seguir estas reglas al usar donorHub.</p>",
+      "item1": "Proporcionar información precisa al registrarse o realizar una donación.",
+      "item2": "Abstenerse de actividades fraudulentas o manipulación del sistema.",
+      "item3": "Respetar los términos y condiciones para participar en los sorteos de premios.",
+      "conclusion": "<p>Al cumplir con estas responsabilidades, los usuarios aseguran una experiencia justa y segura para todos.</p>"
+    },
+    "section3": {
+      "title": "3. Gestión de la Cuenta",
+      "intro": "<p>Los usuarios son responsables de mantener la seguridad de su cuenta y de asegurar que sus credenciales de inicio de sesión se mantengan privadas.</p>",
+      "item1": "No compartir tu información de cuenta con otras personas.",
+      "item2": "Notificar a donorHub de inmediato si sospechas de cualquier actividad no autorizada.",
+      "item3": "Los usuarios deben actualizar regularmente su información para asegurar su precisión.",
+      "conclusion": "<p>Al mantener tu cuenta segura, aseguras una experiencia segura en donorHub.</p>"
+    },
+    "section4": {
+      "title": "4. Donaciones y Sorteos de Premios",
+      "intro": "<p>Las donaciones realizadas a través de donorHub contribuyen a diversas causas benéficas. Los usuarios pueden ingresar a los sorteos de premios comprando boletos con criptomonedas.</p>",
+      "item1": "Las donaciones no son reembolsables una vez enviadas.",
+      "item2": "Los usuarios pueden seguir el historial de sus donaciones dentro de la plataforma.",
+      "item3": "Los sorteos de premios se realizan según horarios establecidos, y los ganadores serán notificados por correo electrónico.",
+      "conclusion": "<p>Todas las transacciones se gestionan de forma segura y transparente.</p>"
+    },
+    "section5": {
+      "title": "5. Política de Privacidad",
+      "intro": "<p>donorHub respeta tu privacidad y se compromete a proteger tus datos personales. Esta sección describe cómo se gestionan tus datos.</p>",
+      "item1": "Recopilamos datos personales únicamente para la gestión de cuentas y fines de donación.",
+      "item2": "Tus datos se almacenan de manera segura y cifrada.",
+      "item3": "No compartimos tu información personal con terceros a menos que lo exija la ley.",
+      "conclusion": "<p>Al usar donorHub, aceptas nuestra política de privacidad y términos relacionados con tu información personal.</p>"
+    },
+    "section6": {
+      "title": "6. Responsabilidad y Exenciones",
+      "intro": "<p>donorHub no es responsable de ninguna pérdida, daño o problema técnico que los usuarios puedan experimentar al usar la plataforma.</p>",
+      "item1": "No garantizamos la disponibilidad de la plataforma en todo momento.",
+      "item2": "No somos responsables de enlaces externos o servicios de terceros.",
+      "item3": "Los usuarios interactúan con la plataforma bajo su propio riesgo.",
+      "conclusion": "<p>Al usar donorHub, reconoces y aceptas estos términos sobre responsabilidad.</p>"
+    },
+    "section7": {
+      "title": "7. Terminación del Servicio",
+      "content": "<p>donorHub se reserva el derecho de cancelar la cuenta de cualquier usuario si violan estos términos de servicio. Las violaciones incluyen, pero no se limitan a, actividades fraudulentas o abuso de la plataforma.</p>"
+    },
+    "section8": {
+      "title": "8. Información de Contacto",
+      "content": "<p>Si tienes alguna pregunta o inquietud sobre estos términos, por favor contáctanos a <a href=\"mailto:contact@donorhub.site\">contact@donorhub.site</a>.</p>"
+    },
+    "footer": {
+      "text": "Para cualquier consulta o preocupación, contáctanos en"
+    }
+  },
+  "privacy": {
+    "linkText": "Política de Privacidad",
+    "pageHeadlineText": "Política de Privacidad",
+    "pageTitle": "Política de Privacidad | DonorHub App",
+    "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia.",
+    "effectiveDate": "Fecha de vigencia: {{date}}",
+    "introText": "En DonorHub, valoramos su privacidad y estamos comprometidos a proteger cualquier información relacionada con su uso de nuestra plataforma.",
+    "dataCollection": {
+      "title": "1. Recopilación de Datos",
+      "description": "No recopilamos información personal de nuestros usuarios. Todas las interacciones en DonorHub se realizan de forma anónima y están vinculadas únicamente a direcciones de Ethereum."
+    },
+    "useOfData": {
+      "title": "2. Uso de Datos",
+      "description": "Los datos recopilados se utilizan estrictamente para mejorar la funcionalidad de la plataforma y garantizar la seguridad del sistema. Esto incluye detalles de transacciones y análisis de uso."
+    },
+    "cookies": {
+      "title": "3. Cookies",
+      "description": "DonorHub utiliza cookies mínimas para mejorar la experiencia del usuario. Estas cookies no almacenan información personal y se utilizan únicamente para optimizar el rendimiento."
+    },
+    "security": {
+      "title": "4. Seguridad",
+      "description": "Priorizamos la seguridad mediante la aplicación de prácticas estándar de la industria para proteger todas las transacciones y las interacciones de datos dentro de nuestra plataforma."
+    },
+    "changes": {
+      "title": "5. Cambios en esta Política",
+      "description": "Esta Política de Privacidad puede actualizarse periódicamente para reflejar cambios en nuestra plataforma o cumplir con los requisitos legales. Por favor, revísela regularmente para mantenerse informado."
+    },
+    "footerText": "Si tiene alguna pregunta sobre esta Política de Privacidad, contáctenos en"
   },
   "faq": {
     "linkText": "Preguntas frecuentes",

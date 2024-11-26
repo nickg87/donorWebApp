@@ -12,7 +12,93 @@
     "linkText": "Toc",
     "pageHeadlineText": "Terms and conditions",
     "pageTitle": "Terms and conditions | DonorHub App",
-    "pageTitleText": "Please read this carefully and act accordingly."
+    "pageTitleText": "Please read this carefully and act accordingly.",
+    "effectiveDate": "Effective Date",
+    "section1": {
+      "title": "1. Purpose of donorHub",
+      "content1": "<p>donorHub is a cryptocurrency-driven donation platform, enabling seamless support for charitable causes. Users can participate by purchasing tickets to join prize pools.</p>",
+      "content2": "<p>This document outlines the rules and regulations for using the donorHub platform.</p>"
+    },
+    "section2": {
+      "title": "2. User Responsibilities",
+      "intro": "<p>As a user, you agree to follow these rules when using donorHub.</p>",
+      "item1": "Provide accurate information when registering or donating.",
+      "item2": "Refrain from fraudulent activities or manipulating the system.",
+      "item3": "Respect the terms and conditions for participating in prize pools.",
+      "conclusion": "<p>By adhering to these responsibilities, users ensure a fair and safe experience for all.</p>"
+    },
+    "section3": {
+      "title": "3. Account Management",
+      "intro": "<p>Users are responsible for maintaining the security of their account and ensuring all login credentials are kept private.</p>",
+      "item1": "Do not share your account information with others.",
+      "item2": "Notify donorHub immediately if you suspect any unauthorized activity.",
+      "item3": "Users must update their information regularly to ensure accuracy.",
+      "conclusion": "<p>By keeping your account secure, you ensure a safe experience on donorHub.</p>"
+    },
+    "section4": {
+      "title": "4. Donations and Prize Pools",
+      "intro": "<p>Donations made through donorHub contribute to various charitable causes. Users can enter prize pools by purchasing tickets with cryptocurrency.</p>",
+      "item1": "Donations are non-refundable once submitted.",
+      "item2": "Users can track their donation history within the platform.",
+      "item3": "Prize pools are drawn according to set schedules, and winners will be notified via email.",
+      "conclusion": "<p>All transactions are handled securely and transparently.</p>"
+    },
+    "section5": {
+      "title": "5. Privacy Policy",
+      "intro": "<p>donorHub respects your privacy and is committed to protecting your personal data. This section outlines how your information is handled.</p>",
+      "item1": "We collect personal data only for account management and donation purposes.",
+      "item2": "Your data is securely stored and encrypted.",
+      "item3": "We do not share your personal information with third parties unless required by law.",
+      "conclusion": "<p>By using donorHub, you agree to our privacy policy and terms regarding your personal information.</p>"
+    },
+    "section6": {
+      "title": "6. Liability and Disclaimers",
+      "intro": "<p>donorHub is not liable for any losses, damages, or technical issues users may experience while using the platform.</p>",
+      "item1": "We do not guarantee the availability of the platform at all times.",
+      "item2": "We are not responsible for external links or third-party services.",
+      "item3": "Users engage with the platform at their own risk.",
+      "conclusion": "<p>By using donorHub, you acknowledge and accept these terms regarding liability.</p>"
+    },
+    "section7": {
+      "title": "7. Termination of Service",
+      "content": "<p>donorHub reserves the right to terminate any user's account if they violate these terms of service. Violations include, but are not limited to, fraudulent activities or abuse of the platform.</p>"
+    },
+    "section8": {
+      "title": "8. Contact Information",
+      "content": "<p>If you have any questions or concerns regarding these terms, please contact us at <a href=\"mailto:contact@donorhub.site\">contact@donorhub.site</a>.</p>"
+    },
+    "footer": {
+      "text": "For any inquiries or concerns, contact us at"
+    }
+  },
+  "privacy": {
+    "linkText": "Privacy Policy",
+    "pageHeadlineText": "Privacy Policy",
+    "pageTitle": "Privacy Policy | DonorHub App",
+    "pageTitleText": "Please read this carefully and act accordingly.",
+    "effectiveDate": "Effective Date: {{date}}",
+    "introText": "At DonorHub, we value your privacy and are committed to safeguarding any information related to your use of our platform.",
+    "dataCollection": {
+      "title": "1. Data Collection",
+      "description": "We do not collect any personal information from our users. All interactions on DonorHub are conducted anonymously and tied solely to Ethereum addresses."
+    },
+    "useOfData": {
+      "title": "2. Use of Data",
+      "description": "Any data collected is used strictly to improve platform functionality and ensure system security. This includes transaction details and usage analytics."
+    },
+    "cookies": {
+      "title": "3. Cookies",
+      "description": "DonorHub uses minimal cookies to enhance user experience. These cookies do not store personal information and are used only for performance optimization."
+    },
+    "security": {
+      "title": "4. Security",
+      "description": "We prioritize security by employing industry-standard practices to protect all transactions and data interactions within our platform."
+    },
+    "changes": {
+      "title": "5. Changes to This Policy",
+      "description": "This Privacy Policy may be updated periodically to reflect changes in our platform or compliance with legal requirements. Please review it regularly to stay informed."
+    },
+    "footerText": "If you have any questions about this Privacy Policy, please contact us at"
   },
   "faq": {
     "linkText": "FAQ",
