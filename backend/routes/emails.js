@@ -1,5 +1,5 @@
 import express from 'express';
-import { sendEmail } from '../utils/sendEmail.js';
+import {sendEmail} from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ router.post('/contact', async (req, res) => {
 
   const emailResult = await sendEmail({
     fromName: name,
-    fromEmail: process.env.EMAIL_ADDRESS,
+    fromEmail: email,
     toEmail: process.env.EMAIL_ADDRESS,
     subject: apiName + `: Contact form from ` + name,
     message: message,
