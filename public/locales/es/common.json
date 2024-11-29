@@ -103,7 +103,79 @@
     "linkText": "Preguntas frecuentes",
     "pageHeadlineText": "Preguntas frecuentes",
     "pageTitle": "Preguntas Frecuentes | DonorHub App",
-    "pageTitleText": "Aquí encontrarás respuestas a las preguntas más comunes."
+    "pageTitleText": "Aquí encontrarás respuestas a las preguntas más comunes.",
+    "q1": {
+      "q": "1. ¿Cuál es el propósito de esta sección de preguntas frecuentes?",
+      "a": "Esta sección de preguntas frecuentes está diseñada para proporcionar respuestas a las preguntas más comunes de nuestros usuarios sobre la plataforma DonorHub. Explica el proceso de ingresar a los pools de donación, ganar premios y cómo funciona todo detrás de escena, incluyendo el papel de los contratos inteligentes."
+    },
+    "q2": {
+      "q": "2. ¿Cómo entro a un pool?",
+      "a": "Para ingresar a un pool, simplemente haz clic en el botón \"Donar ahora\". Aparecerá un modal pidiéndote conectar tu billetera. Elige tu aplicación de billetera descentralizada (como MetaMask o similar) y confirma la conexión. Una vez conectado, envía tu transacción desde la billetera, ya sea desde la aplicación de escritorio o móvil, y espera la confirmación. Una vez que la transacción sea confirmada, ¡habrás ingresado al pool!"
+    },
+    "q3": {
+      "q": "3. ¿Cómo puedo contactar con soporte?",
+      "a": "Si necesitas asistencia, puedes llenar el formulario de contacto o enviarnos un correo directamente a contact@donorhub.site."
+    },
+    "q4": {
+      "q": "4. ¿Cuál es el proceso de entrada para un pool?",
+      "a": "Cada donación a un pool cuenta como un \"ticket\" y solo puedes ingresar una vez por sesión. Sin embargo, puedes ingresar múltiples veces al mismo pool si lo deseas. Las entradas a los pools son gestionadas de manera transparente por un Contrato Inteligente (SC), asegurando la equidad y transparencia en todo el proceso."
+    },
+    "q5": {
+      "q": "5. ¿Cómo se selecciona al ganador de un pool?",
+      "a": "Solo hay un ganador por pool, y el ganador se determina automáticamente por el contrato inteligente, basado en ciertas condiciones. El ganador será seleccionado cuando el precio del gas sea razonable; si es una \"hora punta\", la transacción podría retrasarse hasta que el precio del gas sea más favorable. Este proceso es completamente automatizado, sin intervención manual."
+    },
+    "q6": {
+      "q": "6. ¿Puedo ingresar a múltiples pools?",
+      "a": "Actualmente, no hay límite en la cantidad de pools en los que puedes participar. ¡Puedes ingresar a tantos pools como desees!"
+    },
+    "q7": {
+      "q": "7. ¿Cómo se notifica a los ganadores?",
+      "a": "Cada pool completado mostrará la dirección de Ethereum del ganador. Esta información es visible para todos, pero solo se muestra la dirección del ganador, no su identidad. Esto asegura la transparencia manteniendo el anonimato del usuario."
+    },
+    "q8": {
+      "q": "8. ¿Existen implicaciones legales o fiscales por ganar?",
+      "a": "Esto depende del país en el que residas. No nos hacemos responsables de las obligaciones fiscales o legales relacionadas con las ganancias. Consulta las leyes locales para entender las obligaciones que puedas tener."
+    },
+    "q9": {
+      "q": "9. ¿Tengo una cuenta en DonorHub?",
+      "a": "Actualmente, los usuarios no tienen cuentas individuales. En su lugar, cada usuario está representado por su dirección de Ethereum. Si un usuario tiene varias direcciones, cada una puede participar en pools por separado. En casos raros, si un pool está lleno, el contrato inteligente intentará recompensar la dirección de Ethereum con el premio, pero esto depende de los precios del gas. Si es un período de alta demanda (\"hora punta\"), la transacción puede retrasarse hasta que los precios del gas sean favorables. Los usuarios serán notificados a través de su billetera (por ejemplo, MetaMask)."
+    },
+    "q10": {
+      "q": "10. ¿Cuántos ganadores hay por pool?",
+      "a": "Solo hay un ganador por pool, y el ganador se selecciona automáticamente según la lógica del contrato inteligente. Este proceso es completamente transparente."
+    },
+    "q11": {
+      "q": "11. ¿Hay algún límite sobre cuántos pools puedo ingresar?",
+      "a": "Actualmente, no hay límite sobre cuántos pools puedes ingresar. Eres libre de participar en tantos pools como desees."
+    },
+    "q12": {
+      "q": "12. ¿Podré retirar mi premio?",
+      "a": "No hay un proceso de retiro para los usuarios. Si ganas, el contrato inteligente (SC) transferirá automáticamente tus ganancias directamente a tu dirección de Ethereum."
+    },
+    "q13": {
+      "q": "13. ¿Cómo puedo consultar mis ganancias pasadas?",
+      "a": "En el futuro, planeamos agregar una sección donde podrás ver todas las transacciones y pools ganados por una dirección de Ethereum que haya participado en al menos un pool."
+    },
+    "q14": {
+      "q": "14. ¿Cómo puedo crear mi propio pool?",
+      "a": "Para crear un pool, por favor proporciona los detalles a través de nuestro formulario de contacto y te ayudaremos a configurarlo. Asegúrate de incluir toda la información relevante y los requisitos para tu pool."
+    },
+    "q15": {
+      "q": "15. ¿Qué tan anónimas son las transacciones?",
+      "a": "Todas las transacciones en DonorHub son completamente anónimas. La única información que tenemos es tu dirección de Ethereum, que se utiliza para la transparencia en la selección de los ganadores. No rastreamos quién es el propietario de la dirección."
+    },
+    "q16": {
+      "q": "16. ¿Existe un límite de tiempo para que un pool alcance su objetivo?",
+      "a": "No, no hay límite de tiempo para que un pool alcance su objetivo. Los fondos permanecerán en la red hasta que el pool se llene, asegurando que los usuarios tengan suficiente tiempo para participar."
+    },
+    "q17": {
+      "q": "17. ¿Cómo funciona el Contrato Inteligente?",
+      "a": "El Contrato Inteligente (SC) es completamente transparente y controla todo el proceso de entrada al pool. Garantiza la equidad en la selección de ganadores, el manejo de las entradas y la distribución de premios. Todas las transacciones se ejecutan según las reglas especificadas por el contrato."
+    },
+    "q18": {
+      "q": "18. ¿Puedo donar a un pool sin participar en el sorteo?",
+      "a": "Actualmente, las donaciones solo están vinculadas a la participación en los pools. Si donas a un pool, serás automáticamente incluido en el sorteo. No se aceptan donaciones sin participación en el pool."
+    }
   },
   "blog": {
     "linkText": "Blog",

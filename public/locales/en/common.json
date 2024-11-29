@@ -103,7 +103,79 @@
     "linkText": "FAQ",
     "pageHeadlineText": "Frequently Asked Questions",
     "pageTitle": "Frequently Asked Questions | DonorHub App",
-    "pageTitleText": "Here you will find answers to the most common questions."
+    "pageTitleText": "Here you will find answers to the most common questions.",
+    "q1": {
+      "q": "1. What is the purpose of this FAQ section?",
+      "a": "This FAQ section is designed to provide answers to the most common questions from our users about the DonorHub platform. It explains the process of entering donation pools, winning prizes, and how everything works behind the scenes, including the role of smart contracts."
+    },
+    "q2": {
+      "q": "2. How do I enter a pool?",
+      "a": "To enter a pool, simply click the \"Donate now\" button. A modal will appear asking you to connect your wallet. Choose your decentralized wallet app (like MetaMask or similar), and confirm the connection. Once connected, send your transaction from the wallet, either via desktop or mobile app, and wait for the confirmation. Once the transaction is confirmed, you're entered into the pool!"
+    },
+    "q3": {
+      "q": "3. How can I contact support?",
+      "a": "If you need assistance, you can either fill out the contact form or email us directly at contact@donorhub.site."
+    },
+    "q4": {
+      "q": "4. What is the entry process for a pool?",
+      "a": "Each donation into a pool counts as a \"ticket,\" and you can only enter once per session. However, you can enter multiple times for the same pool if you like. The pool entries are managed transparently by a Smart Contract (SC), ensuring fairness and transparency throughout the process."
+    },
+    "q5": {
+      "q": "5. How is the winner selected for a pool?",
+      "a": "There is only one winner per pool, and the winner is determined automatically by the smart contract, based on certain conditions. The winner will be selected when the gas price is reasonable; if it's a \"rush hour,\" the transaction might be delayed until the gas price is more favorable. This process is fully automated, with no manual intervention."
+    },
+    "q6": {
+      "q": "6. Can I enter multiple pools?",
+      "a": "Currently, there is no limit to the number of pools you can participate in. You can enter as many pools as you like!"
+    },
+    "q7": {
+      "q": "7. How are winners notified?",
+      "a": "Each completed pool will display the Ethereum address of the winner. This information is visible to everyone, but only the winner's address is displayed, not their identity. This ensures transparency while maintaining user anonymity."
+    },
+    "q8": {
+      "q": "8. Are there any legal or tax implications for winning?",
+      "a": "This depends on the country in which you reside. We do not take responsibility for tax obligations or legal requirements regarding winnings. Please check your local laws to understand any obligations you might have."
+    },
+    "q9": {
+      "q": "9. Do I have an account on DonorHub?",
+      "a": "Currently, users do not have individual accounts. Instead, each user is represented by their Ethereum address. If a user owns multiple addresses, each address can participate in pools separately. In rare cases, if a pool is full, the smart contract will attempt to reward the Ethereum address with the prize, but this depends on gas prices. If it's a high-demand period (\"rush hour\"), the transaction may be delayed until gas prices are favorable. Users will be notified through their wallet (e.g., MetaMask)."
+    },
+    "q10": {
+      "q": "10. How many winners are there per pool?",
+      "a": "There is only one winner per pool, and the winner is automatically selected based on the smart contract's logic. This process is entirely transparent."
+    },
+    "q11": {
+      "q": "11. Are there any limits to how many pools I can enter?",
+      "a": "Currently, there is no limit to how many pools you can enter. You are free to participate in as many pools as you want."
+    },
+    "q12": {
+      "q": "12. Will I be able to withdraw my prize?",
+      "a": "There is no withdrawal process for users. If you win, the smart contract (SC) will automatically transfer your winnings directly to your Ethereum address."
+    },
+    "q13": {
+      "q": "13. How do I check my past wins?",
+      "a": "In the future, we plan to add a section where you can view all transactions and winning pools for an Ethereum address that has participated in at least one pool."
+    },
+    "q14": {
+      "q": "14. How can I create my own pool?",
+      "a": "To create a pool, please provide the details via our contact form, and we will assist you in setting it up. Make sure to include all relevant information and requirements for your pool."
+    },
+    "q15": {
+      "q": "15. How anonymous are the transactions?",
+      "a": "All transactions on DonorHub are completely anonymous. The only information we have is your Ethereum address, which is used for transparency in selecting winners. We do not track who owns the address."
+    },
+    "q16": {
+      "q": "16. Is there a time limit for a pool to reach its target?",
+      "a": "No, there is no time limit for a pool to reach its target. Funds will remain on the network until the pool is full, ensuring that users have enough time to participate."
+    },
+    "q17": {
+      "q": "17. How does the Smart Contract work?",
+      "a": "The Smart Contract (SC) is fully transparent and controls the entire pool entry process. It ensures fairness in selecting winners, handling entries, and distributing prizes. All transactions are executed according to the rules specified by the contract."
+    },
+    "q18": {
+      "q": "18. Can I donate to a pool without participating in the drawing?",
+      "a": "Currently, donations are only linked to pool entries. If you donate to a pool, you are automatically entered into the drawing. Donations are not accepted without participation in the pool."
+    }
   },
   "blog": {
     "linkText": "Blog",
