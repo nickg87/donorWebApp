@@ -25,7 +25,7 @@ const FileThumbnail = ({ record }) => {
   const fileExtension = filePath.split('.').pop().toLowerCase();
   const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
   //const isImage = false;
-  const imageUrl = `/${isLocal ? 'public' : ''}${filePath}`;
+  const imageUrl = `${isLocal ? '/public' : ''}${filePath}`;
 
   return (
     <div style={{ textAlign: 'left' }}>
