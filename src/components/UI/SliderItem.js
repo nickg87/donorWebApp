@@ -5,6 +5,7 @@ import {useAppContext} from "@/contexts/AppContext";
 import {useTranslation} from "next-i18next";
 import IconDollar from "../../../public/iconsax/dollar-circle.svg";
 import IconClock from "../../../public/iconsax/clock-1.svg";
+import IconDanger from "../../../public/iconsax/danger.svg";
 import {getTimeAgo} from "@/utils/helpers";
 
 const SliderItem = ({ item, type }) => {
@@ -21,12 +22,24 @@ const SliderItem = ({ item, type }) => {
 
   return (
     <div className={`rounded-[30px] mb-10 mx-1 ${classes[globalState?.theme]} border backdrop-blur-md ${globalState?.theme === 'dark' ? 'border-darkBorder bg-[#030A31] bg-opacity-80 shadow-darkTheme' : 'border-lightBorder bg-white/54 shadow-lightTheme'} `}>
-      <img
-        src={item.image}
-        alt={item.text}
-        title={item.text}
-        className="w-full h-60 object-cover rounded-[30px] rounded-b-none"
-      />
+      {/* Image Wrapper */}
+      <div className="relative w-full h-60 rounded-[30px] rounded-b-none overflow-hidden">
+        {/* Diagonal Ribbon for is_test_net */}
+        {type !== 'article' && item.is_test_net && (
+          <div className={classes.testNetRibbon}>
+            <span className="flex justify-center items-center gap-2">
+              <IconDanger className="w-5 h-5"/> Test Net <IconDanger className="w-5 h-5"/>
+            </span>
+          </div>
+        )}
+        <img
+          src={item.image}
+          alt={item.text}
+          title={item.text}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
       <div
         className={`${classes.sliderDetailItemWrapper} ${classes[globalState?.theme]} p-6 flex flex-col align-center items-start`}>
         <div

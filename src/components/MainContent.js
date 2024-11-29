@@ -16,12 +16,15 @@ const MainContent = ({ pools, transactions, articles }) => {
   // console.log(transactions);
   // console.log('pools:');
   // console.log(pools);
+  // Filter pools of type "social"
+  const socialPools = pools.filter((pool) => pool.type === "social" && pool.active === true );
+
   const { globalState } = useAppContext();
   return (
       <>
         <DonationProgressComponent pools={pools} transactions={transactions}/>
         <PoolCurrentTransactionList pool={globalState?.currentPool}/>
-        <SocialDonationsSlider />
+        <SocialDonationsSlider pools={socialPools}/>
         <NewsArticlesSlider items={articles}/>
         <EtherScanComponent address={globalState?.currentPool?.eth_address} />
       </>
