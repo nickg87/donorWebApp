@@ -98,6 +98,11 @@ app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'favicons/favicon_be.ico'));
 });
 
+// Fallback for css file
+app.get('/css/custom.css', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'backend/public/css/custom.css'));
+});
+
 // Setup AdminJS
 const adminRouter = await setupAdminJS();
 app.use('/admin', adminRouter);
