@@ -20,7 +20,6 @@ dotenvConfig();
 dotenvFlowConfig({
   path: path.resolve(envPath),
   node_env: process.env.NODE_ENV || 'development',
-  is_local: process.env.IS_LOCAL || false,
 });
 
 const __filename = fileURLToPath(import.meta.url);
