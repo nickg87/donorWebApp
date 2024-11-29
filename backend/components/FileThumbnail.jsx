@@ -1,29 +1,31 @@
 // src/components/FileThumbnail.jsx
 import React, {useEffect, useState} from 'react';
+import { fetchIsLocal } from '../utils/miscellaneous'; // Import the helper function
+
 
 const FileThumbnail = ({ record }) => {
+  const [isLocal, setIsLocal] = useState(null);
   const [filePath, setFilePath] = useState(record?.params?.path);
   const [isLoading, setIsLoading] = useState(filePath === undefined);
 
+  // Fetch the environment variable from the server using the helper function
   useEffect(() => {
-    if (!filePath || isLoading) {
-      const timeoutId = setTimeout(() => {
-        setFilePath(record?.params?.path);  // Attempt to get the path again after timeout
-        setIsLoading(false);
-      }, 100); // Set timeout to 1 second (1000 ms) or adjust as needed
+    const getIsLocal = async () => {
+      const isLocalValue = await fetchIsLocal();
+      setIsLocal(isLocalValue);
+    };
 
-      return () => clearTimeout(timeoutId); // Clean up on unmount
-    }
-  }, [filePath, record, isLoading]);
+    getIsLocal();
+  }, []);
 
-  if (isLoading) {
+  if (isLoading || isLocal === null) {
     return <div>Loading...</div>;
   }
 
   const fileExtension = filePath.split('.').pop().toLowerCase();
   const isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
   //const isImage = false;
-  const imageUrl = `/public${filePath}`;
+  const imageUrl = `/${isLocal && 'public'}${filePath}`;
 
   return (
     <div style={{ textAlign: 'left' }}>

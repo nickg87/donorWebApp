@@ -20,6 +20,7 @@ dotenvConfig();
 dotenvFlowConfig({
   path: path.resolve(envPath),
   node_env: process.env.NODE_ENV || 'development',
+  is_local: process.env.IS_LOCAL || false,
 });
 
 const __filename = fileURLToPath(import.meta.url);
@@ -64,6 +65,7 @@ const transactionsRoutes = (await import('./routes/transactions.js')).default;
 const emailsRouter = (await import('./routes/emails.js')).default;
 const etherScanRouter = (await import('./routes/etherscan.js')).default;
 const fileRouter = (await import('./routes/files.js')).default;
+const envRouter = (await import('./routes/env.js')).default;
 console.log("Mounting file router...");
 const authRouter = (await import('./routes/auths.js')).default;
 
@@ -77,6 +79,7 @@ app.use('/api/auth', authRouter(knex));
 // Serve files in the assets folder
 
 app.use('/api/files', fileRouter(knex));
+app.use('/api/env', envRouter);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 //app.use('/api/upload', fileRouter(knex));
 
