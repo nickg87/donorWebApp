@@ -14,6 +14,7 @@ router.post('/contact', async (req, res) => {
     subject: apiName + `: Contact form from ` + name,
     message: message,
     asHtml: true,
+    useReply: true,
   });
 
   if (emailResult.success) {

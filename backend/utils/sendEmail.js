@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export async function sendEmail({ fromName = process.env.APP_NAME, fromEmail, toEmail, subject, message, asHtml }) {
+export async function sendEmail({ fromName = process.env.APP_NAME, fromEmail, toEmail, subject, message, asHtml, useReply = false }) {
   try {
     // Create a transporter object using the Gmail SMTP service
     const transporter = nodemailer.createTransport({
@@ -14,11 +14,12 @@ export async function sendEmail({ fromName = process.env.APP_NAME, fromEmail, to
     // Email options
     const mailOptions = {
       from: `"${fromName}" <${fromEmail}>`,
-      replyTo: fromEmail,
+      replyTo: useReply ? process.env.APP_EMAIL : fromEmail,
       to: toEmail,
       subject: subject,
       [asHtml ? 'html' : 'text']: message, // Use HTML or plain text based on asHtml
     };
+    //console.log(mailOptions);
 
     // Send the email
     const info = await transporter.sendMail(mailOptions);
