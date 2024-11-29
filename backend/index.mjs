@@ -91,17 +91,17 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'public')));
 // Serve static files from the 'public' directory of the frontend
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
-app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
+// app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
 
-// Fallback for favicon
-app.get('/favicon.ico', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'favicons/favicon_be.ico'));
-});
-
-// Fallback for css file
-app.get('/css/custom.css', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'backend/public/css/custom.css'));
-});
+// // Fallback for favicon
+// app.get('/favicon.ico', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'favicons/favicon_be.ico'));
+// });
+//
+// // Fallback for css file
+// app.get('/css/custom.css', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..', 'backend/public/css/custom.css'));
+// });
 
 // Setup AdminJS
 const adminRouter = await setupAdminJS();
