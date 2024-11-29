@@ -11,8 +11,7 @@ const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {
 
   // Extract the initial value from the nested params property
   let initialFieldValue = ((record.params && record.params[fieldName + '.' + currentLang]) || record[fieldName]) || {};
-  // console.log('initialFieldValue for ' + fieldName + ' fieldName: ' );
-  // console.log(initialFieldValue);
+
 
   const [fieldValue, setFieldValue] = useState(initialFieldValue);
 

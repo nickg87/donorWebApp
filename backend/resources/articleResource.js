@@ -15,7 +15,15 @@ export const articleResourceOptions = (Resource, Components, File) => ({
       short: {
         type: 'string',
         components: {
-          edit: Components.MultiLingualFieldEdit,
+          edit: Components.ArticleShortEdit,
+        },
+      },
+      description: {
+        type: 'richtext',
+        components: {
+          edit: Components.ArticleDescriptionEdit,
+          show: Components.ArticleDescriptionShow,
+          list: Components.ArticleDescriptionList,
         },
       },
       slug: {

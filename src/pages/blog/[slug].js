@@ -18,7 +18,7 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL; // Make sure this is you
 
 // This is the page component
 export default function BlogPost({ post }) {
-  console.log(post)
+  //console.log(post)
   const { t } = useTranslation();
   const { globalState } = useAppContext();
   const { i18n } = useTranslation();
@@ -40,8 +40,10 @@ export default function BlogPost({ post }) {
       >
         <>
           <blockquote className={classes.short}>{post.short[i18n.language]}</blockquote>
-          <p>{post.description}</p>
           {post.path && <img src={post.path} alt={'Image for ' + post.description[i18n.language]}/>}
+          <p dangerouslySetInnerHTML={{
+            __html: post.description[i18n.language],
+          }}/>
 
           <Link href={`/blog`} className="block mt-4 md:inline-block pr-2">
             <ButtonWrapper
