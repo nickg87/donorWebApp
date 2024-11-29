@@ -3,8 +3,8 @@ import {fileURLToPath} from 'url';
 import path from 'path';
 import AdminJS, {ComponentLoader} from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import { Database, Resource } from '@adminjs/sequelize';
-import { Sequelize } from 'sequelize';
+import {Database, Resource} from '@adminjs/sequelize';
+import {Sequelize} from 'sequelize';
 
 // Import models
 import poolModel from './models/pools.js';
@@ -18,7 +18,8 @@ import {articleResourceOptions} from "./resources/articleResource.js";
 import {fileResourceOptions} from "./resources/fileResource.js";
 import {transactionResourceOptions} from "./resources/transactionResource.js";
 import {poolResourceOptions} from "./resources/poolResource.js";
-import {deleteFileAction, bulkDeleteFileAction} from "./actions/deleteFileAction.js";
+import {bulkDeleteFileAction, deleteFileAction} from "./actions/deleteFileAction.js";
+import expressBasicAuth from "express-basic-auth";
 
 // Register AdminJS adapter
 AdminJS.registerAdapter({ Database, Resource });
@@ -172,5 +173,18 @@ export async function setupAdminJS() {
   });
 
   // Build and return the AdminJS router
-  return AdminJSExpress.buildRouter(adminJS);
+  //return AdminJSExpress.buildRouter(adminJS);
+
+  // Create an AdminJS router
+  const adminRouter = AdminJSExpress.buildRouter(adminJS);
+
+  // Wrap the router with basic authentication
+  return [
+    expressBasicAuth({
+      users: {[process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD}, // Use env vars for credentials
+      challenge: true, // Forces browser's authentication popup
+    }),
+    adminRouter,
+  ];
+
 }
