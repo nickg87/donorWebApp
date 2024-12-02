@@ -1,6 +1,8 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
-import { broadcastMessage } from '../webSocket.js'; // Import broadcast function
+import { broadcastMessage } from '../webSocket.js';
+import { sendNewTransactionEmail } from './emailService.js'; // Move email logic here
+
 
 export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
   // console.log('etherScanApiKey in fetchEtherScanData: ');
@@ -82,7 +84,7 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
               const poolId = decodedData.args.poolId.toString();
               const ticketPrice = decodedData.args.ticketPrice.toString();
               //console.log("Pool ID:", poolId);
-              console.log("Pool ID:", parseInt(poolId));
+              //console.log("Pool ID:", parseInt(poolId));
               //console.log("Ticket Price:", ticketPrice);
 
 
@@ -102,6 +104,30 @@ export const fetchEtherScanData = async (address, db, etherScanApiKey) => {
                   poolId: parseInt(poolId), // Adjust as necessary
                 });
                 newTransactionsCount++;
+
+
+                //try to send new transaction email
+                // Send email notification
+                await sendNewTransactionEmail(transaction.from, pool);
+
+                // const response = await fetch('/api/emails/newTransaction', {
+                //   method: 'POST',
+                //   headers: {
+                //     'Content-Type': 'application/json',
+                //   },
+                //   body: JSON.stringify({
+                //     apiName: process.env.APP_NAME,
+                //     tx_address: transaction.from,
+                //     message: 'New transaction from ' + transaction.from
+                //   }),
+                // });
+                //
+                // if (response.ok) {
+                //   console.log('Transaction EMAIL SENT');
+                // } else {
+                //   console.warn('Transaction EMAIL FAILED');
+                // }
+
               }
             }
           }
