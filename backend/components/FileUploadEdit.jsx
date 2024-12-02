@@ -1,10 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { fetchIsLocal } from '../utils/miscellaneous'; // Import the helper function
 
 const FileUploadEdit = ({ record, onChange, property, showNotification }) => {
+  const [isLocal, setIsLocal] = useState(null);
   const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  // Fetch the environment variable from the server using the helper function
+  useEffect(() => {
+    const getIsLocal = async () => {
+      const isLocalValue = await fetchIsLocal();
+      setIsLocal(isLocalValue);
+    };
+
+    getIsLocal();
+  }, []);
+
+  if (isLocal === null) {
+    return <div>Loading...</div>;
+  }
 
   // Allowed file types and max size
   const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -131,7 +147,7 @@ const FileUploadEdit = ({ record, onChange, property, showNotification }) => {
             {uploadedFiles.map((file, index) => (
               <div key={index} style={{ width: '150px', textAlign: 'center' }}>
                 <img
-                  src={'/public/' + file.path}
+                  src={(isLocal ? '/public' : '') + file.path}
                   alt={file.filename}
                   style={{ width: '100%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
                 />
