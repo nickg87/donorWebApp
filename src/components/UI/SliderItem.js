@@ -12,8 +12,6 @@ const SliderItem = ({ item, type }) => {
 
   const { t,i18n } = useTranslation();
   const { globalState } = useAppContext();
-  // console.log(item);
-  // console.log(type);
 
   if (type === 'article') {
     item.image = item.files?.[0]?.path ? `${item.files[0].path}` : '/images/placeholder.svg';

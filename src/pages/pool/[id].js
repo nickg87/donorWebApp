@@ -17,14 +17,12 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL; // Make sure this is you
 
 // This is the page component
 export default function PoolPage({ pool }) {
-  console.log(pool)
+  console.log(pool);
   const { t } = useTranslation();
   const { globalState } = useAppContext();
-  console.log(globalState);
   const { i18n } = useTranslation();
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
 
   // In case the page is built without a specific id or falls back
   if (router.isFallback) {

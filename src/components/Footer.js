@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
         <div className="md:justify-start flex flex-col gap-2">
           <p className="text-sm text-center md:text-left">&copy; {t('general.copyright')}</p>
-          <div className="flex gap-1 md:gap-4 items-center justify-evenly flex-col sm:flex-row md:justify-between md:items-center text-center md:text-left">
+          <div className="flex gap-1 md:gap-4 items-center justify-evenly flex-col md:flex-row md:justify-between md:items-center text-center md:text-left">
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('toc.linkText')}
             </Link>

@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import {formatEther } from 'viem';
 import { fetchCurrentTransactionsForPoolId, timestampToDateString, getTimeAgo} from "@/utils/helpers";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
 import {useAppContext} from "@/contexts/AppContext";
 import SectionNameWrapper from "@/components/UI/SectionNameWrapper";
 import IsTestNetComponent from "@/components/UI/IsTestNetComponent";
