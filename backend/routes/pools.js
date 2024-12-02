@@ -77,6 +77,40 @@ export default (db) => {
   });
 
 
+  //Get pool by id with transactions
+  router.get('/getById/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      // Fetch the pool details
+      const pool = await db('pools')
+        .select('*')
+        .where('id', id)
+        .first();
+
+      if (!pool) {
+        return res.status(404).json({ error: 'Pool not found' });
+      }
+
+      // Fetch the associated transactions
+      const transactions = await db('transactions')
+        .select('*')
+        .where('poolId', id)
+        .orderBy('timeStamp', 'desc');  // Optionally order transactions by timestamp
+
+      // Attach transactions to the pool object
+      const poolWithTransactions = {
+        ...pool,
+        transactions,
+      };
+
+      res.json(poolWithTransactions);
+    } catch (error) {
+      console.error('Error fetching pool:', error);
+      res.status(500).json({ error: 'Failed to fetch pool' });
+    }
+  });
+
   // Get the current pool based on specified conditions
   router.get('/current-pool', async (req, res) => {
     try {

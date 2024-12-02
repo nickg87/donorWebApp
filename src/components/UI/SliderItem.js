@@ -51,7 +51,11 @@ const SliderItem = ({ item, type }) => {
           { (type === 'article') ?
             <Link href={`/blog/${item.slug}`}>
             {item.text}
-          </Link> : item.text }
+          </Link> :
+            <Link href={`/pool/${item.id}`}>
+              {item.text}
+            </Link>
+          }
         </div>
       </div>
 
