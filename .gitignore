@@ -20,6 +20,7 @@
 /staging
 /public/assets/*
 /public/sitemap*.xml
+/public/robots.txt
 /backend/assets/*
 
 # misc
