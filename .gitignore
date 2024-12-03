@@ -19,6 +19,7 @@
 /stage
 /staging
 /public/assets/*
+/public/sitemap*.xml
 /backend/assets/*
 
 # misc
