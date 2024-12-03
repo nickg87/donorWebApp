@@ -43,4 +43,10 @@ module.exports = {
       lastmod: post.lastmod,
     }));
   },
+  robotsTxtOptions: {
+    policies: [
+      { userAgent: '*', disallow: ['/admin'] }, // Add the `/admin` rule explicitly
+      { userAgent: '*', allow: '/' }, // Allow other paths
+    ],
+  },
 };
