@@ -12,12 +12,13 @@ import IconStar from "../../public/iconsax/star.svg";
 import PageWrapper from "@/components/PageWrapper";
 import {useTranslation} from "next-i18next";
 
-const SpecialPoolContent = ({ pools, transactions, articles }) => {
+const SpecialPoolContent = ({ pools, transactions, articles, canonicalPath = null }) => {
   const { t, i18n } = useTranslation();
   const { globalState } = useAppContext();
   return (
     <PageWrapper
       theme={globalState?.theme}
+      canonicalPath={canonicalPath}
       pageTitle={t('special.pageTitle')}
       sectionIcon={<IconStar className={`w-6 h-6`}/>}
       sectionNameText={t('special.linkText')}

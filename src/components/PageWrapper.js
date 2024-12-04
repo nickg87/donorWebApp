@@ -5,11 +5,13 @@ import SectionNameWrapper from "./UI/SectionNameWrapper";
 import classes from "./PageWrapper.module.scss";
 
 const PageWrapper = ({...props}) => {
+  const canonicalUrl = props?.canonicalPath ? `${process.env.NEXT_PUBLIC_SITE_URL || "https://donorhub.site"}${props.canonicalPath}` : null;
   //console.log(props)
   return (
     <>
       <Head>
         <title>{props?.pageTitle}</title>
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       </Head>
       <div className="flex flex-col justify-center items-center py-4">
         <SectionNameWrapper icon={props?.sectionIcon} theme={props?.theme} text={props?.sectionNameText}

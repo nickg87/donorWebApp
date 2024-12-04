@@ -1,10 +1,11 @@
+//src/pages/million/index.js
 import React from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import SpecialPoolContent from "@/components/SpecialPoolContent";
 import axios from "axios";
 
 export default function Million({ pools, transactions, articles }) {
-  return <SpecialPoolContent pools={pools} transactions={transactions} articles={articles} />
+  return <SpecialPoolContent pools={pools} transactions={transactions} articles={articles} canonicalPath="/million" />
 }
 
 // Add serverSideTranslations to load translations
