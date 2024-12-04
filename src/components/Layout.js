@@ -97,7 +97,8 @@ const Layout = ({ children }) => {
         <Head>
           <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>
           <meta name="description"
-                content="Welcome to DonorHub, where donations are made easy. Learn more about our services and how you can contribute."/>
+                content="Discover the top crypto lottery pools with high prize amounts and transparent draws. Join today to win big!"/>
+          <meta name="robots" content="index, follow"/>
           {/* Other meta tags, stylesheets, etc. */}
         </Head>
         <div className="flex flex-col min-h-screen">
