@@ -10,37 +10,40 @@ const fetchBlogPosts = async () => {
   if (!response.ok) {
     throw new Error('Failed to fetch blog posts');
   }
-
-  const posts = await response.json();
-  return posts.map((post) => ({
-    loc: `/blog/${post.slug}`, // Dynamic route
-    lastmod: post.updated_at, // Optional last modified date
-  }));
+  return await response.json();
 };
 
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://donorhub.site';
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://donorhub.site', // Replace with your site's base URL
+  siteUrl: SITE_URL, // Replace with your site's base URL
   generateRobotsTxt: true, // (optional) Generate `robots.txt`, default: false
   changefreq: 'daily', // Frequency of content updates
   priority: 0.7, // Priority of pages
   sitemapSize: 5000, // Max entries per sitemap file
-  exclude: ['/admin'], // Pages to exclude
+  exclude: ['/admin', '/public'], // Pages to exclude
   alternateRefs: [
     {
-      href: process.env.NEXT_PUBLIC_SITE_URL + '/es',
+      href: SITE_URL + '/es',
       hreflang: 'es',
     },
     {
-      href: process.env.NEXT_PUBLIC_SITE_URL + '/en',
+      href: SITE_URL + '/en',
       hreflang: 'en',
     },
   ],
   additionalPaths: async (config) => {
     const blogPosts = await fetchBlogPosts();
     return blogPosts.map((post) => ({
-      loc: post.loc,
-      lastmod: post.lastmod,
+      loc: `/blog/${post.slug}`, // Fully qualified loc
+      lastmod: post.updated_at,            // Optional lastmod
+      changefreq: 'weekly', // Frequency of content updates
+      priority: 0.7, // Priority of pages
+      alternateRefs: [
+        { hreflang: 'es', href: SITE_URL + '/es/' }, // Spanish URL
+        { hreflang: 'en', href: SITE_URL + `/en` }, // English URL
+      ],
     }));
   },
   robotsTxtOptions: {
