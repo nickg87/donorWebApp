@@ -22,7 +22,7 @@ class MyDocument extends Document {
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>
           <script data-name="BMC-Widget" data-cfasync="false"
                   src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="donorhubapp"
-                  data-description="Support me on Buy me a coffee!" data-message="You like this? Support the effort :)"
+                  data-description="Support me on Buy me a coffee!" data-message="💖 Support the effort :)"
                   data-color="#9766FF" data-position="Right" data-x_margin="22" data-y_margin="22"></script>
           <script
             dangerouslySetInnerHTML={{
@@ -35,7 +35,6 @@ class MyDocument extends Document {
             }}
           />
           <link rel="icon" type="image/ico" sizes="32x32" href="/favicons/favicon.ico"/>
-          <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg"/>
         </Head>
         <body>
         <Main/>
