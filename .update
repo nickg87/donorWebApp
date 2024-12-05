@@ -7,12 +7,30 @@ border=$'\e[1;4;32m'
 bold=$'\e[1m'
 underline=$'\e[4m'
 bg_green=$'\e[100m'
-end=$'\e[0m'
 
+# Function to print in red
+print_red() {
+    echo -e "\033[31m$1\033[0m"
+}
+
+# Print current user and repository status
 printf "${grey}Current folder owner is ${blue}${user^^}${end}\n"
 
 printf "${grey}Pulling data from donorHub repo...${end}\n"
-git pull
+
+# Run git pull and capture the output
+GIT_OUTPUT=$(git pull 2>&1)
+
+# Check for "Aborting" in the output
+if echo "$GIT_OUTPUT" | grep -q "Aborting"; then
+    print_red "Error: Pull aborted due to local changes."
+    echo "$GIT_OUTPUT"  # Print the git output to see the full details
+    exit 1  # Exit the script if there's an issue
+else
+    echo "$GIT_OUTPUT"
+fi
+
+# Continue with the build and deployment if git pull was successful
 printf "${blue}Data pulled${end}\n"
 
 printf "${grey}Doing a new build...${end}\n"
@@ -27,5 +45,5 @@ printf "${grey}Reloading PM2 FE app...${end}\n"
 npm run reload-pm2
 printf "\n${blue}RELOAD PM2 DONE!...${end}\n"
 
+# Final completion message
 printf "\n${bold}${green}==================================================\n==================== ALL DONE ====================\n==================================================${end}\n\n\n"
-
