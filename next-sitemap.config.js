@@ -22,7 +22,7 @@ module.exports = {
   changefreq: 'daily', // Frequency of content updates
   priority: 0.7, // Priority of pages
   sitemapSize: 5000, // Max entries per sitemap file
-  exclude: ['/admin', '/public'], // Pages to exclude
+  exclude: ['/admin', '/public', '/blog/[slug]', '/blog/public/locales', '/public/locales'], // Pages to exclude
   alternateRefs: [
     {
       href: SITE_URL + '/es',
