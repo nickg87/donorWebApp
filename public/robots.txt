@@ -1,6 +1,10 @@
 # *
 User-agent: *
 Disallow: /admin
+Disallow: /public
+Disallow: /blog/[slug]
+Disallow: /blog/public/locales
+Disallow: /public/locales
 
 # *
 User-agent: *

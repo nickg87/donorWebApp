@@ -21,6 +21,8 @@
 /public/assets/*
 /public/sitemap*.xml
 /public/robots.txt
+/public/robots*.txt
+/robots.txt
 /backend/assets/*
 
 # misc
