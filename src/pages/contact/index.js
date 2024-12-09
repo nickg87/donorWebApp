@@ -7,12 +7,14 @@ const apiName = process.env.NEXT_PUBLIC_API_NAME || 'DonorHub';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const generateEmailTemplate = require('../../utils/emailTemplateHelper');
-import i18n from "i18next";
-import Head from "next/head";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
+import IconMessageText from "../../../public/iconsax/message-text-1.svg";
+import PageWrapper from "@/components/PageWrapper";
+import {useAppContext} from "@/contexts/AppContext";
 
 export default function Contact() {
   const { t, i18n } = useTranslation();
+  const { globalState } = useAppContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -83,79 +85,84 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>Contact | DonorHub App</title>
-      </Head>
-      <div className="container sm:mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold mb-6">{t('contactPage.title')}</h1>
-        {statusMessage && (
-          <div
-            className={`relative mb-4 p-4 rounded-md ${
-              statusType === 'success' ? 'bg-green-500' : 'bg-red-500'
-            }`}
-          >
-            <button
-              className="absolute top-2 right-2 p-4 py-2 px-4"
-              onClick={handleCloseMessage}
+      <PageWrapper
+        theme={globalState?.theme}
+        pageTitle={t('contactPage.pageTitle')}
+        sectionNameText={t('contactPage.title')}
+        sectionIcon={<IconMessageText className="w-6 h-6" />}
+        sectionTitleText={t('contactPage.pageTitleText')}
+        canonicalPath={"/contact"}
+      >
+        <>
+          {statusMessage && (
+            <div
+              className={`relative mb-4 p-4 rounded-md ${
+                statusType === 'success' ? 'bg-green-500' : 'bg-red-500'
+              }`}
             >
-              <FontAwesomeIcon style={{width:'18'}} icon={faTimes}/>
-            </button>
-            {statusMessage}
-          </div>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium">
-              {t('contactPage.form.fields.name')}
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
+              <button
+                className="absolute top-2 right-2 p-4 py-2 px-4"
+                onClick={handleCloseMessage}
+              >
+                <FontAwesomeIcon style={{width: '18'}} icon={faTimes}/>
+              </button>
+              {statusMessage}
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium">
+                {t('contactPage.form.fields.name')}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+              />
+            </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium">
-              {t('contactPage.form.fields.email')}
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium">
+                {t('contactPage.form.fields.email')}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+              />
+            </div>
 
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium">
-              {t('contactPage.form.fields.message')}
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              rows="5"
-              required
-            ></textarea>
-          </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium">
+                {t('contactPage.form.fields.message')}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                rows="5"
+                required
+              ></textarea>
+            </div>
 
-          <div>
-            <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[156px]'}>
-              {t('contactPage.form.fields.submit')}
-            </ButtonWrapper>
-          </div>
-        </form>
-      </div>
+            <div>
+              <ButtonWrapper theme={'dark'} extra={'h-[50px] w-[156px]'}>
+                {t('contactPage.form.fields.submit')}
+              </ButtonWrapper>
+            </div>
+          </form>
+        </>
+      </PageWrapper>
     </>
   );
 }

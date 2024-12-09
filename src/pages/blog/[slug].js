@@ -37,6 +37,7 @@ export default function BlogPost({ post }) {
         pageTitle={post.title[i18n.language]}
         sectionIcon={<IconBook className={`w-6 h-6`}/>}
         sectionNameText={post.title[i18n.language]}
+        canonicalPath={"/blog/" + post?.slug}
       >
         <>
           <blockquote className={classes.short}>{post.short[i18n.language]}</blockquote>

@@ -20,6 +20,7 @@ export default function Blog({ articles }) {
       sectionIcon={<IconBook className={`w-6 h-6`}/>}
       sectionNameText={t('blog.linkText')}
       sectionTitleText={t('blog.listTitleText')}
+      canonicalPath={"/blog"}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {articles.map((article) => (

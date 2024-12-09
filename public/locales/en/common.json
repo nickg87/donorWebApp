@@ -233,7 +233,10 @@
     "faq": "FAQ"
   },
   "contactPage": {
+    "linkText": "Contact",
     "title": "Contact Us",
+    "pageTitle": "Contact Us | DonorHub App",
+    "pageTitleText": "Let us know your thoughts. We would love to hear your suggestions.",
     "form": {
       "fields": {
         "name": "Name",

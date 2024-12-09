@@ -41,6 +41,7 @@ const FAQ = () => {
         sectionIcon={<IconMessageText className="w-6 h-6" />}
         sectionNameText={t('faq.pageHeadlineText')}
         sectionTitleText={t('faq.pageTitleText')}
+        canonicalPath={"/faq"}
       >
         <div className="space-y-4">
           {faqs.map((faq, index) => (

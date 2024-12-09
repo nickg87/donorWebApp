@@ -233,7 +233,10 @@
     "faq": "Preguntas Frecuentes"
   },
   "contactPage": {
+    "linkText": "Contáctenos",
     "title": "Contáctenos",
+    "pageTitle": "Contáctanos | DonorHub App",
+    "pageTitleText": "Haznos saber tus opiniones. Nos encantaría escuchar tus sugerencias.",
     "form": {
       "fields": {
         "name": "Nombre",

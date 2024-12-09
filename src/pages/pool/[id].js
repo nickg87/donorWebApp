@@ -36,6 +36,7 @@ export default function PoolPage({ pool }) {
         pageTitle={pool.title[i18n.language]}
         sectionIcon={<Icon3DCube className={`w-6 h-6`}/>}
         sectionNameText={pool.title[i18n.language]}
+        canonicalPath={"/pools/" + pool?.id}
       >
         <div className="flex flex-col justify-center items-center py-4">
           {pool.path && <img src={pool.path} alt={'Image for ' + pool.description[i18n.language]}/>}

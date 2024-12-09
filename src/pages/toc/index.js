@@ -19,6 +19,7 @@ export default function ToC() {
         sectionIcon={<IconDocumentText className={`w-6 h-6`}/>}
         sectionNameText={t('toc.pageHeadlineText')}
         sectionTitleText={t('toc.pageTitleText')}
+        canonicalPath={"/toc"}
       >
         <p className="text-sm  text-center mb-12">
           Effective Date: <span className="font-medium">2024/12/01</span>

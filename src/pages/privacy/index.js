@@ -18,6 +18,7 @@ export default function Privacy() {
         sectionIcon={<IconDocumentText className={`w-6 h-6`} />}
         sectionNameText={t('privacy.pageHeadlineText')}
         sectionTitleText={t('privacy.pageTitleText')}
+        canonicalPath={"/privacy"}
       >
         <p className="text-sm  text-center mb-12">
           {t('privacy.effectiveDate', { date: '2024/12/01' })}
