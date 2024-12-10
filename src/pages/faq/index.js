@@ -43,6 +43,17 @@ const FAQ = () => {
         sectionTitleText={t('faq.pageTitleText')}
         canonicalPath={"/faq"}
       >
+        {/* Video Content */}
+        <div className="relative pb-[56.25%] h-0 overflow-hidden w-full m-10">
+          <iframe
+            className="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/oVrz7T99gwA?si=4JV2AXj5bvRRcUb0"
+            title="How to quickly enter a prize pool"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div

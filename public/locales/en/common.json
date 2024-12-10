@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome to DonorHub",
-  "welcomeCurrentPool": "Current {{var1}} Donation Pool",
+  "welcomeCurrentPool": "Current {{var1}} Prize Pool",
   "welcomeCurrentPoolSubText": "Help us reach our goal! Every contribution makes a difference.",
   "firstTextTile": "<h3 class='text-lg font-bold'>Together, we can make a difference</h3>Your donation helps reach the ~$<strong>{{var1}}</strong> in ETH goal for the current donation pool.",
   "secondTextTile": "<h3 class='text-lg font-bold'>The Gauge shows current pool progress</h3>Each donation is a fixed amount of <strong>${{var1}}</strong> in <strong>ETH</strong>, and our goal is to reach <strong>${{var2}}</strong> in <strong>ETH</strong>",
@@ -262,6 +262,7 @@
   },
   "donateComponent": {
     "buttonText": "Donate Now",
+    "buttonTextQuickGuide": "Quick Guide",
     "modalTitle":"How to participate?",
     "note":"<small><sup>(*)</sup>A small transaction fee will be applied by the service provider for processing the donation. <br/> Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
