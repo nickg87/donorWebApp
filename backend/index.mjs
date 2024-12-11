@@ -63,6 +63,7 @@ const articlesRoutes = (await import('./routes/articles.js')).default;
 const transactionsRoutes = (await import('./routes/transactions.js')).default;
 const emailsRouter = (await import('./routes/emails.js')).default;
 const etherScanRouter = (await import('./routes/etherscan.js')).default;
+const emailVerifierRouter = (await import('./routes/emailVerifier.js')).default;
 const fileRouter = (await import('./routes/files.js')).default;
 const envRouter = (await import('./routes/env.js')).default;
 console.log("Mounting file router...");
@@ -74,6 +75,7 @@ app.use('/api/articles', articlesRoutes(knex));
 app.use('/api/transactions', transactionsRoutes(knex));
 app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);
+app.use('/api/emailVerifier', emailVerifierRouter);
 app.use('/api/auth', authRouter(knex));
 // Serve files in the assets folder
 

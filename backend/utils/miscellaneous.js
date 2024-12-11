@@ -1,4 +1,20 @@
 // utils/miscellaneous.js
+import fs from 'fs'; // Use ES module syntax
+import csvParser from 'csv-parser';
+
+// Read emails from a CSV file
+export const readEmailsFromCSV = async (filePath) => {
+  const emails = [];
+  return new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csvParser())
+      .on('data', (row) => {
+        if (row.email) emails.push(row.email.trim());
+      })
+      .on('end', () => resolve(emails))
+      .on('error', (err) => reject(err));
+  });
+};
 
 export const capitalizeFirstLetter = (string) => {
   if (!string) return '';
