@@ -27,6 +27,7 @@ router.get('/:fileName', async (req, res) => {
     const emails = await readEmailsFromCSV(filePath);
     const validEmails = [];
     const invalidEmails = [];
+    const unreachableEmails = [];
     const totalEmails = emails.length;
 
     // Helper function to process each email
@@ -38,14 +39,14 @@ router.get('/:fileName', async (req, res) => {
         if (result.valid) {
           validEmails.push(result.email);
         } else {
-          invalidEmails.push(email);
+          invalidEmails.push({email, result});
         }
 
         // Update progress after processing each email
         currentProgress = Math.round(((index + 1) / totalEmails) * 100);
       } catch (error) {
         console.error(`Verification failed for ${email}: ${error.message}`);
-        invalidEmails.push(email);
+        unreachableEmails.push({ email, error: error.message });
         currentProgress = Math.round(((index + 1) / totalEmails) * 100); // Update progress even on error
       }
     };
@@ -57,7 +58,14 @@ router.get('/:fileName', async (req, res) => {
     // Once the process is done, reset progress to 100
     currentProgress = 100;
 
-    res.json({ validEmails, total: validEmails.length, invalidEmails, totalInvalid: invalidEmails.length });
+    res.json({
+      validEmails,
+      total: validEmails.length,
+      invalidEmails,
+      totalInvalid: invalidEmails.length ,
+      unreachableEmails,
+      totalUnreachable: unreachableEmails.length
+    });
   } catch (error) {
     res.status(500).json({ message: 'Error processing emails', error: error.message });
   }
