@@ -29,24 +29,30 @@ router.get('/:fileName', async (req, res) => {
     const invalidEmails = [];
     const totalEmails = emails.length;
 
-    for (let i = 0; i < totalEmails; i++) {
-      await delay(1500); // Delay of 2 seconds
+    // Helper function to process each email
+    const processEmail = async (email, index) => {
+      await delay(1500); // Delay of 1.5 seconds
 
       try {
-        const result = await verifyEmail(emails[i]);
+        const result = await verifyEmail(email);
         if (result.valid) {
           validEmails.push(result.email);
         } else {
-          invalidEmails.push(emails[i]);
+          invalidEmails.push(email);
         }
 
-        // Update progress and store it
-        currentProgress = Math.round(((i + 1) / totalEmails) * 100);
+        // Update progress after processing each email
+        currentProgress = Math.round(((index + 1) / totalEmails) * 100);
       } catch (error) {
-        console.error(`Verification failed for ${emails[i]}: ${error.message}`);
-        invalidEmails.push(emails[i]);
+        console.error(`Verification failed for ${email}: ${error.message}`);
+        invalidEmails.push(email);
+        currentProgress = Math.round(((index + 1) / totalEmails) * 100); // Update progress even on error
       }
-    }
+    };
+
+    // Use Promise.all to process emails concurrently with delays
+    await Promise.all(emails.map((email, index) => processEmail(email, index)));
+
 
     // Once the process is done, reset progress to 100
     currentProgress = 100;
