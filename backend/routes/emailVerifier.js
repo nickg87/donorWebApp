@@ -55,7 +55,7 @@ router.get('/:fileName', async (req, res) => {
         currentProgress = Math.round(((index + 1) / totalEmails) * 100);
       } catch (error) {
         console.error(`Verification failed for ${email}: ${error.message}`);
-        unreachableEmails.push({ email, error: error.message });
+        unreachableEmails.push({ email, error });
         currentProgress = Math.round(((index + 1) / totalEmails) * 100); // Update progress even on error
       }
     };
