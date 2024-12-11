@@ -117,6 +117,8 @@ const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+server.setTimeout(1800000);
+
 // Import and start WebSocket server
 import { startWebSocketServer } from './webSocket.js';
 startWebSocketServer(server).then();

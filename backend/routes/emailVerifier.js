@@ -14,6 +14,9 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Variable to store progress
 let currentProgress = 0;
 
+// Example: Process emails in batches to avoid timeouts
+const batchSize = 100; // Process 100 emails at a time
+
 // Route to get the progress (for polling)
 router.get('/progress', (req, res) => {
   res.json({ progress: currentProgress });
@@ -39,21 +42,37 @@ router.get('/:fileName', async (req, res) => {
         if (result.valid) {
           validEmails.push(result.email);
         } else {
-          invalidEmails.push({email, result});
+          invalidEmails.push({ email, result });
         }
 
         // Update progress after processing each email
         currentProgress = Math.round(((index + 1) / totalEmails) * 100);
       } catch (error) {
         console.error(`Verification failed for ${email}: ${error.message}`);
-        unreachableEmails.push({ email, error });
+        unreachableEmails.push({ email, error: error.message });
         currentProgress = Math.round(((index + 1) / totalEmails) * 100); // Update progress even on error
       }
     };
 
-    // Use Promise.all to process emails concurrently with delays
-    await Promise.all(emails.map((email, index) => processEmail(email, index)));
+    const processBatch = async (emails, startIndex) => {
+      const endIndex = Math.min(startIndex + batchSize, emails.length);
+      const batch = emails.slice(startIndex, endIndex);
 
+      // Process emails concurrently within the batch
+      const promises = batch.map((email, index) => processEmail(email, startIndex + index));
+      await Promise.all(promises);  // Wait for all promises in the batch to finish
+    };
+
+    let currentIndex = 0;
+
+    while (currentIndex < totalEmails) {
+      await processBatch(emails, currentIndex);
+      currentIndex += batchSize;
+
+      // Optionally, send progress updates to the client
+      currentProgress = Math.round((currentIndex / totalEmails) * 100);
+      // You could send progress here using a response, WebSocket, or another method
+    }
 
     // Once the process is done, reset progress to 100
     currentProgress = 100;

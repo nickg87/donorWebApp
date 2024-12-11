@@ -18,7 +18,8 @@ const retryLimit = 3; // Set the number of retry attempts
 export const verifyEmail = (email) => {
   return new Promise((resolve, reject) => {
     emailExistence.check(email, (err, res) => {
-      console.log(res);
+      console.log(`Checking email: ${email}`);  // Log email being checked
+      console.log('Response from emailExistence:', res);  // Log the result
       if (err) {
         reject(`Error verifying email ${email}: ${err.message}`);
       } else if (res) {
