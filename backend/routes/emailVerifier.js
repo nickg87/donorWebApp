@@ -24,6 +24,12 @@ router.get('/progress', (req, res) => {
 
 // Get verify file by GET filename
 router.get('/:fileName', async (req, res) => {
+  // Set a timeout for this specific route
+  res.setTimeout(1800000, () => { // 1800000ms = 30 minutes
+    console.log('Request timed out!');
+    res.status(408).send('Request timed out');
+  });
+
   const { fileName } = req.params;
   const filePath = path.join('public/lists', fileName);
   try {
