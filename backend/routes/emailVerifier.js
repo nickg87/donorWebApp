@@ -1,6 +1,6 @@
 import express from 'express';
 import { smtpVerifyEmail, verifyEmail } from '../utils/emailVerifier.js';
-import { readEmailsFromCSV } from '../utils/miscellaneous.js';
+//import { readEmailsFromCSV } from '../utils/miscellaneous.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -19,7 +19,8 @@ router.get('/:fileName', async (req, res) => {
   const filePath = path.join('public/lists', fileName);
 
   try {
-    const emails = await readEmailsFromCSV(filePath);
+    //const emails = await readEmailsFromCSV(filePath);
+    const emails = [];
     const totalEmails = emails.length;
 
     // Initialize progress tracking
@@ -29,32 +30,6 @@ router.get('/:fileName', async (req, res) => {
       validEmails: [],
       invalidEmails: [],
       unreachableEmails: [],
-    });
-
-    // Trigger asynchronous email processing
-    emails.forEach(async (email) => {
-      // Add delay to avoid server overloading
-      await delay(500); // e.g., 0.5s delay per email
-
-      // Trigger a separate route to process the email
-      try {
-        const result = await fetch(`http://localhost:5000/api/emailVerifier/verify/${encodeURIComponent(email)}`);
-        const { valid, email: verifiedEmail } = await result.json();
-
-        const progress = progressStore.get(fileName);
-        if (valid) {
-          progress.validEmails.push(verifiedEmail);
-        } else {
-          progress.invalidEmails.push(verifiedEmail);
-        }
-        progress.completed++;
-        progressStore.set(fileName, progress);
-      } catch (error) {
-        const progress = progressStore.get(fileName);
-        progress.unreachableEmails.push(email);
-        progress.completed++;
-        progressStore.set(fileName, progress);
-      }
     });
 
     res.json({ message: 'Email verification started', total: totalEmails });

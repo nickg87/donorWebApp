@@ -84,6 +84,7 @@ export async function setupAdminJS() {
     FileThumbnail: componentLoader.add('FileThumbnail', './components/FileThumbnail'),
     FileShow: componentLoader.add('FileShow', './components/FileShow'),
     FileSelectGallery: componentLoader.add('FileSelectGallery', './components/FileSelectGallery'),
+    EmailVerifier: componentLoader.add('EmailVerifier', './components/EmailVerifier')
   }
 
   // Initialize AdminJS
@@ -93,10 +94,21 @@ export async function setupAdminJS() {
       transactionResourceOptions(Transaction, Components, pools),
       articleResourceOptions(Article, Components, File),
       fileResourceOptions(File, Components, deleteFileAction, bulkDeleteFileAction),
-      { resource: FileAssignment, options: {
+      { resource: FileAssignment,
+        options: {
           navigation: false, // Hide from the navigation sidebar
-        } },
+        }
+      },
+
     ],
+
+    pages: {
+      emailVerifier: {
+        component: Components.EmailVerifier,
+        icon: 'CheckCircle', // Icon for the page
+        label: 'Email Verifier',
+      },
+    },
     rootPath: '/admin',
     branding: {
       companyName: process.env.APP_NAME,
