@@ -11,6 +11,13 @@ const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+// Variable to store progress
+let currentProgress = 0;
+
+// Route to get the progress (for polling)
+router.get('/progress', (req, res) => {
+  res.json({ progress: currentProgress });
+});
 
 // Get verify file by GET filename
 router.get('/:fileName', async (req, res) => {
@@ -18,36 +25,32 @@ router.get('/:fileName', async (req, res) => {
   const filePath = path.join('public/lists', fileName);
   try {
     const emails = await readEmailsFromCSV(filePath);
-    const totalEmails = emails.length;
     const validEmails = [];
     const invalidEmails = [];
+    const totalEmails = emails.length;
 
-    let currentEmailIndex = 0;
-    res.setHeader('Content-Type', 'text/plain');  // Set response type for streaming
+    for (let i = 0; i < totalEmails; i++) {
+      await delay(1500); // Delay of 2 seconds
 
-    for (const email of emails) {
       try {
-        // Add a delay before each check
-        await delay(1500);  // 1.5 seconds delay
-
-        const result = await verifyEmail(email);
+        const result = await verifyEmail(emails[i]);
         if (result.valid) {
           validEmails.push(result.email);
         } else {
-          invalidEmails.push(email);
+          invalidEmails.push(emails[i]);
         }
 
-        // Send progress update (percentage) to client
-        currentEmailIndex++;
-        const progress = Math.floor((currentEmailIndex / totalEmails) * 100);
-        res.write(`Progress: ${progress}%\n`);  // Sends progress data to client
+        // Update progress and store it
+        currentProgress = Math.round(((i + 1) / totalEmails) * 100);
       } catch (error) {
-        console.error(`Verification failed for ${email}: ${error.message}`);
-        invalidEmails.push(email);
+        console.error(`Verification failed for ${emails[i]}: ${error.message}`);
+        invalidEmails.push(emails[i]);
       }
     }
 
-    res.end();  // End the response after processing all emails
+    // Once the process is done, reset progress to 100
+    currentProgress = 100;
+
     res.json({ validEmails, total: validEmails.length, invalidEmails, totalInvalid: invalidEmails.length });
   } catch (error) {
     res.status(500).json({ message: 'Error processing emails', error: error.message });
