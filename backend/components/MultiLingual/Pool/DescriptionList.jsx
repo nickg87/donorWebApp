@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Label, Text } from '@adminjs/design-system';
+import { Box, Text } from '@adminjs/design-system';
 
 // Define the component for displaying multilingual title
 const DescriptionList = ({ record }) => {

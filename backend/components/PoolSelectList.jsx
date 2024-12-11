@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Label, Text, Link } from '@adminjs/design-system';
+import { Box, Link } from '@adminjs/design-system';
 
 const PoolSelectList = ({ record, resource }) => {
   //console.log('record:', record);

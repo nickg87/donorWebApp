@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ComponentLoader } from 'adminjs'
 import { UploadField } from 'adminjs';
 
 const CustomUploadProvider = ({ upload, ...props }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Label, Text } from '@adminjs/design-system';
+import { Box, Label } from '@adminjs/design-system';
 
 // Define the component for displaying drawn data
 const DrawnDataShow = ({ record }) => {

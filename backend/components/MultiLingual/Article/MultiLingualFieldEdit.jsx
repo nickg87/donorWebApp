@@ -1,6 +1,6 @@
 //backend/components/MultiLingual/Article/MultiLingualFieldEdit.jsx
 import React, { useState, useEffect } from 'react';
-import { Button, Input, TextArea, Label, Box } from '@adminjs/design-system';
+import { Button, Input, Label, Box } from '@adminjs/design-system';
 import {capitalizeFirstLetter} from "../../../utils/miscellaneous.js";
 
 const MultiLingualFieldEdit = ({property,  record = {}, onChange }) => {

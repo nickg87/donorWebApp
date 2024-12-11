@@ -38,6 +38,9 @@ export default (sequelize, DataTypes) => {
     drawn_at: {
       type: DataTypes.DATE,
     },
+    updated_at: {
+      type: DataTypes.DATE,
+    },
   }, {
     tableName: 'pools',
     timestamps: true,
