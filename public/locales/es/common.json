@@ -251,7 +251,7 @@
     "survey": {
       "text": "¡Ayúdanos a mejorar! \uD83D\uDCA1\nNos encantaría conocer tu opinión sobre tu experiencia usando nuestra app. Tus comentarios nos ayudarán a crear una mejor plataforma para todos. ¡La encuesta es rápida, fácil y tu voz importa! \uD83C\uDF1F",
       "button": "Participa en la encuesta ahora",
-      "hide": "No mostrar de nuevo"
+      "hide": "No mostrar"
     }
   },
   "qrCodeComponent": {
