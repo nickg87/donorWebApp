@@ -9,11 +9,13 @@ import {themeCustomClass} from "@/utils/helpers";
 import LeftEllipseGradientDark from "../../public/images/leftEllipseGradientDark.svg";
 import GridEffectComponent from "@/components/UI/GridEffectComponent";
 import EllipseGradients from "@/components/UI/EllipseGradients";
+import GoogleSurvey from "@/components/GoogleSurvey";
 
 const Layout = ({ children }) => {
 
-  const { globalState, updateUser } = useAppContext();
+  const { globalState, updateUser, updateShowSurvey } = useAppContext();
   const isDev = process.env.NEXT_PUBLIC_DEVELOPER_MODE === 'true';
+  const surveyActive = process.env.NEXT_PUBLIC_SURVEY_ACTIVE === 'true';
   // console.log('isDev: ' + isDev);
 
   // const [isMaintenanceMode, setIsMaintenanceMode] = React.useState(false);
@@ -93,6 +95,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GridEffectComponent/>
+      {(globalState?.showSurvey === 'true' && surveyActive) && <GoogleSurvey/>}
       <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
           <title>DonorHub App - Donations made easy with a bit of luck in the end! | DonorHub App</title>

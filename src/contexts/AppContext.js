@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [isThemeReady, setIsThemeReady] = useState(false);
   const defaultTheme = typeof window !== 'undefined' ? localStorage.getItem('donorSiteTheme') : null;
   const defaultLanguage = typeof window !== 'undefined' ? localStorage.getItem('donorSiteLanguage') : null;
+  const defaultShowSurvey = typeof window !== 'undefined' ? localStorage.getItem('donorShowSurvey') : 'true';
   const [globalState, setGlobalState] = useState({
     user: null,
     balance: null,
@@ -21,6 +22,7 @@ export const AppProvider = ({ children }) => {
     currentPoolBalance: null,
     specialPoolBalance: null,
     currentEthPrice: null,
+    showSurvey: defaultShowSurvey || 'true',
     theme: defaultTheme || 'light',
     language: defaultLanguage || 'en',
   });
@@ -30,9 +32,13 @@ export const AppProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('donorSiteTheme');
       const storedLanguage = localStorage.getItem('donorSiteLanguage');
+      const storedShowSurvey = localStorage.getItem('donorShowSurvey');
       let updateObj = {};
       if (storedTheme) {
         updateObj.theme = storedTheme;
+      }
+      if (storedShowSurvey) {
+        updateObj.showSurvey = storedShowSurvey;
       }
       if (storedLanguage) {
         updateObj.language = storedLanguage;
@@ -92,6 +98,14 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('donorSiteTheme', theme);
   };
 
+  const updateShowSurvey = (showSurvey) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      showSurvey,
+    }));
+    localStorage.setItem('donorShowSurvey', showSurvey);
+  };
+
   const updateCurrentLanguage = (language) => {
     setGlobalState((prevState) => ({
       ...prevState,
@@ -135,7 +149,8 @@ export const AppProvider = ({ children }) => {
       updateCurrentTheme,
       updateCurrentLanguage,
       updateCurrentPoolBalance,
-      updateSpecialPoolBalance
+      updateSpecialPoolBalance,
+      updateShowSurvey
     }}>
       {isThemeReady ? children : null}
     </AppContext.Provider>

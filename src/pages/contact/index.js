@@ -11,17 +11,20 @@ import ButtonWrapper from "@/components/UI/ButtonWrapper";
 import IconMessageText from "../../../public/iconsax/message-text-1.svg";
 import PageWrapper from "@/components/PageWrapper";
 import {useAppContext} from "@/contexts/AppContext";
+import IconCloseSquare from "../../../public/iconsax/close-square.svg";
+import IconClipboardTick from "../../../public/iconsax/clipboard-tick.svg";
 
 export default function Contact() {
+  const surveyActive = process.env.NEXT_PUBLIC_SURVEY_ACTIVE === 'true';
   const { t, i18n } = useTranslation();
-  const { globalState } = useAppContext();
+  const { globalState, updateShowSurvey } = useAppContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
 
-  console.log(i18n.language);
+  //console.log(i18n.language);
 
   const [statusMessage, setStatusMessage] = useState(''); // New state for the status message
   const [statusType, setStatusType] = useState(''); // New state for message type ('success' or 'error')
@@ -161,6 +164,22 @@ export default function Contact() {
               </ButtonWrapper>
             </div>
           </form>
+          { surveyActive &&
+            <div className={'mb-4 p-4'}>
+              <hr/>
+              <div className={'mt-4'}>
+                {t('contactPage.survey.text')}
+              </div>
+              <div className={'mt-4 scale-75 text-center'}>
+                <ButtonWrapper
+                  icon={<IconClipboardTick className={`w-6 h-6`}/>}
+                  theme={'light'}
+                  text={t('contactPage.survey.button')}
+                  onClick={() => updateShowSurvey('true')}
+                  extra={'uppercase h-[50px] w-[100%]'}/>
+              </div>
+            </div>
+          }
         </>
       </PageWrapper>
     </>

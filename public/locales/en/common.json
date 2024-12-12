@@ -247,6 +247,11 @@
       "messageSuccess": "Your message has been sent successfully!",
       "messageFailed": "Failed to send your message. Please try again.",
       "messageError": "There was an error. Please try again."
+    },
+    "survey": {
+      "text": "Help us improve! \uD83D\uDCA1\nWe’d love to hear your feedback about your experience using our app. Your input will help us create a better platform for everyone. The survey is quick, easy, and your voice matters! \uD83C\uDF1F",
+      "button": "Take the survey now",
+      "hide": "Don't show again"
     }
   },
   "qrCodeComponent": {
