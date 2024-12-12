@@ -1,39 +1,52 @@
-import React, { useState } from 'react';
-
+import React, {useEffect, useState} from 'react';
 
 import classes from "./UI/ModalContainer.module.scss";
 import { useTranslation } from 'next-i18next';
 import {useAppContext} from "@/contexts/AppContext";
-import ModalContainer from "@/components/UI/ModalContainer";
-import IconClose from "../../public/iconsax/close-circle.svg";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
-import IconStar from "../../public/iconsax/star.svg";
 import IconCloseSquare from "../../public/iconsax/close-square.svg";
+import IconClose from "../../public/iconsax/close-circle.svg";
 
 const GoogleSurvey = ({...props}) => {
-  console.log('kkt');
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
-  const [showHowToModal, setShowHowToModal] = useState(false);
-  const [activeTab, setActiveTab] = useState('wallet'); // State to manage active tab
-  const [loading, setLoading] = useState(false);
-  const { globalState, updateShowSurvey } = useAppContext();
-  const currentPool = props.isSpecial ? globalState?.specialPool : globalState?.currentPool;
-  const poolPrizeAmount = currentPool?.prize_amount;
-  const poolEntryAmount = currentPool?.entry_amount;
-  const poolPrizeAmountInDollars = (parseFloat(poolPrizeAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
-  const poolEntryAmountInDollars = (parseFloat(poolEntryAmount)*parseFloat(globalState.currentEthPrice?.lastPrice)).toFixed(2);
-  const poolSize = poolPrizeAmount +' ETH (~' + poolPrizeAmountInDollars + ' $)';
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-  const handleDonateNow = async () => {
-    setLoading(true); // Set loading state to true
-    try {
+  useEffect(() => {
+    // Function to show modal after interaction
+    const handleUserInteraction = () => {
+      setHasInteracted(true);
       setShowModal(true);
-    } catch (error) {
-      console.error('Error initiating transfer:', error);
-      setShowModal(false);
-    }
-  };
+      cleanupListeners();
+    };
+
+    // Timeout to show modal after delay
+    const delayTimeout = setTimeout(() => {
+      setShowModal(true);
+      cleanupListeners();
+    }, 5000); // Adjust delay (5000ms = 5 seconds)
+
+    // Add interaction listeners
+    const addListeners = () => {
+      window.addEventListener("click", handleUserInteraction);
+    };
+
+    // Cleanup listeners
+    const cleanupListeners = () => {
+      window.removeEventListener("click", handleUserInteraction);
+      clearTimeout(delayTimeout);
+    };
+
+    addListeners();
+
+    // Cleanup on unmount
+    return () => cleanupListeners();
+  }, []);
+
+
+  const { globalState, updateShowSurvey } = useAppContext();
+
+  if (!showModal) return null;
 
   return (
     <>
@@ -46,13 +59,17 @@ const GoogleSurvey = ({...props}) => {
     border backdrop-blur-md ${globalState.theme === 'dark' ? 'border-darkBorder shadow-darkTheme' : 'border-lightBorder shadow-lightTheme'}`}
         >
           <div className="flex-col flex-grow flex-shrink w-full h-full flex items-stretch justify-stretch"
-               style={{minHeight: 'inherit'}}>
+               style={{minHeight: 'inherit', textAlign: 'center'}}>
             <ButtonWrapper
               icon={<IconCloseSquare className={`w-6 h-6`}/>}
               theme={'dark'}
               text={t('contactPage.survey.hide')}
               onClick={() => updateShowSurvey(false)}
-              extra={'uppercase h-[50px] w-[100%]'}/>
+              extra={'uppercase h-[50px] w-[240px] self-center'}/>
+            <button className="absolute top-[20px] right-[20px] text-inherit hover:text-gray-400"
+                    onClick={() => setShowModal(false)}>
+              <IconClose className="w-6 h-6"/>
+            </button>
             <iframe
               title="Help us to be better"
               className="flex-grow flex-shrink w-full h-full rounded-[15px] md:rounded-[20px] border-none"
