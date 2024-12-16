@@ -47,12 +47,13 @@ const EmailSender = () => {
         subject: subject,
         body: body,
       });
-      console
+      console.log((response));
       if (response.data.success) {
-        addNotification({
-          message: `Successfully sent ${response.data.success} emails.`,
-          type: 'success',
-        });
+        console.log(`Successfully sent ${response.data.success} emails.`)
+        // addNotification({
+        //   message: `Successfully sent ${response.data.success} emails.`,
+        //   type: 'success',
+        // });
       }
 
       setCompleted(true);
@@ -85,8 +86,9 @@ const EmailSender = () => {
 
           {error && <Text color="danger">{error}</Text>}
           {completed && <Text color="success">Emails sent successfully!</Text>}
-
-          <ProgressBar progress={progress} />
+          <Box mt="lg">
+            <ProgressBar value={progress} max={100}/>
+          </Box>
         </Box>
       </Section>
     </Section>
