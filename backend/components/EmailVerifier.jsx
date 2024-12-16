@@ -213,6 +213,24 @@ const EmailVerifier = () => {
     setSkipValidation(false)
   }
 
+  const copyToClipboard = () => {
+    const textArea = document.getElementById('validEmailsTextArea');
+    if (textArea) {
+      // Select the content of the textarea
+      textArea.select();
+      textArea.setSelectionRange(0, 99999); // For mobile devices
+
+      // Use the Clipboard API (modern approach)
+      navigator.clipboard.writeText(textArea.value)
+        .then(() => {
+          alert('Copied to clipboard!'); // You can customize this message
+        })
+        .catch((err) => {
+          console.error('Failed to copy: ', err);
+        });
+    }
+  };
+
   return (
     <Section style={{ border: 'none' }}>
       <Label style={{ color: '#6c757d', fontWeight: 300 }}>
@@ -295,10 +313,15 @@ const EmailVerifier = () => {
                     readOnly
                     rows={10}
                     cols={50}
+                    id="validEmailsTextArea"
                   />
+                    {/* Copy to Clipboard Button */}
+                    <Button variant="secondary" onClick={copyToClipboard} style={{position: 'absolute', margin: '0 10px'}}>
+                      Copy to Clipboard
+                    </Button>
                   </div>
-                  { !skipValidation && <Button  variant="info" onClick={writeValidEmailsToCSV}>Write Valid Emails to a CSV file</Button>}
-                  { skipValidation && <Button variant="danger" onClick={resetAll}>Reset</Button>}
+                  { !skipValidation && <Button  variant="info" mt="lg" onClick={writeValidEmailsToCSV}>Write Valid Emails to a CSV file</Button>}
+                  { skipValidation && <Button variant="danger" mt="lg" onClick={resetAll}>Reset</Button>}
                 </>
               )
               }
