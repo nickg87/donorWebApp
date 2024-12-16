@@ -249,10 +249,16 @@ const EmailVerifier = () => {
           {/* Results */}
           {completed && (
             <>
-              <Text style={{marginTop: '20px'}}>Verification Completed!</Text>
-              <Text>Valid Emails: {results.valid.length}</Text>
-              <Text>Invalid Emails: {results.invalid.length}</Text>
-              <Text>Unreachable Emails: {results.unreachable.length}</Text>
+              { !skipValidation ?
+                <>
+                  <Text style={{marginTop: '20px'}}>Verification Completed!</Text>
+                  <Text>Valid Emails: {results.valid.length}</Text>
+                  <Text>Invalid Emails: {results.invalid.length}</Text>
+                  <Text>Unreachable Emails: {results.unreachable.length}</Text>
+                </> :
+                <Text>Valid Emails: {validEmails.length}</Text>
+              }
+
               {totalTimeTaken !== null && (
                 <div>
                   <Text>Total Time Taken: {formatTime(totalTimeTaken)}</Text>
