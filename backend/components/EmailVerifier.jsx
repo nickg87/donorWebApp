@@ -61,7 +61,7 @@ const EmailVerifier = () => {
       setError('Please enter a valid filename.');
       return;
     }
-
+    setSkipValidation(false);
     await checkValidFile(fileName);
 
     setError(''); // Clear any previous errors
@@ -197,6 +197,7 @@ const EmailVerifier = () => {
           type: response.notification.type, // 'success', 'error', or 'info'
         });
       }
+      await fetchValidEmailList();
     } catch (error) {
       console.error('Error writing CSV:', error);
     }
