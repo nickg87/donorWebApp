@@ -12,7 +12,7 @@ const verifyOpts = {
 };
 const verifier = new Verifier(process.env.WHOISXMLAPI_APIKEY, verifyOpts);
 
-const retryLimit = 3; // Set the number of retry attempts
+const retryLimit = 2; // Set the number of retry attempts
 
 // Function to check if an email exists using the email-existence library
 export const verifyEmail = (email) => {
