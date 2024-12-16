@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Section, Box, Label, Text, Button, Input } from '@adminjs/design-system';
+import React, {useEffect, useState} from 'react';
+import {Box, Button, Input, Label, Section, Text} from '@adminjs/design-system';
 import ProgressBar from './UI/ProgressBar';
 import axios from 'axios';
 
@@ -15,6 +15,31 @@ const EmailVerifier = () => {
   const [loading, setLoading] = useState(false); // Track loading state
   const [completed, setCompleted] = useState(false); // Mark process as done
   const [error, setError] = useState(''); // Track errors
+  const [elapsedTime, setElapsedTime] = useState(0); // Elapsed time in seconds
+  const [estimatedTimeLeft, setEstimatedTimeLeft] = useState(0); // Estimated time left in seconds
+  const [totalTimeTaken, setTotalTimeTaken] = useState(null);
+  const [startTime, setStartTime] = useState(null); // Time when verification started
+  const [validEmails, setValidEmails] = useState([]);
+
+
+  useEffect(() => {
+    if (startTime) {
+      const interval = setInterval(() => {
+        const now = Date.now();
+        const timeSpent = Math.floor((now - startTime) / 1000); // Elapsed time in seconds
+        setElapsedTime(timeSpent);
+
+        // Estimate time left based on progress
+        const progressRatio = progress / 100;
+        if (progressRatio > 0) {
+          const estimatedTime = Math.floor((timeSpent / progressRatio) - timeSpent);
+          setEstimatedTimeLeft(estimatedTime);
+        }
+      }, 1000); // Update every second
+
+      return () => clearInterval(interval);
+    }
+  }, [startTime, progress]);
 
   const fetchEmailList = async () => {
     if (!fileName) {
@@ -41,6 +66,8 @@ const EmailVerifier = () => {
   };
 
   const verifyEmails = async () => {
+    let currTime = Date.now();
+    setStartTime(currTime);
     setLoading(true);
     const totalEmails = emails.length;
     const newResults = { valid: [], invalid: [], unreachable: [] };
@@ -53,6 +80,7 @@ const EmailVerifier = () => {
 
         if (valid) {
           newResults.valid.push(email);
+          validEmails.push(email);
         } else {
           newResults.invalid.push(email);
         }
@@ -69,6 +97,34 @@ const EmailVerifier = () => {
     setResults(newResults);
     setCompleted(true);
     setLoading(false);
+    setValidEmails(validEmails);
+    setTotalTimeTaken(calculateElapsedTime(currTime));
+  };
+
+// Function to calculate time difference
+  const calculateElapsedTime = (start) => {
+    console.log('start: ')
+    console.log(start)
+
+    // Calculate the difference in milliseconds
+    const differenceInMilliseconds = Date.now() - start;
+
+    // Convert milliseconds to seconds
+    return Math.floor(differenceInMilliseconds / 1000);
+  };
+
+  // Convert seconds to human-readable format (hours, minutes, seconds)
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    let timeString = '';
+
+    if (hours > 0) timeString += `${hours} hour${hours > 1 ? 's' : ''} `;
+    if (minutes > 0) timeString += `${minutes} minute${minutes > 1 ? 's' : ''} `;
+    if (remainingSeconds > 0) timeString += `${remainingSeconds} second${remainingSeconds > 1 ? 's' : ''}`;
+
+    return timeString || '0 seconds'; // Return 0 seconds if no time was provided
   };
 
   return (
@@ -107,18 +163,37 @@ const EmailVerifier = () => {
           {/* Loading and Progress */}
           {loading && (
             <>
-              <ProgressBar value={progress} max={100} />
+              <ProgressBar value={progress} max={100}/>
               <Text>Verifying emails... {Math.round(progress)}%</Text>
+              <div>
+                <Text>Time Elapsed: {elapsedTime} seconds</Text>
+                <Text>Estimated Time Left: {estimatedTimeLeft} seconds</Text>
+              </div>
             </>
           )}
 
           {/* Results */}
           {completed && (
             <>
-              <Text style={{ marginTop: '20px' }}>Verification Completed!</Text>
+              <Text style={{marginTop: '20px'}}>Verification Completed!</Text>
               <Text>Valid Emails: {results.valid.length}</Text>
               <Text>Invalid Emails: {results.invalid.length}</Text>
               <Text>Unreachable Emails: {results.unreachable.length}</Text>
+              {totalTimeTaken !== null && (
+                <div>
+                  <Text>Total Time Taken: {formatTime(totalTimeTaken)}</Text>
+                </div>
+              )}
+              {validEmails.length && (
+                <div>
+                  <textarea
+                    value={validEmails.join('\n')} // Display valid emails, each on a new line
+                    readOnly
+                    rows={10}
+                    cols={50}
+                  />
+                </div>)
+              }
             </>
           )}
         </Box>
