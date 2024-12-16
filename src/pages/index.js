@@ -1,7 +1,8 @@
 // src/pages/index.js
+import React from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from "next/head";
 import MainContent from "@/components/MainContent";
-import axios from 'axios';
 
 export async function getServerSideProps({ locale }) {
   const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -39,5 +40,11 @@ export async function getServerSideProps({ locale }) {
 }
 
 export default function Home({ pools, transactions, articles }) {
-  return <MainContent pools={pools} transactions={transactions} articles={articles} />;
+  return <>
+    <Head>
+      <link rel="canonical" href={(process.env.NEXT_PUBLIC_SITE_URL || "https://donorhub.site")}/>
+    </Head>
+    <MainContent pools={pools} transactions={transactions} articles={articles}/>;
+  </>
+
 }
