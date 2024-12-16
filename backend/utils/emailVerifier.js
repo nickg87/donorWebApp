@@ -18,12 +18,12 @@ const retryLimit = 3; // Set the number of retry attempts
 export const verifyEmail = (email) => {
   return new Promise((resolve, reject) => {
     // Create a timeout promise that will reject after 2 seconds
-    const timeout = setTimeout(() => {
-      reject({ valid: false, email, error: 'Timeout reached' });
-    }, 2000); // Timeout after 2 seconds
+    // const timeout = setTimeout(() => {
+    //   reject({ valid: false, email, error: 'Timeout reached' });
+    // }, 2000); // Timeout after 2 seconds
 
     emailExistence.check(email, (err, res) => {
-      clearTimeout(timeout);
+      //clearTimeout(timeout);
       console.log(`Checking email: ${email}`);  // Log email being checked
       console.log('Response from emailExistence:', res);  // Log the result
 
@@ -31,7 +31,7 @@ export const verifyEmail = (email) => {
       if (err) {
         reject({ valid: false, email, error: err.message });
       } else if (res) {
-        resolve({ valid: true, email });
+        resolve({ valid: true, email, method: 'emailExistence' });
       } else {
         reject({ valid: false, email, error: 'Email not valid' });
       }
@@ -47,14 +47,18 @@ export const smtpVerifyEmail = async (email) => {
   return new Promise((resolve, reject) => {
     dns.resolveMx(domain, async (err, addresses) => {
       if (err || !addresses || addresses.length === 0) {
-        return reject(`No MX record found for domain: ${domain}`);
+        return resolve({ valid: false, email, error: `No MX record found for domain: ${domain}` });
       }
 
       const mxRecord = addresses[0].exchange; // Choose the first MX record
 
       const attemptVerification = async (attemptsLeft) => {
         if (attemptsLeft <= 0) {
-          return reject(`SMTP verification failed for ${email} after multiple attempts.`);
+          return resolve({
+            valid: false,
+            email,
+            error: `SMTP verification failed for ${email} after multiple attempts.`,
+          });
         }
 
         const client = new SMTPClient({
@@ -70,19 +74,58 @@ export const smtpVerifyEmail = async (email) => {
           const response = await client.rcpt({ to: email });
 
           if (response.code === 250) {
-            resolve(true); // Email is valid
+            resolve({ valid: true, email, method: 'smtpVerifyEmail'}); // Email is valid
           } else {
-            resolve(false); // Invalid email
+            resolve({
+              valid: false,
+              email,
+              error: `Received SMTP response code: ${response.code}`,
+            });
           }
 
           await client.quit();
         } catch (error) {
           console.error(`SMTP attempt failed for ${email}: ${error.message}`);
-          attemptVerification(attemptsLeft - 1); // Retry
+          await attemptVerification(attemptsLeft - 1); // Retry
         }
       };
 
-      attemptVerification(retries); // Start with the first attempt
+      await attemptVerification(retries); // Start with the first attempt
     });
+  });
+};
+
+
+// Combined email verification with fallback
+export const verifyAndFallbackEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    // Create a timeout for the entire operation
+    const timeout = setTimeout(() => {
+      reject({ valid: false, email, error: 'Timeout reached' });
+    }, 5000); // Timeout for 5 seconds (adjust as needed)
+
+    // Start by using verifyEmail
+    verifyEmail(email)
+      .then((result) => {
+        clearTimeout(timeout); // Clear the timeout if verifyEmail succeeds
+        resolve(result); // If the first method confirms validity, resolve immediately
+      })
+      .catch((error) => {
+        // If verifyEmail fails, try the SMTP fallback
+        console.warn(`Primary verification failed for ${email}. Falling back to SMTP verification.`);
+        smtpVerifyEmail(email)
+          .then((isValid) => {
+            clearTimeout(timeout); // Clear the timeout if smtpVerifyEmail succeeds
+            if (isValid) {
+              resolve({ valid: true, email }); // Resolve as valid if SMTP check passes
+            } else {
+              reject({ valid: false, email, error: 'Email not valid (SMTP fallback failed)' });
+            }
+          })
+          .catch((smtpError) => {
+            clearTimeout(timeout); // Clear the timeout if fallback also fails
+            reject({ valid: false, email, error: smtpError });
+          });
+      });
   });
 };

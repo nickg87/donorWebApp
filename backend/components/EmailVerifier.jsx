@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Button, Input, Label, Section, Text} from '@adminjs/design-system';
 import ProgressBar from './UI/ProgressBar';
 import axios from 'axios';
+import { addNotification } from 'adminjs';
 
 const EmailVerifier = () => {
   const [fileName, setFileName] = useState('test0.csv'); // Store the input filename
@@ -20,6 +21,8 @@ const EmailVerifier = () => {
   const [totalTimeTaken, setTotalTimeTaken] = useState(null);
   const [startTime, setStartTime] = useState(null); // Time when verification started
   const [validEmails, setValidEmails] = useState([]);
+  const [validMethodExistence, setValidMethodExistence] = useState(0);
+  const [validMethodSMTP, setValidMethodSMTP] = useState(0);
   const [fileExists, setFileExists] = useState(false);
   const [skipValidation, setSkipValidation] = useState(false);
 
@@ -174,7 +177,16 @@ const EmailVerifier = () => {
         fileName,
         validEmails
       });
-      console.log('CSV file written successfully:', response.data);
+
+      console.log(response);
+
+      // Check if there's a notification in the response
+      if (response.notification) {
+        addNotification({
+          message: response.notification.message,
+          type: response.notification.type, // 'success', 'error', or 'info'
+        });
+      }
     } catch (error) {
       console.error('Error writing CSV:', error);
     }
@@ -241,7 +253,7 @@ const EmailVerifier = () => {
               <Text>Verifying emails... {Math.round(progress)}%</Text>
               <div>
                 <Text>Time Elapsed: {elapsedTime} seconds</Text>
-                <Text>Estimated Time Left: {estimatedTimeLeft} seconds</Text>
+                <Text>Estimated Time Left: {formatTime(estimatedTimeLeft)}</Text>
               </div>
             </>
           )}
@@ -252,7 +264,7 @@ const EmailVerifier = () => {
               { !skipValidation ?
                 <>
                   <Text style={{marginTop: '20px'}}>Verification Completed!</Text>
-                  <Text>Valid Emails: {results.valid.length}</Text>
+                  <Text>Valid Emails: {results.valid.length} ({validMethodExistence} | {validMethodSMTP})</Text>
                   <Text>Invalid Emails: {results.invalid.length}</Text>
                   <Text>Unreachable Emails: {results.unreachable.length}</Text>
                 </> :

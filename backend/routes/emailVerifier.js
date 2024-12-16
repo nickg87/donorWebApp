@@ -1,5 +1,5 @@
 import express from 'express';
-import { smtpVerifyEmail, verifyEmail } from '../utils/emailVerifier.js';
+import { smtpVerifyEmail, verifyEmail, verifyAndFallbackEmail } from '../utils/emailVerifier.js';
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser'; // Use this for reading CSV files
@@ -78,7 +78,7 @@ async function readEmailsFromFile(filePath) {
 router.get('/verify/:email', async (req, res) => {
   const { email } = req.params;
   try {
-    const result = await verifyEmail(email); // Calls the verifyEmail function from utils
+    const result = await verifyAndFallbackEmail(email); // Calls the verifyAndFallbackEmail function from utils
     res.json(result); // Return valid email result
   } catch (error) {
     console.error(`Error verifying email ${email}:`, error); // Log error for debugging
@@ -112,9 +112,23 @@ router.post('/writeValidEmails', async (req, res) => {
 
   try {
     await csvWriter.writeRecords(records);  // Writing the valid emails to the CSV
-    res.json({ message: 'CSV file written successfully', filePath: outputFilePath });
+
+   res.json({
+      message: 'CSV file written successfully',
+      filePath: outputFilePath,
+      notification: {
+        message: 'CSV file was successfully written!',
+        type: 'success', // Can be 'success', 'error', or 'info'
+      },
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error writing CSV', error: error.message });
+    res.status(500).json({
+      message: 'Failed to write the CSV file',
+      notification: {
+        message: `Error: ${error.message}`,
+        type: 'error',
+      },
+    });
   }
 });
 
