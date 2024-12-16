@@ -17,15 +17,23 @@ const retryLimit = 3; // Set the number of retry attempts
 // Function to check if an email exists using the email-existence library
 export const verifyEmail = (email) => {
   return new Promise((resolve, reject) => {
+    // Create a timeout promise that will reject after 2 seconds
+    const timeout = setTimeout(() => {
+      reject({ valid: false, email, error: 'Timeout reached' });
+    }, 2000); // Timeout after 2 seconds
+
     emailExistence.check(email, (err, res) => {
+      clearTimeout(timeout);
       console.log(`Checking email: ${email}`);  // Log email being checked
       console.log('Response from emailExistence:', res);  // Log the result
+
+      // If there's an error, reject with a specific error message
       if (err) {
-        reject(`Error verifying email ${email}: ${err.message}`);
+        reject({ valid: false, email, error: err.message });
       } else if (res) {
         resolve({ valid: true, email });
       } else {
-        reject(`Invalid email ${email}`);
+        reject({ valid: false, email, error: 'Email not valid' });
       }
     });
   });
