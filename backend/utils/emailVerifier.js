@@ -18,22 +18,23 @@ const retryLimit = 3; // Set the number of retry attempts
 export const verifyEmail = (email) => {
   return new Promise((resolve, reject) => {
     // Create a timeout promise that will reject after 2 seconds
-    // const timeout = setTimeout(() => {
-    //   reject({ valid: false, email, error: 'Timeout reached' });
-    // }, 2000); // Timeout after 2 seconds
+    const timeout = setTimeout(() => {
+      reject({ valid: false, email, error: 'Timeout reached' });
+    }, 2000); // Timeout after 2 seconds
 
     emailExistence.check(email, (err, res) => {
-      //clearTimeout(timeout);
-      console.log(`Checking email: ${email}`);  // Log email being checked
-      console.log('Response from emailExistence:', res);  // Log the result
+      clearTimeout(timeout);
+      // console.log(`Checking email: ${email}`);  // Log email being checked
+      // console.log('Response from emailExistence:', res);  // Log the result
 
       // If there's an error, reject with a specific error message
-      if (err) {
-        reject({ valid: false, email, error: err.message });
-      } else if (res) {
+      if (res) {
+        // Email is valid, resolve immediately
         resolve({ valid: true, email, method: 'emailExistence' });
       } else {
-        reject({ valid: false, email, error: 'Email not valid' });
+        // Any other case (error or invalid response), trigger fallback
+        const errorMessage = err ? err.message : 'Email not valid';
+        reject({ valid: false, email, error: errorMessage });
       }
     });
   });

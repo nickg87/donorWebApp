@@ -66,6 +66,8 @@ const EmailVerifier = () => {
 
     setError(''); // Clear any previous errors
     setValidEmails([]);
+    setValidMethodExistence(0);
+    setValidMethodSMTP(0);
     setEmails([]);
     setResults({ valid: [], invalid: [], unreachable: [] });
     setProgress(0);
@@ -114,6 +116,7 @@ const EmailVerifier = () => {
       const email = emails[i];
       try {
         const response = await axios.get(`/api/emailVerifier/verify/${email}`);
+        console.log(response.data);
         const { valid, method } = response.data;
 
         if (valid) {
