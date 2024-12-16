@@ -84,7 +84,8 @@ export async function setupAdminJS() {
     FileThumbnail: componentLoader.add('FileThumbnail', './components/FileThumbnail'),
     FileShow: componentLoader.add('FileShow', './components/FileShow'),
     FileSelectGallery: componentLoader.add('FileSelectGallery', './components/FileSelectGallery'),
-    EmailVerifier: componentLoader.add('EmailVerifier', './components/EmailVerifier')
+    EmailVerifier: componentLoader.add('EmailVerifier', './components/EmailVerifier'),
+    EmailSender: componentLoader.add('EmailSender', './components/EmailSender')
   }
 
   // Initialize AdminJS
@@ -106,6 +107,11 @@ export async function setupAdminJS() {
       emailVerifier: {
         component: Components.EmailVerifier,
         icon: 'CheckCircle', // Icon for the page
+        label: 'Email Verifier',
+      },
+      emailSending: {
+        component: Components.EmailSender,
+        icon: 'Send', // Icon for the page
         label: 'Email Verifier',
       },
     },
