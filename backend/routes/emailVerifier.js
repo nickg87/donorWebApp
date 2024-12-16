@@ -27,6 +27,38 @@ router.get('/:fileName', async (req, res) => {
   }
 });
 
+// Route to read the email valid file and return the email valid list
+router.get('/fetchValidEmailList/:fileName', async (req, res) => {
+  const { fileName } = req.params;
+  const filePath = path.join(__dirname, '../public/lists/valid', `${fileName.replace('.csv', '')}_valid.csv`);
+
+  try {
+    const emails = await readEmailsFromFile(filePath);
+    if (!emails.length) {
+      return res.status(404).json({ message: 'No emails found in the file.' });
+    }
+    res.json({ emails });
+  } catch (error) {
+    res.status(500).json({ message: 'Error reading file', error: error.message });
+  }
+});
+
+const checkValidFileExists = (fileName) => {
+  const validFilePath = path.join(__dirname, '../public/lists/valid', `${fileName.replace('.csv', '')}_valid.csv`);
+  return fs.existsSync(validFilePath);  // returns true if the file exists
+};
+
+router.post('/checkValidFile', (req, res) => {
+  const { fileName } = req.body;
+  const fileExists = checkValidFileExists(fileName);
+
+  if (fileExists) {
+    res.status(200).json({ fileExists: true });
+  } else {
+    res.status(200).json({ fileExists: false });
+  }
+});
+
 // Utility function to read emails from a file (CSV support)
 async function readEmailsFromFile(filePath) {
   const emails = [];

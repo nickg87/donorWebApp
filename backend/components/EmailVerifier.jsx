@@ -20,7 +20,19 @@ const EmailVerifier = () => {
   const [totalTimeTaken, setTotalTimeTaken] = useState(null);
   const [startTime, setStartTime] = useState(null); // Time when verification started
   const [validEmails, setValidEmails] = useState([]);
+  const [fileExists, setFileExists] = useState(false);
+  const [skipValidation, setSkipValidation] = useState(false);
 
+
+  // Check if the valid file already exists
+  const checkValidFile = async (fileName) => {
+    try {
+      const response = await axios.post('/api/emailVerifier/checkValidFile', { fileName });
+      setFileExists(response.data.fileExists);
+    } catch (error) {
+      console.error('Error checking valid file:', error);
+    }
+  };
 
   useEffect(() => {
     if (startTime) {
@@ -47,6 +59,8 @@ const EmailVerifier = () => {
       return;
     }
 
+    await checkValidFile(fileName);
+
     setError(''); // Clear any previous errors
     setValidEmails([]);
     setEmails([]);
@@ -58,6 +72,26 @@ const EmailVerifier = () => {
       const response = await axios.get(`/api/emailVerifier/${fileName}`);
       if (response.data?.emails?.length > 0) {
         setEmails(response.data.emails); // Assuming API returns { emails: [...] }
+      } else {
+        setError('No emails found in the file.');
+      }
+    } catch (err) {
+      setError(`Error fetching email list: ${err.message}`);
+    }
+  };
+
+  const fetchValidEmailList = async () => {
+
+    setError(''); // Clear any previous errors
+    setValidEmails([]);
+    setCompleted(false);
+    setSkipValidation(true);
+
+    try {
+      const response = await axios.get(`/api/emailVerifier/fetchValidEmailList/${fileName}`);
+      if (response.data?.emails?.length > 0) {
+        setValidEmails(response.data.emails); // Assuming API returns { emails: [...] }
+        setCompleted(true);
       } else {
         setError('No emails found in the file.');
       }
@@ -146,6 +180,16 @@ const EmailVerifier = () => {
     }
   };
 
+  const resetAll = () => {
+    setError(''); // Clear any previous errors
+    setValidEmails([]);
+    setEmails([]);
+    setResults({ valid: [], invalid: [], unreachable: [] });
+    setProgress(0);
+    setCompleted(false);
+    setSkipValidation(false)
+  }
+
   return (
     <Section style={{ border: 'none' }}>
       <Label style={{ color: '#6c757d', fontWeight: 300 }}>
@@ -164,6 +208,17 @@ const EmailVerifier = () => {
             <Button onClick={fetchEmailList} variant="primary" mt="lg">
               Load Emails
             </Button>
+            {/* Show the "Load Valid Emails" button only if the valid file exists */}
+            {fileExists && (
+              <Button
+                mt="lg"
+                onClick={fetchValidEmailList}
+                variant="secondary"
+                style={{ left: '30%', position: 'absolute'}}
+              >
+                Load Valid Emails (this file was already checked)
+              </Button>
+            )}
           </Box>
 
           {/* Error Display */}
@@ -213,7 +268,8 @@ const EmailVerifier = () => {
                     cols={50}
                   />
                   </div>
-                  <Button onClick={writeValidEmailsToCSV}>Write Valid Emails to a CSV file</Button>
+                  { !skipValidation && <Button  variant="info" onClick={writeValidEmailsToCSV}>Write Valid Emails to a CSV file</Button>}
+                  { skipValidation && <Button variant="danger" onClick={resetAll}>Reset</Button>}
                 </>
               )
               }
