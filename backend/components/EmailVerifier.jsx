@@ -48,6 +48,7 @@ const EmailVerifier = () => {
     }
 
     setError(''); // Clear any previous errors
+    setValidEmails([]);
     setEmails([]);
     setResults({ valid: [], invalid: [], unreachable: [] });
     setProgress(0);
@@ -85,6 +86,10 @@ const EmailVerifier = () => {
           newResults.invalid.push(email);
         }
       } catch (err) {
+        //local env test
+        if (email === 'guliman.nicu@gmail.com') {
+          validEmails.push(email);
+        }
         newResults.unreachable.push(email);
         console.error(`Error verifying email ${email}:`, err.message);
       }
@@ -127,12 +132,26 @@ const EmailVerifier = () => {
     return timeString || '0 seconds'; // Return 0 seconds if no time was provided
   };
 
+
+  // Function to write the valid emails to a CSV file
+  const writeValidEmailsToCSV = async () => {
+    try {
+      const response = await axios.post('/api/emailVerifier/writeValidEmails', {
+        fileName,
+        validEmails
+      });
+      console.log('CSV file written successfully:', response.data);
+    } catch (error) {
+      console.error('Error writing CSV:', error);
+    }
+  };
+
   return (
-    <Section>
+    <Section style={{ border: 'none' }}>
       <Label style={{ color: '#6c757d', fontWeight: 300 }}>
         <Text>Email Verifier</Text>
       </Label>
-      <Section className="adminjs_Box">
+      <Section style={{ backgroundColor: '#fff', border: 'none' }}>
         <Box mb="lg">
           {/* Filename Input */}
           <Box mb="lg">
@@ -185,14 +204,18 @@ const EmailVerifier = () => {
                 </div>
               )}
               {validEmails.length && (
-                <div>
+                <>
+                  <div>
                   <textarea
                     value={validEmails.join('\n')} // Display valid emails, each on a new line
                     readOnly
                     rows={10}
                     cols={50}
                   />
-                </div>)
+                  </div>
+                  <Button onClick={writeValidEmailsToCSV}>Write Valid Emails to a CSV file</Button>
+                </>
+              )
               }
             </>
           )}

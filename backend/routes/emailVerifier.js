@@ -3,6 +3,7 @@ import { smtpVerifyEmail, verifyEmail } from '../utils/emailVerifier.js';
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser'; // Use this for reading CSV files
+import { createObjectCsvWriter } from 'csv-writer';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -50,6 +51,38 @@ router.get('/verify/:email', async (req, res) => {
   } catch (error) {
     console.error(`Error verifying email ${email}:`, error); // Log error for debugging
     res.status(500).json(error); // Return consistent error structure to frontend
+  }
+});
+
+// Route to write valid emails to a CSV file
+router.post('/writeValidEmails', async (req, res) => {
+  const { fileName, validEmails } = req.body;
+
+  if (!validEmails || validEmails.length === 0) {
+    return res.status(400).json({ message: 'No valid emails to write' });
+  }
+
+  //const outputFilePath = path.join('../public/lists/valid', `${fileName.replace('.csv', '')}_valid.csv`);
+  const outputFilePath = path.join(__dirname, '../public/lists/valid', `${fileName.replace('.csv', '')}_valid.csv`);
+
+  console.log('outputFilePath');
+  console.log(outputFilePath);
+
+  // Setup CSV Writer
+  const csvWriter = createObjectCsvWriter({
+    path: outputFilePath,
+    header: [
+      { id: 'email', title: 'email' },  // Assuming each email is just a string
+    ],
+  });
+
+  const records = validEmails.map(email => ({ email }));
+
+  try {
+    await csvWriter.writeRecords(records);  // Writing the valid emails to the CSV
+    res.json({ message: 'CSV file written successfully', filePath: outputFilePath });
+  } catch (error) {
+    res.status(500).json({ message: 'Error writing CSV', error: error.message });
   }
 });
 

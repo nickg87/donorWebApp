@@ -39,20 +39,6 @@ export const verifyEmail = (email) => {
   });
 };
 
-export const emailVerifier = (email) => {
-  console.log(process.env.WHOISXMLAPI_APIKEY);
-  console.log(verifier);
-  return new Promise((resolve, reject) => {
-    verifier.verify(email, (err, data) => {
-      if (err) {
-        reject(`Error verifying email ${email}: ${err.message}`);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-};
-
 
 export const smtpVerifyEmail = async (email) => {
   const [user, domain] = email.split('@');
