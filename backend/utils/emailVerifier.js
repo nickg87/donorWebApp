@@ -55,11 +55,7 @@ export const smtpVerifyEmail = async (email) => {
 
       const attemptVerification = async (attemptsLeft) => {
         if (attemptsLeft <= 0) {
-          return resolve({
-            valid: false,
-            email,
-            error: `SMTP verification failed for ${email} after multiple attempts.`,
-          });
+          return resolve({ valid: false, email, error: `SMTP verification failed for ${email} after multiple attempts.` });
         }
 
         const client = new SMTPClient({
@@ -74,14 +70,12 @@ export const smtpVerifyEmail = async (email) => {
           await client.mail({ from: 'test@example.com' });
           const response = await client.rcpt({ to: email });
 
+          // Check for valid SMTP response code (250)
           if (response.code === 250) {
-            resolve({ valid: true, email, method: 'smtpVerifyEmail'}); // Email is valid
+            resolve({ valid: true, email, method: 'smtpVerifyEmail' });
           } else {
-            resolve({
-              valid: false,
-              email,
-              error: `Received SMTP response code: ${response.code}`,
-            });
+            // If the code is not 250, consider the email invalid
+            resolve({ valid: false, email, error: `Received SMTP response code: ${response.code}` });
           }
 
           await client.quit();
@@ -95,6 +89,7 @@ export const smtpVerifyEmail = async (email) => {
     });
   });
 };
+
 
 
 // Combined email verification with fallback
@@ -115,12 +110,13 @@ export const verifyAndFallbackEmail = (email) => {
         // If verifyEmail fails, try the SMTP fallback
         console.warn(`Primary verification failed for ${email}. Falling back to SMTP verification.`);
         smtpVerifyEmail(email)
-          .then((isValid) => {
+          .then((smtpResult) => {
+            console.log(smtpResult);
             clearTimeout(timeout); // Clear the timeout if smtpVerifyEmail succeeds
-            if (isValid) {
-              resolve({ valid: true, email }); // Resolve as valid if SMTP check passes
+            if (smtpResult.valid) {
+              resolve({ valid: true, email, method: 'smtpVerifyEmail' }); // Resolve as valid if SMTP check passes
             } else {
-              reject({ valid: false, email, error: 'Email not valid (SMTP fallback failed)' });
+              reject({ valid: false, email, error: smtpResult.error || 'Email not valid (SMTP fallback failed)' });
             }
           })
           .catch((smtpError) => {
