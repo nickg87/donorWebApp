@@ -114,11 +114,18 @@ const EmailVerifier = () => {
       const email = emails[i];
       try {
         const response = await axios.get(`/api/emailVerifier/verify/${email}`);
-        const { valid } = response.data;
+        const { valid, method } = response.data;
 
         if (valid) {
           newResults.valid.push(email);
           validEmails.push(email);
+
+          if (method === 'emailExistence') {
+            setValidMethodExistence((prev) => prev + 1);
+          } else {
+            setValidMethodSMTP((prev) => prev + 1);
+          }
+
         } else {
           newResults.invalid.push(email);
         }
