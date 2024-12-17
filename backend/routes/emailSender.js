@@ -16,7 +16,7 @@ router.post('/sendElasticEmail', async (req, res) => {
 
   // 1. Fetch the HTML template
   try {
-    const response = await axios.get(process.env.APP_URL + '/templates/eth_lottery_newsletter.html');
+    const response = await axios.get(process.env.TEMPLATE_URL + '/templates/eth_lottery_newsletter.html');
     htmlTemplate = response.data;
   } catch (error) {
     console.error('Error fetching email template:', error.message);
