@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Input, Label, Section, Text } from '@adminjs/design-system';
 import ProgressBar from './UI/ProgressBar';
 import axios from 'axios';
-import { addNotification } from 'adminjs';
 
 const EmailSender = () => {
+  const defaultSubject = '🎉 Don’t Miss Out! Win some ETH NOW! 🎉';
   const [fileName, setFileName] = useState('test0.csv');
   const [validEmails, setValidEmails] = useState([]);
-  const [subject, setSubject] = useState('');
-  const [body, setBody] = useState('');
+  const [failedEmails, setFailedEmails] = useState([]);
+  const [sendEmailsCounter, setSendEmailsCounter] = useState(0);
+  const [failedEmailsCounter, setFailedEmailsCounter] = useState(0);
+  const [subject, setSubject] = useState(defaultSubject);
+
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
   const [completed, setCompleted] = useState(false);
@@ -22,7 +25,6 @@ const EmailSender = () => {
       const response = await axios.get(`/api/emailVerifier/fetchValidEmailList/${fileName}`);
       if (response.data?.emails?.length > 0) {
         setValidEmails(response.data.emails);
-
         console.log(response.data.emails);
       } else {
         setError('No emails found in the file.');
@@ -32,34 +34,53 @@ const EmailSender = () => {
     }
   };
 
-  const sendEmails = async () => {
-    if (!validEmails.length || !subject || !body) {
-      setError('Please provide subject, body, and a list of emails');
+  const sendElasticEmails = async () => {
+    const totalEmails = validEmails.length;
+    if (!validEmails.length || !subject ) {
+      setError('Please provide subject, and a list of emails');
       return;
     }
 
     setProgress(0);
     setCompleted(false);
+    setSendEmailsCounter(0);
+    setFailedEmailsCounter(0);
 
-    try {
-      const response = await axios.post('/api/emailSender/sendEmails', {
-        emails: validEmails,
-        subject: subject,
-        body: body,
-      });
-      console.log((response));
-      if (response.data.success) {
-        console.log(`Successfully sent ${response.data.success} emails.`)
-        // addNotification({
-        //   message: `Successfully sent ${response.data.success} emails.`,
-        //   type: 'success',
-        // });
+    const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    for (let i = 0; i < totalEmails; i++) {
+      const email = validEmails[i];
+      try {
+        const response = await axios.post('/api/emailSender/sendElasticEmail', {
+          email: email,
+          subject: subject,
+        });
+        console.log((response));
+        if (response.data.send) {
+          console.log(`Successfully sent to ${response.data.email} .`)
+          setSendEmailsCounter((prev) => prev + 1);
+
+        } else {
+          console.warn(`FAILED to sent to ${response.data.email} .`);
+          console.warn(`ERROR: ${response.data.error} .`);
+          setFailedEmailsCounter((prev) => prev + 1);
+          failedEmails.push(email);
+        }
+
+      } catch (err) {
+        console.warn(`FAILED to sent to ${email} .`);
+        console.warn(`ERROR: ${err.message} .`);
+        setFailedEmailsCounter((prev) => prev + 1);
+        setError(`Error sending email: ${err.message}`);
+        failedEmails.push(email);
       }
-
-      setCompleted(true);
-    } catch (err) {
-      setError(`Error sending emails: ${err.message}`);
+      setProgress(((i + 1) / totalEmails) * 100);
+      // Add a delay (e.g., 1 second) before sending the next email
+      await timeout(1000); // Delay for 1000 milliseconds (1 second)
     }
+    console.log('Email sending process completed.');
+    setCompleted(true);
+    setFailedEmails(failedEmails);
   };
 
   return (
@@ -70,22 +91,35 @@ const EmailSender = () => {
       <Section style={{ backgroundColor: '#fff', border: 'none' }}>
         <Box mb="lg">
           <Input
+            value={fileName}
+            placeholder="Enter the file name"
+            onChange={(e) => setFileName(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </Box>
+
+        <Box mb="lg">
+          <Input
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             placeholder="Enter email subject"
             label="Subject"
+            style={{ width: '100%' }}
           />
-          <Input
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            placeholder="Enter email body"
-            label="Body"
-          />
-          <Button onClick={fetchValidEmailList}>Fetch Valid Email List</Button>
-          <Button onClick={sendEmails} disabled={completed}>Send Emails</Button>
+        </Box>
+
+        <Box mb="lg">
+          <Button variant="primary" mt="lg" mr="lg" onClick={fetchValidEmailList}>Fetch Valid Email List</Button>
+          <Button variant="primary" mt="lg" onClick={sendElasticEmails} disabled={completed}>Send Elastic Emails</Button>
 
           {error && <Text color="danger">{error}</Text>}
-          {completed && <Text color="success">Emails sent successfully!</Text>}
+          {sendEmailsCounter > 0 && <Text color="success">{sendEmailsCounter} emails sent successfully!</Text>}
+          {failedEmailsCounter > 0 && <Text color="danger">{sendEmailsCounter} emails sent failed!</Text>}
+          {failedEmails.length ?
+            <Text color="danger">
+              {failedEmails.join('\n')}
+            </Text> : null  }
+
           <Box mt="lg">
             <ProgressBar value={progress} max={100}/>
           </Box>

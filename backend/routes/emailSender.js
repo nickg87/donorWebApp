@@ -1,35 +1,44 @@
 // backend/routes/emailSender.js
 import express from 'express';
-import {sendEmail} from '../utils/emailSender.js'; // Import email sender
+import {sendElasticEmail} from '../utils/emailSender.js';
+import axios from "axios"; // Import email sender
 const router = express.Router();
 
-router.post('/sendEmails', async (req, res) => {
-  const { emails, subject, body } = req.body;
 
-  if (!emails || emails.length === 0) {
-    return res.status(400).send({ error: 'No emails provided' });
+router.post('/sendElasticEmail', async (req, res) => {
+  const { email, subject } = req.body;
+
+  if (!email) {
+    return res.status(400).send({ error: 'No email provided' });
   }
 
-  let successful = 0;
-  let failed = 0;
+  let htmlTemplate = '';
 
-  // Send emails in a throttled manner (1 per second)
-  for (let i = 0; i < emails.length; i++) {
-    try {
-      await sendEmail(emails[i], subject, body);
-      successful++;
-    } catch (error) {
-      failed++;
-    }
-    // Throttle the emails (1 email per second)
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  // 1. Fetch the HTML template
+  try {
+    const response = await axios.get(process.env.APP_URL + '/templates/eth_lottery_newsletter.html');
+    htmlTemplate = response.data;
+  } catch (error) {
+    console.error('Error fetching email template:', error.message);
+    return res.status(500).send({ error: 'Failed to fetch email template' });
   }
 
-  res.send({
-    success: successful,
-    failed: failed,
-    total: emails.length,
-  });
+  try {
+    await sendElasticEmail(email, subject, htmlTemplate); // Call the helper function
+    res.send({
+      send: true,
+      email,
+      error: false
+    });
+
+  } catch (error) {
+    res.send({
+      send: false,
+      email,
+      error: error
+    });
+
+  }
 });
 
 export default router;

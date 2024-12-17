@@ -1,29 +1,35 @@
 // backend/utils/emailSender.js
-import nodemailer from 'nodemailer';
+import axios from "axios"; // Import email sender
 
-// Create a transporter using Elastic Email SMTP settings
-const transporter = nodemailer.createTransport({
-  host: process.env.ELASTIC_SERVER,
-  port: 2525,
-  auth: {
-    user: process.env.ELASTIC_USER,
-    pass: process.env.ELASTIC_PASS,
-  },
-});
 
-export const sendEmail = async (toEmail, subject, text) => {
-  const mailOptions = {
-    from: process.env.ELASTIC_USER, // sender address
-    to: toEmail, // list of receivers
-    subject: subject, // Subject line
-    text: text, // plain text body
+export const sendElasticEmail = async (recipient, subject, content) => {
+  const emailPayload = {
+    Recipients: [{ Email: recipient }],
+    Content: {
+      Body: [
+        {
+          ContentType: 'HTML',
+          Content: content,
+        }
+      ],
+      Subject: subject,
+      From: process.env.ELASTIC_USER
+    }
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Email sent to: ${toEmail}`);
+    const response = await axios.post(
+      'https://api.elasticemail.com/v4/emails',
+      emailPayload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-ElasticEmail-ApiKey': process.env.ELASTIC_APIKEY,
+        }
+      }
+    );
+    console.log('Email sent successfully:', response.data);
   } catch (error) {
-    console.error(`Error sending email to ${toEmail}: ${error.message}`);
+    console.error('Error sending email:', error.response?.data || error.message);
   }
 };
-
