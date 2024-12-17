@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Input, Label, Section, Text } from '@adminjs/design-system';
 import ProgressBar from './UI/ProgressBar';
 import axios from 'axios';
+import {formatTime} from "../utils/miscellaneous.js";
 
 const EmailSender = () => {
   const defaultSubject = '🎉 Don’t Miss Out! Win some ETH NOW! 🎉';
@@ -11,10 +12,35 @@ const EmailSender = () => {
   const [sendEmailsCounter, setSendEmailsCounter] = useState(0);
   const [failedEmailsCounter, setFailedEmailsCounter] = useState(0);
   const [subject, setSubject] = useState(defaultSubject);
+  const [elapsedTime, setElapsedTime] = useState(0); // Elapsed time in seconds
+  const [estimatedTimeLeft, setEstimatedTimeLeft] = useState(0); // Estimated time left in seconds
+  const [startTime, setStartTime] = useState(null); // Time when verification started
+  const [totalTimeTaken, setTotalTimeTaken] = useState(null);
 
   const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false); // Track loading state
   const [error, setError] = useState('');
   const [completed, setCompleted] = useState(false);
+
+  useEffect(() => {
+    if (startTime && !completed) {
+      const interval = setInterval(() => {
+        const now = Date.now();
+        const timeSpent = Math.floor((now - startTime) / 1000);
+        setElapsedTime(timeSpent);
+
+        const progressRatio = progress / 100;
+        if (progressRatio > 0) {
+          const estimatedTime = Math.floor((timeSpent / progressRatio) - timeSpent);
+          setEstimatedTimeLeft(estimatedTime);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    } else if (completed) {
+      setEstimatedTimeLeft(0); // Clear the estimated time left when completed
+    }
+  }, [startTime, progress, completed]);
 
   const fetchValidEmailList = async () => {
     setError('');
@@ -35,6 +61,8 @@ const EmailSender = () => {
   };
 
   const sendElasticEmails = async () => {
+    let currTime = Date.now();
+    setStartTime(currTime);
     const totalEmails = validEmails.length;
     if (!validEmails.length || !subject ) {
       setError('Please provide subject, and a list of emails');
@@ -81,7 +109,19 @@ const EmailSender = () => {
     console.log('Email sending process completed.');
     setCompleted(true);
     setFailedEmails(failedEmails);
+    setLoading(false);
+    setTotalTimeTaken(calculateElapsedTime(currTime));
   };
+
+  // Function to calculate time difference
+  const calculateElapsedTime = (start) => {
+    // Calculate the difference in milliseconds
+    const differenceInMilliseconds = Date.now() - start;
+
+    // Convert milliseconds to seconds
+    return Math.floor(differenceInMilliseconds / 1000);
+  };
+
 
   return (
     <Section style={{ border: 'none' }}>
@@ -121,7 +161,21 @@ const EmailSender = () => {
             </Text> : null  }
 
           <Box mt="lg">
-            <ProgressBar value={progress} max={100}/>
+            {!completed && (
+              <>
+                <ProgressBar value={progress} max={100}/>
+                <Text>Sending emails... {Math.round(progress)}%</Text>
+                <div>
+                  <Text>Time Elapsed: {formatTime(elapsedTime)}</Text>
+                  <Text>Estimated Time Left: {formatTime(estimatedTimeLeft)}</Text>
+                </div>
+              </>
+            )}
+            {(completed && totalTimeTaken !== null) && (
+              <div>
+                <Text>Total Time Taken: {formatTime(totalTimeTaken)}</Text>
+              </div>
+            )}
           </Box>
         </Box>
       </Section>

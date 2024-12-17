@@ -28,6 +28,20 @@ export const generateSlug = (title) => {
     .replace(/^-+|-+$/g, '');    // Remove leading or trailing dashes
 }
 
+// Convert seconds to human-readable format (hours, minutes, seconds)
+export const formatTime = (seconds) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  let timeString = '';
+
+  if (hours > 0) timeString += `${hours} hour${hours > 1 ? 's' : ''} `;
+  if (minutes > 0) timeString += `${minutes} minute${minutes > 1 ? 's' : ''} `;
+  if (remainingSeconds > 0) timeString += `${remainingSeconds} second${remainingSeconds > 1 ? 's' : ''}`;
+
+  return timeString || '0 seconds'; // Return 0 seconds if no time was provided
+};
+
 // Fetch the environment variable to check if it's local
 export const fetchIsLocal = async () => {
   try {

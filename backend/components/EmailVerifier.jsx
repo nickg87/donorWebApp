@@ -3,6 +3,7 @@ import {Box, Button, Input, Label, Section, Text} from '@adminjs/design-system';
 import ProgressBar from './UI/ProgressBar';
 import axios from 'axios';
 import { addNotification } from 'adminjs';
+import {formatTime} from "../utils/miscellaneous.js";
 
 const EmailVerifier = () => {
   const [fileName, setFileName] = useState('test0.csv'); // Store the input filename
@@ -155,9 +156,6 @@ const EmailVerifier = () => {
 
 // Function to calculate time difference
   const calculateElapsedTime = (start) => {
-    console.log('start: ')
-    console.log(start)
-
     // Calculate the difference in milliseconds
     const differenceInMilliseconds = Date.now() - start;
 
@@ -165,19 +163,7 @@ const EmailVerifier = () => {
     return Math.floor(differenceInMilliseconds / 1000);
   };
 
-  // Convert seconds to human-readable format (hours, minutes, seconds)
-  const formatTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-    let timeString = '';
 
-    if (hours > 0) timeString += `${hours} hour${hours > 1 ? 's' : ''} `;
-    if (minutes > 0) timeString += `${minutes} minute${minutes > 1 ? 's' : ''} `;
-    if (remainingSeconds > 0) timeString += `${remainingSeconds} second${remainingSeconds > 1 ? 's' : ''}`;
-
-    return timeString || '0 seconds'; // Return 0 seconds if no time was provided
-  };
 
 
   // Function to write the valid emails to a CSV file
@@ -191,12 +177,12 @@ const EmailVerifier = () => {
       console.log(response);
 
       // Check if there's a notification in the response
-      if (response.notification) {
-        addNotification({
-          message: response.notification.message,
-          type: response.notification.type, // 'success', 'error', or 'info'
-        });
-      }
+      // if (response.notification) {
+      //   addNotification({
+      //     message: response.notification.message,
+      //     type: response.notification.type, // 'success', 'error', or 'info'
+      //   });
+      // }
       await fetchValidEmailList();
     } catch (error) {
       console.error('Error writing CSV:', error);
@@ -281,7 +267,7 @@ const EmailVerifier = () => {
               <ProgressBar value={progress} max={100}/>
               <Text>Verifying emails... {Math.round(progress)}%</Text>
               <div>
-                <Text>Time Elapsed: {elapsedTime} seconds</Text>
+                <Text>Time Elapsed: {formatTime(elapsedTime)}</Text>
                 <Text>Estimated Time Left: {formatTime(estimatedTimeLeft)}</Text>
               </div>
             </>
