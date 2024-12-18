@@ -83,9 +83,9 @@ const EmailSender = () => {
           email: email,
           subject: subject,
         });
-        console.log((response));
+        //console.log((response));
         if (response.data.send) {
-          console.log(`Successfully sent to ${response.data.email} .`)
+          //console.log(`Successfully sent to ${response.data.email} .`)
           setSendEmailsCounter((prev) => prev + 1);
 
         } else {
