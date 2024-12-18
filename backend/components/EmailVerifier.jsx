@@ -118,7 +118,8 @@ const EmailVerifier = () => {
       const email = emails[i];
       try {
         const response = await axios.get(`/api/emailVerifier/verify/${email}`);
-        console.log(response.data);
+        // console.log(`response.data from api/emailVerifier/verify/${email}`);
+        // console.log(response.data);
         const { valid, method } = response.data;
 
         if (valid) {
@@ -142,7 +143,7 @@ const EmailVerifier = () => {
           validEmails.push(email);
         }
         newResults.unreachable.push(email);
-        console.error(`Error verifying email ${email}:`, err.message);
+        console.warn(`Error verifying email ${email}:`, err.message);
       }
 
       // Update progress

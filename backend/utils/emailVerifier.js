@@ -91,40 +91,61 @@ export const smtpVerifyEmail = async (email) => {
 };
 
 const isValidEmailFromMailsSo = (response) => {
+  // console.log('response in isValidEmailFromMailsSo');
+  // console.log(response);
+  let returnedResult = false;
   if (!response || !response.data) {
-    return { valid: false, error: 'Invalid response from API' };
+    returnedResult = { valid: false, error: 'Invalid response from API' };
+    //console.log(returnedResult);
+    return returnedResult;
   }
 
   const { result, reason, score, isv_format, isv_domain, isv_mx } = response.data;
 
   // Check primary validity indicators
   if (result === 'deliverable') {
-    return { valid: true, reason: 'Email is deliverable' };
+    returnedResult = { valid: true, reason: 'Email is deliverable' };
+    //console.log(returnedResult);
+    return returnedResult;
   }
 
   // Handle undeliverable emails
   if (result === 'undeliverable') {
-    return { valid: false, reason: reason || 'Email is undeliverable' };
+    returnedResult = { valid: false, reason: reason || 'Email is undeliverable' };
+    //console.log(returnedResult);
+    return returnedResult;
   }
 
   // If result is unknown, decide based on other fields
   if (result === 'unknown') {
     if (!isv_format) {
-      return { valid: false, reason: 'Invalid email format' };
+      returnedResult = { valid: false, reason: 'Invalid email format' };
+      //console.log(returnedResult);
+      return returnedResult;
     }
     if (!isv_domain) {
-      return { valid: false, reason: 'Invalid domain' };
+      returnedResult = { valid: false, reason: 'Invalid domain' };
+      //console.log(returnedResult);
+      return returnedResult;
     }
     if (!isv_mx) {
-      return { valid: false, reason: 'No MX record for domain' };
+      returnedResult = { valid: false, reason: 'No MX record for domain' };
+      //console.log(returnedResult);
+      return returnedResult;
     }
     if (score < 50) {
-      return { valid: false, reason: 'Low confidence score' };
+      returnedResult = { valid: false, reason: 'Low confidence score' };
+      //console.log(returnedResult);
+      return returnedResult;
     }
-    return { valid: false, reason: reason || 'Unknown result (possibly invalid)' };
+    returnedResult = { valid: false, reason: reason || 'Unknown result (possibly invalid)' };
+    //console.log(returnedResult);
+    return returnedResult;
   }
 
-  return { valid: false, reason: 'Unhandled case in email validation' };
+  returnedResult = { valid: false, reason: 'Unhandled case in email validation' };
+  //console.log(returnedResult);
+  return returnedResult;
 };
 
 // Combined email verification with fallback
@@ -143,12 +164,13 @@ export const verifyAndFallbackEmail = (email) => {
       })
       .catch((error) => {
         // If verifyEmail fails, try the SMTP fallback
-        console.warn(`Primary verification failed for ${email}. Falling back to SMTP verification.`);
+        //console.warn(`Primary verification failed for ${email}. Falling back to SMTP verification.`);
         smtpVerifyEmail(email)
           .then((smtpResult) => {
-            console.log(smtpResult);
-            clearTimeout(timeout); // Clear the timeout if smtpVerifyEmail succeeds
+            //console.log('smtpResult');
+            //console.log(smtpResult);
             if (smtpResult.valid) {
+              clearTimeout(timeout); // Clear the timeout if smtpVerifyEmail succeeds
               resolve({ valid: true, email, method: 'smtpVerifyEmail' }); // Resolve as valid if SMTP check passes
             } else {
               // Add the mails.so API validation as the final fallback
@@ -161,6 +183,8 @@ export const verifyAndFallbackEmail = (email) => {
               })
                 .then((response) => response.json())
                 .then((data) => {
+                  //console.log('data mailss.so');
+                  //console.log(data);
                   const validation = isValidEmailFromMailsSo(data);
                   if (validation.valid) {
                     resolve({ valid: true, email, method: 'mails.so', reason: validation.reason });

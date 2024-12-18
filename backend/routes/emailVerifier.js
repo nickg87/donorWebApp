@@ -77,14 +77,23 @@ async function readEmailsFromFile(filePath) {
 // 2. Route to verify individual emails
 router.get('/verify/:email', async (req, res) => {
   const { email } = req.params;
+
   try {
-    const result = await verifyAndFallbackEmail(email); // Calls the verifyAndFallbackEmail function from utils
+    const result = await verifyAndFallbackEmail(email); // Calls the verifyAndFallbackEmail function
     res.json(result); // Return valid email result
   } catch (error) {
-    console.error(`Error verifying email ${email}:`, error); // Log error for debugging
-    res.status(500).json(error); // Return consistent error structure to frontend
+    console.warn(`Error verifying email ${email}:`, error); // Log error for debugging
+    // Even on failure, return a 200 with a structured response
+    res.status(200).json({
+      success: false,
+      valid: false,
+      email,
+      message: error.error || 'Verification failed',
+      reason: error.reason || 'Unknown reason',
+    });
   }
 });
+
 
 // Route to write valid emails to a CSV file
 router.post('/writeValidEmails', async (req, res) => {
