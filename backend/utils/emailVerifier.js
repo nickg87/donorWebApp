@@ -90,7 +90,42 @@ export const smtpVerifyEmail = async (email) => {
   });
 };
 
+const isValidEmailFromMailsSo = (response) => {
+  if (!response || !response.data) {
+    return { valid: false, error: 'Invalid response from API' };
+  }
 
+  const { result, reason, score, isv_format, isv_domain, isv_mx } = response.data;
+
+  // Check primary validity indicators
+  if (result === 'deliverable') {
+    return { valid: true, reason: 'Email is deliverable' };
+  }
+
+  // Handle undeliverable emails
+  if (result === 'undeliverable') {
+    return { valid: false, reason: reason || 'Email is undeliverable' };
+  }
+
+  // If result is unknown, decide based on other fields
+  if (result === 'unknown') {
+    if (!isv_format) {
+      return { valid: false, reason: 'Invalid email format' };
+    }
+    if (!isv_domain) {
+      return { valid: false, reason: 'Invalid domain' };
+    }
+    if (!isv_mx) {
+      return { valid: false, reason: 'No MX record for domain' };
+    }
+    if (score < 50) {
+      return { valid: false, reason: 'Low confidence score' };
+    }
+    return { valid: false, reason: reason || 'Unknown result (possibly invalid)' };
+  }
+
+  return { valid: false, reason: 'Unhandled case in email validation' };
+};
 
 // Combined email verification with fallback
 export const verifyAndFallbackEmail = (email) => {
@@ -98,7 +133,7 @@ export const verifyAndFallbackEmail = (email) => {
     // Create a timeout for the entire operation
     const timeout = setTimeout(() => {
       reject({ valid: false, email, error: 'Timeout reached' });
-    }, 5000); // Timeout for 5 seconds (adjust as needed)
+    }, 2000); // Timeout for 2 seconds (adjust as needed)
 
     // Start by using verifyEmail
     verifyEmail(email)
@@ -116,7 +151,27 @@ export const verifyAndFallbackEmail = (email) => {
             if (smtpResult.valid) {
               resolve({ valid: true, email, method: 'smtpVerifyEmail' }); // Resolve as valid if SMTP check passes
             } else {
-              reject({ valid: false, email, error: smtpResult.error || 'Email not valid (SMTP fallback failed)' });
+              // Add the mails.so API validation as the final fallback
+              const apiKey = 'ad9813a1-85a5-4a9f-af7e-4e2c3fe68a7c';
+              fetch(`https://api.mails.so/v1/validate?email=${email}`, {
+                method: 'GET',
+                headers: {
+                  'x-mails-api-key': apiKey,
+                },
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  const validation = isValidEmailFromMailsSo(data);
+                  if (validation.valid) {
+                    resolve({ valid: true, email, method: 'mails.so', reason: validation.reason });
+                  } else {
+                    reject({ valid: false, email, error: validation.reason });
+                  }
+                })
+                .catch((apiError) => {
+                  clearTimeout(timeout); // Clear the timeout if mails.so also fails
+                  reject({ valid: false, email, error: `mails.so error: ${apiError.message}` });
+                });
             }
           })
           .catch((smtpError) => {

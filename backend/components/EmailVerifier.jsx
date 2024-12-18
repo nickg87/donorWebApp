@@ -24,6 +24,7 @@ const EmailVerifier = () => {
   const [validEmails, setValidEmails] = useState([]);
   const [validMethodExistence, setValidMethodExistence] = useState(0);
   const [validMethodSMTP, setValidMethodSMTP] = useState(0);
+  const [validMethodMailsSO, setValidMethodMailsSO] = useState(0);
   const [fileExists, setFileExists] = useState(false);
   const [skipValidation, setSkipValidation] = useState(false);
 
@@ -126,6 +127,8 @@ const EmailVerifier = () => {
 
           if (method === 'emailExistence') {
             setValidMethodExistence((prev) => prev + 1);
+          } else if (method === 'mails.so') {
+            setValidMethodMailsSO((prev) => prev + 1);
           } else {
             setValidMethodSMTP((prev) => prev + 1);
           }
@@ -279,7 +282,7 @@ const EmailVerifier = () => {
               { !skipValidation ?
                 <>
                   <Text style={{marginTop: '20px'}}>Verification Completed!</Text>
-                  <Text>Valid Emails: {results.valid.length} ({validMethodExistence} | {validMethodSMTP})</Text>
+                  <Text>Valid Emails: {results.valid.length} ({validMethodExistence} | {validMethodSMTP} | {validMethodMailsSO})</Text>
                   <Text>Invalid Emails: {results.invalid.length}</Text>
                   <Text>Unreachable Emails: {results.unreachable.length}</Text>
                 </> :
