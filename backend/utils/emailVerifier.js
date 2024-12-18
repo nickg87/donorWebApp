@@ -157,7 +157,7 @@ const isValidEmailFromMailsSo = (response) => {
 
 const mailsSoValidation = (email) => {
   return new Promise((resolve, reject) => {
-    const apiKey = 'fbfb6887-1217-4ecc-990f-83c63fba5c0f';
+    const apiKey = process.env.MAILS_SO_APIKEY;
     fetch(`https://api.mails.so/v1/validate?email=${email}`, {
       method: 'GET',
       headers: {
