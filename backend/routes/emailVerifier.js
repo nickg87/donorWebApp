@@ -80,17 +80,13 @@ router.get('/verify/:email', async (req, res) => {
 
   try {
     const result = await verifyAndFallbackEmail(email); // Calls the verifyAndFallbackEmail function
+    // console.log('result of verifyAndFallbackEmail in routes:');
+    // console.log(result);
     res.json(result); // Return valid email result
   } catch (error) {
-    console.warn(`Error verifying email ${email}:`, error); // Log error for debugging
+    //console.warn(`routes: Error verifying email ${email}:`, error); // Log error for debugging
     // Even on failure, return a 200 with a structured response
-    res.status(200).json({
-      success: false,
-      valid: false,
-      email,
-      message: error.error || 'Verification failed',
-      reason: error.reason || 'Unknown reason',
-    });
+    res.status(200).json(error);
   }
 });
 

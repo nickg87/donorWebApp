@@ -12,40 +12,45 @@ const verifyOpts = {
 };
 const verifier = new Verifier(process.env.WHOISXMLAPI_APIKEY, verifyOpts);
 
-const retryLimit = 2; // Set the number of retry attempts
+const retryLimit = 1; // Set the number of retry attempts
 
 // Function to check if an email exists using the email-existence library
 export const verifyEmail = (email) => {
-  return new Promise((resolve, reject) => {
-    // Create a timeout promise that will reject after 2 seconds
-    const timeout = setTimeout(() => {
-      reject({ valid: false, email, error: 'Timeout reached' });
-    }, 2000); // Timeout after 2 seconds
+  let check = new Promise((resolve, reject) => {
+    const timeoutV = setTimeout(() => {
+      // Reject on timeout
+      reject({ valid: false, email, error: 'Timeout reached verifyEmail after 1000ms' });
+    }, 1000); // Timeout after 1 second
 
     emailExistence.check(email, (err, res) => {
-      clearTimeout(timeout);
-      // console.log(`Checking email: ${email}`);  // Log email being checked
-      // console.log('Response from emailExistence:', res);  // Log the result
-
-      // If there's an error, reject with a specific error message
-      if (res) {
-        // Email is valid, resolve immediately
-        resolve({ valid: true, email, method: 'emailExistence' });
-      } else {
-        // Any other case (error or invalid response), trigger fallback
+      clearTimeout(timeoutV); // Clear timeout after getting a response
+      if (err || !res) {
+        // Reject if there's an error or the response indicates the email is invalid
         const errorMessage = err ? err.message : 'Email not valid';
         reject({ valid: false, email, error: errorMessage });
+      } else {
+        // Resolve if the email is valid
+        resolve({ valid: true, email, method: 'emailExistence' });
       }
     });
   });
+  // console.log('check');
+  // console.log(check);
+  return check;
 };
 
 
 export const smtpVerifyEmail = async (email) => {
+
   const [user, domain] = email.split('@');
   const retries = retryLimit;
 
   return new Promise((resolve, reject) => {
+    const timeoutS = setTimeout(() => {
+      // Reject on timeout
+      reject({ valid: false, email, error: 'Timeout reached smtpVerifyEmail after 1000ms' });
+    }, 1000); // Timeout after 1 second
+
     dns.resolveMx(domain, async (err, addresses) => {
       if (err || !addresses || addresses.length === 0) {
         return resolve({ valid: false, email, error: `No MX record found for domain: ${domain}` });
@@ -72,8 +77,10 @@ export const smtpVerifyEmail = async (email) => {
 
           // Check for valid SMTP response code (250)
           if (response.code === 250) {
+            clearTimeout(timeoutS);
             resolve({ valid: true, email, method: 'smtpVerifyEmail' });
           } else {
+            clearTimeout(timeoutS);
             // If the code is not 250, consider the email invalid
             resolve({ valid: false, email, error: `Received SMTP response code: ${response.code}` });
           }
@@ -91,8 +98,8 @@ export const smtpVerifyEmail = async (email) => {
 };
 
 const isValidEmailFromMailsSo = (response) => {
-  // console.log('response in isValidEmailFromMailsSo');
-  // console.log(response);
+  // console.log('response.data in isValidEmailFromMailsSo');
+  // console.log(response.data);
   let returnedResult = false;
   if (!response || !response.data) {
     returnedResult = { valid: false, error: 'Invalid response from API' };
@@ -148,21 +155,47 @@ const isValidEmailFromMailsSo = (response) => {
   return returnedResult;
 };
 
+const mailsSoValidation = (email) => {
+  return new Promise((resolve, reject) => {
+    const apiKey = 'fbfb6887-1217-4ecc-990f-83c63fba5c0f';
+    fetch(`https://api.mails.so/v1/validate?email=${email}`, {
+      method: 'GET',
+      headers: {
+        'x-mails-api-key': apiKey,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const validation = isValidEmailFromMailsSo(data); // Assuming this is your custom validation logic
+        if (validation.valid) {
+          resolve({ valid: true, email, method: 'mails.so' });
+        } else {
+          reject({ valid: false, email, error: validation.reason });
+        }
+      })
+      .catch((apiError) => {
+        reject({ valid: false, email, error: `mails.so error: ${apiError.message}` });
+      });
+  });
+};
+
 // Combined email verification with fallback
 export const verifyAndFallbackEmail = (email) => {
   return new Promise((resolve, reject) => {
     // Create a timeout for the entire operation
     const timeout = setTimeout(() => {
       reject({ valid: false, email, error: 'Timeout reached' });
-    }, 2000); // Timeout for 2 seconds (adjust as needed)
+    }, 5000); // Timeout for 3 seconds (adjust as needed)
 
     // Start by using verifyEmail
     verifyEmail(email)
       .then((result) => {
-        clearTimeout(timeout); // Clear the timeout if verifyEmail succeeds
-        resolve(result); // If the first method confirms validity, resolve immediately
+        console.log('verifyEmail succeeded:', result);
+        clearTimeout(timeout);
+        resolve(result);
       })
       .catch((error) => {
+        //console.warn(`verifyEmail failed for ${email}:`, error);
         // If verifyEmail fails, try the SMTP fallback
         //console.warn(`Primary verification failed for ${email}. Falling back to SMTP verification.`);
         smtpVerifyEmail(email)
@@ -170,37 +203,23 @@ export const verifyAndFallbackEmail = (email) => {
             //console.log('smtpResult');
             //console.log(smtpResult);
             if (smtpResult.valid) {
+              console.log('reaches this point!');
               clearTimeout(timeout); // Clear the timeout if smtpVerifyEmail succeeds
               resolve({ valid: true, email, method: 'smtpVerifyEmail' }); // Resolve as valid if SMTP check passes
-            } else {
-              // Add the mails.so API validation as the final fallback
-              const apiKey = 'ad9813a1-85a5-4a9f-af7e-4e2c3fe68a7c';
-              fetch(`https://api.mails.so/v1/validate?email=${email}`, {
-                method: 'GET',
-                headers: {
-                  'x-mails-api-key': apiKey,
-                },
-              })
-                .then((response) => response.json())
-                .then((data) => {
-                  //console.log('data mailss.so');
-                  //console.log(data);
-                  const validation = isValidEmailFromMailsSo(data);
-                  if (validation.valid) {
-                    resolve({ valid: true, email, method: 'mails.so', reason: validation.reason });
-                  } else {
-                    reject({ valid: false, email, error: validation.reason });
-                  }
-                })
-                .catch((apiError) => {
-                  clearTimeout(timeout); // Clear the timeout if mails.so also fails
-                  reject({ valid: false, email, error: `mails.so error: ${apiError.message}` });
-                });
             }
           })
           .catch((smtpError) => {
-            clearTimeout(timeout); // Clear the timeout if fallback also fails
-            reject({ valid: false, email, error: smtpError });
+            //console.warn(`SMTP verification failed for ${email}:`, smtpError);
+            // Fallback to mails.so as the last step
+            mailsSoValidation(email)
+              .then((result) => {
+                clearTimeout(timeout); // Clear the timeout if mails.so succeeds
+                resolve(result);
+              })
+              .catch((mailsError) => {
+                clearTimeout(timeout); // Clear the timeout if everything fails
+                reject(mailsError);
+              });
           });
       });
   });

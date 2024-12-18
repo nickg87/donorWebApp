@@ -70,6 +70,7 @@ const EmailVerifier = () => {
     setValidEmails([]);
     setValidMethodExistence(0);
     setValidMethodSMTP(0);
+    setValidMethodMailsSO(0);
     setEmails([]);
     setResults({ valid: [], invalid: [], unreachable: [] });
     setProgress(0);
