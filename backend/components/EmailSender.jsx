@@ -10,6 +10,7 @@ const EmailSender = () => {
   const [validEmails, setValidEmails] = useState([]);
   const [failedEmails, setFailedEmails] = useState([]);
   const [sendEmailsCounter, setSendEmailsCounter] = useState(0);
+  const [sendNotificationEmail, setSendNotificationEmail] = useState(null);
   const [failedEmailsCounter, setFailedEmailsCounter] = useState(0);
   const [subject, setSubject] = useState(defaultSubject);
   const [elapsedTime, setElapsedTime] = useState(0); // Elapsed time in seconds
@@ -38,6 +39,7 @@ const EmailSender = () => {
 
       return () => clearInterval(interval);
     } else if (completed) {
+      sendMasterNotificationEmail(sendEmailsCounter).then();
       setEstimatedTimeLeft(0); // Clear the estimated time left when completed
     }
   }, [startTime, progress, completed]);
@@ -46,6 +48,7 @@ const EmailSender = () => {
     setError('');
     setValidEmails([]);
     setCompleted(false);
+    setSendNotificationEmail(null);
 
     try {
       const response = await axios.get(`/api/emailVerifier/fetchValidEmailList/${fileName}`);
@@ -58,6 +61,33 @@ const EmailSender = () => {
     } catch (err) {
       setError(`Error fetching email list: ${err.message}`);
     }
+  };
+
+  const sendMasterNotificationEmail = async (number) => {
+    console.log('number from sendEmailsCounter: ');
+    console.log(number);
+    const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    try {
+        const response = await axios.post('/api/emailSender/sendElasticEmail', {
+          email: 'master',
+          subject: `A total of ${number} emails were sent successfully!`,
+        });
+        //console.log((response));
+        if (response.data.send) {
+          setSendNotificationEmail(true);
+        } else {
+          setSendNotificationEmail(false);
+          console.warn(`FAILED to sent MASTER NOTIFICATION email to ${email} .`);
+          console.warn(`ERROR: ${response.data.error} .`);
+        }
+
+      } catch (err) {
+        console.warn(`FAILED to sent MASTER NOTIFICATION email to ${email} .`);
+        console.warn(`ERROR: ${err.message} .`);
+        setSendNotificationEmail(false);
+      }
+      // Add a delay (e.g., 1 second) before sending the next email
+      await timeout(1000); // Delay for 1000 milliseconds (1 second)
   };
 
   const sendElasticEmails = async () => {
@@ -154,7 +184,9 @@ const EmailSender = () => {
 
           {error && <Text color="danger">{error}</Text>}
           {sendEmailsCounter > 0 && <Text color="success">{sendEmailsCounter} emails sent successfully!</Text>}
-          {failedEmailsCounter > 0 && <Text color="danger">{sendEmailsCounter} emails sent failed!</Text>}
+          {sendNotificationEmail && <Text color="success">MASTER NOTIFICATION email sent successfully!</Text>}
+          {sendNotificationEmail === false && <Text className={'success'} color="danger">MASTER NOTIFICATION email FAILED!</Text>}
+          {failedEmailsCounter > 0 && <Text className={'danger'} color="danger">{sendEmailsCounter} emails sent failed!</Text>}
           {failedEmails.length ?
             <Text color="danger">
               {failedEmails.join('\n')}

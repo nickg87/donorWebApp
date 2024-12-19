@@ -7,10 +7,18 @@ const router = express.Router();
 
 router.post('/sendElasticEmail', async (req, res) => {
   const { email, subject } = req.body;
+  let toEmail = email;
 
   if (!email) {
     return res.status(400).send({ error: 'No email provided' });
   }
+
+  if (email === 'master') {
+    toEmail = process.env.APP_EMAIL;
+  }
+
+  console.log('toEmail');
+  console.log(toEmail);
 
   let htmlTemplate = '';
 
@@ -24,17 +32,17 @@ router.post('/sendElasticEmail', async (req, res) => {
   }
 
   try {
-    await sendElasticEmail(email, subject, htmlTemplate); // Call the helper function
+    await sendElasticEmail(toEmail, subject, htmlTemplate); // Call the helper function
     res.send({
       send: true,
-      email,
+      toEmail,
       error: false
     });
 
   } catch (error) {
     res.send({
       send: false,
-      email,
+      toEmail,
       error: error
     });
 
