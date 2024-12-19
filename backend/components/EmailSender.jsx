@@ -54,7 +54,7 @@ const EmailSender = () => {
       const response = await axios.get(`/api/emailVerifier/fetchValidEmailList/${fileName}`);
       if (response.data?.emails?.length > 0) {
         setValidEmails(response.data.emails);
-        console.log(response.data.emails);
+        console.log(`total emails fetched: ${response.data.emails.length}`);
       } else {
         setError('No emails found in the file.');
       }
@@ -64,8 +64,6 @@ const EmailSender = () => {
   };
 
   const sendMasterNotificationEmail = async (number) => {
-    console.log('number from sendEmailsCounter: ');
-    console.log(number);
     const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     try {
         const response = await axios.post('/api/emailSender/sendElasticEmail', {
