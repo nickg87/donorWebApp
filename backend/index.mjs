@@ -84,6 +84,11 @@ app.use('/api/auth', authRouter(knex));
 app.use('/api/files', fileRouter(knex));
 app.use('/api/env', envRouter);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+// Increase the limit (e.g., 50mb)
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 //app.use('/api/upload', fileRouter(knex));
 
 // app.use((req, res, next) => {

@@ -1,9 +1,9 @@
 {
-  "welcome": "Bienvenido a DonorHub",
+  "welcome": "Bienvenido a LuckyHub",
   "welcomeCurrentPool": "Actual {{var1}} Bote de Premio",
   "welcomeCurrentPoolSubText": "¡Ayúdenos a alcanzar nuestro objetivo! Cada contribución marca la diferencia.",
-  "firstTextTile": "<h3 class='text-lg font-bold'>Juntos, podemos hacer la diferencia</h3>Tu donación ayuda a alcanzar la meta de ~$<strong>{{var1}}</strong> en ETH para el pool de donaciones actual.",
-  "secondTextTile": "<h3 class='text-lg font-bold'>El medidor muestra el progreso actual del pool</h3>Cada donación es una cantidad fija de <strong>${{var1}}</strong> en <strong>ETH</strong>, y nuestra meta es alcanzar <strong>${{var2}}</strong> en <strong>ETH</strong>.",
+  "firstTextTile": "<h3 class='text-lg font-bold'>Juntos, podemos hacer la diferencia</h3>Tu transacción ayuda a alcanzar la meta de ~$<strong>{{var1}}</strong> en ETH para el pool de transacciones actual.",
+  "secondTextTile": "<h3 class='text-lg font-bold'>El medidor muestra el progreso actual del pool</h3>Cada transacción es una cantidad fija de <strong>${{var1}}</strong> en <strong>ETH</strong>, y nuestra meta es alcanzar <strong>${{var2}}</strong> en <strong>ETH</strong>.",
   "thirdTextTile": "<h3 class='text-lg font-bold'>Devuelve la alegría a tu vida</h3>Una vez que alcancemos esta meta, el monto total(<sup>*</sup>) <strong>será donado de nuevo a TI</strong>, un afortunado donante.",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
@@ -11,20 +11,20 @@
   "toc": {
     "linkText": "Términos",
     "pageHeadlineText": "Términos y condiciones",
-    "pageTitle": "Términos y condiciones | DonorHub App",
+    "pageTitle": "Términos y condiciones | LuckyHub App",
     "pageTitleText": "Por favor, lea esto cuidadosamente y actúe en consecuencia.",
     "effectiveDate": "Fecha de entrada en vigor",
     "section1": {
-      "title": "1. Propósito de donorHub",
-      "text": "<p class=\"leading-relaxed mb-4\">donorHub es una plataforma de donaciones impulsada por criptomonedas diseñada para conectar a individuos con causas benéficas en todo el mundo. Nuestra misión es hacer que las donaciones sean fáciles, transparentes y gratificantes, permitiendo a los donantes contribuir y participar en los fondos de premios.  </p> <p class=\"leading-relaxed\"> Ya sea que busque apoyar proyectos humanitarios, conservación del medio ambiente, educación o cualquier otra causa, donorHub asegura que sus contribuciones sean procesadas de manera segura y lleguen a sus destinatarios previstos. Los fondos de premios son una característica adicional para incentivar a los donantes, combinando filantropía con participación.</p>"
+      "title": "1. Propósito de LuckyHub",
+      "text": "<p class=\"leading-relaxed mb-4\">LuckyHub es una plataforma de lotería impulsada por criptomonedas diseñada para ofrecer emocionantes pozos de premios mientras apoya causas significativas. Nuestra misión es hacer que la participación sea emocionante, transparente y gratificante, permitiendo a los usuarios ingresar a loterías con la oportunidad de ganar grandes premios.  </p> <p class=\"leading-relaxed\"> Ya sea que te atraiga la emoción de ganar o quieras apoyar proyectos innovadores, LuckyHub garantiza una experiencia segura y fluida. Al participar en nuestros pozos de premios, no solo estás comprando un boleto: estás uniéndote a una comunidad que combina entretenimiento con propósito.</p>"
     },
     "section2": {
       "title": "2. Elegibilidad",
-      "text1": "Para usar donorHub, debe cumplir con los siguientes requisitos:",
+      "text1": "Para usar LuckyHub, debe cumplir con los siguientes requisitos:",
       "li1": "Debe tener al menos 18 años o la mayoría de edad legal en su país.",
-      "li2": "Acepta proporcionar información precisa y completa durante el proceso de donación.",
+      "li2": "Acepta proporcionar información precisa y completa durante el proceso de transacción.",
       "li3": "No está prohibido por la ley para realizar transacciones con criptomonedas en su jurisdicción.",
-      "text2": "donorHub se reserva el derecho de terminar cuentas o restringir el acceso si se violan los requisitos de elegibilidad."
+      "text2": "LuckyHub se reserva el derecho de terminar cuentas o restringir el acceso si se violan los requisitos de elegibilidad."
     },
     "section3": {
       "title": "3. Cuentas de usuario (si corresponde)",
@@ -32,11 +32,11 @@
       "li1": "Elija una contraseña segura y única.",
       "li2": "Mantenga sus credenciales de inicio de sesión confidenciales y seguras.",
       "li3": "Asegúrese de que toda la información de la cuenta esté actualizada y sea precisa para evitar interrupciones.",
-      "text2": "En caso de acceso no autorizado a la cuenta o actividad sospechosa, notifique inmediatamente a donorHub. No seremos responsables de pérdidas o daños causados por su incumplimiento en mantener la seguridad de la cuenta."
+      "text2": "En caso de acceso no autorizado a la cuenta o actividad sospechosa, notifique inmediatamente a LuckyHub. No seremos responsables de pérdidas o daños causados por su incumplimiento en mantener la seguridad de la cuenta."
     },
     "section4": {
-      "title": "4. Donaciones y fondos de premios",
-      "text1": "Las donaciones realizadas a través de donorHub son finales, no reembolsables y se procesan a través de redes blockchain seguras. Los fondos de premios ofrecen a los usuarios la oportunidad de ganar recompensas, sujetos a las siguientes condiciones:",
+      "title": "4. Transacciones y fondos de premios",
+      "text1": "Las transacciones realizadas a través de LuckyHub son finales, no reembolsables y se procesan a través de redes blockchain seguras. Los fondos de premios ofrecen a los usuarios la oportunidad de ganar recompensas, sujetos a las siguientes condiciones:",
       "li1": "Cada fondo de premios especifica los requisitos de entrada, plazos y reglas.",
       "li2": "Los ganadores se seleccionan de manera justa, ya sea mediante mecanismos blockchain o aleatorizadores seguros.",
       "li3": "La distribución de premios puede estar sujeta a procesos de verificación y cumplimiento de los términos del fondo.",
@@ -44,15 +44,15 @@
     },
     "section5": {
       "title": "5. Transacciones con criptomonedas",
-      "text1": "Todas las transacciones en donorHub se procesan en redes blockchain. Esto garantiza seguridad y transparencia, pero también puede dar lugar a:",
+      "text1": "Todas las transacciones en LuckyHub se procesan en redes blockchain. Esto garantiza seguridad y transparencia, pero también puede dar lugar a:",
       "li1": "Transacciones irreversibles una vez confirmadas en la blockchain.",
       "li2": "Retrasos causados por congestión en la red o errores de billetera.",
       "li3": "La responsabilidad de ingresar las direcciones de billetera correctas recae únicamente en el usuario.",
-      "text2": "donorHub no es responsable de las pérdidas derivadas de errores del usuario o problemas de red. Siempre verifique los detalles de la transacción antes de proceder."
+      "text2": "LuckyHub no es responsable de las pérdidas derivadas de errores del usuario o problemas de red. Siempre verifique los detalles de la transacción antes de proceder."
     },
     "section6": {
       "title": "6. Responsabilidades del usuario",
-      "text1": "Los usuarios deben cumplir con las siguientes pautas al usar donorHub:",
+      "text1": "Los usuarios deben cumplir con las siguientes pautas al usar LuckyHub:",
       "li1": "Abstenerse de actividades ilegales, incluyendo fraude, lavado de dinero o evasión fiscal.",
       "li2": "Respetar la propiedad intelectual de terceros.",
       "li3": "Evitar enviar contenido dañino, engañoso u ofensivo.",
@@ -60,11 +60,11 @@
     },
     "section7": {
       "title": "7. Privacidad de los datos",
-      "text": "donorHub recopila y procesa sus datos de acuerdo con nuestra <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Política de Privacidad</a>. Sus datos nunca serán vendidos ni compartidos con terceros sin su consentimiento, a menos que lo exija la ley."
+      "text": "LuckyHub recopila y procesa sus datos de acuerdo con nuestra <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Política de Privacidad</a>. Sus datos nunca serán vendidos ni compartidos con terceros sin su consentimiento, a menos que lo exija la ley."
     },
     "section8": {
       "title": "8. Exención de responsabilidad",
-      "text": "donorHub proporciona servicios \"tal cual\" sin garantías. Renunciamos a todas las garantías, y nuestra responsabilidad está limitada al máximo permitido por la ley."
+      "text": "LuckyHub proporciona servicios \"tal cual\" sin garantías. Renunciamos a todas las garantías, y nuestra responsabilidad está limitada al máximo permitido por la ley."
     },
     "footer": {
       "text": "Para cualquier consulta o inquietud, contáctenos en "
@@ -73,13 +73,13 @@
   "privacy": {
     "linkText": "Política de Privacidad",
     "pageHeadlineText": "Política de Privacidad",
-    "pageTitle": "Política de Privacidad | DonorHub App",
+    "pageTitle": "Política de Privacidad | LuckyHub App",
     "pageTitleText": "Por favor, lea esto detenidamente y actúe en consecuencia.",
     "effectiveDate": "Fecha de vigencia: {{date}}",
-    "introText": "En DonorHub, valoramos su privacidad y estamos comprometidos a proteger cualquier información relacionada con su uso de nuestra plataforma.",
+    "introText": "En LuckyHub, valoramos su privacidad y estamos comprometidos a proteger cualquier información relacionada con su uso de nuestra plataforma.",
     "dataCollection": {
       "title": "1. Recopilación de Datos",
-      "description": "No recopilamos información personal de nuestros usuarios. Todas las interacciones en DonorHub se realizan de forma anónima y están vinculadas únicamente a direcciones de Ethereum."
+      "description": "No recopilamos información personal de nuestros usuarios. Todas las interacciones en LuckyHub se realizan de forma anónima y están vinculadas únicamente a direcciones de Ethereum."
     },
     "useOfData": {
       "title": "2. Uso de Datos",
@@ -87,7 +87,7 @@
     },
     "cookies": {
       "title": "3. Cookies",
-      "description": "DonorHub utiliza cookies mínimas para mejorar la experiencia del usuario. Estas cookies no almacenan información personal y se utilizan únicamente para optimizar el rendimiento."
+      "description": "LuckyHub utiliza cookies mínimas para mejorar la experiencia del usuario. Estas cookies no almacenan información personal y se utilizan únicamente para optimizar el rendimiento."
     },
     "security": {
       "title": "4. Seguridad",
@@ -102,11 +102,11 @@
   "faq": {
     "linkText": "Preguntas frecuentes",
     "pageHeadlineText": "Preguntas frecuentes",
-    "pageTitle": "Preguntas Frecuentes | DonorHub App",
+    "pageTitle": "Preguntas Frecuentes | LuckyHub App",
     "pageTitleText": "Aquí encontrarás respuestas a las preguntas más comunes.",
     "q1": {
       "q": "1. ¿Cuál es el propósito de esta sección de preguntas frecuentes?",
-      "a": "Esta sección de preguntas frecuentes está diseñada para proporcionar respuestas a las preguntas más comunes de nuestros usuarios sobre la plataforma DonorHub. Explica el proceso de ingresar a los pools de donación, ganar premios y cómo funciona todo detrás de escena, incluyendo el papel de los contratos inteligentes."
+      "a": "Esta sección de preguntas frecuentes está diseñada para proporcionar respuestas a las preguntas más comunes de nuestros usuarios sobre la plataforma LuckyHub. Explica el proceso de ingresar a los pools de transacción, ganar premios y cómo funciona todo detrás de escena, incluyendo el papel de los contratos inteligentes."
     },
     "q2": {
       "q": "2. ¿Cómo entro a un pool?",
@@ -114,11 +114,11 @@
     },
     "q3": {
       "q": "3. ¿Cómo puedo contactar con soporte?",
-      "a": "Si necesitas asistencia, puedes llenar el formulario de contacto o enviarnos un correo directamente a contact@donorhub.site."
+      "a": "Si necesitas asistencia, puedes llenar el formulario de contacto o enviarnos un correo directamente a contact@LuckyHub.site."
     },
     "q4": {
       "q": "4. ¿Cuál es el proceso de entrada para un pool?",
-      "a": "Cada donación a un pool cuenta como un \"ticket\" y solo puedes ingresar una vez por sesión. Sin embargo, puedes ingresar múltiples veces al mismo pool si lo deseas. Las entradas a los pools son gestionadas de manera transparente por un Contrato Inteligente (SC), asegurando la equidad y transparencia en todo el proceso."
+      "a": "Cada transacción a un pool cuenta como un \"ticket\" y solo puedes ingresar una vez por sesión. Sin embargo, puedes ingresar múltiples veces al mismo pool si lo deseas. Las entradas a los pools son gestionadas de manera transparente por un Contrato Inteligente (SC), asegurando la equidad y transparencia en todo el proceso."
     },
     "q5": {
       "q": "5. ¿Cómo se selecciona al ganador de un pool?",
@@ -137,7 +137,7 @@
       "a": "Esto depende del país en el que residas. No nos hacemos responsables de las obligaciones fiscales o legales relacionadas con las ganancias. Consulta las leyes locales para entender las obligaciones que puedas tener."
     },
     "q9": {
-      "q": "9. ¿Tengo una cuenta en DonorHub?",
+      "q": "9. ¿Tengo una cuenta en LuckyHub?",
       "a": "Actualmente, los usuarios no tienen cuentas individuales. En su lugar, cada usuario está representado por su dirección de Ethereum. Si un usuario tiene varias direcciones, cada una puede participar en pools por separado. En casos raros, si un pool está lleno, el contrato inteligente intentará recompensar la dirección de Ethereum con el premio, pero esto depende de los precios del gas. Si es un período de alta demanda (\"hora punta\"), la transacción puede retrasarse hasta que los precios del gas sean favorables. Los usuarios serán notificados a través de su billetera (por ejemplo, MetaMask)."
     },
     "q10": {
@@ -162,7 +162,7 @@
     },
     "q15": {
       "q": "15. ¿Qué tan anónimas son las transacciones?",
-      "a": "Todas las transacciones en DonorHub son completamente anónimas. La única información que tenemos es tu dirección de Ethereum, que se utiliza para la transparencia en la selección de los ganadores. No rastreamos quién es el propietario de la dirección."
+      "a": "Todas las transacciones en LuckyHub son completamente anónimas. La única información que tenemos es tu dirección de Ethereum, que se utiliza para la transparencia en la selección de los ganadores. No rastreamos quién es el propietario de la dirección."
     },
     "q16": {
       "q": "16. ¿Existe un límite de tiempo para que un pool alcance su objetivo?",
@@ -174,20 +174,20 @@
     },
     "q18": {
       "q": "18. ¿Puedo donar a un pool sin participar en el sorteo?",
-      "a": "Actualmente, las donaciones solo están vinculadas a la participación en los pools. Si donas a un pool, serás automáticamente incluido en el sorteo. No se aceptan donaciones sin participación en el pool."
+      "a": "Actualmente, las transacciones solo están vinculadas a la participación en los pools. Si donas a un pool, serás automáticamente incluido en el sorteo. No se aceptan transacciones sin participación en el pool."
     }
   },
   "blog": {
     "linkText": "Blog",
     "listTitleText": "Artículos del blog",
-    "pageTitle": "Artículos del blog | DonorHub App",
+    "pageTitle": "Artículos del blog | LuckyHub App",
     "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
   },
   "special": {
     "linkText": "El especial",
     "listTitleText": "&#9733; ¡Un millón de dólares! &#9733;",
-    "pageTitle": "El pool de un millón | DonorHub App",
+    "pageTitle": "El pool de un millón | LuckyHub App",
     "secondaryText": "No es realmente UN MILLÓN $, ¡pero casi! </br>Porque depende del precio de ETH. ( &#11016; | &#11017; ) ¡Atrévete a intentarlo! Quién sabe, ¡UNO de ustedes lo CONSEGUIRÁ con SEGURIDAD!",
     "backToText": "Volver a la página principal",
     "welcomeCurrentPool": "Pool especial {{var1}}",
@@ -204,7 +204,7 @@
   "one-million-dollar-pool": "El sorteo del millón de dólares",
   "general": {
     "close": "Cerrar",
-    "copyright": "2024 Mi aplicación DonorHub. Todos los derechos reservados.",
+    "copyright": "2024 Mi aplicación LuckyHub. Todos los derechos reservados.",
     "timeAgo": "Hace {{var1}}"
   },
   "sections": {
@@ -220,8 +220,8 @@
     },
     "pools": {
       "name": "Pools",
-      "title": "Pools de Donación",
-      "text": "¡Explora nuestros pools de donación social y marca la diferencia hoy! </br> Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
+      "title": "Pools de Transacción",
+      "text": "¡Explora nuestros pools de transacción social y marca la diferencia hoy! </br> Tu contribución puede crear un cambio positivo en comunidades de todo el mundo."
     },
     "blog": "Blog",
     "articles": {
@@ -235,7 +235,7 @@
   "contactPage": {
     "linkText": "Contáctenos",
     "title": "Contáctenos",
-    "pageTitle": "Contáctanos | DonorHub App",
+    "pageTitle": "Contáctanos | LuckyHub App",
     "pageTitleText": "Haznos saber tus opiniones. Nos encantaría escuchar tus sugerencias.",
     "form": {
       "fields": {
@@ -269,9 +269,9 @@
     "buttonText": "Donar ahora",
     "buttonTextQuickGuide": "Guía Rápida",
     "modalTitle": "¿Cómo participar?",
-    "note": "<small><sup>(*)</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la donación. <br/> Consulte la página de <a class='link' href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
+    "note": "<small><sup>(*)</sup> Nota: Se aplicará una pequeña tarifa de transacción por parte del proveedor del servicio para procesar la transacción. <br/> Consulte la página de <a class='link' href=\"/es/toc\"><i>Términos y condiciones</i></a>.</small>",
     "howToParticipateText": "Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
-    "successMessage": "Tu donación se ha iniciado con éxito. ¡Gracias!",
+    "successMessage": "Tu transacción se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
   }
 }

@@ -42,9 +42,9 @@ export async function getServerSideProps({ locale }) {
 export default function Home({ pools, transactions, articles }) {
   return <>
     <Head>
-      <link rel="canonical" href={(process.env.NEXT_PUBLIC_SITE_URL || "https://donorhub.site")}/>
+      <link rel="canonical" href={(process.env.NEXT_PUBLIC_SITE_URL || "https://luckyhub.app")}/>
     </Head>
-    <MainContent pools={pools} transactions={transactions} articles={articles}/>;
+    <MainContent pools={pools} transactions={transactions} articles={articles}/>
   </>
 
 }

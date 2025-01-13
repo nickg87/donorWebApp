@@ -79,9 +79,9 @@ export default function Privacy() {
           <p className="text-sm ">
             {t('privacy.footerText')}{" "}
             <a
-              href="mailto:contact@donorhub.site"
+              href="mailto:contact@luckyhub.app"
               className="text-blue-500 hover:underline"
-            > contact@donorhub.site
+            > contact@luckyhub.app
             </a>
 
             .

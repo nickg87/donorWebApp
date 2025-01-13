@@ -150,10 +150,10 @@ export default function ToC() {
           <p className="text-sm ">
             {t('toc.footer.text')}
             <a
-              href="mailto:contact@donorhub.site"
+              href="mailto:contact@luckyhub.app"
               className="text-blue-500 hover:underline"
             >
-              contact@donorhub.site
+              contact@luckyhub.app
             </a>
             .
           </p>

@@ -3,7 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 import {useTranslation} from "next-i18next";
 import Link from "next/link";
-import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
+//import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
+import LogoWhite from "../../public/logos/luckyHubLogoWhite.svg";
 
 const Footer = () => {
 

@@ -14,8 +14,10 @@ import axios from "axios";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
 import classes from "./Header.module.scss";
 
-import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
-import LogoBlack from "../../public/logos/donorLogoBlackNew.svg";
+//import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
+//import LogoBlack from "../../public/logos/donorLogoBlackNew.svg";
+import LogoWhite from "../../public/logos/luckyHubLogoWhite.svg";
+import LogoBlack from "../../public/logos/luckyHubLogoBlack.svg";
 import MobileDetect from "mobile-detect";
 
 const Header = () => {

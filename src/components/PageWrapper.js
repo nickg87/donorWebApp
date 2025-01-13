@@ -5,7 +5,7 @@ import SectionNameWrapper from "./UI/SectionNameWrapper";
 import classes from "./PageWrapper.module.scss";
 
 const PageWrapper = ({...props}) => {
-  const canonicalUrl = props?.canonicalPath ? `${process.env.NEXT_PUBLIC_SITE_URL || "https://donorhub.site"}${props.canonicalPath}` : null;
+  const canonicalUrl = props?.canonicalPath ? `${process.env.NEXT_PUBLIC_SITE_URL || "https://luckyhub.app"}${props.canonicalPath}` : null;
   //console.log(props)
   return (
     <>

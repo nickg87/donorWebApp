@@ -1,30 +1,30 @@
 {
-  "welcome": "Welcome to DonorHub",
+  "welcome": "Welcome to LuckyHub",
   "welcomeCurrentPool": "Current {{var1}} Prize Pool",
   "welcomeCurrentPoolSubText": "Help us reach our goal! Every contribution makes a difference.",
-  "firstTextTile": "<h3 class='text-lg font-bold'>Together, we can make a difference</h3>Your donation helps reach the ~$<strong>{{var1}}</strong> in ETH goal for the current donation pool.",
-  "secondTextTile": "<h3 class='text-lg font-bold'>The Gauge shows current pool progress</h3>Each donation is a fixed amount of <strong>${{var1}}</strong> in <strong>ETH</strong>, and our goal is to reach <strong>${{var2}}</strong> in <strong>ETH</strong>",
-  "thirdTextTile": "<h3 class='text-lg font-bold'>Bring joy back into your life</h3>Once we hit this target, the entire(<sup>*</sup>) amount <strong>will be donated back to YOU</strong>, one lucky donor.",
+  "firstTextTile": "<h3 class='text-lg font-bold'>Together, we can make a difference</h3>Your transaction helps reach the ~$<strong>{{var1}}</strong> in ETH goal for the current transaction pool.",
+  "secondTextTile": "<h3 class='text-lg font-bold'>The Gauge shows current pool progress</h3>Each transaction is a fixed amount of <strong>${{var1}}</strong> in <strong>ETH</strong>, and our goal is to reach <strong>${{var2}}</strong> in <strong>ETH</strong>",
+  "thirdTextTile": "<h3 class='text-lg font-bold'>Bring joy back into your life</h3>Once we hit this target, the entire(<sup>*</sup>) amount <strong>will be transferred back to YOU</strong>, one lucky player.",
   "signIn": "Sign In",
   "signOut": "Sign Out",
   "contact": "Contact us",
   "toc": {
     "linkText": "Toc",
     "pageHeadlineText": "Terms and conditions",
-    "pageTitle": "Terms and conditions | DonorHub App",
+    "pageTitle": "Terms and conditions | LuckyHub App",
     "pageTitleText": "Please read this carefully and act accordingly.",
     "effectiveDate": "Effective Date",
     "section1": {
-      "title": "1. Purpose of donorHub",
-      "text": "<p class=\"leading-relaxed mb-4\">\n  donorHub is a cryptocurrency-driven donation platform designed to connect individuals with charitable causes worldwide. Our mission is to make giving easy, transparent, and rewarding by allowing donors to contribute and participate in prize pools.</p><p class=\"leading-relaxed\">Whether you're looking to support humanitarian projects, environmental conservation, education, or any other cause, donorHub ensures that your contributions are securely processed and reach their intended recipients. Prize pools are an added feature to incentivize donors, combining philanthropy with engagement.</p>"
+      "title": "1. Purpose of LuckyHub",
+      "text": "<p class=\"leading-relaxed mb-4\">\n  LuckyHub is a cryptocurrency-powered lottery platform designed to offer exciting prize pools while supporting meaningful causes. Our mission is to make participation thrilling, transparent, and rewarding by allowing users to enter lotteries with the chance to win big prizes.</p><p class=\"leading-relaxed\">Whether you're drawn to the thrill of winning or want to support innovative projects, LuckyHub ensures a secure and seamless experience. By participating in our prize pools, you're not just buying a ticket—you’re joining a community that combines entertainment with purpose.</p>"
     },
     "section2": {
       "title": "2. Eligibility",
-      "text1": "To use donorHub, you must meet the following requirements:",
+      "text1": "To use LuckyHub, you must meet the following requirements:",
       "li1": "You are at least 18 years old or the legal age of majority in your country.",
-      "li2": "You agree to provide accurate and complete information during the donation process.",
+      "li2": "You agree to provide accurate and complete information during the transaction process.",
       "li3": "You are not prohibited by law from making cryptocurrency transactions in your jurisdiction.",
-      "text2": "donorHub reserves the right to terminate accounts or restrict access if any eligibility criteria are violated."
+      "text2": "LuckyHub reserves the right to terminate accounts or restrict access if any eligibility criteria are violated."
     },
     "section3": {
       "title": "3. User Accounts (if applicable)",
@@ -32,11 +32,11 @@
       "li1": "Choose a secure and unique password.",
       "li2": "Keep your login credentials confidential and secure.",
       "li3": "Ensure that all account information is current and accurate to avoid disruptions.",
-      "text2": "In case of unauthorized account access or suspicious activity, notify donorHub immediately. We will not be liable for any losses or damages caused by your failure to maintain account security."
+      "text2": "In case of unauthorized account access or suspicious activity, notify LuckyHub immediately. We will not be liable for any losses or damages caused by your failure to maintain account security."
     },
     "section4": {
-      "title": "4. Donations and Prize Pools",
-      "text1": "Donations made through donorHub are final, non-refundable, and processed through secure blockchain networks. Prize pools offer users the chance to win rewards, subject to the following conditions:",
+      "title": "4. Transactions and Prize Pools",
+      "text1": "Transactions made through LuckyHub are final, non-refundable, and processed through secure blockchain networks. Prize pools offer users the chance to win rewards, subject to the following conditions:",
       "li1": "Each prize pool specifies entry requirements, deadlines, and rules.",
       "li2": "Winners are selected fairly, either via blockchain mechanisms or secure randomizers.",
       "li3": "Prize distribution may be subject to verification processes and adherence to the pool's terms.",
@@ -44,15 +44,15 @@
     },
     "section5": {
       "title": "5. Cryptocurrency Transactions",
-      "text1": "All transactions on donorHub are processed on blockchain networks. This ensures security and transparency but may also lead to:",
+      "text1": "All transactions on LuckyHub are processed on blockchain networks. This ensures security and transparency but may also lead to:",
       "li1": "Irreversible transactions once confirmed on the blockchain.",
       "li2": "Delays caused by network congestion or wallet errors.",
       "li3": "Responsibility for inputting correct wallet addresses lies solely with the user.",
-      "text2": "donorHub is not liable for losses arising from user errors or network issues. Always double-check transaction details before proceeding."
+      "text2": "LuckyHub is not liable for losses arising from user errors or network issues. Always double-check transaction details before proceeding."
     },
     "section6": {
       "title": "6. User Responsibilities",
-      "text1": "Users must adhere to the following guidelines when using donorHub:",
+      "text1": "Users must adhere to the following guidelines when using LuckyHub:",
       "li1": "Refrain from illegal activities, including fraud, money laundering, or tax evasion.",
       "li2": "Respect the intellectual property of others.",
       "li3": "Avoid submitting harmful, misleading, or offensive content.",
@@ -60,11 +60,11 @@
     },
     "section7": {
       "title": "7. Data Privacy",
-      "text": "donorHub collects and processes your data in accordance with our <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Privacy Policy</a>. Your data will never be sold or shared with third parties without consent unless required by law."
+      "text": "LuckyHub collects and processes your data in accordance with our <a href=\"/privacy\" class=\"text-blue-500 hover:underline\">Privacy Policy</a>. Your data will never be sold or shared with third parties without consent unless required by law."
     },
     "section8": {
       "title": "8. Liability Disclaimer",
-      "text": "donorHub provides services \"as is\" without guarantees. We disclaim all warranties, and our liability is limited to the maximum extent permitted by law."
+      "text": "LuckyHub provides services \"as is\" without guarantees. We disclaim all warranties, and our liability is limited to the maximum extent permitted by law."
     },
     "footer": {
       "text": "For any inquiries or concerns, contact us at "
@@ -73,13 +73,13 @@
   "privacy": {
     "linkText": "Privacy Policy",
     "pageHeadlineText": "Privacy Policy",
-    "pageTitle": "Privacy Policy | DonorHub App",
+    "pageTitle": "Privacy Policy | LuckyHub App",
     "pageTitleText": "Please read this carefully and act accordingly.",
     "effectiveDate": "Effective Date: {{date}}",
-    "introText": "At DonorHub, we value your privacy and are committed to safeguarding any information related to your use of our platform.",
+    "introText": "At LuckyHub, we value your privacy and are committed to safeguarding any information related to your use of our platform.",
     "dataCollection": {
       "title": "1. Data Collection",
-      "description": "We do not collect any personal information from our users. All interactions on DonorHub are conducted anonymously and tied solely to Ethereum addresses."
+      "description": "We do not collect any personal information from our users. All interactions on LuckyHub are conducted anonymously and tied solely to Ethereum addresses."
     },
     "useOfData": {
       "title": "2. Use of Data",
@@ -87,7 +87,7 @@
     },
     "cookies": {
       "title": "3. Cookies",
-      "description": "DonorHub uses minimal cookies to enhance user experience. These cookies do not store personal information and are used only for performance optimization."
+      "description": "LuckyHub uses minimal cookies to enhance user experience. These cookies do not store personal information and are used only for performance optimization."
     },
     "security": {
       "title": "4. Security",
@@ -102,23 +102,23 @@
   "faq": {
     "linkText": "FAQ",
     "pageHeadlineText": "Frequently Asked Questions",
-    "pageTitle": "Frequently Asked Questions | DonorHub App",
+    "pageTitle": "Frequently Asked Questions | LuckyHub App",
     "pageTitleText": "Here you will find answers to the most common questions.",
     "q1": {
       "q": "1. What is the purpose of this FAQ section?",
-      "a": "This FAQ section is designed to provide answers to the most common questions from our users about the DonorHub platform. It explains the process of entering donation pools, winning prizes, and how everything works behind the scenes, including the role of smart contracts."
+      "a": "This FAQ section is designed to provide answers to the most common questions from our users about the LuckyHub platform. It explains the process of entering transaction pools, winning prizes, and how everything works behind the scenes, including the role of smart contracts."
     },
     "q2": {
       "q": "2. How do I enter a pool?",
-      "a": "To enter a pool, simply click the \"Donate now\" button. A modal will appear asking you to connect your wallet. Choose your decentralized wallet app (like MetaMask or similar), and confirm the connection. Once connected, send your transaction from the wallet, either via desktop or mobile app, and wait for the confirmation. Once the transaction is confirmed, you're entered into the pool!"
+      "a": "To enter a pool, simply click the \"Enter now\" button. A modal will appear asking you to connect your wallet. Choose your decentralized wallet app (like MetaMask or similar), and confirm the connection. Once connected, send your transaction from the wallet, either via desktop or mobile app, and wait for the confirmation. Once the transaction is confirmed, you're entered into the pool!"
     },
     "q3": {
       "q": "3. How can I contact support?",
-      "a": "If you need assistance, you can either fill out the contact form or email us directly at contact@donorhub.site."
+      "a": "If you need assistance, you can either fill out the contact form or email us directly at contact@luckyhub.app."
     },
     "q4": {
       "q": "4. What is the entry process for a pool?",
-      "a": "Each donation into a pool counts as a \"ticket,\" and you can only enter once per session. However, you can enter multiple times for the same pool if you like. The pool entries are managed transparently by a Smart Contract (SC), ensuring fairness and transparency throughout the process."
+      "a": "Each transaction into a pool counts as a \"ticket,\" and you can only enter once per session. However, you can enter multiple times for the same pool if you like. The pool entries are managed transparently by a Smart Contract (SC), ensuring fairness and transparency throughout the process."
     },
     "q5": {
       "q": "5. How is the winner selected for a pool?",
@@ -137,7 +137,7 @@
       "a": "This depends on the country in which you reside. We do not take responsibility for tax obligations or legal requirements regarding winnings. Please check your local laws to understand any obligations you might have."
     },
     "q9": {
-      "q": "9. Do I have an account on DonorHub?",
+      "q": "9. Do I have an account on LuckyHub?",
       "a": "Currently, users do not have individual accounts. Instead, each user is represented by their Ethereum address. If a user owns multiple addresses, each address can participate in pools separately. In rare cases, if a pool is full, the smart contract will attempt to reward the Ethereum address with the prize, but this depends on gas prices. If it's a high-demand period (\"rush hour\"), the transaction may be delayed until gas prices are favorable. Users will be notified through their wallet (e.g., MetaMask)."
     },
     "q10": {
@@ -162,7 +162,7 @@
     },
     "q15": {
       "q": "15. How anonymous are the transactions?",
-      "a": "All transactions on DonorHub are completely anonymous. The only information we have is your Ethereum address, which is used for transparency in selecting winners. We do not track who owns the address."
+      "a": "All transactions on LuckyHub are completely anonymous. The only information we have is your Ethereum address, which is used for transparency in selecting winners. We do not track who owns the address."
     },
     "q16": {
       "q": "16. Is there a time limit for a pool to reach its target?",
@@ -174,24 +174,24 @@
     },
     "q18": {
       "q": "18. Can I donate to a pool without participating in the drawing?",
-      "a": "Currently, donations are only linked to pool entries. If you donate to a pool, you are automatically entered into the drawing. Donations are not accepted without participation in the pool."
+      "a": "Currently, transactions are only linked to pool entries. If you donate to a pool, you are automatically entered into the drawing. Transactions are not accepted without participation in the pool."
     }
   },
   "blog": {
     "linkText": "Blog",
     "listTitleText": "Blog articles",
-    "pageTitle": "Blog articles | DonorHub App",
+    "pageTitle": "Blog articles | LuckyHub App",
     "listReadMore": "Read more",
     "backToText": "Back to article list"
   },
   "special": {
     "linkText": "The special one",
     "listTitleText": "&#9733; One million dollars pool &#9733;",
-    "pageTitle": "The one million pool | DonorHub App",
+    "pageTitle": "The one million pool | LuckyHub App",
     "secondaryText": "It's not really ONE MILLION $, but close enough! </br>Because it's up to ETH price. ( &#11016; | &#11017; ) But dare to try it! Who knows, ONE of you will GET it for SURE!",
     "backToText": "Back to home page",
     "welcomeCurrentPool": "Special {{var1}} Pool",
-    "welcomeCurrentPoolSubText": "Feeling lucky? Once this hits 100% The Smart Contract will choose randomly one address that entered this special pool. And will donate the amount (`) back to this address! As simple as that! Every entry is another chance to be the lucky one and make a difference.",
+    "welcomeCurrentPoolSubText": "Feeling lucky? Once this hits 100% The Smart Contract will choose randomly one address that entered this special pool. And will transfer the amount (`) back to this address! As simple as that! Every entry is another chance to be the lucky one and make a difference.",
     "donateComponent": {
       "buttonText": "Enter Now"
     }
@@ -204,7 +204,7 @@
   "one-million-dollar-pool": "The Million Dollar Pool",
   "general": {
     "close": "Close",
-    "copyright": "2024 My DonorHub App. All rights reserved.",
+    "copyright": "2024 My LuckyHub App. All rights reserved.",
     "timeAgo": "{{var1}} ago"
   },
   "sections": {
@@ -220,8 +220,8 @@
     },
     "pools": {
       "name": "Pools",
-      "title": "Donation Pools",
-      "text": "Explore our social donation pools and make a difference today! </br> Your contribution can create positive change in communities around the world."
+      "title": "Transaction Pools",
+      "text": "Explore our social transaction pools and make a difference today! </br> Your contribution can create positive change in communities around the world."
     },
     "blog": "Blog",
     "articles": {
@@ -235,7 +235,7 @@
   "contactPage": {
     "linkText": "Contact",
     "title": "Contact Us",
-    "pageTitle": "Contact Us | DonorHub App",
+    "pageTitle": "Contact Us | LuckyHub App",
     "pageTitleText": "Let us know your thoughts. We would love to hear your suggestions.",
     "form": {
       "fields": {
@@ -255,7 +255,7 @@
     }
   },
   "qrCodeComponent": {
-    "text": "Scan QR Code with your wallet app to donate <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong style='word-break: break-all'>address below</strong>"
+    "text": "Scan QR Code with your wallet app to initiate a transaction of <strong style='word-break: keep-all'>{{var1}}</strong> ETH to <strong style='word-break: break-all'>address below</strong>"
   },
   "sendTransactionComponent": {
     "userWalletAddress": "<span class='grayed'>You are connected with:</span><br><strong style='word-break: break-all'>{{var1}}</strong>",
@@ -266,12 +266,12 @@
     "sendTransaction": "Send"
   },
   "donateComponent": {
-    "buttonText": "Donate Now",
+    "buttonText": "Enter Now",
     "buttonTextQuickGuide": "Quick Guide",
     "modalTitle":"How to participate?",
-    "note":"<small><sup>(*)</sup>A small transaction fee will be applied by the service provider for processing the donation. <br/> Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
+    "note":"<small><sup>(*)</sup>A small transaction fee will be applied by the service provider for processing the transaction. <br/> Check <a class='link' href=\"/toc\"><i>Terms and condition</i></a> page</small>",
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
-    "successMessage":"Your donation has been successfully initiated. Thank you!",
+    "successMessage":"Your transaction has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"
   }
 }

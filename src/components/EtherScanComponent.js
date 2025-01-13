@@ -77,7 +77,7 @@ const EtherScanComponent = ({ address }) => {
       <WebSocketClient />
       {/*{transactionList && <TransactionListComponent transactions={transactionList}/> }*/}
     </div>
-  );
-};
+  )
+}
 
 export default EtherScanComponent;
