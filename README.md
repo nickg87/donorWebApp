@@ -203,7 +203,7 @@ Make sure to adjust the path for the uploaded files in the production environmen
 ### 4. **Accessing Uploaded Files**
 
 - **Local Development**: Files are accessible through `http://localhost/assets/uploads/...`.
-- **Production**: Files are accessible through `https://donorhub.site/assets/uploads/...`.
+- **Production**: Files are accessible through `https://luckyhub.app/assets/uploads/...`.
 
 ---
 
@@ -214,7 +214,7 @@ After configuration, try accessing a file (e.g., an image) through your browser 
 In **production**:
 
 ```url
-https://donorhub.site/assets/uploads/file-dummy1-1732286374375-746456809.jpg
+https://luckyhub.app/assets/uploads/file-dummy1-1732286374375-746456809.jpg
 ```
 
 If everything is configured correctly, the file should load.

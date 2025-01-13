@@ -14,7 +14,7 @@ const fetchBlogPosts = async () => {
 };
 
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://donorhub.site';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://luckyhub.app';
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: SITE_URL, // Replace with your site's base URL
