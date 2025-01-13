@@ -15,7 +15,8 @@ import IconCloseSquare from "../../../public/iconsax/close-square.svg";
 import IconClipboardTick from "../../../public/iconsax/clipboard-tick.svg";
 
 export default function Contact() {
-  const surveyActive = process.env.NEXT_PUBLIC_SURVEY_ACTIVE === 'true';
+  //const surveyActive = process.env.NEXT_PUBLIC_SURVEY_ACTIVE === 'true';
+  const surveyActive = false;
   const { t, i18n } = useTranslation();
   const { globalState, updateShowSurvey } = useAppContext();
   const [formData, setFormData] = useState({

@@ -95,7 +95,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GridEffectComponent/>
-      {(globalState?.showSurvey === 'true' && surveyActive) && <GoogleSurvey/>}
+      {/*{(globalState?.showSurvey === 'true' && surveyActive) && <GoogleSurvey/>}*/}
       <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
           <title>LuckyHub App - Donations made easy with a bit of luck in the end! | LuckyHub App</title>
