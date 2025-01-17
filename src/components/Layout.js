@@ -98,7 +98,7 @@ const Layout = ({ children }) => {
       {/*{(globalState?.showSurvey === 'true' && surveyActive) && <GoogleSurvey/>}*/}
       <div className={['mainContainer', 'absolute', 'z-2'].join(' ')}>
         <Head>
-          <title>LuckyHub App - Donations made easy with a bit of luck in the end! | LuckyHub App</title>
+          <title>LuckyHub App - ETH Lottery made easy with a bit of luck in the end! | LuckyHub App</title>
           <meta name="description"
                 content="Discover the top crypto lottery pools with high prize amounts and transparent draws. Join today to win big!"/>
           <meta name="robots" content="index, follow"/>
