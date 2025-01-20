@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './InputWrapper.module.scss';
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
 
-const InputWrapper = ({ id, name, type, theme, placeholder, value, required, readOnly, disabled, icon, extra }) => {
+const InputWrapper = ({ id, name, type, theme, placeholder, value, required, readOnly, disabled, icon, onChange, extra }) => {
   let rounded = "rounded-full";
   if (icon) {
     rounded = "rounded-full rounded-r-none";
@@ -17,6 +17,7 @@ const InputWrapper = ({ id, name, type, theme, placeholder, value, required, rea
         value={value}
         required={required}
         readOnly={readOnly}
+        onChange={onChange}
         disabled={disabled}
         className={`
                 px-3 py-2 ${rounded} ${classes.inputWrapperStyle} ${classes[theme]} w-full

@@ -5,6 +5,7 @@ import {useTranslation} from "next-i18next";
 import Link from "next/link";
 //import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
 import LogoWhite from "../../public/logos/luckyHubLogoWhite.svg";
+import EmailSubscriptionComponent from "@/components/EmailSubscriptionComponent";
 
 const Footer = () => {
 
@@ -13,9 +14,13 @@ const Footer = () => {
   return (
     <footer className="bg-[#030A31] text-white py-8 p-4 shadow-md w-full">
       <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
+        <EmailSubscriptionComponent/>
+      </div>
+      <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
         <div className="md:justify-start flex flex-col gap-2">
           <p className="text-sm text-center md:text-left">&copy; {t('general.copyright')}</p>
-          <div className="flex gap-1 md:gap-4 items-center justify-evenly flex-col md:flex-row md:justify-between md:items-center text-center md:text-left">
+          <div
+            className="flex gap-1 md:gap-4 items-center justify-evenly flex-col md:flex-row md:justify-between md:items-center text-center md:text-left">
             <Link href="/toc" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('toc.linkText')}
             </Link>
@@ -60,7 +65,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
+);
 };
 
 export default Footer;

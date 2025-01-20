@@ -64,6 +64,7 @@ const transactionsRoutes = (await import('./routes/transactions.js')).default;
 const emailsRouter = (await import('./routes/emails.js')).default;
 const etherScanRouter = (await import('./routes/etherscan.js')).default;
 const emailVerifierRouter = (await import('./routes/emailVerifier.js')).default;
+const emailSubscriptionRouter = (await import('./routes/emailSubscriptions.js')).default;
 const emailSenderRouter = (await import('./routes/emailSender.js')).default;
 const fileRouter = (await import('./routes/files.js')).default;
 const envRouter = (await import('./routes/env.js')).default;
@@ -77,6 +78,7 @@ app.use('/api/transactions', transactionsRoutes(knex));
 app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);
 app.use('/api/emailVerifier', emailVerifierRouter);
+app.use('/api/emailSubscription', emailSubscriptionRouter(knex));
 app.use('/api/emailSender', emailSenderRouter);
 app.use('/api/auth', authRouter(knex));
 // Serve files in the assets folder
