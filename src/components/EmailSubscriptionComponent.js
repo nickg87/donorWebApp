@@ -4,10 +4,13 @@ import IconStar from "../../public/iconsax/star.svg";
 import IconLovely from "../../public/iconsax/lovely.svg";
 import ButtonWrapper from "@/components/UI/ButtonWrapper";
 import IconMessageTick from "../../public/iconsax/message-tick.svg";
+import {useTranslation} from "next-i18next";
 
 const EmailSubscriptionComponent = () => {
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -25,8 +28,10 @@ const EmailSubscriptionComponent = () => {
       });
 
       const data = await response.json();
-      setMessage(data.message || 'An error occurred. Please try again.');
+      setError(data?.error || false);
+      setMessage(data.message[i18n.language] || 'An error occurred. Please try again.');
     } catch (error) {
+      setError(error?.error || false);
       setMessage('Failed to send request. Please try again.');
     } finally {
       setLoading(false);
@@ -37,19 +42,18 @@ const EmailSubscriptionComponent = () => {
   return (
     <div className="flex flex-col gap-3 mb-6 justify-start align-center">
       <h2 className="text-2xl font-semibold">
-        Subscribe to Notifications
+        {t('subscribeComponent.heading')}
       </h2>
       <p className="mb-2">
-        Enter your email to stay updated with our latest prize pools and lotteries.
+        {t('subscribeComponent.subheading')}
       </p>
       <form onSubmit={handleSubmit} className="flex gap-3 justify-start align-center">
-
         <InputWrapper
           id="email"
           name={'value'}
           type={'email'}
           theme={'dark'}
-          placeholder={'Enter your email'}
+          placeholder={t('subscribeComponent.inputPlaceholder')}
           value={email}
           required={true}
           readOnly={false}
@@ -64,7 +68,7 @@ const EmailSubscriptionComponent = () => {
       {message && (
         <p
           className={`mt-4 text-sm ${
-            message.includes('success') ? 'text-green-600' : 'text-red-600'
+           (error === 'subscribed') ? 'text-green-600' : ((error === 'invalid_email') ? 'text-red-600' : 'text-yellow-600')
           }`}
         >
           {message}

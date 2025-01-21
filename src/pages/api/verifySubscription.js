@@ -16,7 +16,6 @@ export default async function handler(req, res) {
     // Trigger the backend verification endpoint
     const backendUrl = `${apiUrl}emailSubscription/verify?temp_hash=${temp_hash}`;
     const response = await axios.get(backendUrl);
-
     // Pass the backend's response to the client
     return res.status(response.status).json(response.data);
   } catch (error) {

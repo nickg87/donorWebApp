@@ -273,5 +273,10 @@
     "howToParticipateText": "Para participar en el premio del pool, simplemente transfiere la cantidad de entrada utilizando la aplicación de billetera de tu elección (por ejemplo, MetaMask). Estas transacciones se procesan de manera segura a través de un Smart Contract. Una vez completada la transferencia, quedas automáticamente inscrito en el sorteo del premio, el cual se realizará de forma transparente mediante un Smart Contract.",
     "successMessage": "Tu transacción se ha iniciado con éxito. ¡Gracias!",
     "transferStartedMessage": "¡Transferencia criptográfica iniciada con éxito!"
+  },
+  "subscribeComponent": {
+    "heading": "Suscribirse a las notificaciones",
+    "subheading": "Introduce tu email para estar al día de nuestras últimas quinielas y loterías»",
+    "inputPlaceholder": "Introduce tu email"
   }
 }

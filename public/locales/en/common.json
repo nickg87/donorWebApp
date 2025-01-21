@@ -273,5 +273,10 @@
     "howToParticipateText":"To participate in the pool prize, simply transfer the entry amount using a wallet application of your choice (e.g., MetaMask). These transactions are securely processed through a Smart Contract. Once the transfer is completed, you are automatically enrolled in the prize draw, which will be conducted transparently via Smart Contract.",
     "successMessage":"Your transaction has been successfully initiated. Thank you!",
     "transferStartedMessage":"Crypto transfer initiated successfully!"
+  },
+  "subscribeComponent": {
+    "heading": "Subscribe to Notifications",
+    "subheading": "Enter your email to stay updated with our latest prize pools and lotteries.",
+    "inputPlaceholder": "Enter your email"
   }
 }

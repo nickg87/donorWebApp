@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
-const apiName = process.env.NEXT_PUBLIC_API_NAME || 'DonorHub';
+const apiName = process.env.NEXT_PUBLIC_API_NAME || 'LuckyHub';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const generateEmailTemplate = require('../../utils/emailTemplateHelper');

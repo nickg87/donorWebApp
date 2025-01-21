@@ -6,16 +6,19 @@ import Link from "next/link";
 //import LogoWhite from "../../public/logos/donorLogoWhiteNew.svg";
 import LogoWhite from "../../public/logos/luckyHubLogoWhite.svg";
 import EmailSubscriptionComponent from "@/components/EmailSubscriptionComponent";
+import {useRouter} from "next/router";
 
 const Footer = () => {
 
   const { t, i18n } = useTranslation();
+  const router = useRouter();
 
   return (
     <footer className="bg-[#030A31] text-white py-8 p-4 shadow-md w-full">
+      {router.query.test ?
       <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
         <EmailSubscriptionComponent/>
-      </div>
+      </div> : null }
       <div className="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center">
         <div className="md:justify-start flex flex-col gap-2">
           <p className="text-sm text-center md:text-left">&copy; {t('general.copyright')}</p>
