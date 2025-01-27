@@ -50,7 +50,7 @@ const TransactionItem = ({ transaction, isTest, theme }) => {
                         {transaction.from}
                       </span>
             <a
-              href={`https://` + (isTest ? 'sepolia.' : null) + `etherscan.io/tx/${transaction.hash}`}
+              href={`https://` + (isTest ? 'sepolia.' : '') + `etherscan.io/tx/${transaction.hash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="link ml-2 hover:text-blue-500 transition"
