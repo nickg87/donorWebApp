@@ -30,6 +30,9 @@ const Footer = () => {
             <Link href="/privacy" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('privacy.linkText')}
             </Link>
+            <Link href="/unsubscribe" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
+              {t('unsubscribe.linkText')}
+            </Link>
             <Link href="/faq" className="block mt-4 md:inline-block md:mt-0 pr-2 text-white hover:text-gray-300">
               {t('faq.linkText')}
             </Link>

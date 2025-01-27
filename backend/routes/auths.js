@@ -24,6 +24,7 @@ export default (db) => {
         password_hash: passwordHash,
         image: '', // Optionally handle profile image
         email_verified: false,
+        is_subscribed: false,
         is_admin: false,
       }).returning('id');
 

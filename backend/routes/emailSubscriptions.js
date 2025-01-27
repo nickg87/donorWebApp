@@ -33,7 +33,16 @@ export default (db) => {
       // Check if email already exists in the users table
       const existingUser = await db('users').select('*').where({ email }).first();
       if (existingUser) {
-        if (existingUser.email_verified) {
+        if (existingUser.is_subscribed) {
+          return res.status(200).json({
+            error: 'subscribed',
+            message: {
+              en: 'Email is already subscribed.',
+              es: 'El correo electrónico ya está suscrito y verificado.',
+            },
+          });
+        }
+        if (!existingUser.email_verified) {
           return res.status(200).json({
             error: 'subscribed',
             message: {
@@ -111,6 +120,70 @@ export default (db) => {
     }
   });
 
+  //unsubscribe
+  router.post('/unsubscribe', async (req, res) => {
+    const { email } = req.body;
+
+    // Basic email validation
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ error: 'Invalid email provided.' });
+    }
+
+    try {
+      // Verify email via SMTP
+      const smtpResult = await verifyEmail(email);
+      //const smtpResult = {valid : true};
+
+      if (!smtpResult.valid) {
+        return res.status(400).json({
+          error: 'invalid_email',
+          message: {
+            en: `The email address "${email}" is invalid.`,
+            es: `La dirección de correo electrónico "${email}" no es válida.`,
+          },
+        });
+      }
+
+      // Check if email already exists in the users table
+      const existingUser = await db('users').select('*').where({ email }).first();
+      if (existingUser) {
+        if (!existingUser.is_subscribed) {
+          return res.status(200).json({
+            error: 'unsubscribed',
+            message: {
+              en: 'Email is already unsubscribed',
+              es: 'El correo electrónico ya está dado de baja.',
+            },
+          });
+        } else {
+          const { id } = existingUser;
+          await db('users').where({ id }).update({ is_subscribed: false});
+
+          return res.status(200).json({
+            error: false,
+            message: {
+              en: 'The email has been unsubscribed from notifications.',
+              es: 'El correo electrónico ha sido dado de baja de las notificaciones.',
+            },
+          });
+        }
+      } else {
+        return res.status(200).json({
+          error: 'not_found',
+          message: {
+            en: 'This email address was not found in our database. You must have received a notification from our partners.',
+            es: 'Esta dirección de correo electrónico no se encontró en nuestra base de datos. Debes haber recibido una notificación de nuestros socios.',
+          },
+        });
+      }
+
+
+    } catch (error) {
+      console.log(error);
+      console.error('Error processing unsubscription:', error.message);
+      return res.status(500).json({ error: 'Internal server error.' });
+    }
+  });
 
 // Verify route
   router.get('/verify', async (req, res) => {
@@ -143,7 +216,7 @@ export default (db) => {
       // Move the email to the users table
       await db.transaction(async (trx) => {
         const tempPassHash = crypto.randomBytes(20).toString('hex');
-        await trx('users').insert({ email, email_verified: true, name:email, password_hash: tempPassHash }); // Adjust this based on your schema
+        await trx('users').insert({ email, email_verified: true, name:email, is_subscribed: true, password_hash: tempPassHash }); // Adjust this based on your schema
         await trx('email_subscriptions').where({ temp_hash }).del(); // Remove from the buffer table
       });
 

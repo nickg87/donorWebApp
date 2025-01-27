@@ -184,6 +184,15 @@
     "listReadMore": "Más información",
     "backToText": "Volver a la lista de artículos"
   },
+  "unsubscribe": {
+    "linkText": "Cancelar suscripción",
+    "listTitleText": "Cancelar suscripción",
+    "pageTitle": "Cancelar suscripción al boletín | LuckyHub App",
+    "backToText": "Volver a la página principal",
+    "heading": "Cancelar suscripción al boletín",
+    "subheading": "Lamentamos verte ir. Por favor, ingresa tu correo electrónico abajo si prefieres no recibir más notificaciones.",
+    "inputPlaceholder": "Ingresa tu correo electrónico"
+  },
   "special": {
     "linkText": "El especial",
     "listTitleText": "&#9733; ¡Un millón de dólares! &#9733;",

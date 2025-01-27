@@ -184,6 +184,15 @@
     "listReadMore": "Read more",
     "backToText": "Back to article list"
   },
+  "unsubscribe": {
+    "linkText": "Unsubscribe",
+    "listTitleText": "Unsubscribe",
+    "pageTitle": "Unsubscribe newsletter | LuckyHub App",
+    "backToText": "Back to homepage",
+    "heading": "Unsubscribe from notifications",
+    "subheading": "We're sorry to see you go. Please enter your email below if you'd prefer not to receive notifications anymore.",
+    "inputPlaceholder": "Enter your email"
+  },
   "special": {
     "linkText": "The special one",
     "listTitleText": "&#9733; One million dollars pool &#9733;",
