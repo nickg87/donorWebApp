@@ -79,7 +79,7 @@ app.use('/api/emails', emailsRouter);
 app.use('/api/etherscan', etherScanRouter);
 app.use('/api/emailVerifier', emailVerifierRouter);
 app.use('/api/emailSubscription', emailSubscriptionRouter(knex));
-app.use('/api/emailSender', emailSenderRouter);
+app.use('/api/emailSender', emailSenderRouter(knex));
 app.use('/api/auth', authRouter(knex));
 // Serve files in the assets folder
 
