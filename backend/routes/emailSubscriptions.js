@@ -38,16 +38,16 @@ export default (db) => {
             error: 'subscribed',
             message: {
               en: 'Email is already subscribed.',
-              es: 'El correo electrónico ya está suscrito y verificado.',
+              es: 'El correo electrónico ya está suscrito.',
             },
           });
         }
-        if (existingUser.email_verified) {
+        if (existingUser.email_verified && !existingUser.is_subscribed) {
           return res.status(200).json({
-            error: 'subscribed',
+            error: 'verified',
             message: {
-              en: 'Email is already subscribed and verified.',
-              es: 'El correo electrónico ya está suscrito y verificado.',
+              en: 'Email is verified but already ubsubscribed.',
+              es: 'El correo electrónico está verificado pero ya está dado de baja.',
             },
           });
         } else {
