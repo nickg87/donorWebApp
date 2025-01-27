@@ -80,7 +80,7 @@ export default (db) => {
       await db('email_subscriptions').insert({ email, temp_hash: tempHash });
 
       // Build the verification URL
-      const verificationUrl = `${process.env.APP_URL}/request/verifySubscription?temp_hash=${tempHash}`;
+      const verificationUrl = `${process.env.APP_ROOT_URL}/request/verifySubscription?temp_hash=${tempHash}`;
 
       // Prepare email content
       const message = `
