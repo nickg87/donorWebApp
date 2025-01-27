@@ -42,7 +42,7 @@ export default (db) => {
             },
           });
         }
-        if (!existingUser.email_verified) {
+        if (existingUser.email_verified) {
           return res.status(200).json({
             error: 'subscribed',
             message: {
